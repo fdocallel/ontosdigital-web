@@ -4,17 +4,34 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ONTOS — automatización, IA y gemelos digitales para ingeniería</title>
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <meta name="description" content="ONTOS: implementación de automatización, IA y gemelos digitales para el sector AEC. Fernando Calle, ingeniero de caminos.">
 <style>
+  /* tokens: brand/colores.md — oscuro por defecto, claro via prefers-color-scheme */
   :root {
+    --teja: #d4713b;        /* fija: CTA y clave del logo */
     --bg: #0f0e0c;
     --panel: #171512;
     --borde: #2a261f;
     --texto: #ece7de;
-    --granito-claro: #a39a8c;
-    --teja: #d4713b;
-    --teja-clara: #e8956a;
+    --sec: #a39a8c;         /* granito-claro */
+    --acento: #d4713b;      /* teja sobre oscuro */
+    --realce: #e8956a;      /* teja-clara sobre oscuro */
+    --piedra-logo: #3a352c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #faf8f5;        /* hueso */
+      --panel: #ffffff;
+      --borde: #e3ddd2;
+      --texto: #1c1a17;     /* tinta */
+      --sec: #6b6257;       /* granito */
+      --acento: #b0532a;    /* teja-quemada: texto sobre claro (AA) */
+      --realce: #b0532a;
+      --piedra-logo: #4a443a;
+    }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -38,7 +55,7 @@
     background: radial-gradient(ellipse 60% 45% at 50% 30%, rgba(212,113,59,0.14), transparent 70%);
     pointer-events: none;
   }
-  .arco-svg { width: 120px; color: #3a352c; margin-bottom: 2rem; animation: sube 0.9s ease both; }
+  .arco-svg { width: 120px; color: var(--piedra-logo); margin-bottom: 2rem; animation: sube 0.9s ease both; }
   .hero h1 {
     font-size: clamp(3rem, 9vw, 5.5rem);
     letter-spacing: 0.28em; text-indent: 0.28em; font-weight: 650;
@@ -46,10 +63,10 @@
   }
   .hero .lema {
     margin-top: 1rem; max-width: 34rem;
-    font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--granito-claro);
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--sec);
     animation: sube 0.9s 0.2s ease both;
   }
-  .hero .lema em { color: var(--teja-clara); font-style: normal; }
+  .hero .lema em { color: var(--realce); font-style: normal; }
   .cta {
     display: inline-block; margin-top: 2.5rem;
     padding: 0.8rem 2rem; border-radius: 999px;
@@ -64,14 +81,14 @@
   section { padding: 4.5rem 0; }
   h2 {
     font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.25em;
-    color: var(--teja); margin-bottom: 2rem;
+    color: var(--acento); margin-bottom: 2rem;
   }
   .intro p { max-width: 42rem; font-size: 1.15rem; color: var(--texto); }
-  .intro strong { color: var(--teja-clara); font-weight: 600; }
+  .intro strong { color: var(--realce); font-weight: 600; }
 
   .stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; }
   .stat .n { font-size: 2rem; font-weight: 650; color: var(--texto); }
-  .stat .l { font-size: 0.85rem; color: var(--granito-claro); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
 
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
   .card {
@@ -81,16 +98,16 @@
   }
   .card:hover { transform: translateY(-4px); border-color: var(--teja); }
   .card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
-  .card p { font-size: 0.95rem; color: var(--granito-claro); }
+  .card p { font-size: 0.95rem; color: var(--sec); }
   .card .icono { font-size: 1.4rem; margin-bottom: 0.8rem; display: block; }
 
   /* ---- contacto ---- */
   .contacto { text-align: center; border-top: 1px solid var(--borde); }
-  .contacto p { color: var(--granito-claro); max-width: 30rem; margin: 0 auto; }
+  .contacto p { color: var(--sec); max-width: 30rem; margin: 0 auto; }
 
   footer {
     border-top: 1px solid var(--borde);
-    padding: 2rem 0 3rem; font-size: 0.8rem; color: #6f675b;
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
   }
   footer a { color: inherit; }
 </style>
