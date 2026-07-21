@@ -12,9 +12,9 @@
     --panel: #171512;
     --borde: #2a261f;
     --texto: #ece7de;
-    --piedra: #a39a8c;
-    --arco: #d4713b;
-    --arco-suave: #e8956a;
+    --granito-claro: #a39a8c;
+    --teja: #d4713b;
+    --teja-clara: #e8956a;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -46,14 +46,14 @@
   }
   .hero .lema {
     margin-top: 1rem; max-width: 34rem;
-    font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--piedra);
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem); color: var(--granito-claro);
     animation: sube 0.9s 0.2s ease both;
   }
-  .hero .lema em { color: var(--arco-suave); font-style: normal; }
+  .hero .lema em { color: var(--teja-clara); font-style: normal; }
   .cta {
     display: inline-block; margin-top: 2.5rem;
     padding: 0.8rem 2rem; border-radius: 999px;
-    background: var(--arco); color: #14100c; font-weight: 600; text-decoration: none;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     animation: sube 0.9s 0.3s ease both;
   }
@@ -64,14 +64,14 @@
   section { padding: 4.5rem 0; }
   h2 {
     font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.25em;
-    color: var(--arco); margin-bottom: 2rem;
+    color: var(--teja); margin-bottom: 2rem;
   }
   .intro p { max-width: 42rem; font-size: 1.15rem; color: var(--texto); }
-  .intro strong { color: var(--arco-suave); font-weight: 600; }
+  .intro strong { color: var(--teja-clara); font-weight: 600; }
 
   .stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; }
   .stat .n { font-size: 2rem; font-weight: 650; color: var(--texto); }
-  .stat .l { font-size: 0.85rem; color: var(--piedra); text-transform: uppercase; letter-spacing: 0.08em; }
+  .stat .l { font-size: 0.85rem; color: var(--granito-claro); text-transform: uppercase; letter-spacing: 0.08em; }
 
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
   .card {
@@ -79,14 +79,14 @@
     padding: 1.8rem 1.6rem;
     transition: transform 0.15s ease, border-color 0.15s ease;
   }
-  .card:hover { transform: translateY(-4px); border-color: var(--arco); }
+  .card:hover { transform: translateY(-4px); border-color: var(--teja); }
   .card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
-  .card p { font-size: 0.95rem; color: var(--piedra); }
+  .card p { font-size: 0.95rem; color: var(--granito-claro); }
   .card .icono { font-size: 1.4rem; margin-bottom: 0.8rem; display: block; }
 
   /* ---- contacto ---- */
   .contacto { text-align: center; border-top: 1px solid var(--borde); }
-  .contacto p { color: var(--piedra); max-width: 30rem; margin: 0 auto; }
+  .contacto p { color: var(--granito-claro); max-width: 30rem; margin: 0 auto; }
 
   footer {
     border-top: 1px solid var(--borde);

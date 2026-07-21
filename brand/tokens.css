@@ -1,0 +1,13 @@
+/* ONTOS — tokens de color (fuente: brand/colores.md, 21-jul-2026) */
+:root {
+  --teja: #d4713b;         /* marca: clave del logo, CTAs y acentos sobre oscuro */
+  --teja-quemada: #b0532a; /* teja para texto/enlaces sobre claro (AA) */
+  --teja-clara: #e8956a;   /* realces sobre oscuro (AAA) */
+  --tinta: #1c1a17;
+  --granito: #6b6257;
+  --granito-claro: #a39a8c;
+  --hueso: #faf8f5;
+  --noche: #0f0e0c;
+  --panel: #171512;
+  --borde-oscuro: #2a261f;
+}
