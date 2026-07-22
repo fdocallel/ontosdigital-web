@@ -103,13 +103,25 @@
   .stat .n { font-size: 2rem; font-weight: 650; color: var(--texto); }
   .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
 
-  .demo90 {
-    aspect-ratio: 16 / 9; margin-top: 2rem;
-    border: 1px solid var(--borde); border-radius: 14px; overflow: hidden;
-    background: #0f0e0c;
+  .ver-demo { margin-top: 1.6rem; }
+  .ver-demo a {
+    color: var(--acento); font-weight: 600; text-decoration: none;
+    border-bottom: 1px solid var(--acento); padding-bottom: 0.1rem;
   }
-  .demo90 iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .nota-demo { font-size: 0.85rem; color: var(--sec); margin-top: 0.6rem; }
+  .ver-demo span { color: var(--sec); font-size: 0.85rem; margin-left: 0.8rem; }
+
+  /* Intro: la película como entrada de la página (clic o fin de película = entrar) */
+  #intro {
+    position: fixed; inset: 0; z-index: 50; background: #0f0e0c; cursor: pointer;
+    opacity: 1; transition: opacity 0.7s ease;
+  }
+  #intro.fuera { opacity: 0; pointer-events: none; }
+  #intro iframe { width: 100%; height: 100%; border: 0; display: block; pointer-events: none; }
+  #intro .intro-pie {
+    position: absolute; left: 0; right: 0; bottom: 1.1rem;
+    display: flex; justify-content: space-between; padding: 0 1.5rem;
+    font-size: 0.8rem; color: #a39a8c;
+  }
 
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
   .card {
@@ -210,8 +222,7 @@
   con IA. Los movimientos bancarios entran solos por API, cada documento queda ordenado y
   <strong>consultable en lenguaje natural</strong>, y una auditoría automática comprueba que nada
   se pierda.</p>
-  <div class="demo90"><iframe src="caso-90s.html" title="El sistema ONTOS en 90 segundos" loading="lazy"></iframe></div>
-  <p class="nota-demo">90 segundos, sin sonido. Demostración con datos de muestra.</p>
+  <p class="ver-demo"><a href="caso-90s.html" data-ver-intro>▶ Ver el sistema en 60 segundos</a><span>Sin sonido. Datos de muestra.</span></p>
   <div class="stats">
     <div class="stat"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
     <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
@@ -233,6 +244,39 @@
 </footer>
 
 </div>
+
+<!-- Intro: la película de 60s como entrada (1 vez por sesión; clic, Esc o fin = entrar) -->
+<div id="intro" hidden>
+  <iframe title="El sistema ONTOS en 60 segundos"></iframe>
+  <div class="intro-pie"><span>Demostración con datos de muestra</span><span>Clic para entrar</span></div>
+</div>
+<script>
+(function () {
+  var intro = document.getElementById("intro");
+  var marco = intro.querySelector("iframe");
+  function abrir() {
+    marco.src = "caso-90s.html?autoplay=1&r=" + Date.now();
+    intro.hidden = false;
+    document.documentElement.style.overflow = "hidden";
+  }
+  function cerrar() {
+    if (intro.hidden) return;
+    try { sessionStorage.setItem("introVista", "1"); } catch (e) {}
+    intro.classList.add("fuera");
+    document.documentElement.style.overflow = "";
+    setTimeout(function () { intro.hidden = true; intro.classList.remove("fuera"); marco.src = "about:blank"; }, 700);
+  }
+  intro.addEventListener("click", cerrar);
+  addEventListener("keydown", function (e) { if (e.key === "Escape") cerrar(); });
+  addEventListener("message", function (e) { if (e.data === "ontos-intro-fin") cerrar(); });
+  document.querySelectorAll("[data-ver-intro]").forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); abrir(); });
+  });
+  var vista = false;
+  try { vista = !!sessionStorage.getItem("introVista"); } catch (e) {}
+  if (!vista && !matchMedia("(prefers-reduced-motion: reduce)").matches) abrir();
+})();
+</script>
 
 <!-- GoatCounter: recuento anónimo, sin cookies (cuenta pendiente de registrar: código "ontosdigital") -->
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
