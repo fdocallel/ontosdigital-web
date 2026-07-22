@@ -69,14 +69,13 @@ def tracked(draw, xy, text, f, fill, tracking):
 f_word = font(92, bold=True)
 end_x = tracked(d, (742 * S, 118 * S), "ONTOS", f_word, TEXTO, tracking=26)
 
-# lema (2 lineas, granito claro)
-f_lema = font(27)
-d.text((746 * S, 254 * S), "El modelo digital de lo que tu negocio es,", font=f_lema, fill=GRANITO_CLARO)
-d.text((746 * S, 292 * S), "y la IA que lo opera.", font=f_lema, fill=GRANITO_CLARO)
+# tagline (1 linea, granito claro)
+f_lema = font(31)
+d.text((746 * S, 262 * S), "Raíces sólidas. Futuro inteligente.", font=f_lema, fill=GRANITO_CLARO)
 
-# dominio en teja, alineado con el lema
+# dominio en teja, alineado con el tagline
 f_dom = font(24, bold=True)
-d.text((746 * S, 338 * S), "ontosdigital.es", font=f_dom, fill=TEJA)
+d.text((746 * S, 326 * S), "ontosdigital.es", font=f_dom, fill=TEJA)
 
 out = img.resize((W, H), Image.LANCZOS)
 out.save("/Users/fdocallel/Dev/ontosdigital-web/brand/banner-linkedin.png")
