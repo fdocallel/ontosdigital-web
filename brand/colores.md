@@ -45,3 +45,11 @@ Matriz de contraste (umbral: 3:1 gráfico/texto grande · 4,5:1 texto AA):
 `granito` → hueso 5,64 · `granito-claro` → noche 6,94 · `tinta` → hueso 16,4
 
 Tokens listos para CSS en `tokens.css`.
+
+## Tipografía (22-jul-2026, tras revisión del banner)
+
+- **Gráficos/display** (banner, piezas de marca): **Avenir Next** — Demi Bold para el wordmark
+  (tracking ~0.2em), Medium para texto, Demi pequeño para el dominio. Una familia, tres pesos:
+  la O geométrica de Avenir rima con el anillo de dovelas. Nunca Helvetica Bold con tracking ancho.
+- **Web**: sigue en system stack (ui-sans-serif) — carga instantánea; no se incrusta fuente.
+- Alineación: los bloques de texto comparten borde óptico izquierdo (descontar side bearing).

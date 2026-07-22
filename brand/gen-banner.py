@@ -1,28 +1,31 @@
 #!/usr/bin/env python3
-"""Banner LinkedIn 1584x396 con la marca ONTOS (noche + O de dovelas + lema).
-Render a 4x y downscale LANCZOS. Paleta: brand/colores.md."""
+"""Banner LinkedIn 1584x396 con la marca ONTOS.
+Spec: una familia (Avenir Next) en 3 pesos · alineacion optica por bbox ·
+ritmo vertical constante · logo con geometria exacta de gen-logo.py.
+Render a 4x, downscale LANCZOS. Paleta: brand/colores.md."""
 import math
 from PIL import Image, ImageDraw, ImageFont
 
-W, H, S = 1584, 396, 4  # tamano final y supersampling
+W, H, S = 1584, 396, 4
 NOCHE = (15, 14, 12)
 TEJA = (212, 113, 59)
 GRANITO_CLARO = (163, 154, 140)
 TEXTO = (236, 231, 222)
-PIEDRA = (58, 53, 44)  # piedra del logo sobre noche
+PIEDRA = (69, 63, 53)  # un punto sobre la piedra web para no hundirse en noche a este tamano
+
+AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
+DEMI, MEDIUM, REGULAR = 2, 5, 7
 
 img = Image.new("RGB", (W * S, H * S), NOCHE)
+
+# ---- glow: halo calido muy sutil tras el lockup ----
+glow = Image.radial_gradient("L").resize((1600 * S, 1600 * S))
+glow = glow.point(lambda v: int((255 - v) * 0.07))
+img.paste(Image.new("RGB", glow.size, TEJA), (int(820 * S - glow.size[0] / 2), int(198 * S - glow.size[1] / 2)), glow)
 d = ImageDraw.Draw(img)
 
-# ---- glow radial teja, sutil, tras el bloque de marca ----
-glow = Image.radial_gradient("L").resize((1500 * S, 1500 * S))
-glow = glow.point(lambda v: int((255 - v) * 0.09))  # centro ~9% alpha
-teja_layer = Image.new("RGB", glow.size, TEJA)
-img.paste(teja_layer, (int(800 * S - glow.size[0] / 2), int(190 * S - glow.size[1] / 2)), glow)
-d = ImageDraw.Draw(img)
-
-# ---- logo: anillo de 11 dovelas, clave teja levantada ----
-def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=24):
+# ---- logo: anillo de 11 dovelas, clave teja levantada (geometria gen-logo.py) ----
+def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=32):
     pts = []
     for i in range(steps + 1):
         a = math.radians(a1 + (a2 - a1) * i / steps)
@@ -32,51 +35,47 @@ def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=24):
         pts.append((cx + r * math.cos(a), cy + dy + r * math.sin(a)))
     return pts
 
-def logo(cx, cy, radius, color_piedra, color_clave, alpha=None):
-    # geometria de gen-logo.py: N=11, gap 3 grados, R=42/r=26 sobre viewBox 100, clave dy=-5
+def logo(cx, cy, radius):
     N, gap = 11, 3.0
-    k_R, k_r, k_dy = radius * 42 / 42, radius * 26 / 42, -radius * 5 / 42
+    R, r, dy_clave = radius, radius * 26 / 42, -radius * 5 / 42
     seg = 360 / N
-    layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
-    dl = ImageDraw.Draw(layer)
     for k in range(N):
         c = -90 + k * seg
         a1, a2 = c - seg / 2 + gap / 2, c + seg / 2 - gap / 2
         if k == 0:
-            dl.polygon(sector(cx, cy, k_R, k_r, a1, a2, dy=k_dy), fill=color_clave + (alpha or 255,))
+            d.polygon(sector(cx, cy, R, r, a1, a2, dy=dy_clave), fill=TEJA)
         else:
-            dl.polygon(sector(cx, cy, k_R, k_r, a1, a2), fill=color_piedra + (alpha or 255,))
-    img.paste(layer, (0, 0), layer)
+            d.polygon(sector(cx, cy, R, r, a1, a2), fill=PIEDRA)
 
-# logo principal, a la izquierda del wordmark (zona segura, sobre el avatar no)
-logo(560 * S, 190 * S, 105 * S, PIEDRA, TEJA)
+logo(590 * S, 202 * S, 96 * S)
 
-# ---- tipografia ----
-def font(size, bold=False):
-    try:
-        return ImageFont.truetype("/System/Library/Fonts/HelveticaNeue.ttc", size * S, index=1 if bold else 0)
-    except Exception:
-        return ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", size * S, index=1 if bold else 0)
+# ---- tipografia: Avenir Next, alineacion optica ----
+def font(idx, size):
+    return ImageFont.truetype(AVENIR, size * S, index=idx)
 
-def tracked(draw, xy, text, f, fill, tracking):
-    x, y = xy
+def draw_optical(xy, text, f, fill, tracking=0.0):
+    """dibuja alineando el borde optico izquierdo en x (descuenta side bearing)"""
+    x, y = xy[0] * S, xy[1] * S
+    off = d.textbbox((0, 0), text[0], font=f)[0]
+    x -= off
     for ch in text:
-        draw.text((x, y), ch, font=f, fill=fill)
-        x += draw.textlength(ch, font=f) + tracking * S
-    return x - tracking * S
+        d.text((x, y), ch, font=f, fill=fill)
+        x += d.textlength(ch, font=f) + tracking * S
+    return (x - tracking * S) / S  # borde derecho final en coords 1x
 
-# wordmark ONTOS
-f_word = font(92, bold=True)
-end_x = tracked(d, (742 * S, 118 * S), "ONTOS", f_word, TEXTO, tracking=26)
+X0 = 756  # borde optico izquierdo del bloque de texto
 
-# tagline (1 linea, granito claro)
-f_lema = font(31)
-d.text((746 * S, 262 * S), "Raíces sólidas. Futuro inteligente.", font=f_lema, fill=GRANITO_CLARO)
+# wordmark: Demi Bold, tracking 0.2em
+f_word = font(DEMI, 88)
+draw_optical((X0, 112), "ONTOS", f_word, TEXTO, tracking=17.6)
 
-# dominio en teja, alineado con el tagline
-f_dom = font(24, bold=True)
-d.text((746 * S, 326 * S), "ontosdigital.es", font=f_dom, fill=TEJA)
+# tagline: Medium, granito claro
+f_tag = font(MEDIUM, 30)
+draw_optical((X0, 250), "Raíces sólidas. Futuro inteligente.", f_tag, GRANITO_CLARO)
 
-out = img.resize((W, H), Image.LANCZOS)
-out.save("/Users/fdocallel/Dev/ontosdigital-web/brand/banner-linkedin.png")
-print("ok banner-linkedin.png", out.size)
+# dominio: Demi pequeno en teja, mismo borde optico
+f_dom = font(DEMI, 21)
+draw_optical((X0, 316), "ontosdigital.es", f_dom, TEJA, tracking=0.6)
+
+img.resize((W, H), Image.LANCZOS).save("/Users/fdocallel/Dev/ontosdigital-web/brand/banner-linkedin.png")
+print("ok banner-linkedin.png")
