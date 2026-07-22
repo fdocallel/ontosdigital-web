@@ -127,6 +127,22 @@
     background: var(--teja); color: #14100c; font-size: 36px; font-weight: 600;
   }
 
+
+  /* ---- modo vertical (movil 9:16): el JS pone body.v y stage 1080x1920 ---- */
+  body.v .rotulo { bottom: 200px; padding: 0 70px; font-size: 54px; }
+  body.v #e1 .linea { max-width: 900px; }
+  body.v #e3 { flex-direction: column !important; padding: 0 80px 260px; gap: 44px; }
+  body.v .term { width: 920px; height: 520px; }
+  body.v .fichas { width: 920px; gap: 22px; }
+  body.v #e4 .consola { width: 920px; }
+  body.v #e4 .cab { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 36px; }
+  body.v #e4 .tiles { flex-direction: column; gap: 22px; margin-bottom: 44px; }
+  body.v #e4 .barras { grid-template-columns: 200px 1fr 130px; }
+  body.v #e5 .chat { width: 920px; }
+  body.v #e6 .grid { width: 920px; gap: 24px; }
+  body.v #e6 .kpi { padding: 44px 48px; }
+  body.v #e7 h1 { font-size: 96px; }
+
   /* Telón: play inicial y repetición */
   #telon {
     position: fixed; inset: 0; z-index: 9; cursor: pointer;
@@ -265,8 +281,11 @@ const scenes = [...document.querySelectorAll(".scene")];
 let idx = 0, timers = [], paused = false, tw = null;
 
 function fit() {
-  const s = Math.min(innerWidth / 1920, innerHeight / 1080);
-  stage.style.setProperty("--s", s);
+  const vertical = innerHeight > innerWidth;
+  document.body.classList.toggle("v", vertical);
+  const W = vertical ? 1080 : 1920, H = vertical ? 1920 : 1080;
+  stage.style.width = W + "px"; stage.style.height = H + "px";
+  stage.style.setProperty("--s", Math.min(innerWidth / W, innerHeight / H));
 }
 addEventListener("resize", fit); fit();
 
