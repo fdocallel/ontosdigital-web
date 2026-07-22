@@ -23,19 +23,24 @@ def svg(paths, vb="0 0 100 100"):
     body = "\n".join(paths)
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{vb}">\n{body}\n</svg>\n')
 
-# ---- Variante A: la O de dovelas (anillo, clave arriba separada) ----
-N, gap = 11, 3.0
-cx, cy, R, r = 50, 52, 42, 26
-seg = 360 / N
-paths = []
-for k in range(N):
-    c = -90 + k * seg
-    a1, a2 = c - seg/2 + gap/2, c + seg/2 - gap/2
-    if k == 0:  # clave: acento y levantada 4u
-        paths.append(f'<path d="{seg_path(cx,cy,R,r,a1,a2,0,-5)}" fill="{ACCENT}"/>')
-    else:
-        paths.append(f'<path d="{seg_path(cx,cy,R,r,a1,a2)}" fill="currentColor"/>')
-open(f"{OUT}/logo-a-anillo.svg","w").write(svg(paths))
+# ---- Variante A (V4, 22-jul-2026): 7 dovelas, anillo fino 0.70, clave exenta -19% ----
+# (la version de 11 dovelas gruesas queda superseded: estudio 2026-07-marca-critica-logo)
+def variante_a(stone):
+    N, gap = 7, 4.0
+    cx, cy, R, r = 50, 53, 42, 29.4
+    seg = 360 / N
+    paths = []
+    for k in range(N):
+        c = -90 + k * seg
+        a1, a2 = c - seg/2 + gap/2, c + seg/2 - gap/2
+        if k == 0:  # clave: acento, claramente exenta (8u = 19% de R)
+            paths.append(f'<path d="{seg_path(cx,cy,R,r,a1,a2,0,-8)}" fill="{ACCENT}"/>')
+        else:
+            paths.append(f'<path d="{seg_path(cx,cy,R,r,a1,a2)}" fill="{stone}"/>')
+    return paths
+open(f"{OUT}/logo-a-anillo.svg","w").write(svg(variante_a("currentColor")))
+open(f"{OUT}/logo.svg","w").write(svg(variante_a("currentColor")))
+open(f"{OUT}/favicon.svg","w").write(svg(variante_a("#8a8177")))
 
 # ---- Variante B: arco de medio punto (Acueducto), clave en acento ----
 N, gap = 7, 2.6
