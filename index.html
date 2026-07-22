@@ -103,6 +103,14 @@
   .stat .n { font-size: 2rem; font-weight: 650; color: var(--texto); }
   .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
 
+  .demo90 {
+    aspect-ratio: 16 / 9; margin-top: 2rem;
+    border: 1px solid var(--borde); border-radius: 14px; overflow: hidden;
+    background: #0f0e0c;
+  }
+  .demo90 iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .nota-demo { font-size: 0.85rem; color: var(--sec); margin-top: 0.6rem; }
+
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
   .card {
     background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
@@ -165,7 +173,6 @@
   construya puentes.</p>
   <div class="stats">
     <div class="stat"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
-    <div class="stat"><div class="n">6</div><div class="l">países</div></div>
     <div class="stat"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
   </div>
 </section>
@@ -203,6 +210,8 @@
   con IA. Los movimientos bancarios entran solos por API, cada documento queda ordenado y
   <strong>consultable en lenguaje natural</strong>, y una auditoría automática comprueba que nada
   se pierda.</p>
+  <div class="demo90"><iframe src="caso-90s.html" title="El sistema ONTOS en 90 segundos" loading="lazy"></iframe></div>
+  <p class="nota-demo">90 segundos, sin sonido. Demostración con datos de muestra.</p>
   <div class="stats">
     <div class="stat"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
     <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
