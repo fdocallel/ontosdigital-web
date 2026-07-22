@@ -57,7 +57,20 @@
     background: radial-gradient(ellipse 60% 45% at 50% 30%, rgba(212,113,59,0.14), transparent 70%);
     pointer-events: none;
   }
-  .arco-svg { width: 120px; color: var(--piedra-logo); margin-bottom: 2rem; animation: sube 0.9s ease both; }
+  .arco-svg { width: 132px; color: var(--piedra-logo); margin-bottom: 2rem; }
+  /* portada: el arco se construye de abajo arriba por parejas; la clave entra la última */
+  .arco-svg path { opacity: 0; animation: dovela 0.45s ease forwards; }
+  .arco-svg path:nth-child(6), .arco-svg path:nth-child(7)  { animation-delay: 0.1s; }
+  .arco-svg path:nth-child(5), .arco-svg path:nth-child(8)  { animation-delay: 0.25s; }
+  .arco-svg path:nth-child(4), .arco-svg path:nth-child(9)  { animation-delay: 0.4s; }
+  .arco-svg path:nth-child(3), .arco-svg path:nth-child(10) { animation-delay: 0.55s; }
+  .arco-svg path:nth-child(2), .arco-svg path:nth-child(11) { animation-delay: 0.7s; }
+  .arco-svg path:first-child { animation-name: clave; animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.34, 1.3, 0.5, 1); animation-delay: 1s; }
+  @keyframes dovela { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes clave  { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .arco-svg path, .hero h1, .hero .lema, .cta { animation: none; opacity: 1; }
+  }
   .hero h1 {
     font-size: clamp(3rem, 9vw, 5.5rem);
     letter-spacing: 0.28em; text-indent: 0.28em; font-weight: 650;
@@ -189,6 +202,22 @@
   Si no aporta, lo ves pronto.</p>
 </section>
 
+<section class="intro">
+  <h2>Caso real</h2>
+  <p>El primer gemelo digital lo construí para mí. ONTOS empezó como mi propio sistema: un modelo
+  digital de mi vida completa (finanzas, patrimonio, trámites, agenda, contactos) mantenido a diario
+  con IA. Los movimientos bancarios entran solos por API, cada documento queda ordenado y
+  <strong>consultable en lenguaje natural</strong>, y una auditoría automática comprueba que nada
+  se pierda.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
+    <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">países, trámites al día</div></div>
+  </div>
+  <p class="metodo">El método es el mismo que aplico a un negocio: primero el modelo de lo que es;
+  después, la IA trabajando encima.</p>
+</section>
+
 <section class="contacto">
   <h2>Contacto</h2>
   <p>Cuéntame qué te come horas, o qué querrías saber de tu negocio y hoy no puedes.</p>
@@ -197,10 +226,13 @@
 
 <footer>
   <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
-  <a href="aviso-legal.html">Aviso legal</a> · Web sin cookies ni rastreo.</p>
+  <a href="aviso-legal.html">Aviso legal</a> · Web sin cookies · recuento de visitas anónimo.</p>
 </footer>
 
 </div>
+
+<!-- GoatCounter: recuento anónimo, sin cookies (cuenta pendiente de registrar: código "ontosdigital") -->
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>
