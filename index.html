@@ -140,13 +140,14 @@
   .card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
   .card p { font-size: 0.95rem; color: var(--sec); }
   .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
-  .demos { margin-top: 1.8rem; grid-template-columns: repeat(2, 1fr); }
-  @media (max-width: 40rem) { .demos { grid-template-columns: 1fr; } }
-  .card.demo { display: block; text-decoration: none; color: var(--texto); }
-  .card.demo .top { display: flex; align-items: baseline; gap: 0.7rem; margin-bottom: 0.7rem; }
-  .card.demo .icono { margin-bottom: 0; font-size: 1.2rem; }
-  .card.demo h3 { margin-bottom: 0; }
-  .card.demo .dur { font-size: 0.8rem; color: var(--sec); font-weight: 500; margin-left: auto; white-space: nowrap; }
+  .demos { margin-top: 1.8rem; grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 30rem) { .demos { grid-template-columns: 1fr; } }
+  .card.demo { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); }
+  .card.demo .icono { font-size: 2.4rem; margin-bottom: 1rem; line-height: 1; }
+  .card.demo h3 { margin-bottom: 0.5rem; }
+  .card.demo p { flex: 1; }
+  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
 
@@ -247,20 +248,28 @@
   se pierda.</p>
   <div class="cards demos">
     <a class="card demo" href="caso-90s.html" data-ver-intro>
-      <div class="top"><span class="icono">◉</span><h3>El sistema completo</h3><span class="dur">▶</span></div>
+      <span class="icono">◉</span>
+      <h3>El sistema completo</h3>
       <p>El modelo entero y la IA operándolo: datos, documentos, respuestas con citas.</p>
+      <span class="ver">▶ Ver la demo</span>
     </a>
     <a class="card demo" href="finanzas-70s.html">
-      <div class="top"><span class="icono">€</span><h3>Finanzas</h3><span class="dur">▶</span></div>
+      <span class="icono">€</span>
+      <h3>Finanzas</h3>
       <p>Gastos por API, proyección a 18 meses, ayudas vigiladas, inversión con reglas.</p>
+      <span class="ver">▶ Ver la demo</span>
     </a>
     <a class="card demo" href="organizacion-60s.html">
-      <div class="top"><span class="icono">☰</span><h3>Organización</h3><span class="dur">▶</span></div>
+      <span class="icono">☰</span>
+      <h3>Organización</h3>
       <p>Proyectos con su siguiente paso, tareas, calendario y contactos al día.</p>
+      <span class="ver">▶ Ver la demo</span>
     </a>
     <a class="card demo" href="salud-60s.html">
-      <div class="top"><span class="icono">♥</span><h3>Salud</h3><span class="dur">▶</span></div>
+      <span class="icono">♥</span>
+      <h3>Salud</h3>
       <p>Entreno con progresión automática, composición, nutrición y descanso del wearable.</p>
+      <span class="ver">▶ Ver la demo</span>
     </a>
   </div>
   <p class="demos-nota">Sin sonido. Demostraciones con datos de muestra.</p>
