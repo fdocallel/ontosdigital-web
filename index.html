@@ -149,6 +149,14 @@
   .card.demo p { flex: 1; }
   .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  .verticales { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 48rem) { .verticales { grid-template-columns: 1fr; } }
+  .vert .icono { font-size: 2rem; }
+  .vert h3 { font-size: 1.15rem; }
+  .vert .vert-desc { font-size: 0.95rem; color: var(--sec); }
+  .vert .lineas { list-style: none; margin-top: 1.1rem; }
+  .vert .lineas li { font-size: 0.92rem; color: var(--sec); padding: 0.6rem 0; border-top: 1px solid var(--borde); }
+  .vert .lineas b { color: var(--texto); font-weight: 600; display: block; }
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
 
   /* ---- contacto ---- */
@@ -214,29 +222,32 @@
 </section>
 
 <section>
-  <h2>Servicios</h2>
-  <div class="cards">
-    <div class="card">
-      <span class="icono">◯</span>
-      <h3>El gemelo digital de tu negocio</h3>
-      <p>Un modelo ordenado y vivo de tu empresa (datos, procesos, conocimiento) que puedes
-      consultar en lenguaje natural.</p>
+  <h2>Qué hago</h2>
+  <div class="verticales">
+    <div class="card vert">
+      <span class="icono">◉</span>
+      <h3>Producto · ONTOS</h3>
+      <p class="vert-desc">El software de las demos: un gemelo digital ordenado y vivo, consultable
+      en lenguaje natural y operado con IA. En desarrollo, con el caso real como prueba.</p>
+      <ul class="lineas">
+        <li><b>ONTOS personal</b>Tu vida entera en un solo modelo: finanzas, trámites, agenda, salud.</li>
+        <li><b>ONTOS empresarial</b>El modelo de tu negocio: datos, procesos, conocimiento.</li>
+      </ul>
     </div>
-    <div class="card">
+    <div class="card vert">
       <span class="icono">⚙︎</span>
-      <h3>Automatización e IA a medida</h3>
-      <p>Lo repetitivo, automatizado. Agentes de IA integrados en tus herramientas y procesos:
-      en producción, no en demos.</p>
-    </div>
-    <div class="card">
-      <span class="icono">⌖</span>
-      <h3>Datos del mundo físico</h3>
-      <p>Dron, fotogrametría y catastro: terreno, activos y obras convertidos en modelos
-      utilizables.</p>
+      <h3>Consultoría tecnológica</h3>
+      <p class="vert-desc">Aplicación de nuevas tecnologías a empresas y particulares: un caso
+      concreto, semanas en vez de meses, y un resultado que se puede medir.</p>
+      <ul class="lineas">
+        <li><b>Automatización e IA a medida</b>Agentes integrados en tus herramientas y procesos: en producción, no en demos.</li>
+        <li><b>Datos del mundo físico</b>Dron, fotogrametría y catastro: terreno, activos y obras convertidos en modelos utilizables.</li>
+        <li><b>Auditoría financiera con IA</b>Revisión de cuentas y detección de anomalías asistida por IA.</li>
+      </ul>
     </div>
   </div>
-  <p class="metodo">Método: un caso concreto, semanas en vez de meses, y un resultado que se puede medir.
-  Si no aporta, lo ves pronto.</p>
+  <p class="metodo">Las dos se alimentan: cada encargo de consultoría enseña algo que el producto
+  incorpora. Si no aporta, lo ves pronto.</p>
 </section>
 
 <section class="intro">
