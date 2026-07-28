@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ONTOS · la organización, en 60 segundos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+  /* tokens: brand/colores.md (pieza oscura siempre: es una película) */
+  :root {
+    --noche: #0f0e0c; --panel: #171512;
+    --texto: #ece7e0; --sec: #a39a8c;
+    --teja: #d4713b; --teja-clara: #e8956a;
+    --borde: rgba(163,154,140,0.18);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; background: var(--noche); overflow: hidden; }
+  body { font-family: "Avenir Next", Avenir, system-ui, sans-serif; color: var(--texto); }
+
+  #stage {
+    width: 1920px; height: 1080px; position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(var(--s, 1));
+    background: var(--noche);
+  }
+  .scene { position: absolute; inset: 0; display: none; }
+  .scene.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+  .rotulo {
+    position: absolute; bottom: 90px; left: 0; right: 0; text-align: center;
+    font-size: 52px; font-weight: 600; letter-spacing: 0.01em; color: var(--texto);
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    padding: 0 160px;
+  }
+  .rotulo em { color: var(--teja-clara); font-style: normal; }
+  .scene.active .rotulo.on { opacity: 1; transform: none; }
+
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+  .cursor::after { content: "▋"; color: var(--teja); animation: parpadeo 0.9s steps(1) infinite; }
+  @keyframes parpadeo { 50% { opacity: 0; } }
+  @keyframes sube { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .aparece { opacity: 0; }
+  .aparece.on { animation: sube 0.7s ease both; }
+
+  .cab { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 44px; }
+  .cab h3 { font-size: 34px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sec); }
+  .badge {
+    font-size: 26px; color: var(--teja-clara); border: 1px solid rgba(212,113,59,0.45);
+    border-radius: 999px; padding: 8px 26px;
+  }
+  .badge i { display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: var(--teja); margin-right: 14px; animation: pulso 1.6s ease infinite; }
+  @keyframes pulso { 50% { opacity: 0.3; } }
+
+  /* ---- O1 · hook ---- */
+  #o1 .linea { font-size: 58px; letter-spacing: 0.01em; max-width: 1500px; text-align: center; line-height: 1.35; }
+  #o1 .prompt { color: var(--teja); margin-right: 20px; }
+
+  /* ---- O2 · proyectos con cronología (datos escenificados) ---- */
+  #o2 .consola { width: 1400px; }
+  .proy {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 16px;
+    padding: 26px 36px; margin-bottom: 20px;
+    display: flex; align-items: baseline; gap: 28px;
+  }
+  .proy .n { font-size: 32px; flex: 1; }
+  .proy .fase {
+    font-size: 22px; color: var(--teja-clara); border: 1px solid rgba(212,113,59,0.45);
+    border-radius: 999px; padding: 6px 20px; white-space: nowrap;
+  }
+  .proy .sig { font-size: 26px; color: var(--sec); }
+  #o2 svg { width: 100%; display: block; margin-top: 26px; }
+  #o2 .via { stroke: rgba(163,154,140,0.3); stroke-width: 4; }
+  #o2 .hito-p { fill: var(--teja); }
+  #o2 .hito-f { fill: none; stroke: var(--sec); stroke-width: 4; }
+  #o2 .hlbl { font-size: 24px; fill: var(--sec); font-family: inherit; }
+  #o2 .hlbl.hecho { fill: var(--texto); }
+
+  /* ---- O3 · tareas + calendario (datos escenificados) ---- */
+  #o3 .duo { display: flex; gap: 40px; width: 1500px; }
+  #o3 .col { flex: 1; background: var(--panel); border: 1px solid var(--borde); border-radius: 18px; padding: 34px 40px; }
+  #o3 h4 { font-size: 28px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sec); margin-bottom: 28px; }
+  .tarea { display: flex; gap: 20px; align-items: baseline; font-size: 29px; padding: 14px 0; border-bottom: 1px solid var(--borde); }
+  .tarea:last-child { border-bottom: 0; }
+  .tarea .box { color: var(--sec); font-size: 26px; }
+  .tarea.hecha .box { color: var(--teja-clara); }
+  .tarea.hecha .t { color: var(--sec); text-decoration: line-through; }
+  .evento { display: flex; gap: 22px; align-items: baseline; font-size: 29px; padding: 14px 0; border-bottom: 1px solid var(--borde); }
+  .evento:last-child { border-bottom: 0; }
+  .evento .h { color: var(--teja-clara); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  /* ---- O4 · red de contactos (datos escenificados) ---- */
+  #o4 .lista { width: 1250px; display: flex; flex-direction: column; gap: 26px; }
+  .persona {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 18px;
+    padding: 28px 38px; display: flex; align-items: center; gap: 30px;
+  }
+  .persona .ava {
+    width: 78px; height: 78px; border-radius: 50%; background: rgba(212,113,59,0.18);
+    color: var(--teja-clara); display: flex; align-items: center; justify-content: center;
+    font-size: 30px; font-weight: 600; flex: none;
+  }
+  .persona .quien { flex: 1; }
+  .persona .n { font-size: 31px; }
+  .persona .rol { font-size: 24px; color: var(--sec); margin-top: 4px; }
+  .persona .estado { font-size: 25px; color: var(--sec); text-align: right; line-height: 1.5; }
+  .persona .estado b { color: var(--teja-clara); font-weight: 600; }
+
+  /* ---- O5 · pregunta (datos escenificados) ---- */
+  #o5 .chat { width: 1300px; }
+  #o5 .q { font-size: 46px; font-weight: 600; }
+  #o5 .q .prompt { color: var(--teja); margin-right: 18px; }
+  #o5 .a { font-size: 38px; line-height: 1.65; color: var(--texto); margin-top: 50px; max-width: 1200px; }
+  #o5 .a b { color: var(--teja-clara); font-weight: 600; }
+  #o5 .fuentes { margin-top: 44px; display: flex; gap: 20px; }
+  #o5 .fu {
+    font-size: 26px; color: var(--sec); background: var(--panel);
+    border: 1px solid var(--borde); border-radius: 999px; padding: 10px 26px;
+  }
+
+  /* ---- O6 · cierre ---- */
+  .arco { width: 260px; height: 260px; color: var(--sec); }
+  .arco path { opacity: 0; }
+  .scene.active .arco.on path { animation: dovela 0.45s ease forwards; }
+  .scene.active .arco.on path:nth-child(4), .scene.active .arco.on path:nth-child(5) { animation-delay: 0.1s; }
+  .scene.active .arco.on path:nth-child(3), .scene.active .arco.on path:nth-child(6) { animation-delay: 0.3s; }
+  .scene.active .arco.on path:nth-child(2), .scene.active .arco.on path:nth-child(7) { animation-delay: 0.5s; }
+  .scene.active .arco.on path:first-child { animation-name: clave; animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.34,1.3,0.5,1); animation-delay: 0.85s; }
+  @keyframes dovela { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes clave  { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: none; } }
+  #o6 h1 { font-size: 110px; font-weight: 650; letter-spacing: 0.28em; text-indent: 0.28em; margin-top: 40px; }
+  #o6 .tagline { font-size: 46px; color: var(--sec); margin-top: 26px; }
+  #o6 .tagline em { color: var(--teja-clara); font-style: normal; }
+  #o6 .cta-line { font-size: 38px; margin-top: 70px; }
+  #o6 .pill {
+    display: inline-block; margin-top: 30px; padding: 18px 54px; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-size: 36px; font-weight: 600;
+  }
+
+  /* ---- modo vertical (movil 9:16) ---- */
+  body.v .rotulo { bottom: 200px; padding: 0 70px; font-size: 54px; }
+  body.v #o1 .linea { max-width: 900px; }
+  body.v #o2 .consola { width: 920px; }
+  body.v .proy { flex-direction: column; gap: 10px; align-items: flex-start; }
+  body.v .cab { flex-direction: column; align-items: flex-start; gap: 18px; margin-bottom: 36px; }
+  body.v #o3 .duo { flex-direction: column; width: 920px; gap: 26px; }
+  body.v #o4 .lista { width: 920px; }
+  body.v .persona .estado { text-align: left; }
+  body.v .persona { flex-wrap: wrap; }
+  body.v #o5 .chat { width: 920px; }
+  body.v #o5 .fuentes { flex-wrap: wrap; }
+  body.v #o6 h1 { font-size: 96px; }
+
+  /* Telón: play inicial y repetición */
+  #telon {
+    position: fixed; inset: 0; z-index: 9; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.2rem;
+    background: rgba(15,14,12,0.55); backdrop-filter: blur(2px);
+  }
+  #telon .play {
+    width: clamp(64px, 12vmin, 110px); height: clamp(64px, 12vmin, 110px); border-radius: 50%;
+    background: var(--teja); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 40px rgba(212,113,59,0.35);
+    transition: transform 0.15s ease;
+  }
+  #telon:hover .play { transform: scale(1.06); }
+  #telon .play svg { width: 38%; margin-left: 6%; fill: #14100c; }
+  #telon .t1 { font-size: clamp(1rem, 2.6vmin, 1.5rem); font-weight: 600; }
+  #telon .t2 { font-size: clamp(0.75rem, 1.9vmin, 1rem); color: var(--sec); }
+  #telon.oculto { display: none; }
+
+  #volver {
+    position: fixed; left: 1.4rem; bottom: 1.1rem; z-index: 10;
+    font-size: 0.85rem; color: var(--sec); text-decoration: none;
+  }
+  #volver:hover { color: var(--texto); }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- O1 · 4,5s · hook -->
+  <section class="scene" id="o1" data-dur="4500">
+    <div class="linea mono"><span class="prompt">›</span><span id="o1txt" class="cursor"></span></div>
+  </section>
+
+  <!-- O2 · 12s · proyectos con cronología (datos escenificados) -->
+  <section class="scene" id="o2" data-dur="12000">
+    <div class="consola">
+      <div class="cab">
+        <h3>Proyectos</h3>
+        <div class="badge mono"><i></i>3 abiertos · al día</div>
+      </div>
+      <div class="proy aparece" data-t="500"><div class="n">Reforma del local</div><div class="fase">en obra</div><div class="sig">siguiente: visita del técnico</div></div>
+      <div class="proy aparece" data-t="1300"><div class="n">Licencia de apertura</div><div class="fase">en trámite</div><div class="sig">siguiente: subsanar un requerimiento</div></div>
+      <div class="proy aparece" data-t="2100"><div class="n">Web nueva</div><div class="fase">propuesta</div><div class="sig">siguiente: elegir presupuesto</div></div>
+      <svg viewBox="0 0 1400 130" aria-hidden="true" class="aparece" data-t="3200">
+        <line class="via" x1="80" y1="50" x2="1320" y2="50"/>
+        <circle class="hito-p" cx="120"  cy="50" r="13"/><text class="hlbl hecho" x="120"  y="105" text-anchor="middle">proyecto firmado</text>
+        <circle class="hito-p" cx="500"  cy="50" r="13"/><text class="hlbl hecho" x="500"  y="105" text-anchor="middle">demolición</text>
+        <circle class="hito-p" cx="880"  cy="50" r="13"/><text class="hlbl hecho" x="880"  y="105" text-anchor="middle">instalaciones</text>
+        <circle class="hito-f" cx="1260" cy="50" r="13"/><text class="hlbl"       x="1260" y="105" text-anchor="middle">acabados</text>
+      </svg>
+    </div>
+    <div class="rotulo" data-t="7500">Cada proyecto, con su historia <em>y su siguiente paso</em>.</div>
+  </section>
+
+  <!-- O3 · 11s · tareas + calendario (datos escenificados) -->
+  <section class="scene" id="o3" data-dur="11000">
+    <div class="duo">
+      <div class="col aparece" data-t="400">
+        <h4>Tareas · el qué</h4>
+        <div class="tarea" id="o3hecha"><span class="box" id="o3box">☐</span><span class="t">enviar la documentación al banco</span></div>
+        <div class="tarea"><span class="box">☐</span><span class="t">pedir dos presupuestos de rotulación</span></div>
+        <div class="tarea"><span class="box">☐</span><span class="t">renovar el seguro del local</span></div>
+      </div>
+      <div class="col aparece" data-t="1200">
+        <h4>Calendario · el cuándo</h4>
+        <div class="evento"><span class="h">mar · 10:00</span><span>visita del técnico a la obra</span></div>
+        <div class="evento"><span class="h">jue · 12:30</span><span>llamada con la gestoría</span></div>
+        <div class="evento"><span class="h">vie · 09:00</span><span>plazo del requerimiento</span></div>
+      </div>
+    </div>
+    <div class="rotulo" data-t="6500">Las tareas son el qué; el calendario, el cuándo. <em>Nada duplicado.</em></div>
+  </section>
+
+  <!-- O4 · 11s · red de contactos (datos escenificados) -->
+  <section class="scene" id="o4" data-dur="11000">
+    <div class="lista">
+      <div class="persona aparece" data-t="500">
+        <div class="ava">LM</div>
+        <div class="quien"><div class="n">Laura Martín</div><div class="rol">arquitecta · reforma del local</div></div>
+        <div class="estado">último: planos recibidos<br><b>siguiente: confirmar acabados</b></div>
+      </div>
+      <div class="persona aparece" data-t="1400">
+        <div class="ava">EV</div>
+        <div class="quien"><div class="n">Estudio Vega</div><div class="rol">proveedor · web nueva</div></div>
+        <div class="estado">último: propuesta enviada<br><b>siguiente: respuesta el jueves</b></div>
+      </div>
+      <div class="persona aparece" data-t="2300">
+        <div class="ava">JR</div>
+        <div class="quien"><div class="n">Jorge Ruiz</div><div class="rol">gestoría · licencias</div></div>
+        <div class="estado">último: requerimiento explicado<br><b>siguiente: subsanación esta semana</b></div>
+      </div>
+    </div>
+    <div class="rotulo" data-t="6500">Cada relación, <em>con su contexto al día</em>.</div>
+  </section>
+
+  <!-- O5 · 12s · pregunta (datos escenificados) -->
+  <section class="scene" id="o5" data-dur="12000">
+    <div class="chat">
+      <div class="q mono"><span class="prompt">›</span><span id="o5txt" class="cursor"></span></div>
+      <div class="a aparece" data-t="4200">La obra va <b>en plazo</b>: acabados desde el lunes. El requerimiento de la licencia
+      vence <b>el viernes</b> y la subsanación está con la gestoría. Del resto, solo decidir el presupuesto de la web.</div>
+      <div class="fuentes aparece" data-t="6800">
+        <span class="fu mono">[[reforma-local]]</span>
+        <span class="fu mono">[[licencia · vie]]</span>
+        <span class="fu mono">[[tareas]]</span>
+      </div>
+    </div>
+    <div class="rotulo" data-t="8500">Se lo pregunto, <em>y me lo da ordenado</em>.</div>
+  </section>
+
+  <!-- O6 · 10s · cierre -->
+  <section class="scene" id="o6" data-dur="10000">
+    <svg class="arco" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
+      <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
+      <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
+      <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
+      <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
+      <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
+      <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+    </svg>
+    <h1>ONTOS</h1>
+    <div class="tagline aparece" data-t="1600">Esto hace un gemelo digital <em>con tus proyectos</em>.</div>
+    <div class="cta-line aparece" data-t="3000">Ahora lo construyo para negocios.</div>
+    <div class="pill aparece" data-t="3800">hola@ontosdigital.es · ontosdigital.es</div>
+  </section>
+
+</div>
+
+<div id="telon" role="button" aria-label="Reproducir">
+  <div class="play"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></div>
+  <div class="t1" id="telonT1">La organización, en 60 segundos</div>
+  <div class="t2">Sin sonido. Demostración con datos de muestra.</div>
+</div>
+<a id="volver" href="https://ontosdigital.es/">← ontosdigital.es</a>
+
+<script>
+"use strict";
+// Datos ESCENIFICADOS: proyectos, personas y fechas son ficticios.
+const stage = document.getElementById("stage");
+const telon = document.getElementById("telon");
+const scenes = [...document.querySelectorAll(".scene")];
+let idx = 0, timers = [], paused = false, tw = null;
+
+function fit() {
+  const vertical = innerHeight > innerWidth;
+  document.body.classList.toggle("v", vertical);
+  const W = vertical ? 1080 : 1920, H = vertical ? 1920 : 1080;
+  stage.style.width = W + "px"; stage.style.height = H + "px";
+  stage.style.setProperty("--s", Math.min(innerWidth / W, innerHeight / H));
+}
+addEventListener("resize", fit); fit();
+
+function sched(fn, ms) {
+  const t = { fn, restante: ms, inicio: performance.now(), id: null };
+  t.id = setTimeout(() => { fn(); timers = timers.filter(x => x !== t); }, ms);
+  timers.push(t);
+}
+function cancelAll() { timers.forEach(t => clearTimeout(t.id)); timers = []; if (tw) { clearInterval(tw); tw = null; } }
+function pausar(si) {
+  paused = si;
+  document.body.classList.toggle("paused", si);
+  if (si) {
+    timers.forEach(t => { clearTimeout(t.id); t.restante -= performance.now() - t.inicio; });
+  } else {
+    timers.forEach(t => { t.inicio = performance.now(); t.id = setTimeout(() => { t.fn(); timers = timers.filter(x => x !== t); }, Math.max(0, t.restante)); });
+  }
+}
+function maquina(el, texto, cps) {
+  let i = 0;
+  tw = setInterval(() => {
+    if (paused) return;
+    el.textContent = texto.slice(0, ++i);
+    if (i >= texto.length) { clearInterval(tw); tw = null; }
+  }, 1000 / cps);
+}
+function apariciones(scope) {
+  scope.querySelectorAll(".aparece[data-t], .rotulo[data-t]").forEach(el =>
+    sched(() => el.classList.add("on"), +el.dataset.t));
+}
+
+const runners = {
+  o1(s) { maquina(document.getElementById("o1txt"), "¿En qué punto está cada cosa?", 24); },
+  o2(s) { apariciones(s); },
+  o3(s) {
+    apariciones(s);
+    sched(() => {
+      document.getElementById("o3hecha").classList.add("hecha");
+      document.getElementById("o3box").textContent = "☑";
+    }, 3600);
+  },
+  o4(s) { apariciones(s); },
+  o5(s) {
+    apariciones(s);
+    sched(() => maquina(document.getElementById("o5txt"), "¿Qué toca esta semana?", 22), 500);
+  },
+  o6(s) { s.querySelector(".arco").classList.add("on"); apariciones(s); },
+};
+
+function show(i) {
+  cancelAll();
+  idx = (i + scenes.length) % scenes.length;
+  scenes.forEach(s => s.classList.remove("active"));
+  const s = scenes[idx];
+  const limpio = s.cloneNode(true);
+  s.replaceWith(limpio); scenes[idx] = limpio;
+  limpio.classList.add("active");
+  runners[limpio.id](limpio);
+  if (idx === scenes.length - 1) {
+    sched(() => {
+      if (AUTO && parent !== window) { parent.postMessage("ontos-intro-fin", "*"); return; }
+      document.getElementById("telonT1").textContent = "Ver otra vez";
+      telon.classList.remove("oculto");
+    }, +limpio.dataset.dur);
+  } else {
+    sched(() => show(idx + 1), +limpio.dataset.dur);
+  }
+}
+
+const AUTO = new URLSearchParams(location.search).has("autoplay");
+telon.addEventListener("click", () => { telon.classList.add("oculto"); show(0); });
+addEventListener("keydown", e => {
+  if (!telon.classList.contains("oculto")) return;
+  if (e.key === " ") { e.preventDefault(); pausar(!paused); }
+  else if (e.key === "r" || e.key === "R") show(0);
+  else if (e.key >= "1" && e.key <= "6") show(+e.key - 1);
+});
+if (AUTO) { telon.classList.add("oculto"); show(0); }
+</script>
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

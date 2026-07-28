@@ -140,6 +140,10 @@
   .card h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
   .card p { font-size: 0.95rem; color: var(--sec); }
   .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
+  .demos { margin-top: 1.8rem; }
+  .card.demo { display: block; text-decoration: none; color: var(--texto); }
+  .card.demo .dur { font-size: 0.8rem; color: var(--sec); font-weight: 500; margin-left: 0.5rem; white-space: nowrap; }
+  .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
 
   /* ---- contacto ---- */
@@ -237,8 +241,22 @@
   con IA. Los movimientos bancarios entran solos por API, cada documento queda ordenado y
   <strong>consultable en lenguaje natural</strong>, y una auditoría automática comprueba que nada
   se pierda.</p>
-  <p class="ver-demo"><a href="caso-90s.html" data-ver-intro>▶ Ver el sistema en 80 segundos</a><span>Sin sonido. Datos de muestra.</span></p>
-  <p class="ver-demo"><a href="finanzas-70s.html">▶ La parte de finanzas, en 70 segundos</a><span>Gastos, proyección, ayudas, inversión.</span></p>
+  <div class="cards demos">
+    <a class="card demo" href="caso-90s.html" data-ver-intro>
+      <span class="icono">▶</span><h3>El sistema completo <span class="dur">80 s</span></h3>
+      <p>El modelo entero y la IA operándolo: datos, documentos, respuestas con citas.</p>
+    </a>
+    <a class="card demo" href="finanzas-70s.html">
+      <span class="icono">▶</span><h3>Finanzas <span class="dur">70 s</span></h3>
+      <p>Gastos por API, proyección a 18 meses, ayudas vigiladas, inversión con reglas.</p>
+    </a>
+    <a class="card demo" href="organizacion-60s.html">
+      <span class="icono">▶</span><h3>Organización <span class="dur">60 s</span></h3>
+      <p>Proyectos con su siguiente paso, tareas, calendario y contactos al día.</p>
+    </a>
+    <!-- Salud (salud-60s.html): se enlaza cuando el wearable esté conectado -->
+  </div>
+  <p class="demos-nota">Sin sonido. Demostraciones con datos de muestra.</p>
   <div class="stats">
     <div class="stat"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
     <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
