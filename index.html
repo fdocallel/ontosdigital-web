@@ -297,10 +297,18 @@
 // Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
 document.querySelectorAll("[data-copiar]").forEach(function (b) {
   b.addEventListener("click", function () {
-    navigator.clipboard.writeText(b.dataset.copiar).then(function () {
+    function hecho() {
       var t = b.textContent; b.textContent = "copiado ✓";
       setTimeout(function () { b.textContent = t; }, 1600);
-    });
+    }
+    function fallback() { // navegadores sin clipboard API o escritura rechazada
+      var t = document.createElement("textarea");
+      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
+      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
+    else fallback();
   });
 });
 </script>
