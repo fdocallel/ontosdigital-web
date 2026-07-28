@@ -145,6 +145,14 @@
   /* ---- contacto ---- */
   .contacto { text-align: center; border-top: 1px solid var(--borde); }
   .contacto p { color: var(--sec); max-width: 30rem; margin: 0 auto; }
+  .copiar {
+    margin: 2.5rem 0 0 0.6rem; padding: 0.8rem 1.4rem; border-radius: 999px;
+    font: inherit; font-size: 0.9rem; border: 1px solid var(--borde);
+    background: none; color: var(--sec); cursor: pointer; vertical-align: middle;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .copiar:hover { color: var(--realce); border-color: var(--realce); }
+  html { scroll-behavior: smooth; }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -168,7 +176,7 @@
   </svg>
   <h1>ONTOS</h1>
   <p class="lema"><em>Ontos</em>, del griego ὄντος: <em>«lo que es»</em>. El modelo digital de lo que tu negocio es, y la IA que lo opera.</p>
-  <a class="cta" href="mailto:hola@ontosdigital.es">Hablemos</a>
+  <a class="cta" href="#contacto">Hablemos</a>
 </header>
 
 <div class="wrap">
@@ -240,10 +248,11 @@
   después, la IA trabajando encima.</p>
 </section>
 
-<section class="contacto">
+<section class="contacto" id="contacto">
   <h2>Contacto</h2>
   <p>Cuéntame qué te come horas, o qué querrías saber de tu negocio y hoy no puedes.</p>
   <a class="cta" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+  <button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button>
 </section>
 
 <footer>
@@ -284,9 +293,19 @@
   try { vista = !!sessionStorage.getItem("introVista"); } catch (e) {}
   if (!vista && !matchMedia("(prefers-reduced-motion: reduce)").matches) abrir();
 })();
+
+// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
+document.querySelectorAll("[data-copiar]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    navigator.clipboard.writeText(b.dataset.copiar).then(function () {
+      var t = b.textContent; b.textContent = "copiado ✓";
+      setTimeout(function () { b.textContent = t; }, 1600);
+    });
+  });
+});
 </script>
 
-<!-- GoatCounter: recuento anónimo, sin cookies (cuenta pendiente de registrar: código "ontosdigital") -->
+<!-- GoatCounter: recuento anónimo, sin cookies -->
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>
