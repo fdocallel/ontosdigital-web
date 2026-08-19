@@ -157,6 +157,9 @@
   .formulario .aviso-envio { font-size: 0.8rem; color: var(--sec); margin: 0; }
   .alternativa { margin-top: 2rem; font-size: 0.95rem; color: var(--sec); }
   .alternativa a, .aviso-envio a { color: var(--acento); }
+  /* enlaces en línea del cuerpo: nunca el azul del navegador */
+  p a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
+  footer a { border-bottom: 0; font-weight: inherit; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 <script type="application/ld+json">
@@ -209,6 +212,7 @@
     </a>
     <a class="item" href="bim.html" aria-current="page">Oficina BIM</a>
     <a class="item" href="/#casos">Casos</a>
+    <a class="item" href="/#escritos">Escritos</a>
     <a class="item" href="/#contacto">Contacto</a>
   </nav>
 </header>

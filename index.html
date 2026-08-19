@@ -137,6 +137,17 @@
   .vert .areas { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--borde);
     font-size: 0.92rem; line-height: 1.8; }
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
+  /* escritos: la escritura fechada es la señal de que el sitio está vivo */
+  .escrito {
+    display: block; text-decoration: none; color: var(--texto);
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.6rem 1.6rem; transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .escrito:hover { border-color: var(--teja); transform: translateY(-3px); }
+  .escrito .fecha { font-size: 0.78rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.1em; }
+  .escrito h3 { font-size: 1.25rem; margin: 0.5rem 0 0.6rem; }
+  .escrito p { color: var(--sec); font-size: 0.95rem; }
+  .escrito .ver { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
   .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
   /* Retrato de Quién: al tener la foto (#113), guardarla como brand/fernando.jpg (cuadrada,
@@ -228,6 +239,7 @@
     </a>
     <a class="item" href="bim.html">Oficina BIM</a>
     <a class="item" href="#casos">Casos</a>
+    <a class="item" href="#escritos">Escritos</a>
     <a class="item" href="#contacto">Contacto</a>
   </nav>
 </header>
@@ -358,6 +370,18 @@
   </div>
   <p class="metodo">El método es el mismo que aplico a un negocio: primero el modelo de lo que es;
   después, la IA trabajando encima.</p>
+</section>
+
+<section id="escritos">
+  <h2>Escritos</h2>
+  <a class="escrito" href="escrito-plan-bim-ingenieria.html">
+    <span class="fecha">19 de agosto de 2026 · 7 min</span>
+    <h3>Qué exige el Plan BIM a una ingeniería mediana en 2026</h3>
+    <p>Qué obliga hoy, a quién alcanza y desde cuándo; qué significa en la práctica; los cuatro
+    errores típicos al responder un pliego con requisitos BIM; y una lista de comprobación honesta
+    de diez preguntas para saber si estás listo.</p>
+    <span class="ver">Leer ▸</span>
+  </a>
 </section>
 
 <section>
