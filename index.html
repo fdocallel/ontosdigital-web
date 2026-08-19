@@ -27,7 +27,7 @@
   "email": "hola@ontosdigital.es",
   "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
   "areaServed": "ES",
-  "founder": { "@type": "Person", "name": "Fernando Calle", "jobTitle": "Ingeniero de Caminos, Canales y Puertos", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" },
+  "founder": { "@type": "Person", "name": "Fernando Calle", "jobTitle": "Ingeniero de Caminos, Canales y Puertos", "image": "https://ontosdigital.es/brand/fernando.jpg", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" },
   "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
   "makesOffer": { "@type": "Offer", "name": "Diagnóstico de nivel BIM", "price": "0", "priceCurrency": "EUR" }
 }
@@ -150,11 +150,20 @@
   .escrito .ver { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
   .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
-  /* Retrato de Quién: al tener la foto (#113), guardarla como brand/fernando.jpg (cuadrada,
-     ~600x600, <120 KB) y descomentar el bloque <figure class="retrato"> de la sección Quién. */
-  .quien-con-foto { display: grid; grid-template-columns: 12rem 1fr; gap: 2.2rem; align-items: start; }
-  @media (max-width: 48rem) { .quien-con-foto { grid-template-columns: 1fr; gap: 1.4rem; } }
-  .retrato img { width: 12rem; height: 12rem; object-fit: cover; border-radius: 14px; border: 1px solid var(--borde); display: block; }
+  /* Retrato de Quién: brand/fernando.jpg, 600x800 (3:4), ~50 KB */
+  .quien-con-foto { display: grid; grid-template-columns: 13rem 1fr; gap: 2.4rem; align-items: start; }
+  @media (max-width: 48rem) { .quien-con-foto { grid-template-columns: 1fr; gap: 1.6rem; } }
+  .retrato { margin: 0; }
+  .retrato img {
+    /* height:auto es obligatorio: el atributo height="800" del HTML es una pista de
+       presentación que gana a aspect-ratio y estiraba el retrato a 800 px de alto. */
+    width: 13rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
+    /* borde algo más marcado que --borde: la pared beige de la foto y el fondo hueso
+       se diferencian solo un 5 % y la silueta se disolvía en la página */
+    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
+  }
+  @media (prefers-color-scheme: dark) { .retrato img { border-color: rgba(255,255,255,0.12); } }
+  @media (max-width: 48rem) { .retrato img { width: 10rem; } }
   .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
 
   /* cualificadora */
@@ -400,25 +409,27 @@
 
 <section class="intro">
   <h2>Quién</h2>
-  <!-- Al tener la foto (#113): guardarla como brand/fernando.jpg, envolver este <p> y el
-       siguiente bloque en <div class="quien-con-foto"> y descomentar el figure de abajo.
-  <figure class="retrato">
-    <img src="brand/fernando.jpg" alt="Fernando Calle, ingeniero de caminos, fundador de ONTOS" width="600" height="600">
-    <figcaption>Fernando Calle · La Lastrilla (Segovia)</figcaption>
-  </figure>
-  -->
-  <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos
-  y automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), donde
-  un dato mal puesto cuesta millones. Esa cabeza de ingeniero,
-  <strong>premiada por I+D en automatización e IA</strong>, es la que pongo a trabajar en tu negocio:
-  sistemas en vez de heroicidades, y resultados que se miden. No hace falta que tu empresa
-  construya puentes.</p>
-  <div class="stats">
-    <div class="stat"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
-    <div class="stat"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
+  <div class="quien-con-foto">
+    <figure class="retrato">
+      <img src="brand/fernando.jpg" alt="Retrato de Fernando Calle, ingeniero de caminos y fundador de ONTOS"
+           width="600" height="800" loading="lazy" decoding="async">
+      <figcaption>Fernando Calle · Segovia</figcaption>
+    </figure>
+    <div>
+      <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos
+      y automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), donde
+      un dato mal puesto cuesta millones. Esa cabeza de ingeniero,
+      <strong>premiada por I+D en automatización e IA</strong>, es la que pongo a trabajar en tu negocio:
+      sistemas en vez de heroicidades, y resultados que se miden. No hace falta que tu empresa
+      construya puentes.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
+        <div class="stat"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
+      </div>
+      <p class="verificable">Puedes comprobarlo:
+      <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">mi perfil profesional en LinkedIn</a>.</p>
+    </div>
   </div>
-  <p class="verificable">Puedes comprobarlo:
-  <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">mi perfil profesional en LinkedIn</a>.</p>
 </section>
 
 <section class="contacto" id="contacto">

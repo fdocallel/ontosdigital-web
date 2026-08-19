@@ -40,10 +40,13 @@
 /* Barra de navegación compartida (index, bim, casos) */
 .barra {
   position: sticky; top: 0; z-index: 40;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(12px) saturate(140%); -webkit-backdrop-filter: blur(12px) saturate(140%);
   border-bottom: 1px solid var(--borde);
 }
+/* La barra es pegajosa: sin esto, un salto a #casos/#escritos/#contacto deja el
+   principio de la sección debajo de ella. */
+:target, section[id] { scroll-margin-top: 4.5rem; }
 .barra nav {
   max-width: 64rem; margin: 0 auto; padding: 0.7rem 1.5rem;
   display: flex; align-items: center; gap: 1.4rem;
