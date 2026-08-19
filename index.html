@@ -27,7 +27,8 @@
   "email": "hola@ontosdigital.es",
   "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
   "areaServed": "ES",
-  "founder": { "@type": "Person", "name": "Fernando Calle", "jobTitle": "Ingeniero de Caminos, Canales y Puertos" },
+  "founder": { "@type": "Person", "name": "Fernando Calle", "jobTitle": "Ingeniero de Caminos, Canales y Puertos", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" },
+  "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
   "makesOffer": { "@type": "Offer", "name": "Diagnóstico de nivel BIM", "price": "0", "priceCurrency": "EUR" }
 }
 </script>
@@ -136,6 +137,14 @@
   .vert .areas { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--borde);
     font-size: 0.92rem; line-height: 1.8; }
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
+  .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
+  .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
+  /* Retrato de Quién: al tener la foto (#113), guardarla como brand/fernando.jpg (cuadrada,
+     ~600x600, <120 KB) y descomentar el bloque <figure class="retrato"> de la sección Quién. */
+  .quien-con-foto { display: grid; grid-template-columns: 12rem 1fr; gap: 2.2rem; align-items: start; }
+  @media (max-width: 48rem) { .quien-con-foto { grid-template-columns: 1fr; gap: 1.4rem; } }
+  .retrato img { width: 12rem; height: 12rem; object-fit: cover; border-radius: 14px; border: 1px solid var(--borde); display: block; }
+  .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
 
   /* cualificadora */
   .preguntas { list-style: none; max-width: 42rem; }
@@ -367,6 +376,13 @@
 
 <section class="intro">
   <h2>Quién</h2>
+  <!-- Al tener la foto (#113): guardarla como brand/fernando.jpg, envolver este <p> y el
+       siguiente bloque en <div class="quien-con-foto"> y descomentar el figure de abajo.
+  <figure class="retrato">
+    <img src="brand/fernando.jpg" alt="Fernando Calle, ingeniero de caminos, fundador de ONTOS" width="600" height="600">
+    <figcaption>Fernando Calle · La Lastrilla (Segovia)</figcaption>
+  </figure>
+  -->
   <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos
   y automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), donde
   un dato mal puesto cuesta millones. Esa cabeza de ingeniero,
@@ -377,13 +393,15 @@
     <div class="stat"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
     <div class="stat"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
   </div>
+  <p class="verificable">Puedes comprobarlo:
+  <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">mi perfil profesional en LinkedIn</a>.</p>
 </section>
 
 <section class="contacto" id="contacto">
   <h2>Contacto</h2>
   <p class="lead">Cuéntame qué te come horas, o qué querrías saber de tu negocio y hoy no puedes.
   Contesto normalmente en 24-48 horas.</p>
-  <form action="https://formsubmit.co/hola@ontosdigital.es" method="POST">
+  <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
     <div><label for="f-nombre">Nombre</label>
     <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
     <div><label for="f-org">Empresa u organismo</label>
