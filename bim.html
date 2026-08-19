@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Requisitos BIM en licitación pública · ONTOS</title>
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<meta name="description" content="Tu licitación pide nivel BIM: IFC, ISO 19650, entorno común de datos. Departamento BIM externo por meses. Diagnóstico de nivel BIM sin coste en 48 horas.">
+<meta property="og:title" content="Tu próxima licitación pide BIM. ¿Lo tienes resuelto?">
+<meta property="og:description" content="Un departamento BIM que se contrata por meses: requisitos de información, coordinación, control de calidad y entregables. Diagnóstico de nivel BIM sin coste.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ontosdigital.es/bim.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ONTOS">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tu próxima licitación pide BIM. ¿Lo tienes resuelto?">
+<meta name="twitter:description" content="Un departamento BIM que se contrata por meses. Diagnóstico de nivel BIM sin coste.">
+<meta name="twitter:image" content="https://ontosdigital.es/brand/og.png">
+<link rel="canonical" href="https://ontosdigital.es/bim.html">
+<style>
+  /* tokens: brand/colores.md · oscuro por defecto, claro via prefers-color-scheme */
+  :root {
+    --teja: #d4713b;        /* fija: CTA y clave del logo */
+    --bg: #0f0e0c;
+    --panel: #171512;
+    --borde: #2a261f;
+    --texto: #ece7de;
+    --sec: #a39a8c;         /* granito-claro */
+    --acento: #d4713b;      /* teja sobre oscuro */
+    --realce: #e8956a;      /* teja-clara sobre oscuro */
+    --piedra-logo: #3a352c;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #faf8f5;        /* hueso */
+      --panel: #ffffff;
+      --borde: #e3ddd2;
+      --texto: #1c1a17;     /* tinta */
+      --sec: #6b6257;       /* granito */
+      --acento: #b0532a;    /* teja-quemada: texto sobre claro (AA) */
+      --realce: #b0532a;
+      --piedra-logo: #4a443a;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg); color: var(--texto);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---- cabecera sobria ---- */
+  .barra { border-bottom: 1px solid var(--borde); }
+  .barra .wrap {
+    display: flex; align-items: center; gap: 0.7rem;
+    padding-top: 1.1rem; padding-bottom: 1.1rem;
+  }
+  .marca { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--texto); }
+  .marca svg { width: 26px; height: 26px; color: var(--piedra-logo); display: block; }
+  .marca .nombre { font-weight: 650; letter-spacing: 0.22em; text-indent: 0.22em; font-size: 0.95rem; }
+  .barra .seccion { margin-left: auto; font-size: 0.75rem; text-transform: uppercase;
+    letter-spacing: 0.2em; color: var(--sec); }
+  @media (max-width: 34rem) { .barra .seccion { display: none; } }
+
+  /* ---- titular ---- */
+  .titular { padding: 4.5rem 0 2.5rem; position: relative; overflow: hidden; }
+  .titular::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 20% 0%, rgba(212,113,59,0.13), transparent 70%);
+    pointer-events: none;
+  }
+  .titular .wrap { position: relative; }
+  .titular h1 {
+    font-size: clamp(1.9rem, 5.2vw, 3.1rem); line-height: 1.15; font-weight: 650;
+    max-width: 24ch;
+  }
+  .titular h1 .pregunta { color: var(--realce); display: block; }
+  .titular .bajada { margin-top: 1.2rem; max-width: 46rem; font-size: 1.1rem; color: var(--sec); }
+
+  /* ---- secciones ---- */
+  section { padding: 3.2rem 0; }
+  section + section { border-top: 1px solid var(--borde); }
+  h2 {
+    font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.25em;
+    color: var(--acento); margin-bottom: 1.6rem;
+  }
+  p { max-width: 46rem; }
+  p + p { margin-top: 1rem; }
+  .sec { color: var(--sec); }
+  strong { color: var(--texto); font-weight: 650; }
+  .sec strong { color: var(--texto); }
+
+  /* ---- calendario legal (dato duro) ---- */
+  .calendario { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.2rem; }
+  .hito {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.5rem 1.4rem;
+  }
+  .hito .fecha { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--acento); }
+  .hito .cifra { font-size: 1.9rem; font-weight: 650; margin-top: 0.5rem; line-height: 1.1; }
+  .hito .cifra small { font-size: 0.95rem; font-weight: 500; color: var(--sec); display: block; margin-top: 0.15rem; }
+  .hito .nota { font-size: 0.92rem; color: var(--sec); margin-top: 0.9rem; }
+  .aplica {
+    margin-top: 1.4rem; padding-top: 1.2rem; border-top: 1px solid var(--borde);
+    font-size: 0.95rem; color: var(--texto); max-width: 46rem;
+  }
+  .aplica b { color: var(--texto); font-weight: 650; }
+  .pie-dato { margin-top: 1rem; font-size: 0.82rem; color: var(--sec); max-width: 46rem; }
+
+  /* ---- las tres salidas ---- */
+  .tres { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.2rem; margin-top: 1.4rem; }
+  .salida {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.4rem 1.3rem;
+  }
+  .salida .n { font-size: 0.78rem; letter-spacing: 0.18em; color: var(--sec); }
+  .salida p { font-size: 0.98rem; margin-top: 0.5rem; }
+
+  /* ---- la cuarta vía ---- */
+  .cuarta {
+    background: var(--panel); border: 1px solid var(--borde); border-left: 3px solid var(--teja);
+    border-radius: 14px; padding: 2rem 1.8rem;
+  }
+  .cuarta h3 { font-size: clamp(1.25rem, 3.2vw, 1.7rem); line-height: 1.25; font-weight: 650; max-width: 22ch; }
+  .cuarta p { margin-top: 1rem; color: var(--sec); }
+
+  /* ---- listas de servicio ---- */
+  .lineas { list-style: none; max-width: 46rem; }
+  .lineas li { padding: 1rem 0; border-top: 1px solid var(--borde); font-size: 0.98rem; color: var(--sec); }
+  .lineas li:last-child { border-bottom: 1px solid var(--borde); }
+  .lineas b { color: var(--texto); font-weight: 650; }
+
+  /* ---- quién ---- */
+  .credenciales { display: flex; gap: 2.6rem; flex-wrap: wrap; margin-top: 1.8rem; }
+  .cred .n { font-size: 1.6rem; font-weight: 650; }
+  .cred .l { font-size: 0.8rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  /* ---- cierre ---- */
+  .cierre { text-align: center; }
+  .cierre h2 { text-align: center; }
+  .cierre p { margin-left: auto; margin-right: auto; max-width: 38rem; }
+  .cierre .promesa { list-style: none; margin: 1.8rem auto 0; max-width: 34rem; text-align: left; }
+  .cierre .promesa li { padding: 0.65rem 0 0.65rem 1.6rem; position: relative; color: var(--sec); font-size: 0.98rem; }
+  .cierre .promesa li::before { content: "▸"; position: absolute; left: 0; color: var(--acento); }
+  .cta {
+    display: inline-block; margin-top: 2.2rem; vertical-align: middle;
+    padding: 0.8rem 2rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .copiar {
+    margin: 2.2rem 0 0 0.6rem; padding: 0.8rem 1.4rem; border-radius: 999px;
+    font: inherit; font-size: 0.9rem; border: 1px solid var(--borde);
+    background: none; color: var(--sec); cursor: pointer; vertical-align: middle;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .copiar:hover { color: var(--realce); border-color: var(--realce); }
+  .sin-compromiso { margin-top: 1.4rem; font-size: 0.9rem; color: var(--sec); }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="wrap">
+    <a class="marca" href="/">
+      <!-- Logo ONTOS: la O de dovelas, la clave sostiene el arco (brand/logo.svg) -->
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
+      <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
+      <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
+      <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
+      <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
+      <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
+      <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+      </svg>
+      <span class="nombre">ONTOS</span>
+    </a>
+    <span class="seccion">BIM en contratación pública</span>
+  </div>
+</header>
+
+<div class="titular">
+  <div class="wrap">
+    <h1>Tu próxima licitación pide BIM. <span class="pregunta">¿Lo tienes resuelto?</span></h1>
+    <p class="bajada">Cuando el pliego lo pide, lo pide así: entrega en IFC, coordinación bajo ISO 19650,
+    entorno común de datos, seguridad conforme al Esquema Nacional de Seguridad. Y cuando todavía no lo
+    pide, el calendario sigue corriendo igual.</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section>
+  <h2>El calendario legal</h2>
+  <div class="calendario">
+    <div class="hito">
+      <div class="fecha">Desde el 1 de octubre de 2025</div>
+      <div class="cifra">5.404.000 €<small>de presupuesto en adelante</small></div>
+      <p class="nota">Los contratos de obra a partir de esa cifra se licitan con <strong>nivel BIM
+      medio</strong>.</p>
+    </div>
+    <div class="hito">
+      <div class="fecha">Desde el 1 de octubre de 2025</div>
+      <div class="cifra">2.000.000 €<small>de presupuesto en adelante</small></div>
+      <p class="nota">A partir de esa cifra, <strong>nivel BIM inicial</strong>.</p>
+    </div>
+    <div class="hito">
+      <div class="fecha">1 de octubre de 2027</div>
+      <div class="cifra">Un escalón más<small>para los dos umbrales</small></div>
+      <p class="nota">Lo que hoy es nivel inicial y nivel medio sube de exigencia en esa fecha.</p>
+    </div>
+  </div>
+  <p class="aplica">Aplica a <b>las obras</b>, a <b>las concesiones</b>, a <b>la dirección
+  facultativa</b>, a <b>la asistencia técnica</b> y a <b>la redacción de proyectos</b>.</p>
+  <p class="pie-dato">Lo dice el Plan BIM en la contratación pública, aprobado en Consejo de
+  Ministros. Umbrales vigentes según la actualización del 1 de enero de 2026.</p>
+</section>
+
+<section>
+  <h2>Lo que suele pasar</h2>
+  <p class="sec">Para muchas ingenierías, estudios y constructoras, cumplir eso significa una de
+  estas tres cosas:</p>
+  <div class="tres">
+    <div class="salida">
+      <div class="n">01</div>
+      <p>Contratar un perfil que casi no existe en el mercado.</p>
+    </div>
+    <div class="salida">
+      <div class="n">02</div>
+      <p>Montar una estructura interna que no se amortiza.</p>
+    </div>
+    <div class="salida">
+      <div class="n">03</div>
+      <p>Dejar de presentarse.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Hay una cuarta</h2>
+  <div class="cuarta">
+    <h3>Un departamento BIM que se contrata por meses.</h3>
+    <p>Yo llevo la gestión de la información de tus contratos: requisitos, coordinación, entorno
+    común de datos, control de calidad de los modelos y de lo que se entrega. <strong>Tu equipo
+    sigue haciendo ingeniería.</strong></p>
+  </div>
+</section>
+
+<section>
+  <h2>Qué hago exactamente</h2>
+  <ul class="lineas">
+    <li><b>Requisitos de información.</b> Leo el pliego y traduzco lo que pide a un plan de
+    ejecución BIM que tu equipo puede seguir sin ser expertos.</li>
+    <li><b>Coordinación y control de calidad.</b> Federación de modelos, detección de
+    interferencias, verificación de que lo entregado cumple lo exigido, informes por hito.</li>
+    <li><b>Entorno común de datos.</b> Montado y ordenado, con control de versiones y accesos, sin
+    obligarte a comprar plataformas caras.</li>
+    <li><b>Entregables.</b> IFC, BCF, COBie y mediciones que salen del modelo, no de una hoja
+    aparte.</li>
+    <li><b>Automatización.</b> Las comprobaciones repetitivas las hace un programa, no una persona
+    mirando pantallas. Por eso el trabajo sale en días.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Quién lo hace</h2>
+  <p><strong>Fernando Calle</strong>, ingeniero de Caminos, Canales y Puertos. Seis años de gestión de información y coordinación
+  BIM en proyectos de infraestructura de referencia: <strong>HS2</strong>, <strong>Sydney Metro
+  West</strong>, desalación en <strong>Adelaida</strong>, <strong>Red Sea</strong> y
+  <strong>Trojena</strong>.</p>
+  <p class="sec">Coordinación bajo ISO 19650, federación de modelos, control de calidad, IFC 4.3,
+  COBie, tableros de datos. Premiado por contribuciones de I+D en automatización e inteligencia
+  artificial.</p>
+  <p class="sec">Ahora hago lo mismo desde ONTOS, con automatización propia por dentro: eso comprime
+  el trabajo y es lo que permite que una sola persona lleve lo que antes ocupaba a un equipo.</p>
+  <div class="credenciales">
+    <div class="cred"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
+    <div class="cred"><div class="n">ISO 19650</div><div class="l">coordinación y control de calidad</div></div>
+    <div class="cred"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
+  </div>
+</section>
+
+<section class="cierre" id="diagnostico">
+  <h2>Por dónde empezar</h2>
+  <p><strong>Diagnóstico de nivel BIM, sin coste.</strong> Me envías un pliego o el último proyecto
+  entregado. En 48 horas recibes un documento de una página con:</p>
+  <ul class="promesa">
+    <li>Qué nivel BIM te exige la norma para ese contrato.</li>
+    <li>Qué te falta para cumplirlo.</li>
+    <li>Qué riesgo tienes en la próxima licitación.</li>
+    <li>Qué haría yo primero.</li>
+  </ul>
+  <p class="sin-compromiso">Si te sirve, seguimos. Si no, te quedas el diagnóstico.</p>
+  <a class="cta" href="mailto:hola@ontosdigital.es?subject=Diagn%C3%B3stico%20de%20nivel%20BIM">hola@ontosdigital.es</a>
+  <button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button>
+</section>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
+  <a href="./">Inicio</a> · <a href="aviso-legal.html">Aviso legal</a> ·
+  <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+</footer>
+
+</div>
+
+<script>
+// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
+document.querySelectorAll("[data-copiar]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    function hecho() {
+      var t = b.textContent; b.textContent = "copiado ✓";
+      setTimeout(function () { b.textContent = t; }, 1600);
+    }
+    function fallback() { // navegadores sin clipboard API o escritura rechazada
+      var t = document.createElement("textarea");
+      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
+      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
+    else fallback();
+  });
+});
+</script>
+
+<!-- GoatCounter: recuento anónimo, sin cookies -->
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>
