@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El sistema completo · caso ONTOS</title>
+<meta name="description" content="Cómo construí mi gemelo digital: un modelo de toda mi vida mantenido a diario con IA. Datos, documentos, respuestas con citas y auditoría diaria.">
+<link rel="canonical" href="https://ontosdigital.es/caso-sistema.html">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<meta property="og:title" content="El sistema completo · caso ONTOS">
+<meta property="og:description" content="Un modelo de toda mi vida mantenido a diario con IA: datos que entran solos, documentos consultables en lenguaje natural y auditoría diaria.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:url" content="https://ontosdigital.es/caso-sistema.html">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans);
+    font-size: 16px; line-height: 1.6;
+    background: var(--bg); color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; }
+  h1 { font-size: clamp(2rem, 5.5vw, 2.8rem); line-height: 1.15; margin-top: 3.5rem; }
+  .contexto { margin-top: 0.9rem; font-size: 1.1rem; color: var(--sec); }
+  h2 { font-size: 1.45rem; margin: 3rem 0 1rem; }
+  p + p { margin-top: 1rem; }
+
+  .demo-bloque {
+    display: block; margin-top: 2.2rem;
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.4rem 1.6rem; text-decoration: none; color: var(--texto);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .demo-bloque:hover { border-color: var(--teja); transform: translateY(-2px); }
+  .demo-bloque .titulo { font-weight: 650; font-size: 1.1rem; color: var(--acento); }
+  .demo-bloque .titulo::before { content: "▶ "; }
+  .demo-bloque .detalle { margin-top: 0.3rem; font-size: 0.9rem; color: var(--sec); }
+
+  .muestra { color: var(--sec); font-size: 0.85rem; }
+  .nota {
+    margin-top: 3rem; padding: 1.1rem 1.4rem;
+    border-left: 3px solid var(--teja);
+    background: var(--panel); border-radius: 0 10px 10px 0;
+    font-size: 0.95rem; color: var(--sec);
+  }
+  .cifras { display: flex; flex-wrap: wrap; gap: 2.2rem; margin: 1.6rem 0 0.4rem; }
+  .cifra .n { font-size: 1.7rem; font-weight: 650; font-family: var(--serif); }
+  .cifra .l { font-size: 0.82rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.07em; }
+
+  .cierre { margin: 3.5rem 0 4rem; text-align: center; }
+  .cierre p { font-size: 1.15rem; }
+  .cta {
+    display: inline-block; margin-top: 1.4rem;
+    padding: 0.8rem 2rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .cierre .alt { margin-top: 1rem; font-size: 0.9rem; }
+  .cierre .alt a { color: var(--acento); }
+
+  a { color: var(--acento); }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    margin-top: 2rem; padding: 2rem 0 3rem;
+    font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
+      <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
+      <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
+      <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
+      <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
+      <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
+      <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+    </svg>ONTOS</a>
+    <a class="item" href="bim.html">Oficina BIM</a>
+    <a class="item" href="/#casos">Casos</a>
+    <a class="item" href="/#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<h1>El sistema completo</h1>
+<p class="contexto">Un modelo digital de toda una vida, mantenido a diario con IA. El primero lo construí para mí.</p>
+
+<a class="demo-bloque" href="caso-90s.html">
+  <span class="titulo">Ver la demo animada</span>
+  <span class="detalle">80 segundos aproximados · sin sonido · datos de muestra</span>
+</a>
+
+<h2>El problema</h2>
+<p>Finanzas, trámites, patrimonio, agenda, contactos, salud. Cada cosa vive en un sitio distinto:
+la cabeza, una carpeta del correo, un Excel que se actualizó por última vez hace meses, un cajón
+con papeles. Y una sola persona intentando llevarlo todo.</p>
+<p>El resultado lo conoce cualquiera: plazos que aparecen de golpe, documentos que se buscan tres
+veces, decisiones que se toman sin la foto completa porque juntar la foto costaba más que decidir.
+No es un problema de desorden personal. Es que ningún humano puede sostener de memoria un sistema
+con tantas piezas.</p>
+
+<h2>Qué se construyó</h2>
+<p>Un gemelo digital: un modelo ordenado de lo que hay, con cada dato en un único sitio, y una IA
+que lo opera a diario. No es una app más. Es la estructura debajo de todas.</p>
+<p>El modelo tiene tres capas. El dato duro: movimientos bancarios que entran solos por API,
+tareas, calendario, contactos, mediciones de salud. Los documentos: más de 300, ordenados y
+consultables en lenguaje natural. Y encima, la IA que mantiene el conjunto: cuando le cuento algo,
+actualiza todas las piezas afectadas; cuando le pregunto, responde con mis datos y cita de dónde
+sale cada cosa.</p>
+<p>Y una pieza que casi nadie pone: una auditoría automática que comprueba a diario que nada se
+pierda. Que cada dato está donde debe, que ninguna tarea quedó huérfana, que las vistas cuadran
+con la fuente. Un sistema sin vigilancia se degrada; este se vigila solo.</p>
+<p>Todo funciona en local. Los datos no salen de mi máquina.</p>
+
+<h2>Cómo funciona a diario</h2>
+<p>Le escribo una frase: «me llegó la factura del taller, 240 €». El sistema anota el gasto en la
+ficha del coche, cierra la tarea de llevarlo al taller, pone la recogida del jueves en el
+calendario y escribe la entrada del día en la bitácora. Yo digo qué pasó; él actualiza todo lo
+demás. <span class="muestra">(Ejemplo escenificado con datos de muestra, como en la demo.)</span></p>
+<p>Las finanzas no se teclean: los movimientos entran solos por API y la consola muestra el gasto
+del mes por categorías y una proyección de tesorería a 18 meses. Las ayudas y los plazos están
+vigilados con aviso, y las reglas de inversión están escritas y el sistema comprueba que se
+cumplen.</p>
+<p>Cuando necesito un dato, pregunto en lenguaje natural: «¿cuánto llevo gastado en el coche este
+año?». La respuesta llega con el desglose y con citas a las fichas y a la bitácora de donde sale
+cada cifra. <span class="muestra">(Cifras de muestra en la demo.)</span> Sin citas, una respuesta
+de IA es una opinión; con ellas, es un dato verificable.</p>
+<p>Lo mismo en el resto de áreas: proyectos con su siguiente paso claro, tareas y calendario
+sincronizados, red de contactos al día. En salud, plan de entrenamiento con progresión automática,
+composición corporal medida con protocolo, nutrición registrada y el descanso del wearable (WHOOP)
+conectado desde julio de 2026.</p>
+
+<h2>Resultado</h2>
+<div class="cifras">
+  <div class="cifra"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
+  <div class="cifra"><div class="n">300+</div><div class="l">documentos consultables</div></div>
+  <div class="cifra"><div class="n">100%</div><div class="l">local y privado</div></div>
+</div>
+<p>No es un prototipo: es mi día a día, mantenido con IA desde junio de 2026, con una auditoría
+automática comprobando cada día que nada se pierda. El método es el mismo que aplico a un negocio:
+primero el modelo de lo que es; después, la IA trabajando encima.</p>
+
+<div class="nota">
+  <strong>Nota honesta.</strong> El primer cliente de este sistema soy yo: lo construí para mi
+  propia vida y lo uso a diario. Las demos usan datos de muestra escenificados, nunca los datos
+  reales.
+</div>
+
+<div class="cierre">
+  <p>Cuéntame qué te come horas.</p>
+  <a class="cta" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+  <p class="alt">O escríbeme desde la <a href="/#contacto">página de contacto</a>.</p>
+</div>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
+  <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+</footer>
+
+</main>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

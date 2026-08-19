@@ -5,6 +5,7 @@
 <title>ONTOS · las finanzas, en 70 segundos</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <style>
   /* tokens: brand/colores.md (pieza oscura siempre: es una película) */
   :root {
@@ -138,6 +139,7 @@
     display: inline-block; margin-top: 30px; padding: 18px 54px; border-radius: 999px;
     background: var(--teja); color: #14100c; font-size: 36px; font-weight: 600;
   }
+  #f7 .pill a { color: inherit; text-decoration: underline; text-decoration-color: rgba(20,16,12,0.4); text-underline-offset: 3px; }
 
   /* ---- modo vertical (movil 9:16) ---- */
   body.v .rotulo { bottom: 200px; padding: 0 70px; font-size: 54px; }
@@ -172,6 +174,10 @@
     font-size: 0.85rem; color: var(--sec); text-decoration: none;
   }
   #volver:hover { color: var(--texto); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor::after, .badge i { animation: none; }
+  }
 </style>
 </head>
 <body>
@@ -273,12 +279,12 @@
     <h1>ONTOS</h1>
     <div class="tagline aparece" data-t="1600">Esto hace un gemelo digital <em>con tu dinero</em>.</div>
     <div class="cta-line aparece" data-t="3000">Ahora lo construyo para negocios.</div>
-    <div class="pill aparece" data-t="3800">hola@ontosdigital.es · ontosdigital.es</div>
+    <div class="pill aparece" data-t="3800"><a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a> · <a href="https://ontosdigital.es/" target="_self">ontosdigital.es</a></div>
   </section>
 
 </div>
 
-<div id="telon" role="button" aria-label="Reproducir">
+<div id="telon" role="button" aria-label="Reproducir" tabindex="0">
   <div class="play"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></div>
   <div class="t1" id="telonT1">Las finanzas, en 70 segundos</div>
   <div class="t2">Sin sonido. Demostración con datos de muestra.</div>
@@ -377,6 +383,7 @@ function show(i) {
 
 const AUTO = new URLSearchParams(location.search).has("autoplay");
 telon.addEventListener("click", () => { telon.classList.add("oculto"); show(0); });
+telon.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); telon.click(); } });
 addEventListener("keydown", e => {
   if (!telon.classList.contains("oculto")) return;
   if (e.key === " ") { e.preventDefault(); pausar(!paused); }

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gracias · ONTOS</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--texto);
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  main {
+    flex: 1;
+    max-width: 32rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 2rem 1.5rem 3rem; font-size: 0.8rem; color: var(--sec); text-align: center;
+  }
+  footer a { color: inherit; }
+  h1 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  main p {
+    color: var(--sec);
+    margin-bottom: 1rem;
+  }
+  main p:last-of-type { margin-bottom: 2.5rem; }
+  main a.correo {
+    color: var(--acento);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  main a.correo:hover { border-bottom-color: var(--acento); }
+  .volver {
+    display: inline-block;
+    color: var(--acento);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+  .volver:hover { border-bottom-color: var(--acento); }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
+        <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
+        <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
+        <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
+        <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
+        <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
+        <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="bim.html">Oficina BIM</a>
+    <a class="item" href="/#casos">Casos</a>
+    <a class="item" href="/#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Gracias</h1>
+  <p>Recibido. Te contesto normalmente en 24-48 horas.</p>
+  <p>Si prefieres, escríbeme directamente a
+  <a class="correo" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>.</p>
+  <a class="volver" href="/">← Volver al inicio</a>
+</main>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
+  <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a></p>
+</footer>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

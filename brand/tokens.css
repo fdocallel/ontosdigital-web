@@ -1,13 +1,64 @@
-/* ONTOS — tokens de color (fuente: brand/colores.md, 21-jul-2026) */
-:root {
-  --teja: #d4713b;         /* marca: clave del logo, CTAs y acentos sobre oscuro */
-  --teja-quemada: #b0532a; /* teja para texto/enlaces sobre claro (AA) */
-  --teja-clara: #e8956a;   /* realces sobre oscuro (AAA) */
-  --tinta: #1c1a17;
-  --granito: #6b6257;
-  --granito-claro: #a39a8c;
-  --hueso: #faf8f5;
-  --noche: #0f0e0c;
-  --panel: #171512;
-  --borde-oscuro: #2a261f;
+/* ONTOS — tokens de marca (fuente única; paleta definida en colores.md, 21-jul-2026).
+ * Claro por defecto desde el remodelado v2 (19-ago-2026): el comprador B2B lee de día.
+ * Oscuro via prefers-color-scheme. Las demos (caso-90s etc.) NO cargan este fichero:
+ * son cine, siempre noche. */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("fraunces.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
+
+:root {
+  --teja: #d4713b;          /* fija: la clave del logo y fondo de CTA */
+  --bg: #faf8f5;            /* hueso */
+  --panel: #ffffff;
+  --borde: #e3ddd2;
+  --texto: #1c1a17;         /* tinta */
+  --sec: #6b6257;           /* granito */
+  --acento: #b0532a;        /* teja-quemada: texto/enlace sobre claro (AA) */
+  --realce: #b0532a;
+  --piedra-logo: #4a443a;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0e0c;          /* noche */
+    --panel: #171512;
+    --borde: #2a261f;
+    --texto: #ece7de;
+    --sec: #a39a8c;         /* granito-claro */
+    --acento: #d4713b;      /* teja sobre oscuro */
+    --realce: #e8956a;      /* teja-clara */
+    --piedra-logo: #3a352c;
+  }
+}
+
+/* Barra de navegación compartida (index, bim, casos) */
+.barra {
+  position: sticky; top: 0; z-index: 40;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--borde);
+}
+.barra nav {
+  max-width: 64rem; margin: 0 auto; padding: 0.7rem 1.5rem;
+  display: flex; align-items: center; gap: 1.4rem;
+}
+.barra .marca {
+  display: flex; align-items: center; gap: 0.55rem;
+  font-weight: 650; letter-spacing: 0.18em; text-decoration: none;
+  color: var(--texto); font-size: 0.95rem; margin-right: auto;
+}
+.barra .marca svg { width: 22px; height: 22px; color: var(--piedra-logo); }
+.barra a.item {
+  color: var(--sec); text-decoration: none; font-size: 0.9rem;
+  padding: 0.25rem 0; border-bottom: 2px solid transparent;
+}
+.barra a.item:hover, .barra a.item[aria-current="page"] {
+  color: var(--acento); border-bottom-color: var(--acento);
+}
+@media (max-width: 30rem) { .barra nav { gap: 0.9rem; } .barra a.item { font-size: 0.82rem; } }

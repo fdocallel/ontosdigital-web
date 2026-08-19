@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caso Finanzas · ONTOS, el gemelo digital de tu dinero</title>
+<meta name="description" content="El caso Finanzas de ONTOS: movimientos bancarios por API, proyección de tesorería a 18 meses, ayudas vigiladas e inversión con reglas escritas.">
+<link rel="canonical" href="https://ontosdigital.es/caso-finanzas.html">
+<meta property="og:title" content="Caso Finanzas · ONTOS, el gemelo digital de tu dinero">
+<meta property="og:description" content="Movimientos bancarios por API, proyección de tesorería a 18 meses, ayudas vigiladas e inversión con reglas escritas. Todo local y privado.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:url" content="https://ontosdigital.es/caso-finanzas.html">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); font-size: 16px; line-height: 1.6;
+    background: var(--bg); color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--serif); }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  .cabecera { padding: 3.5rem 0 2rem; }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 600; line-height: 1.15; }
+  .contexto { margin-top: 0.9rem; font-size: 1.1rem; color: var(--sec); max-width: 38rem; }
+
+  .demo-cta {
+    display: block; margin: 2rem 0 0; padding: 1.4rem 1.6rem;
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    text-decoration: none; color: var(--texto);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .demo-cta:hover { border-color: var(--teja); transform: translateY(-2px); }
+  .demo-cta .grande { font-size: 1.15rem; font-weight: 650; color: var(--acento); }
+  .demo-cta .detalle { display: block; margin-top: 0.3rem; font-size: 0.9rem; color: var(--sec); }
+
+  section { padding: 1.8rem 0; }
+  h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.9rem; }
+  section p { margin-bottom: 1rem; max-width: 40rem; }
+  section p:last-child { margin-bottom: 0; }
+  section ul { margin: 0 0 1rem 1.2rem; max-width: 40rem; }
+  section li { margin-bottom: 0.4rem; }
+  strong { color: var(--realce); font-weight: 600; }
+  .muestra { font-size: 0.85rem; color: var(--sec); }
+
+  .nota {
+    margin: 1.5rem 0; padding: 1.2rem 1.5rem;
+    background: var(--panel); border: 1px solid var(--borde); border-left: 3px solid var(--teja);
+    border-radius: 0 12px 12px 0; color: var(--sec); font-size: 0.95rem; max-width: 40rem;
+  }
+
+  .cierre { text-align: center; padding: 3rem 0 3.5rem; border-top: 1px solid var(--borde); margin-top: 2rem; }
+  .cierre h2 { margin-bottom: 0.6rem; }
+  .cierre p { color: var(--sec); max-width: 30rem; margin: 0 auto 1.8rem; }
+  .cta {
+    display: inline-block; padding: 0.8rem 2rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .cierre .alt { display: block; margin-top: 1.2rem; font-size: 0.9rem; }
+  .cierre .alt a { color: var(--acento); }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
+      <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
+      <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
+      <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
+      <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
+      <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
+      <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+    </svg>ONTOS</a>
+    <a class="item" href="bim.html">Oficina BIM</a>
+    <a class="item" href="/#casos" aria-current="page">Casos</a>
+    <a class="item" href="/#contacto">Contacto</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<div class="cabecera">
+  <h1>Finanzas: el dinero, al día y sin tocarlo</h1>
+  <p class="contexto">Cómo un gemelo digital lleva mis finanzas completas: los movimientos entran
+  solos, la proyección se recalcula y las reglas se cumplen. Este es el primer caso del sistema ONTOS.</p>
+  <a class="demo-cta" href="finanzas-70s.html">
+    <span class="grande">▶ Ver la demo animada</span>
+    <span class="detalle">70 segundos aproximados · sin sonido · datos de muestra</span>
+  </a>
+</div>
+
+<section>
+  <h2>El problema</h2>
+  <p>Casi todo el mundo lleva su dinero en tres sitios a la vez: la cabeza, una carpeta de recibos
+  y un Excel que se actualiza cuando hay un rato. El extracto del banco dice una cosa, el Excel
+  otra, y la sensación de control depende del último fin de semana que uno dedicó a cuadrarlo.</p>
+  <p>Las decisiones importantes se toman sin la foto completa. Una ayuda pública se pierde porque
+  el plazo abría en un mes concreto y nadie lo apuntó. Una compra grande se hace por impulso, o
+  no se hace por miedo, porque nadie sabe de verdad qué aguanta la tesorería. Y la inversión, si
+  existe, va a golpes de titular.</p>
+</section>
+
+<section>
+  <h2>Qué se construyó</h2>
+  <p>Primero, el modelo del dato: cada movimiento, cada regla y cada plazo viven en un solo sitio,
+  ordenados y con fecha. Después, la inteligencia artificial trabajando encima de ese modelo, a diario.</p>
+  <ul>
+    <li><strong>Gastos por API.</strong> Los movimientos bancarios entran solos, ya categorizados.
+    Nadie transcribe tickets ni pica un Excel.</li>
+    <li><strong>Proyección de tesorería a 18 meses.</strong> Se recalcula sola con cada movimiento.
+    Antes de una decisión, veo qué aguanta.</li>
+    <li><strong>Ayudas y plazos vigilados.</strong> Cada ayuda tiene su estado y su fecha; cuando
+    un plazo se acerca, el sistema avisa.</li>
+    <li><strong>Inversión con reglas escritas.</strong> La asignación está decidida por adelantado
+    y el sistema comprueba que se cumple. Reglas, no impulsos.</li>
+  </ul>
+  <p>Todo funciona en local: los datos no salen de mi máquina.</p>
+</section>
+
+<section>
+  <h2>Cómo funciona a diario</h2>
+  <p>Por la mañana, los movimientos del día anterior ya están dentro y clasificados. En la demo se
+  ve la escena con datos de muestra: un supermercado en comida, una gasolinera en coche, una
+  farmacia en salud. Cada uno entra solo, con su categoría y su importe, sin que yo toque nada.</p>
+  <p>Cuando aparece una decisión con dinero, miro la proyección. La curva de tesorería a 18 meses
+  de la demo (escenificada, como todo lo que sale en ella) enseña exactamente eso: dónde estoy hoy
+  y dónde estaré si no cambio nada. Sé lo que aguanta cada decisión antes de tomarla.</p>
+  <p>Las ayudas tienen su propia lista viva. En la demo aparecen tres ejemplos de muestra: una
+  ayuda al emprendimiento ya presentada con resolución estimada, una bonificación de cuota activa
+  y una deducción cuyo plazo abre en octubre, con el recordatorio ya puesto. Ese es el punto:
+  nada depende de que yo me acuerde.</p>
+  <p>Hasta las compras pendientes tienen sistema: una lista de deseos con prioridad y precio, y
+  cuando algo se compra, el gasto queda registrado en el momento. Y la inversión sigue su regla
+  escrita (en la demo, un reparto de muestra entre fondo indexado, colchón y plan de pensiones),
+  con la aportación mensual automática el día 1.</p>
+</section>
+
+<section>
+  <h2>Resultado</h2>
+  <p>El primer gemelo digital lo construí para mí, y lo mantengo a diario con IA desde junio
+  de 2026. Hoy el sistema acumula <strong>más de 400 entradas de bitácora</strong> y
+  <strong>más de 300 documentos consultables en lenguaje natural</strong>, todo
+  <strong>100% local y privado</strong>.</p>
+  <p>En finanzas: los movimientos bancarios entran solos por API, la tesorería está proyectada a
+  18 meses, las ayudas y sus plazos están vigilados con aviso, y las reglas de inversión están
+  escritas y el sistema comprueba que se cumplen. Una auditoría automática verifica cada día que
+  nada se pierda.</p>
+  <p>El mismo sistema cubre el resto de la vida: proyectos con su siguiente paso, tareas y
+  calendario sincronizados, la red de contactos al día, y la salud con plan de entrenamiento de
+  progresión automática, composición corporal medida con protocolo, nutrición registrada y el
+  descanso del wearable conectado desde julio de 2026.</p>
+</section>
+
+<p class="nota">Una nota honesta: el primer cliente del sistema soy yo. Lo que ves en las demos
+usa datos de muestra escenificados, nunca mis datos reales. El método sí es el real, y es el
+mismo que aplico a un negocio: primero el modelo de lo que es, después la IA trabajando encima.</p>
+
+<section class="cierre">
+  <h2>Cuéntame qué te come horas</h2>
+  <p>Soy Fernando Calle, ingeniero de caminos: seis años en grandes proyectos internacionales
+  (el metro de Sídney, HS2, NEOM) y premio de I+D en automatización e IA. Si tu dinero, o el de
+  tu negocio, vive en cabezas y en Excels, se puede ordenar.</p>
+  <a class="cta" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+  <span class="alt">o escríbeme desde <a href="/#contacto">la página de contacto</a></span>
+</section>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
+  <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+</footer>
+
+</div>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

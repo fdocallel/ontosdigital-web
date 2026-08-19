@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Requisitos BIM en licitación pública · ONTOS</title>
+<meta name="theme-color" content="#faf8f5">
 <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
 <meta name="description" content="Tu licitación pide nivel BIM: IFC, ISO 19650, entorno común de datos. Departamento BIM externo por meses. Diagnóstico de nivel BIM sin coste en 48 horas.">
 <meta property="og:title" content="Tu próxima licitación pide BIM. ¿Lo tienes resuelto?">
@@ -22,53 +22,20 @@
 <meta name="twitter:description" content="Un departamento BIM que se contrata por meses. Diagnóstico de nivel BIM sin coste.">
 <meta name="twitter:image" content="https://ontosdigital.es/brand/og.png">
 <link rel="canonical" href="https://ontosdigital.es/bim.html">
+<link rel="stylesheet" href="brand/tokens.css">
 <style>
-  /* tokens: brand/colores.md · oscuro por defecto, claro via prefers-color-scheme */
-  :root {
-    --teja: #d4713b;        /* fija: CTA y clave del logo */
-    --bg: #0f0e0c;
-    --panel: #171512;
-    --borde: #2a261f;
-    --texto: #ece7de;
-    --sec: #a39a8c;         /* granito-claro */
-    --acento: #d4713b;      /* teja sobre oscuro */
-    --realce: #e8956a;      /* teja-clara sobre oscuro */
-    --piedra-logo: #3a352c;
-  }
-  @media (prefers-color-scheme: light) {
-    :root {
-      --bg: #faf8f5;        /* hueso */
-      --panel: #ffffff;
-      --borde: #e3ddd2;
-      --texto: #1c1a17;     /* tinta */
-      --sec: #6b6257;       /* granito */
-      --acento: #b0532a;    /* teja-quemada: texto sobre claro (AA) */
-      --realce: #b0532a;
-      --piedra-logo: #4a443a;
-    }
-  }
+  /* tokens y barra compartida: brand/tokens.css (claro por defecto, oscuro via prefers-color-scheme) */
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: var(--sans);
+    font-size: 16px;
     background: var(--bg); color: var(--texto);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  h1, h2, h3 { font-family: var(--serif); }
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
-
-  /* ---- cabecera sobria ---- */
-  .barra { border-bottom: 1px solid var(--borde); }
-  .barra .wrap {
-    display: flex; align-items: center; gap: 0.7rem;
-    padding-top: 1.1rem; padding-bottom: 1.1rem;
-  }
-  .marca { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--texto); }
-  .marca svg { width: 26px; height: 26px; color: var(--piedra-logo); display: block; }
-  .marca .nombre { font-weight: 650; letter-spacing: 0.22em; text-indent: 0.22em; font-size: 0.95rem; }
-  .barra .seccion { margin-left: auto; font-size: 0.75rem; text-transform: uppercase;
-    letter-spacing: 0.2em; color: var(--sec); }
-  @media (max-width: 34rem) { .barra .seccion { display: none; } }
 
   /* ---- titular ---- */
   .titular { padding: 4.5rem 0 2.5rem; position: relative; overflow: hidden; }
@@ -158,7 +125,7 @@
   }
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
   .copiar {
-    margin: 2.2rem 0 0 0.6rem; padding: 0.8rem 1.4rem; border-radius: 999px;
+    margin-left: 0.6rem; padding: 0.35rem 1rem; border-radius: 999px;
     font: inherit; font-size: 0.9rem; border: 1px solid var(--borde);
     background: none; color: var(--sec); cursor: pointer; vertical-align: middle;
     transition: color 0.15s ease, border-color 0.15s ease;
@@ -171,13 +138,62 @@
     padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
   }
   footer a { color: inherit; }
+  /* ---- formulario de contacto ---- */
+  .formulario {
+    margin: 2.2rem auto 0; max-width: 34rem; text-align: left;
+    display: grid; gap: 0.9rem;
+  }
+  .formulario label { display: grid; gap: 0.3rem; font-size: 0.85rem; color: var(--sec); }
+  .formulario input, .formulario textarea {
+    font: inherit; font-size: 1rem; color: var(--texto);
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 10px;
+    padding: 0.65rem 0.8rem; width: 100%;
+    transition: border-color 0.15s ease;
+  }
+  .formulario input:hover, .formulario textarea:hover,
+  .formulario input:focus, .formulario textarea:focus { border-color: var(--acento); outline: none; }
+  .formulario textarea { min-height: 7rem; resize: vertical; }
+  .formulario .cta { margin-top: 0.4rem; border: 0; cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
+  .formulario .aviso-envio { font-size: 0.8rem; color: var(--sec); margin: 0; }
+  .alternativa { margin-top: 2rem; font-size: 0.95rem; color: var(--sec); }
+  .alternativa a, .aviso-envio a { color: var(--acento); }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "ONTOS",
+  "url": "https://ontosdigital.es/",
+  "email": "hola@ontosdigital.es",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "La Lastrilla",
+    "addressRegion": "Segovia",
+    "addressCountry": "España"
+  },
+  "areaServed": "España",
+  "founder": {
+    "@type": "Person",
+    "name": "Fernando Calle",
+    "jobTitle": "Ingeniero de Caminos, Canales y Puertos"
+  },
+  "makesOffer": {
+    "@type": "Offer",
+    "itemOffered": {
+      "@type": "Service",
+      "name": "Diagnóstico de nivel BIM"
+    },
+    "price": "0",
+    "priceCurrency": "EUR"
+  }
+}
+</script>
 </head>
 <body>
 
 <header class="barra">
-  <div class="wrap">
+  <nav>
     <a class="marca" href="/">
       <!-- Logo ONTOS: la O de dovelas, la clave sostiene el arco (brand/logo.svg) -->
       <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -189,10 +205,12 @@
       <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
       <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
       </svg>
-      <span class="nombre">ONTOS</span>
+      ONTOS
     </a>
-    <span class="seccion">BIM en contratación pública</span>
-  </div>
+    <a class="item" href="bim.html" aria-current="page">Oficina BIM</a>
+    <a class="item" href="/#casos">Casos</a>
+    <a class="item" href="/#contacto">Contacto</a>
+  </nav>
 </header>
 
 <div class="titular">
@@ -307,8 +325,30 @@
     <li>Qué haría yo primero.</li>
   </ul>
   <p class="sin-compromiso">Si te sirve, seguimos. Si no, te quedas el diagnóstico.</p>
-  <a class="cta" href="mailto:hola@ontosdigital.es?subject=Diagn%C3%B3stico%20de%20nivel%20BIM">hola@ontosdigital.es</a>
-  <button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button>
+  <form class="formulario" action="https://formsubmit.co/hola@ontosdigital.es" method="POST">
+    <input type="hidden" name="_subject" value="Contacto web · Oficina BIM">
+    <input type="hidden" name="_next" value="https://ontosdigital.es/gracias.html">
+    <input type="text" name="_honey" style="display:none">
+    <input type="hidden" name="_captcha" value="false">
+    <label>Nombre
+      <input type="text" name="nombre" required autocomplete="name">
+    </label>
+    <label>Organización
+      <input type="text" name="organizacion" autocomplete="organization">
+    </label>
+    <label>Email
+      <input type="email" name="email" required autocomplete="email">
+    </label>
+    <label>Mensaje
+      <textarea name="mensaje" placeholder="Qué licitas o qué te preocupa del Plan BIM" required></textarea>
+    </label>
+    <button class="cta" type="submit">Pedir el diagnóstico</button>
+    <p class="aviso-envio">El envío pasa por FormSubmit; detalle en la
+    <a href="privacidad.html">política de privacidad</a>.</p>
+  </form>
+  <p class="alternativa">Si prefieres el correo directo:
+  <a href="mailto:hola@ontosdigital.es?subject=Diagn%C3%B3stico%20de%20nivel%20BIM">hola@ontosdigital.es</a>
+  <button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button></p>
 </section>
 
 <footer>

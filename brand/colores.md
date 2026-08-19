@@ -51,5 +51,8 @@ Tokens listos para CSS en `tokens.css`.
 - **Gráficos/display** (banner, piezas de marca): **Avenir Next** — Demi Bold para el wordmark
   (tracking ~0.2em), Medium para texto, Demi pequeño para el dominio. Una familia, tres pesos:
   la O geométrica de Avenir rima con el anillo de dovelas. Nunca Helvetica Bold con tracking ancho.
-- **Web**: sigue en system stack (ui-sans-serif) — carga instantánea; no se incrusta fuente.
+- **Web** (remodelado v2, 19-ago-2026): titulares en **Fraunces** variable (400-700), autoalojada
+  en `brand/fraunces.woff2` (67 KB, subset latin, `font-display: swap`) — carácter artesanal que
+  rima con teja/piedra, sin conectar con servidores de terceros. Cuerpo sigue en system stack
+  (ui-sans-serif). Tokens y familias en `tokens.css` (fuente única; claro por defecto desde v2).
 - Alineación: los bloques de texto comparten borde óptico izquierdo (descontar side bearing).

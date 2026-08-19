@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caso Salud: entreno, nutrición y descanso en un gemelo digital · ONTOS</title>
+<meta name="description" content="Cómo un gemelo digital lleva entreno con progresión automática, composición corporal, nutrición y descanso del wearable. Caso real del sistema ONTOS.">
+<link rel="canonical" href="https://ontosdigital.es/caso-salud.html">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<meta property="og:title" content="Caso Salud: entreno, nutrición y descanso en un gemelo digital">
+<meta property="og:description" content="Entreno con progresión automática, composición corporal medida con protocolo, nutrición registrada y descanso del wearable. Caso del sistema ONTOS.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:url" content="https://ontosdigital.es/caso-salud.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ONTOS">
+<meta property="og:locale" content="es_ES">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans); font-size: 16px; line-height: 1.6;
+    background: var(--bg); color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 600; margin: 3rem 0 0.9rem; }
+  h2 { font-size: 1.45rem; font-weight: 600; margin: 2.8rem 0 0.9rem; }
+  .contexto { color: var(--sec); font-size: 1.05rem; max-width: 38rem; }
+  p { margin: 0 0 1rem; }
+  main p { max-width: 40rem; }
+  a { color: var(--acento); }
+  ul { margin: 0 0 1rem 1.2rem; }
+  li { margin-bottom: 0.4rem; }
+  strong { font-weight: 650; }
+
+  .demo-bloque {
+    display: block; margin: 2.2rem 0 0.5rem; padding: 1.3rem 1.5rem;
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    text-decoration: none; transition: border-color 0.15s ease;
+  }
+  .demo-bloque:hover { border-color: var(--acento); }
+  .demo-bloque .t {
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 600;
+    color: var(--acento); display: flex; align-items: center; gap: 0.6rem;
+  }
+  .demo-bloque .t svg { width: 1em; height: 1em; flex: none; fill: currentColor; }
+  .demo-bloque .s { color: var(--sec); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  .muestra { color: var(--sec); font-size: 0.85rem; }
+
+  .nota {
+    margin: 2.8rem 0 0; padding: 1.1rem 1.4rem;
+    border-left: 3px solid var(--teja); background: var(--panel);
+    border-radius: 0 12px 12px 0; color: var(--sec); font-size: 0.95rem;
+  }
+
+  .cierre { text-align: center; margin: 3.5rem 0 0; padding-top: 2.5rem; border-top: 1px solid var(--borde); }
+  .cierre h2 { margin-top: 0; }
+  .cta {
+    display: inline-block; margin-top: 1rem; padding: 0.85rem 1.8rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-1px); }
+  .cierre .alt { display: block; margin-top: 1rem; font-size: 0.9rem; color: var(--sec); }
+
+  footer {
+    border-top: 1px solid var(--borde); margin-top: 3.5rem;
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
+        <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
+        <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
+        <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
+        <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
+        <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
+        <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+      </svg>ONTOS</a>
+    <a class="item" href="bim.html">Oficina BIM</a>
+    <a class="item" href="/#casos" aria-current="page">Casos</a>
+    <a class="item" href="/#contacto">Contacto</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Salud: el cuerpo también entra en el sistema</h1>
+  <p class="contexto">Entreno, composición corporal, nutrición y descanso, unidos en un solo modelo que la IA mantiene al día. Soy Fernando Calle y esto es lo que construí para mí.</p>
+
+  <a class="demo-bloque" href="salud-60s.html">
+    <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver la demo animada</span>
+    <span class="s">60 segundos aproximadamente · sin sonido · datos de muestra</span>
+  </a>
+
+  <h2>El problema</h2>
+  <p>La salud suele vivir repartida: el plan de entreno en una app o en una libreta, el peso en la app de la báscula, la comida en otra app que se abandona a las dos semanas, el sueño en la del wearable. Cuatro pantallas que no se hablan entre sí, y las decisiones importantes se toman de cabeza: cuánto peso pongo hoy en la barra, si el mes va bien o mal, si estoy comiendo lo que toca.</p>
+  <p>El resultado conocido: se entrena sin progresar, se pesa uno sin saber leer la cifra, y el dato del descanso se mira un día sí y veinte no. No falta información. Falta un sitio donde toda esa información se junte y alguien, o algo, la trabaje a diario.</p>
+
+  <h2>Qué se construyó</h2>
+  <p>Un modelo del dato: cada área de la salud tiene su registro, con estructura, y todos viven en el mismo sistema, en local. Sobre ese modelo opera la IA, que es quien hace el trabajo de mantenerlo.</p>
+  <ul>
+    <li><strong>Entreno.</strong> Cada sesión queda registrada con ejercicios, series y kilos. La progresión no se decide de cabeza: el sistema la calcula y propone la carga de la siguiente sesión.</li>
+    <li><strong>Composición corporal.</strong> Peso y grasa medidos con protocolo, siempre en las mismas condiciones, para que la cifra sea comparable. Lo que se lee es la tendencia del mes, no la báscula de un día.</li>
+    <li><strong>Nutrición.</strong> Lo comido se registra y se compara contra los objetivos del plan: proteína, calorías, actividad. Sin hoja de cálculo.</li>
+    <li><strong>Descanso.</strong> El wearable (WHOOP) sincroniza solo: sueño, recuperación y pulso en reposo entran cada mañana sin tocar nada.</li>
+  </ul>
+  <p>Y por debajo, una auditoría automática comprueba a diario que nada se pierda: que los registros llegan, que los datos cuadran, que ningún cabo queda suelto.</p>
+
+  <h2>Cómo funciona a diario</h2>
+  <p>Un día cualquiera, con los datos de muestra de la demo: termino la sesión de fuerza y quedan apuntadas la sentadilla a 4x6 con 100 kg, el press banca a 4x8 con 72,5 kg y el remo con barra a 4x10 con 65 kg. El sistema, al ver las series completadas, deja preparada la siguiente sesión: el press banca sube a 75 kg. Yo no calculo nada. <span class="muestra">(Cifras escenificadas, no reales.)</span></p>
+  <p>La composición se lee en tendencia: 78,4 kg de peso estable en el mes, grasa corporal en 14,2 % bajando 0,4 puntos, y el índice de masa libre de grasa subiendo. Tres números que cuentan si el plan funciona, sin interpretar picos de un día. <span class="muestra">(Datos de muestra.)</span></p>
+  <p>La nutrición del día se cierra contra el plan: 165 de 160 g de proteína, 2.450 de 2.500 calorías, 8.900 de 10.000 pasos. De un vistazo sé si el día ha cumplido, y el sistema guarda el histórico. <span class="muestra">(Datos de muestra.)</span></p>
+  <p>Por la mañana, el descanso ya está dentro: 7 h 40 de sueño, 82 % de recuperación, 52 pulsaciones en reposo. Con eso, la conversación con el sistema es directa: qué tal la noche, si toca apretar o aflojar hoy. <span class="muestra">(Datos de muestra.)</span></p>
+
+  <h2>Resultado</h2>
+  <p>El primer gemelo digital lo construí para mí mismo y lo mantengo a diario con IA desde junio de 2026. En el área de salud, hoy: plan de entrenamiento con progresión automática, composición corporal medida con protocolo, nutrición registrada y el descanso del wearable conectado desde julio de 2026. Una auditoría automática comprueba a diario que nada se pierda.</p>
+  <p>El sistema completo va mucho más allá de la salud: acumula más de 400 entradas de bitácora y más de 300 documentos consultables en lenguaje natural, todo 100 % local y privado. Soy ingeniero de caminos, con 6 años en grandes proyectos internacionales (metro de Sídney, HS2, NEOM) y premios de I+D en automatización e IA. Este sistema es mi propia medicina aplicada a mi vida.</p>
+
+  <div class="nota">
+    <p style="margin:0">Nota honesta: el primer cliente de este sistema soy yo. Las demos usan datos de muestra escenificados, nunca los datos reales. Lo que enseño es el mecanismo, no mi historia clínica.</p>
+  </div>
+
+  <section class="cierre">
+    <h2>Cuéntame qué te come horas</h2>
+    <p class="contexto" style="margin:0 auto">Si en tu negocio hay datos repartidos en cuatro sitios que nadie junta, esto mismo se construye para eso.</p>
+    <a class="cta" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+    <span class="alt">o escríbeme desde <a href="/#contacto">la página de contacto</a></span>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0">© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
+    <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+  </div>
+</footer>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
