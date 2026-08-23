@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Banner LinkedIn 1584x396 con la marca ONTOS (logo V4 + arco de fondo).
+"""Banner LinkedIn 1584x396 con la marca ONTOS (marca N5 + arco de fondo).
 Spec: Avenir Next en 3 pesos · alineacion optica por bbox · ritmo constante ·
-logo V4 (7 dovelas, anillo 0.70, clave exenta) · arco de medio punto como
+marca N5 (8 dovelas + radios + nucleo) · arco de medio punto como
 motivo de fondo. Render a 4x, downscale LANCZOS. Paleta: brand/colores.md."""
 import math
 from PIL import Image, ImageDraw, ImageFont
@@ -50,18 +50,23 @@ glow = glow.point(lambda v: int((255 - v) * 0.07))
 img.paste(Image.new("RGB", glow.size, TEJA), (int(820 * S - glow.size[0] / 2), int(198 * S - glow.size[1] / 2)), glow)
 d = ImageDraw.Draw(img)
 
-# ---- logo V4: 7 dovelas, anillo 0.70, clave exenta 19% ----
+# ---- marca N5 'conectado' (23-ago-2026): 8 dovelas + radios + nucleo teja ----
 def logo(cx, cy, R):
-    N, gap = 7, 4.0
+    N, gap = 8, 4.0
     r = R * 0.70
     seg = 360 / N
     for k in range(N):
         c = -90 + k * seg
         a1, a2 = c - seg / 2 + gap / 2, c + seg / 2 - gap / 2
-        if k == 0:
-            d.polygon(sector(cx, cy, R, r, a1, a2, dy=-R * 8 / 42), fill=TEJA)
-        else:
-            d.polygon(sector(cx, cy, R, r, a1, a2), fill=PIEDRA)
+        d.polygon(sector(cx, cy, R, r, a1, a2), fill=PIEDRA)
+    e = R / 42  # unidades del viewBox 100 -> px
+    for k in range(N):
+        a = math.radians(-90 + k * seg)
+        d.line([(cx + 15.5 * e * math.cos(a), cy + 15.5 * e * math.sin(a)),
+                (cx + 29.4 * e * math.cos(a), cy + 29.4 * e * math.sin(a))],
+               fill=PIEDRA, width=round(2.6 * e))
+    nr = 14 * e
+    d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=TEJA)
 
 logo(590 * S, 206 * S, 96 * S)
 

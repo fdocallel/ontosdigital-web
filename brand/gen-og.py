@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""og:image 1200x630 con la marca ONTOS (logo V4 centrado + wordmark + tagline).
+"""og:image 1200x630 con la marca ONTOS (marca N5 centrada + wordmark + tagline).
 Mismo sistema que gen-banner.py: Avenir Next, alineacion optica por bbox,
 render a 4x con downscale LANCZOS. Paleta: brand/colores.md."""
 import math
@@ -33,18 +33,23 @@ glow = glow.point(lambda v: int((255 - v) * 0.07))
 img.paste(Image.new("RGB", glow.size, TEJA), (int(W * S / 2 - glow.size[0] / 2), int(215 * S - glow.size[1] / 2)), glow)
 d = ImageDraw.Draw(img)
 
-# logo V4: 7 dovelas, anillo 0.70, clave teja exenta
+# marca N5 'conectado' (23-ago-2026): 8 dovelas + radios + nucleo teja
 def logo(cx, cy, R):
-    N, gap = 7, 4.0
+    N, gap = 8, 4.0
     r = R * 0.70
     seg = 360 / N
     for k in range(N):
         c = -90 + k * seg
         a1, a2 = c - seg / 2 + gap / 2, c + seg / 2 - gap / 2
-        if k == 0:
-            d.polygon(sector(cx, cy, R, r, a1, a2, dy=-R * 8 / 42), fill=TEJA)
-        else:
-            d.polygon(sector(cx, cy, R, r, a1, a2), fill=PIEDRA)
+        d.polygon(sector(cx, cy, R, r, a1, a2), fill=PIEDRA)
+    e = R / 42  # unidades del viewBox 100 -> px
+    for k in range(N):
+        a = math.radians(-90 + k * seg)
+        d.line([(cx + 15.5 * e * math.cos(a), cy + 15.5 * e * math.sin(a)),
+                (cx + 29.4 * e * math.cos(a), cy + 29.4 * e * math.sin(a))],
+               fill=PIEDRA, width=round(2.6 * e))
+    nr = 14 * e
+    d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=TEJA)
 
 logo(W * S / 2, 180 * S, 92 * S)
 

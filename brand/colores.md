@@ -6,7 +6,9 @@ Definido 21-jul-2026 (análisis en sesión; contrastes WCAG medidos, no estimado
 
 **Por qué este y no azul.** El sector AEC en España viste de azul corporativo (ingenierías clásicas)
 y el mundo IA de morados/degradados; ambos son ruido. El terracota viene del relato de la marca:
-la **clave del arco** — arcilla y teja castellana, el atardecer sobre el granito del Acueducto.
+arcilla y teja castellana, el atardecer sobre el granito del Acueducto. Desde el 23-ago-2026 la
+teja es el **núcleo** de la marca N5 «conectado» (antes, la clave del arco V4): el centro que
+ordena las 8 áreas, como la portada del sistema.
 Cálido (humano, artesanal) sobre neutros minerales (riguroso, estructural): exactamente lo que vende
 ONTOS — tecnología dirigida por una persona. Riesgo asumido: vecindad con el clay de Anthropic
 (#CC785C), más rosado y desaturado que el nuestro; en nuestro mercado (consultoría AEC ES) no compite
@@ -16,7 +18,7 @@ y la asociación no perjudica.
 
 | Token | Hex | Rol |
 |---|---|---|
-| **teja** | `#d4713b` | EL color de marca: la clave del logo, CTAs y acentos **sobre fondo oscuro** (5,7:1 ✓ texto) |
+| **teja** | `#d4713b` | EL color de marca: el núcleo del logo, CTAs y acentos **sobre fondo oscuro** (5,7:1 ✓ texto) |
 | **teja-quemada** | `#b0532a` | la teja para **texto/enlaces sobre fondo claro** (4,8-5,1:1 ✓ AA; la teja base ahí solo como gráfico ≥3:1) |
 | **teja-clara** | `#e8956a` | realces finos sobre oscuro (8,2:1, AAA) |
 | **tinta** | `#1c1a17` | texto sobre claro; negro cálido, nunca #000 |
@@ -27,12 +29,12 @@ y la asociación no perjudica.
 
 ## Reglas de uso
 
-1. **La teja es la clave: una sola pieza del arco.** Proporción ~60/30/10 — neutros dominan
+1. **La teja es el núcleo: una sola pieza, el centro.** Proporción ~60/30/10 — neutros dominan
    (noche/hueso + granito), la teja aparece poco y por eso manda. Si un diseño tiene mucha teja,
    está mal.
 2. Par accesible obligatorio: teja sobre oscuro · teja-quemada sobre claro. Nunca teja base como
    texto normal sobre claro.
-3. El logo no cambia de teja: clave `#d4713b` fija; la piedra hereda (`currentColor` → tinta en
+3. El logo no cambia de teja: núcleo `#d4713b` fijo; la piedra (dovelas y radios) hereda (`currentColor` → tinta en
    claro, granito en oscuro).
 4. Sin degradados, sin segundos colores de fantasía. Estados (ok/aviso/error) se definirán cuando
    haya producto que los necesite — no antes.

@@ -70,15 +70,21 @@
     pointer-events: none;
   }
   .arco-svg { width: 104px; color: var(--piedra-logo); margin-bottom: 1.6rem; }
-  /* el arco se construye de abajo arriba por parejas; la clave entra la última */
-  .arco-svg path { opacity: 0; animation: dovela 0.45s ease forwards; }
-  .arco-svg path:nth-child(4), .arco-svg path:nth-child(5) { animation-delay: 0.1s; }
-  .arco-svg path:nth-child(3), .arco-svg path:nth-child(6) { animation-delay: 0.3s; }
-  .arco-svg path:nth-child(2), .arco-svg path:nth-child(7) { animation-delay: 0.5s; }
-  .arco-svg path:first-child { animation-name: clave; animation-duration: 0.6s; animation-timing-function: cubic-bezier(0.34, 1.3, 0.5, 1); animation-delay: 0.85s; }
+  /* el sistema se monta: las áreas aparecen de abajo arriba, el núcleo llega, los radios conectan */
+  .arco-svg .dovela { opacity: 0; animation: dovela 0.4s ease forwards; animation-delay: 0.4s; }
+  .arco-svg .dovela:nth-child(4), .arco-svg .dovela:nth-child(6) { animation-delay: 0.3s; }
+  .arco-svg .dovela:nth-child(3), .arco-svg .dovela:nth-child(7) { animation-delay: 0.2s; }
+  .arco-svg .dovela:nth-child(2), .arco-svg .dovela:nth-child(8) { animation-delay: 0.1s; }
+  .arco-svg .dovela:nth-child(5) { animation-delay: 0s; }
+  .arco-svg .nucleo { opacity: 0; transform-box: fill-box; transform-origin: center; animation: nucleo 0.5s cubic-bezier(0.34, 1.3, 0.5, 1) forwards; animation-delay: 0.75s; }
+  .arco-svg .radio { stroke-dasharray: 14; stroke-dashoffset: 14; animation: radio 0.4s ease forwards; animation-delay: 1.15s; }
   @keyframes dovela { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  @keyframes clave  { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
-  @media (prefers-reduced-motion: reduce) { .arco-svg path { animation: none; opacity: 1; } }
+  @keyframes nucleo { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
+  @keyframes radio  { to { stroke-dashoffset: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .arco-svg .dovela, .arco-svg .nucleo { animation: none; opacity: 1; }
+    .arco-svg .radio { animation: none; stroke-dashoffset: 0; }
+  }
   .wordmark {
     font-family: var(--sans); font-size: 1.1rem; font-weight: 650;
     letter-spacing: 0.3em; text-indent: 0.3em; color: var(--sec);
@@ -241,13 +247,15 @@
   <nav>
     <a class="marca" href="/" aria-current="page">
       <svg viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
-        <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
-        <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
-        <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
-        <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
-        <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
-        <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
       </svg>
       ONTOS
     </a>
@@ -259,15 +267,25 @@
 </header>
 
 <div class="hero">
-  <!-- Logo ONTOS: la O de dovelas, la clave sostiene el arco (brand/logo.svg) -->
+  <!-- Logo ONTOS: la O de dovelas, el núcleo conecta las áreas (brand/logo.svg) -->
   <svg class="arco-svg" viewBox="0 0 100 100" aria-hidden="true">
-  <path d="M33.11,6.55 A42,42 0 0 1 66.89,6.55 L61.82,18.08 A29.4,29.4 0 0 0 38.18,18.08 Z" fill="#d4713b"/>
-  <path d="M69.53,15.82 A42,42 0 0 1 90.6,42.23 L78.42,45.46 A29.4,29.4 0 0 0 63.67,26.97 Z" fill="currentColor"/>
-  <path d="M91.25,45.09 A42,42 0 0 1 83.73,78.02 L73.61,70.52 A29.4,29.4 0 0 0 78.87,47.46 Z" fill="currentColor"/>
-  <path d="M81.9,80.32 A42,42 0 0 1 51.47,94.97 L51.03,82.38 A29.4,29.4 0 0 0 72.33,72.12 Z" fill="currentColor"/>
-  <path d="M48.53,94.97 A42,42 0 0 1 18.1,80.32 L27.67,72.12 A29.4,29.4 0 0 0 48.97,82.38 Z" fill="currentColor"/>
-  <path d="M16.27,78.02 A42,42 0 0 1 8.75,45.09 L21.13,47.46 A29.4,29.4 0 0 0 26.39,70.52 Z" fill="currentColor"/>
-  <path d="M9.4,42.23 A42,42 0 0 1 30.47,15.82 L36.33,26.97 A29.4,29.4 0 0 0 21.58,45.46 Z" fill="currentColor"/>
+  <path class="dovela" d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+  <path class="dovela" d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+  <path class="dovela" d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+  <path class="dovela" d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+  <path class="dovela" d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+  <path class="dovela" d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+  <path class="dovela" d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+  <path class="dovela" d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+  <line class="radio" x1="50.00" y1="34.50" x2="50.00" y2="20.60" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="60.96" y1="39.04" x2="70.79" y2="29.21" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="65.50" y1="50.00" x2="79.40" y2="50.00" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="60.96" y1="60.96" x2="70.79" y2="70.79" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="50.00" y1="65.50" x2="50.00" y2="79.40" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="39.04" y1="60.96" x2="29.21" y2="70.79" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="34.50" y1="50.00" x2="20.60" y2="50.00" stroke="currentColor" stroke-width="2.6"/>
+  <line class="radio" x1="39.04" y1="39.04" x2="29.21" y2="29.21" stroke="currentColor" stroke-width="2.6"/>
+  <circle class="nucleo" cx="50" cy="50" r="14" fill="#d4713b"/>
   </svg>
   <div class="wordmark">ONTOS</div>
   <h1>Un modelo digital de todo lo tuyo, y una IA que lo mantiene al día.</h1>
