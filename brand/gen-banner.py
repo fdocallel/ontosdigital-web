@@ -16,7 +16,7 @@ están MEDIDAS, no opinadas — informe: ONTOS `data/_cache/estilo/banner-linked
  * MARCA DE AGUA: anillo N5 sangrado abajo a la derecha. Hasta el 24-ago era el
    arco de medio punto, que es la marca V4 ANTERIOR (la clave del arco): dos marcas
    en la misma pieza. El arco sigue vivo en gen-logo.py como motivo suelto.
- * GEOMETRÍA de la marca N5 derivada de gen-logo.py (DATO ÚNICO), no recalculada.
+ * GEOMETRÍA de la marca N5 leída en vivo de gen-logo.py (DATO ÚNICO), no copiada.
    Se dibuja con polígonos a 4x: medido contra rasterizar logo.svg con qlmanage, la
    vía polígono da el borde MÁS limpio (1320 vs 1426 px de transición).
  * SIN BANDING: el glow se calcula en float (no un degradado de 256 niveles
@@ -27,7 +27,9 @@ están MEDIDAS, no opinadas — informe: ONTOS `data/_cache/estilo/banner-linked
    para la web; una serif fina sufre más en la recompresión).
 Paleta: brand/colores.md — 60/30/10, la teja poca y mandando.
 """
-import math, random, sys
+import math, random, runpy, sys
+from pathlib import Path
+
 from PIL import Image, ImageDraw, ImageFont
 
 W, H = 1584, 396
@@ -40,11 +42,13 @@ GRANITO_CLARO = (163, 154, 140)
 TEXTO = (236, 231, 222)
 PIEDRA = (69, 63, 53)                   # la piedra del logo sobre noche
 
-# ---- geometría canónica de la marca N5 (brand/gen-logo.py) ----
-N_DOV, GAP = 8, 4.0
-R_EXT, R_INT = 42.0, 29.4               # en unidades del viewBox 100
-RADIO_1, RADIO_2, RADIO_W = 15.5, 29.4, 2.6
-NUCLEO_R = 14.0
+# ---- geometría canónica de la marca N5: se LEE de gen-logo.py, no se copia ----
+# (el 24-ago se desincronizaron por copiarlas a mano; DATO ÚNICO también aquí)
+_g = runpy.run_path(str(Path(__file__).resolve().parent / 'gen-logo.py'))
+N_DOV, GAP = _g['N'], _g['GAP']
+R_EXT, R_INT = float(_g['R_EXT']), float(_g['R_INT'])
+RADIO_1, RADIO_2, RADIO_W = _g['RADIO_1'], _g['RADIO_2'], _g['RADIO_W']
+NUCLEO_R = float(_g['NUCLEO_R'])
 
 AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
 DEMI, MEDIUM = 2, 5

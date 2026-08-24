@@ -6,6 +6,12 @@ ONTOS ya no es la clave del arco sino el NUCLEO — el centro que ordena,
 como la portada del sistema (nucleo + 8 areas conectadas).
 Sistema adaptativo: marca completa (dovelas + radios + nucleo) en >=96px;
 esqueleto (sin radios) en pequeno y favicon. V4 (clave) queda superseded.
+
+Radios a 3,2u desde el 24-ago-2026 (antes 2,6): medido sobre plancha, la separacion
+radio/hueco a 32px sube de 56 a 66 sobre noche y de 145 a 170 sobre hueso, sin que
+la marca engorde en grande. A 4,0u el radio pesa ya como la dovela (rueda de carro).
+El grosor sigue rimando con el gap: la cuerda del gap a la altura de la dovela mide
+2,49u. Sin tocar color: el radio hereda currentColor como el resto de la piedra.
 """
 import math, os
 
@@ -18,7 +24,7 @@ N, GAP = 8, 4.0
 CX = CY = 50
 R_EXT, R_INT = 42, 29.4
 NUCLEO_R, NUCLEO_R_ESQ = 14, 16.5     # con radios el nucleo cede algo de aire
-RADIO_1, RADIO_2, RADIO_W = 15.5, 29.4, 2.6
+RADIO_1, RADIO_2, RADIO_W = 15.5, 29.4, 3.2   # 24-ago: 2,6 -> 3,2 (plancha /tmp/logo-v/p2)
 
 def pt(cx, cy, r, deg):
     a = math.radians(deg)

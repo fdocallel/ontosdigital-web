@@ -2,8 +2,18 @@
 """og:image 1200x630 con la marca ONTOS (marca N5 centrada + wordmark + tagline).
 Mismo sistema que gen-banner.py: Avenir Next, alineacion optica por bbox,
 render a 4x con downscale LANCZOS. Paleta: brand/colores.md."""
-import math
+import math, runpy
+from pathlib import Path
+
 from PIL import Image, ImageDraw, ImageFont
+
+# geometria canonica de la marca: se LEE de gen-logo.py, nunca se copia a mano
+# (el 24-ago las copias se desincronizaron; DATO UNICO tambien aqui)
+_g = runpy.run_path(str(Path(__file__).resolve().parent / 'gen-logo.py'))
+N_DOV, GAP_DOV = _g['N'], _g['GAP']
+R_EXT, R_INT = float(_g['R_EXT']), float(_g['R_INT'])
+RADIO_1, RADIO_2, RADIO_W = _g['RADIO_1'], _g['RADIO_2'], _g['RADIO_W']
+NUCLEO_R = float(_g['NUCLEO_R'])
 
 W, H, S = 1200, 630, 4
 NOCHE = (15, 14, 12)
@@ -35,20 +45,18 @@ d = ImageDraw.Draw(img)
 
 # marca N5 'conectado' (23-ago-2026): 8 dovelas + radios + nucleo teja
 def logo(cx, cy, R):
-    N, gap = 8, 4.0
-    r = R * 0.70
-    seg = 360 / N
-    for k in range(N):
+    e = R / R_EXT  # unidades del viewBox 100 -> px
+    seg = 360 / N_DOV
+    for k in range(N_DOV):
         c = -90 + k * seg
-        a1, a2 = c - seg / 2 + gap / 2, c + seg / 2 - gap / 2
-        d.polygon(sector(cx, cy, R, r, a1, a2), fill=PIEDRA)
-    e = R / 42  # unidades del viewBox 100 -> px
-    for k in range(N):
+        a1, a2 = c - seg / 2 + GAP_DOV / 2, c + seg / 2 - GAP_DOV / 2
+        d.polygon(sector(cx, cy, R, R_INT * e, a1, a2), fill=PIEDRA)
+    for k in range(N_DOV):
         a = math.radians(-90 + k * seg)
-        d.line([(cx + 15.5 * e * math.cos(a), cy + 15.5 * e * math.sin(a)),
-                (cx + 29.4 * e * math.cos(a), cy + 29.4 * e * math.sin(a))],
-               fill=PIEDRA, width=round(2.6 * e))
-    nr = 14 * e
+        d.line([(cx + RADIO_1 * e * math.cos(a), cy + RADIO_1 * e * math.sin(a)),
+                (cx + RADIO_2 * e * math.cos(a), cy + RADIO_2 * e * math.sin(a))],
+               fill=PIEDRA, width=round(RADIO_W * e))
+    nr = NUCLEO_R * e
     d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=TEJA)
 
 logo(W * S / 2, 180 * S, 92 * S)
