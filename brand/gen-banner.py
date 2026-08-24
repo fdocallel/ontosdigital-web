@@ -1,31 +1,32 @@
 #!/usr/bin/env python3
-"""Banner de LinkedIn 1584x396 con la marca ONTOS — lockup horizontal (24-ago-2026).
+"""Banner de LinkedIn 1584x396 con la marca ONTOS — v3, diseñado a ESCALA REAL.
 
   python3 gen-banner.py ["lema alternativo"] [salida.png]
+  python3 sim-linkedin.py banner-linkedin.png    <- la vista en la que se juzga
 
-Sustituye a la versión de julio (marca + texto sin más). Las decisiones de abajo
-están MEDIDAS, no opinadas — informe: ONTOS `data/_cache/estilo/banner-linkedin-2026-08-24.md`
-(criterio) y las 3 planchas A/B/C que Fernando comparó el 24-ago (eligió A).
+La v2 (24-ago por la mañana) se diseñó mirando el fichero a tamaño completo y
+fallaba en el perfil: LinkedIn lo pinta a 605 px de ancho, así que el lema de
+27 px se leía a 10 y la marca de agua se volvía una nube marrón. Medido en el
+perfil real (www.linkedin.com/in/fercalle-ontos, 24-ago) y corregido:
 
- * LEMA de producto (#317): el de consultoría («Raíces sólidas. Futuro inteligente.»)
-   quedó revocado el 19-ago. Dice lo mismo que og.png y el <title> de la web.
- * ZONA SEGURA: la foto de perfil tapa la esquina INFERIOR IZQUIERDA (x<320, y>236)
-   y el móvil recorta 15-20% por los lados -> ventana útil x 320..1270, aire inferior
-   >= 80 px. Las guías de «safe area» que circulan son granjas SEO que discrepan 3x:
-   esto es la intersección conservadora, verificada midiendo el bbox de la tinta.
- * MARCA DE AGUA: anillo N5 sangrado abajo a la derecha, con el núcleo encendido
-   como brasa (ver BRASA). Hasta el 24-ago era el
-   arco de medio punto, que es la marca V4 ANTERIOR (la clave del arco): dos marcas
-   en la misma pieza. El arco sigue vivo en gen-logo.py como motivo suelto.
+ * ESCALA 605/1584 = 0,3819 -> divide cualquier cuerpo entre 2,6 para saber lo
+   que se lee. Aquí: ONTOS 112 -> 43 px · lema 48 -> 18 · dominio 30 -> 11.
+ * RECORTE VERTICAL: se ven 136 px de alto, no 151. LinkedIn se come ~40 px de
+   diseño, mitad arriba y mitad abajo -> toda la tinta entre y 60 y y 336.
+ * FOTO DE PERFIL: tapa hasta x=411 (con y>240) -> el lockup arranca en x=440.
+   Las guías de «safe area» que circulan daban x<320: se quedaban cortas.
+ * LEMA CORTO: con la foto comiéndose el arranque y el móvil el final, el ancho
+   útil son ~810 px, no 1.180. Una frase de 44 caracteres no cabe ahí a cuerpo
+   legible; con 31 se sube de 40 a 48 px (+78% de tamaño real). Por eso el lema
+   de la web se acorta AQUÍ y solo aquí.
+ * SIN MARCA DE AGUA: el anillo N5 grande se probó y a 605 px no se reconoce como
+   la marca (los radios desaparecen); con brasa además emborronaba. Descartada
+   por inútil, no por fallida: no compra nada que no dé ya el logo del lockup.
+ * SIN BANDING: el glow se calcula en float y se dithera con ruido TPDF de ±1,3
+   niveles cuya amplitud sigue al degradado. Si LinkedIn recomprime fuerte y
+   aparece escalonado, el dial es `amp` en fondo().
  * GEOMETRÍA de la marca N5 leída en vivo de gen-logo.py (DATO ÚNICO), no copiada.
-   Se dibuja con polígonos a 4x: medido contra rasterizar logo.svg con qlmanage, la
-   vía polígono da el borde MÁS limpio (1320 vs 1426 px de transición).
- * SIN BANDING: el glow se calcula en float (no un degradado de 256 niveles
-   reescalado) y se DITHERA con ruido TPDF de ±1,3 niveles cuya amplitud sigue al
-   propio degradado. Antes: tiradas de 204 px con el mismo valor. Después: 21 px.
-   Si LinkedIn recomprime fuerte y vuelve el escalonado, el dial es `amp` de grano().
- * TIPOGRAFÍA: Avenir Next en tres pesos (colores.md §Tipografía reserva Fraunces
-   para la web; una serif fina sufre más en la recompresión).
+ * TIPOGRAFÍA Avenir Next (colores.md §Tipografía reserva Fraunces para la web).
 Paleta: brand/colores.md — 60/30/10, la teja poca y mandando.
 """
 import math, random, runpy, sys
@@ -44,7 +45,6 @@ TEXTO = (236, 231, 222)
 PIEDRA = (69, 63, 53)                   # la piedra del logo sobre noche
 
 # ---- geometría canónica de la marca N5: se LEE de gen-logo.py, no se copia ----
-# (el 24-ago se desincronizaron por copiarlas a mano; DATO ÚNICO también aquí)
 _g = runpy.run_path(str(Path(__file__).resolve().parent / 'gen-logo.py'))
 N_DOV, GAP = _g['N'], _g['GAP']
 R_EXT, R_INT = float(_g['R_EXT']), float(_g['R_INT'])
@@ -55,61 +55,58 @@ AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
 DEMI, MEDIUM = 2, 5
 
 WORDMARK = "ONTOS"
-LEMA = "El gemelo digital de tu vida y de tu negocio."
+LEMA = "Tu vida y tu negocio, modelados."      # corto A PROPÓSITO: ver cabecera
 DOMINIO = "ontosdigital.es"
-SALIDA = "/Users/fdocallel/Dev/ontosdigital-web/brand/banner-linkedin.png"
+SALIDA = str(Path(__file__).resolve().parent / "banner-linkedin.png")
 if len(sys.argv) > 1:
     LEMA = sys.argv[1]
 if len(sys.argv) > 2:
     SALIDA = sys.argv[2]
 
-X_ANCLA, X_MAX = 340, 1270              # ventana útil (ancla izquierda: no centrar)
-GLOW = (560, 150, 880, 0.085)           # cx, cy, radio, intensidad
-# BRASA (24-ago, Fernando: «la parte central en naranja, ahora no aparece»): el
-# núcleo de la marca de agua encendido como ascua, no dibujado como disco — con
-# disco salía un segundo círculo de teja que le robaba el sitio al del lockup.
-# Mismo principio que la portada: el color es luz, no pintura.
-BRASA = (1300, 300, 250, 0.60)   # 0,38 -> 0,60 (24-ago, Fernando: «¿mayor brasa?»)
+# ---- encuadre medido en el perfil real (no estimado) ----
+X0 = 440                    # borde izquierdo del lockup (la foto llega a 411)
+Y_MIN, Y_MAX = 60, 336      # banda visible tras el recorte vertical
+CY = 198                    # centro óptico
+R_MARCA = 92                # radio de la marca N5
+CUERPO_WORD, CUERPO_LEMA, CUERPO_DOM = 112, 48, 30
+GLOW = (900, 168, 900, 0.090)           # cx, cy, radio, intensidad
 
 
 # ---------------------------------------------------------------- geometría
-def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=64):
+def sector(cx, cy, R, r, a1, a2, steps=64):
     pts = []
     for i in range(steps + 1):
         a = math.radians(a1 + (a2 - a1) * i / steps)
-        pts.append((cx + R * math.cos(a), cy + dy + R * math.sin(a)))
+        pts.append((cx + R * math.cos(a), cy + R * math.sin(a)))
     for i in range(steps + 1):
         a = math.radians(a2 + (a1 - a2) * i / steps)
-        pts.append((cx + r * math.cos(a), cy + dy + r * math.sin(a)))
+        pts.append((cx + r * math.cos(a), cy + r * math.sin(a)))
     return pts
 
 
-def logo(d, cx, cy, R, piedra=PIEDRA, nucleo=TEJA, radios=True):
+def logo(d, cx, cy, R):
     """marca N5 completa; R = radio exterior en px (equivale a R_EXT del viewBox)"""
     e = R / R_EXT
     seg = 360 / N_DOV
     for k in range(N_DOV):
         c = -90 + k * seg
         d.polygon(sector(cx, cy, R, R_INT * e, c - seg / 2 + GAP / 2, c + seg / 2 - GAP / 2),
-                  fill=piedra)
-    if radios:
-        for k in range(N_DOV):
-            a = math.radians(-90 + k * seg)
-            d.line([(cx + RADIO_1 * e * math.cos(a), cy + RADIO_1 * e * math.sin(a)),
-                    (cx + RADIO_2 * e * math.cos(a), cy + RADIO_2 * e * math.sin(a))],
-                   fill=piedra, width=max(1, round(RADIO_W * e)))
-    if nucleo:
-        nr = NUCLEO_R * e
-        d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=nucleo)
-
+                  fill=PIEDRA)
+    for k in range(N_DOV):
+        a = math.radians(-90 + k * seg)
+        d.line([(cx + RADIO_1 * e * math.cos(a), cy + RADIO_1 * e * math.sin(a)),
+                (cx + RADIO_2 * e * math.cos(a), cy + RADIO_2 * e * math.sin(a))],
+               fill=PIEDRA, width=max(1, round(RADIO_W * e)))
+    nr = NUCLEO_R * e
+    d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=TEJA)
 
 
 # ---------------------------------------------------------------- fondo
-def fondo(glow, brasa=None, amp=1.3, amp_min=0.35, semilla=7):
+def fondo(glow, amp=1.3, amp_min=0.35, semilla=7):
     """noche + glow cálido en float y DITHER TPDF antes de cuantizar: mata el
     banding con grano imperceptible. La amplitud sigue al degradado — donde el
-    fondo es plano basta un roce (menos ruido, menos peso). Sin numpy a propósito:
-    este script tiene que correr con el Python del sistema desde gen-marca.py."""
+    fondo es plano basta un roce. Sin numpy a propósito: este script corre con el
+    Python del sistema desde gen-marca.py (0,8 s)."""
     rnd = random.Random(semilla)
     cx, cy, R, k = glow
     dcol = [TEJA[c] - NOCHE[c] for c in range(3)]
@@ -121,13 +118,6 @@ def fondo(glow, brasa=None, amp=1.3, amp_min=0.35, semilla=7):
             dist = math.sqrt((x - cx) ** 2 + dy2) / R
             m = (1.0 - dist) ** 2.2 if dist < 1.0 else 0.0   # mapa 0..1 del glow
             f = m * k
-            if brasa:
-                bx, by, bR, bk = brasa
-                bd = math.sqrt((x - bx) ** 2 + (y - by) ** 2) / bR
-                if bd < 1.0:
-                    bm = (1.0 - bd) ** 2.0
-                    f += bm * bk
-                    m = max(m, bm)                            # el dither la sigue
             a = amp_min + (amp - amp_min) * math.sqrt(m)
             n = (rnd.random() - rnd.random()) * a
             for c in range(3):
@@ -139,7 +129,7 @@ def fondo(glow, brasa=None, amp=1.3, amp_min=0.35, semilla=7):
 
 # ---------------------------------------------------------------- tipografía
 def av(idx, size):
-    return ImageFont.truetype(AVENIR, size * S, index=idx)
+    return ImageFont.truetype(AVENIR, int(size * S), index=idx)
 
 
 def texto(d, x, baseline, s, f, fill, tracking=0.0):
@@ -159,26 +149,24 @@ def cap(f):
 
 
 def lockup(d):
-    """A — marca a la izquierda y texto a su derecha; el arco de medio punto brota
-    como marca de agua del borde inferior derecho, que si no queda muerto."""
-    # marca de agua: el ANILLO N5 (24-ago, Fernando: el arco de medio punto era la
-    # marca V4 anterior y no pinta nada aquí). Esqueleto sin núcleo: no repite el
-    # gesto del lockup ni mete una segunda teja.
-    logo(d, 1300 * S, 300 * S, 300 * S, piedra=PIEDRA + (30,), nucleo=None, radios=False)
-    R = 84
-    logo(d, (X_ANCLA + R) * S, 150 * S, R * S)
-    X = X_ANCLA + 2 * R + 66
-    f_w, f_l, f_d = av(DEMI, 82), av(MEDIUM, 27), av(DEMI, 19)
-    b1 = 150 + cap(f_w) / 2                          # wordmark centrado con la marca
-    texto(d, X, b1, WORDMARK, f_w, TEXTO, tracking=82 * 0.20)
-    texto(d, X, b1 + 62, LEMA, f_l, GRANITO_CLARO)
-    texto(d, X, b1 + 62 + 42, DOMINIO, f_d, TEJA, tracking=19 * 0.06)
+    """marca N5 + ONTOS + lema + dominio, en columna a la derecha de la foto y
+    centrado en la banda que LinkedIn deja ver."""
+    logo(d, (X0 + R_MARCA) * S, CY * S, R_MARCA * S)
+    X = X0 + 2 * R_MARCA + 60
+    f_w, f_l, f_d = av(DEMI, CUERPO_WORD), av(MEDIUM, CUERPO_LEMA), av(DEMI, CUERPO_DOM)
+    sep1, sep2 = 84, 64
+    desc = CUERPO_DOM * 0.24
+    top = CY - (cap(f_w) + sep1 + sep2 + desc) / 2
+    b1 = top + cap(f_w)
+    texto(d, X, b1, WORDMARK, f_w, TEXTO, tracking=CUERPO_WORD * 0.20)
+    texto(d, X, b1 + sep1, LEMA, f_l, GRANITO_CLARO)
+    texto(d, X, b1 + sep1 + sep2, DOMINIO, f_d, TEJA, tracking=CUERPO_DOM * 0.06)
 
 
 if __name__ == "__main__":
     capa = Image.new("RGBA", (W * S, H * S), (0, 0, 0, 0))
     lockup(ImageDraw.Draw(capa))
-    base = fondo(GLOW, BRASA).convert("RGBA")
+    base = fondo(GLOW).convert("RGBA")
     base.alpha_composite(capa.resize((W, H), Image.LANCZOS))
     base.convert("RGB").save(SALIDA, optimize=True, compress_level=9)
-    print("ok", SALIDA)
+    print("ok", SALIDA, "— compruébalo con: python3 sim-linkedin.py", SALIDA)
