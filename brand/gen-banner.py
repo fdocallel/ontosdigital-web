@@ -13,7 +13,8 @@ están MEDIDAS, no opinadas — informe: ONTOS `data/_cache/estilo/banner-linked
    y el móvil recorta 15-20% por los lados -> ventana útil x 320..1270, aire inferior
    >= 80 px. Las guías de «safe area» que circulan son granjas SEO que discrepan 3x:
    esto es la intersección conservadora, verificada midiendo el bbox de la tinta.
- * MARCA DE AGUA: anillo N5 sangrado abajo a la derecha. Hasta el 24-ago era el
+ * MARCA DE AGUA: anillo N5 sangrado abajo a la derecha, con el núcleo encendido
+   como brasa (ver BRASA). Hasta el 24-ago era el
    arco de medio punto, que es la marca V4 ANTERIOR (la clave del arco): dos marcas
    en la misma pieza. El arco sigue vivo en gen-logo.py como motivo suelto.
  * GEOMETRÍA de la marca N5 leída en vivo de gen-logo.py (DATO ÚNICO), no copiada.
@@ -64,6 +65,11 @@ if len(sys.argv) > 2:
 
 X_ANCLA, X_MAX = 340, 1270              # ventana útil (ancla izquierda: no centrar)
 GLOW = (560, 150, 880, 0.085)           # cx, cy, radio, intensidad
+# BRASA (24-ago, Fernando: «la parte central en naranja, ahora no aparece»): el
+# núcleo de la marca de agua encendido como ascua, no dibujado como disco — con
+# disco salía un segundo círculo de teja que le robaba el sitio al del lockup.
+# Mismo principio que la portada: el color es luz, no pintura.
+BRASA = (1300, 300, 250, 0.38)
 
 
 # ---------------------------------------------------------------- geometría
@@ -99,7 +105,7 @@ def logo(d, cx, cy, R, piedra=PIEDRA, nucleo=TEJA, radios=True):
 
 
 # ---------------------------------------------------------------- fondo
-def fondo(glow, amp=1.3, amp_min=0.35, semilla=7):
+def fondo(glow, brasa=None, amp=1.3, amp_min=0.35, semilla=7):
     """noche + glow cálido en float y DITHER TPDF antes de cuantizar: mata el
     banding con grano imperceptible. La amplitud sigue al degradado — donde el
     fondo es plano basta un roce (menos ruido, menos peso). Sin numpy a propósito:
@@ -115,6 +121,13 @@ def fondo(glow, amp=1.3, amp_min=0.35, semilla=7):
             dist = math.sqrt((x - cx) ** 2 + dy2) / R
             m = (1.0 - dist) ** 2.2 if dist < 1.0 else 0.0   # mapa 0..1 del glow
             f = m * k
+            if brasa:
+                bx, by, bR, bk = brasa
+                bd = math.sqrt((x - bx) ** 2 + (y - by) ** 2) / bR
+                if bd < 1.0:
+                    bm = (1.0 - bd) ** 2.0
+                    f += bm * bk
+                    m = max(m, bm)                            # el dither la sigue
             a = amp_min + (amp - amp_min) * math.sqrt(m)
             n = (rnd.random() - rnd.random()) * a
             for c in range(3):
@@ -165,7 +178,7 @@ def lockup(d):
 if __name__ == "__main__":
     capa = Image.new("RGBA", (W * S, H * S), (0, 0, 0, 0))
     lockup(ImageDraw.Draw(capa))
-    base = fondo(GLOW).convert("RGBA")
+    base = fondo(GLOW, BRASA).convert("RGBA")
     base.alpha_composite(capa.resize((W, H), Image.LANCZOS))
     base.convert("RGB").save(SALIDA, optimize=True, compress_level=9)
     print("ok", SALIDA)
