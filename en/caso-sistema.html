@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- GENERADO por i18n/gen-en.py desde ../caso-sistema.html · no editar a mano -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The whole system · an ONTOS case</title>
+<meta name="description" content="How I built my digital twin: a model of my entire life kept up to date daily with AI. Data, documents, answers with citations and a daily audit.">
+<link rel="canonical" href="https://ontosdigital.es/en/caso-sistema.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/caso-sistema.html">
+<link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/caso-sistema.html">
+<link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/caso-sistema.html">
+<!-- /i18n:alt -->
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<meta property="og:title" content="The whole system · an ONTOS case">
+<meta property="og:description" content="A model of my entire life kept up to date daily with AI: data that arrives on its own, documents you can query in plain language, and a daily audit.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:url" content="https://ontosdigital.es/en/caso-sistema.html">
+<meta property="og:type" content="article">
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans);
+    font-size: 16px; line-height: 1.6;
+    background: var(--bg); color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; }
+  h1 { font-size: clamp(2rem, 5.5vw, 2.8rem); line-height: 1.15; margin-top: 3.5rem; }
+  .contexto { margin-top: 0.9rem; font-size: 1.1rem; color: var(--sec); }
+  h2 { font-size: 1.45rem; margin: 3rem 0 1rem; }
+  p + p { margin-top: 1rem; }
+
+  .demo-bloque {
+    display: block; margin-top: 2.2rem;
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.4rem 1.6rem; text-decoration: none; color: var(--texto);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .demo-bloque:hover { border-color: var(--teja); transform: translateY(-2px); }
+  .demo-bloque .titulo { font-weight: 650; font-size: 1.1rem; color: var(--acento); }
+  .demo-bloque .titulo::before { content: "▶ "; }
+  .demo-bloque .detalle { margin-top: 0.3rem; font-size: 0.9rem; color: var(--sec); }
+
+  .muestra { color: var(--sec); font-size: 0.85rem; }
+  .nota {
+    margin-top: 3rem; padding: 1.1rem 1.4rem;
+    border-left: 3px solid var(--teja);
+    background: var(--panel); border-radius: 0 10px 10px 0;
+    font-size: 0.95rem; color: var(--sec);
+  }
+  .cifras { display: flex; flex-wrap: wrap; gap: 2.2rem; margin: 1.6rem 0 0.4rem; }
+  .cifra .n { font-size: 1.7rem; font-weight: 650; font-family: var(--serif); }
+  .cifra .l { font-size: 0.82rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.07em; }
+
+  .cierre { margin: 3.5rem 0 4rem; text-align: center; }
+  .cierre p { font-size: 1.15rem; }
+  .cta {
+    display: inline-block; margin-top: 1.4rem;
+    padding: 0.8rem 2rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .cierre .alt { margin-top: 1rem; font-size: 0.9rem; }
+  .cierre .alt a { color: var(--acento); }
+
+  a { color: var(--acento); }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    margin-top: 2rem; padding: 2rem 0 3rem;
+    font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/en/"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+      <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+      <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+      <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+      <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+      <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+      <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+      <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+      <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+    </svg>ONTOS</a>
+    <a class="item" href="/en/#producto">The product</a>
+    <a class="item" href="/en/#casos">Cases</a>
+    <a class="item" href="/en/#escritos">Writing</a>
+    <a class="item" href="/en/#contacto">Contact</a>
+    <a class="item idioma" data-i18n-alt href="/caso-sistema.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<h1>The whole system</h1>
+<p class="contexto">A digital model of an entire life, kept up to date daily with AI. I built the first one for myself.</p>
+
+<a class="demo-bloque" href="/en/caso-90s.html">
+  <span class="titulo">Watch the animated demo</span>
+  <span class="detalle">about 80 seconds · no sound · sample data</span>
+</a>
+
+<h2>The problem</h2>
+<p>Finances, admin, property, diary, contacts, health. Each one lives somewhere different: your head, a folder in your inbox, a spreadsheet last updated months ago, a drawer full of paper. And one person trying to carry all of it.</p>
+<p>Everyone knows how that turns out: deadlines that appear out of nowhere, documents you look for three times over, decisions taken without the full picture because assembling the picture cost more than deciding. It is not a problem of personal untidiness. It is that no human can hold a system with that many pieces in their head.</p>
+
+<h2>What was built</h2>
+<p>A digital twin: an ordered model of what there is, with every fact in a single place, and an AI operating it daily. It is not one more app. It is the structure underneath all of them.</p>
+<p>The model has three layers. The hard data: bank transactions that arrive on their own through an API, tasks, calendar, contacts, health measurements. The documents: more than 300, ordered and searchable in plain language. And on top, the AI that maintains the whole thing: when I tell it something, it updates every piece affected; when I ask it something, it answers with my data and cites where each thing comes from.</p>
+<p>And one piece almost nobody puts in: an automatic audit that checks every day that nothing is lost. That every fact is where it should be, that no task has been orphaned, that the views match their source. A system nobody watches degrades; this one watches itself.</p>
+<p>Everything runs locally. The data never leaves my machine.</p>
+
+<h2>How it works day to day</h2>
+<p>I write it one sentence: “the garage invoice came in, €240”. The system logs the expense on the car's record, closes the task about taking it in, puts Thursday's collection in the calendar and writes the day's entry in the log. I say what happened; it updates everything else. <span class="muestra">(A staged example with sample data, as in the demo.)</span></p>
+<p>Finances are not typed in: transactions arrive on their own through an API and the console shows the month's spending by category and an 18-month cash projection. Grants and deadlines are watched and flagged, and the investment rules are written down and the system checks that they are being followed.</p>
+<p>When I need a figure, I ask in plain language: “how much have I spent on the car this year?”. The answer comes with the breakdown and with citations to the records and the log each figure comes from. <span class="muestra">(Sample figures in the demo.)</span> Without citations, an AI answer is an opinion; with them, it is a fact you can check.</p>
+<p>The same goes for every other area: projects with their next step clear, tasks and calendar in sync, contacts up to date. In health, a training plan with automatic progression, body composition measured to a protocol, nutrition logged and rest from the wearable (WHOOP) connected since July 2026.</p>
+
+<h2>Result</h2>
+<div class="cifras">
+  <div class="cifra"><div class="n">400+</div><div class="l">log entries</div></div>
+  <div class="cifra"><div class="n">300+</div><div class="l">searchable documents</div></div>
+  <div class="cifra"><div class="n">100%</div><div class="l">local and private</div></div>
+</div>
+<p>This is not a prototype: it is my daily life, kept up to date with AI since June 2026, with an automatic audit checking every day that nothing is lost. The method is the same one I apply to a business: first the model of what is; then the AI working on top of it.</p>
+
+<div class="nota">
+  <strong>An honest note.</strong> The first client of this system is me: I built it for my own life and I use it every day. The demos use staged sample data, never the real data.
+</div>
+
+<div class="cierre">
+  <p>Tell me what eats your hours.</p>
+  <a class="cta" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+  <p class="alt">Or write to me from the <a href="/en/#contacto">contact page</a>.</p>
+</div>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a> · Cookie-free website · anonymous visit count.</p>
+</footer>
+
+</main>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Hook del repo web. Instalar con:  ln -sf ../../hooks/pre-commit .git/hooks/pre-commit
+# 1) regenera el espejo inglés  2) regenera el sitemap  3) mete lo generado en el commit
+set -e
+raiz=$(git rev-parse --show-toplevel)
+cd "$raiz"
+./i18n/gen-en.py
+./gen-sitemap.sh
+git add en sitemap.xml
+# las páginas españolas llevan el bloque hreflang que inyecta el generador
+git add ./*.html

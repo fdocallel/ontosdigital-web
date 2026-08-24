@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- GENERADO por i18n/gen-en.py desde ../caso-salud.html · no editar a mano -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Health case: training, nutrition and rest in a digital twin · ONTOS</title>
+<meta name="description" content="How a digital twin runs training with automatic progression, body composition, nutrition and rest from the wearable. A real case from the ONTOS system.">
+<link rel="canonical" href="https://ontosdigital.es/en/caso-salud.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/caso-salud.html">
+<link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/caso-salud.html">
+<link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/caso-salud.html">
+<!-- /i18n:alt -->
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<meta property="og:title" content="Health case: training, nutrition and rest in a digital twin">
+<meta property="og:description" content="Training with automatic progression, body composition measured to a protocol, nutrition logged and rest from the wearable. A case from the ONTOS system.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:url" content="https://ontosdigital.es/en/caso-salud.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ONTOS">
+<meta property="og:locale" content="en_GB">
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans); font-size: 16px; line-height: 1.6;
+    background: var(--bg); color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  h1, h2, h3 { font-family: var(--serif); line-height: 1.2; }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); font-weight: 600; margin: 3rem 0 0.9rem; }
+  h2 { font-size: 1.45rem; font-weight: 600; margin: 2.8rem 0 0.9rem; }
+  .contexto { color: var(--sec); font-size: 1.05rem; max-width: 38rem; }
+  p { margin: 0 0 1rem; }
+  main p { max-width: 40rem; }
+  a { color: var(--acento); }
+  ul { margin: 0 0 1rem 1.2rem; }
+  li { margin-bottom: 0.4rem; }
+  strong { font-weight: 650; }
+
+  .demo-bloque {
+    display: block; margin: 2.2rem 0 0.5rem; padding: 1.3rem 1.5rem;
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    text-decoration: none; transition: border-color 0.15s ease;
+  }
+  .demo-bloque:hover { border-color: var(--acento); }
+  .demo-bloque .t {
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 600;
+    color: var(--acento); display: flex; align-items: center; gap: 0.6rem;
+  }
+  .demo-bloque .t svg { width: 1em; height: 1em; flex: none; fill: currentColor; }
+  .demo-bloque .s { color: var(--sec); font-size: 0.9rem; margin-top: 0.3rem; }
+
+  .muestra { color: var(--sec); font-size: 0.85rem; }
+
+  .nota {
+    margin: 2.8rem 0 0; padding: 1.1rem 1.4rem;
+    border-left: 3px solid var(--teja); background: var(--panel);
+    border-radius: 0 12px 12px 0; color: var(--sec); font-size: 0.95rem;
+  }
+
+  .cierre { text-align: center; margin: 3.5rem 0 0; padding-top: 2.5rem; border-top: 1px solid var(--borde); }
+  .cierre h2 { margin-top: 0; }
+  .cta {
+    display: inline-block; margin-top: 1rem; padding: 0.85rem 1.8rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-1px); }
+  .cierre .alt { display: block; margin-top: 1rem; font-size: 0.9rem; color: var(--sec); }
+
+  footer {
+    border-top: 1px solid var(--borde); margin-top: 3.5rem;
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/en/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>ONTOS</a>
+    <a class="item" href="/en/#producto">The product</a>
+    <a class="item" href="/en/#casos" aria-current="page">Cases</a>
+    <a class="item" href="/en/#escritos">Writing</a>
+    <a class="item" href="/en/#contacto">Contact</a>
+    <a class="item idioma" data-i18n-alt href="/caso-salud.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <h1>Health: the body goes into the system too</h1>
+  <p class="contexto">Training, body composition, nutrition and rest, brought together in a single model the AI keeps up to date. I am Fernando Calle and this is what I built for myself.</p>
+
+  <a class="demo-bloque" href="/en/salud-60s.html">
+    <span class="t"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch the animated demo</span>
+    <span class="s">about 60 seconds · no sound · sample data</span>
+  </a>
+
+  <h2>The problem</h2>
+  <p>Health usually lives scattered: the training plan in an app or a notebook, weight in the scales app, food in another app abandoned after a fortnight, sleep in the wearable's. Four screens that do not talk to each other, and the important decisions taken off the top of your head: how much weight goes on the bar today, whether the month is going well or badly, whether I am eating what I should.</p>
+  <p>The familiar result: you train without progressing, you weigh yourself without knowing how to read the figure, and you look at the rest data one day in twenty. There is no shortage of information. What is missing is a place where all of it comes together and someone, or something, works on it daily.</p>
+
+  <h2>What was built</h2>
+  <p>A data model: each area of health has its own record, with structure, and they all live in the same system, locally. The AI operates on top of that model, and it is the AI that does the work of maintaining it.</p>
+  <ul>
+    <li><strong>Training.</strong> Every session is logged with exercises, sets and kilos. Progression is not decided off the top of your head: the system calculates it and proposes the load for the next session.</li>
+    <li><strong>Body composition.</strong> Weight and fat measured to a protocol, always under the same conditions, so the figure is comparable. What you read is the trend across the month, not one day on the scales.</li>
+    <li><strong>Nutrition.</strong> What you eat is logged and compared against the targets in the plan: protein, calories, activity. No spreadsheet.</li>
+    <li><strong>Rest.</strong> The wearable (WHOOP) syncs on its own: sleep, recovery and resting heart rate come in every morning without touching anything.</li>
+  </ul>
+  <p>And underneath, an automatic audit checks every day that nothing is lost: that the records arrive, that the data adds up, that no loose end is left hanging.</p>
+
+  <h2>How it works day to day</h2>
+  <p>An ordinary day, with the demo's sample data: I finish the strength session and it logs squats at 4x6 with 100 kg, bench press at 4x8 with 72.5 kg and barbell rows at 4x10 with 65 kg. Seeing the sets completed, the system leaves the next session ready: bench press goes up to 75 kg. I calculate nothing. <span class="muestra">(Staged figures, not real.)</span></p>
+  <p>Composition is read as a trend: weight steady at 78.4 kg over the month, body fat at 14.2% and down 0.4 points, and the fat-free mass index rising. Three numbers that tell you whether the plan is working, without reading anything into one day's spike. <span class="muestra">(Sample data.)</span></p>
+  <p>The day's nutrition is closed off against the plan: 165 of 160 g of protein, 2,450 of 2,500 calories, 8,900 of 10,000 steps. At a glance I know whether the day has met the target, and the system keeps the history. <span class="muestra">(Sample data.)</span></p>
+  <p>In the morning, rest is already in: 7 h 40 of sleep, 82% recovery, 52 bpm at rest. With that, the conversation with the system is direct: how was the night, do I push today or ease off. <span class="muestra">(Sample data.)</span></p>
+
+  <h2>Result</h2>
+  <p>I built the first digital twin for myself and I keep it up to date daily with AI since June 2026. In the health area, today: a training plan with automatic progression, body composition measured to a protocol, nutrition logged and rest from the wearable connected since July 2026. An automatic audit checks every day that nothing is lost.</p>
+  <p>The full system goes far beyond health: it holds more than 400 log entries and more than 300 documents searchable in plain language, all 100% local and private. I am a civil engineer, with 6 years on major international projects (the Sydney Metro, HS2, NEOM) and R&amp;D awards for automation and AI. This system is my own medicine applied to my own life.</p>
+
+  <div class="nota">
+    <p style="margin:0">An honest note: the first client of this system is me. The demos use staged sample data, never the real data. What I am showing is the mechanism, not my medical history.</p>
+  </div>
+
+  <section class="cierre">
+    <h2>Tell me what eats your hours</h2>
+    <p class="contexto" style="margin:0 auto">If your business has data scattered across four places that nobody brings together, this same thing gets built for exactly that.</p>
+    <a class="cta" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+    <span class="alt">or write to me from <a href="/en/#contacto">the contact page</a></span>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0">© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a> · Cookie-free website · anonymous visit count.</p>
+  </div>
+</footer>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

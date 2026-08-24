@@ -1,0 +1,14 @@
+{
+  "_doc": "Traducción al inglés de 404.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
+  "Página no encontrada · ONTOS": "Page not found · ONTOS",
+  "ONTOS": "ONTOS",
+  "El producto": "The product",
+  "Casos": "Cases",
+  "Escritos": "Writing",
+  "Contacto": "Contact",
+  "Esta página no existe": "This page does not exist",
+  "El enlace está roto o la dirección no es correcta.": "The link is broken or the address is not correct.",
+  "Inicio": "Home",
+  "Oficina BIM": "BIM Office",
+  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a>": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a>"
+}

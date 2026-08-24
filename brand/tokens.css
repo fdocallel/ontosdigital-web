@@ -65,12 +65,26 @@
 .barra a.item:hover, .barra a.item[aria-current="page"] {
   color: var(--acento); border-bottom-color: var(--acento);
 }
+/* El conmutador de idioma no es una sección más: es un interruptor. Píldora corta,
+   sin subrayado, y en móvil se aprieta para que no expulse a "Contacto" de la fila. */
+.barra a.item.idioma {
+  border: 1px solid var(--borde); border-radius: 999px;
+  padding: 0.1rem 0.45rem; font-size: 0.78rem; letter-spacing: 0.06em;
+}
+.barra a.item.idioma:hover { color: var(--acento); border-color: var(--acento); }
 /* Móvil: cuatro enlaces no caben a tamaño completo. Se aprieta el ritmo y, si aun así
    no entran, la fila se desplaza a los lados en vez de partirse. */
 @media (max-width: 34rem) {
-  .barra nav { gap: 0.85rem; padding: 0.6rem 1rem; overflow-x: auto; scrollbar-width: none; }
+  .barra nav { gap: 0.6rem; padding: 0.6rem 0.85rem; overflow-x: auto; scrollbar-width: none; }
   .barra nav::-webkit-scrollbar { display: none; }
-  .barra .marca { font-size: 0.85rem; letter-spacing: 0.12em; gap: 0.4rem; margin-right: 0.6rem; }
+  .barra .marca { font-size: 0.85rem; letter-spacing: 0.12em; gap: 0.4rem; margin-right: 0.5rem; }
   .barra .marca svg { width: 18px; height: 18px; }
-  .barra a.item { font-size: 0.78rem; }
+  .barra a.item { font-size: 0.75rem; }
+  /* Si la fila llega a desplazarse, el idioma se queda pegado al borde: es el enlace
+     que un visitante que no lee español tiene que poder ver siempre. */
+  .barra a.item.idioma {
+    padding: 0.08rem 0.38rem; font-size: 0.7rem;
+    position: sticky; right: 0; background: var(--bg);
+    box-shadow: -10px 0 10px -6px var(--bg);
+  }
 }
