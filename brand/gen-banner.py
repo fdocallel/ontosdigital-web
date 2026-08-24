@@ -13,6 +13,9 @@ están MEDIDAS, no opinadas — informe: ONTOS `data/_cache/estilo/banner-linked
    y el móvil recorta 15-20% por los lados -> ventana útil x 320..1270, aire inferior
    >= 80 px. Las guías de «safe area» que circulan son granjas SEO que discrepan 3x:
    esto es la intersección conservadora, verificada midiendo el bbox de la tinta.
+ * MARCA DE AGUA: anillo N5 sangrado abajo a la derecha. Hasta el 24-ago era el
+   arco de medio punto, que es la marca V4 ANTERIOR (la clave del arco): dos marcas
+   en la misma pieza. El arco sigue vivo en gen-logo.py como motivo suelto.
  * GEOMETRÍA de la marca N5 derivada de gen-logo.py (DATO ÚNICO), no recalculada.
    Se dibuja con polígonos a 4x: medido contra rasterizar logo.svg con qlmanage, la
    vía polígono da el borde MÁS limpio (1320 vs 1426 px de transición).
@@ -42,8 +45,6 @@ N_DOV, GAP = 8, 4.0
 R_EXT, R_INT = 42.0, 29.4               # en unidades del viewBox 100
 RADIO_1, RADIO_2, RADIO_W = 15.5, 29.4, 2.6
 NUCLEO_R = 14.0
-N_ARCO, GAP_ARCO = 7, 2.6               # arco de medio punto (motivo secundario)
-ARCO_R, ARCO_r, ARCO_DY = 46.0, 27.0, 5.0
 
 AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
 DEMI, MEDIUM = 2, 5
@@ -73,32 +74,24 @@ def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=64):
     return pts
 
 
-def logo(d, cx, cy, R):
+def logo(d, cx, cy, R, piedra=PIEDRA, nucleo=TEJA, radios=True):
     """marca N5 completa; R = radio exterior en px (equivale a R_EXT del viewBox)"""
     e = R / R_EXT
     seg = 360 / N_DOV
     for k in range(N_DOV):
         c = -90 + k * seg
         d.polygon(sector(cx, cy, R, R_INT * e, c - seg / 2 + GAP / 2, c + seg / 2 - GAP / 2),
-                  fill=PIEDRA)
-    for k in range(N_DOV):
-        a = math.radians(-90 + k * seg)
-        d.line([(cx + RADIO_1 * e * math.cos(a), cy + RADIO_1 * e * math.sin(a)),
-                (cx + RADIO_2 * e * math.cos(a), cy + RADIO_2 * e * math.sin(a))],
-               fill=PIEDRA, width=max(1, round(RADIO_W * e)))
-    nr = NUCLEO_R * e
-    d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=TEJA)
+                  fill=piedra)
+    if radios:
+        for k in range(N_DOV):
+            a = math.radians(-90 + k * seg)
+            d.line([(cx + RADIO_1 * e * math.cos(a), cy + RADIO_1 * e * math.sin(a)),
+                    (cx + RADIO_2 * e * math.cos(a), cy + RADIO_2 * e * math.sin(a))],
+                   fill=piedra, width=max(1, round(RADIO_W * e)))
+    if nucleo:
+        nr = NUCLEO_R * e
+        d.ellipse([cx - nr, cy - nr, cx + nr, cy + nr], fill=nucleo)
 
-
-def arco(d, cx, cy, R, color):
-    """arco de medio punto (Acueducto) — marca de agua, geometría de gen-logo.py"""
-    e = R / ARCO_R
-    seg = 180 / N_ARCO
-    for k in range(N_ARCO):
-        a1 = 180 + k * seg + GAP_ARCO / 2
-        a2 = 180 + (k + 1) * seg - GAP_ARCO / 2
-        dy = -ARCO_DY * e if abs((a1 + a2) / 2 - 270) < seg / 2 else 0
-        d.polygon(sector(cx, cy, R, ARCO_r * e, a1, a2, dy=dy), fill=color)
 
 
 # ---------------------------------------------------------------- fondo
@@ -151,7 +144,10 @@ def cap(f):
 def lockup(d):
     """A — marca a la izquierda y texto a su derecha; el arco de medio punto brota
     como marca de agua del borde inferior derecho, que si no queda muerto."""
-    arco(d, 1285 * S, 400 * S, 300 * S, PIEDRA + (26,))
+    # marca de agua: el ANILLO N5 (24-ago, Fernando: el arco de medio punto era la
+    # marca V4 anterior y no pinta nada aquí). Esqueleto sin núcleo: no repite el
+    # gesto del lockup ni mete una segunda teja.
+    logo(d, 1300 * S, 300 * S, 300 * S, piedra=PIEDRA + (30,), nucleo=None, radios=False)
     R = 84
     logo(d, (X_ANCLA + R) * S, 150 * S, R * S)
     X = X_ANCLA + 2 * R + 66
