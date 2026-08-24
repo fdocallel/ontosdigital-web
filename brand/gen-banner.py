@@ -69,7 +69,7 @@ GLOW = (560, 150, 880, 0.085)           # cx, cy, radio, intensidad
 # núcleo de la marca de agua encendido como ascua, no dibujado como disco — con
 # disco salía un segundo círculo de teja que le robaba el sitio al del lockup.
 # Mismo principio que la portada: el color es luz, no pintura.
-BRASA = (1300, 300, 250, 0.38)
+BRASA = (1300, 300, 250, 0.60)   # 0,38 -> 0,60 (24-ago, Fernando: «¿mayor brasa?»)
 
 
 # ---------------------------------------------------------------- geometría
