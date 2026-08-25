@@ -87,4 +87,18 @@
     position: sticky; right: 0; background: var(--bg);
     box-shadow: -10px 0 10px -6px var(--bg);
   }
+  /* Área táctil de 44 px (25-ago-2026, medido en WebKit a 390/360/320: los enlaces de la
+     barra caían en 22-29 px de alto y fallar el toque en una barra pegajosa es de las cosas
+     que más barata parecen y más caro salen). Se agranda con un pseudo-elemento y NO con
+     padding: el padding movería el subrayado del enlace activo y cambiaría el dibujo de la
+     barra. Así crece lo que el dedo toca y no cambia nada de lo que el ojo ve. */
+  .barra a.item, .barra .marca { position: relative; }
+  .barra a.item::after, .barra .marca::after {
+    content: ''; position: absolute; left: 0; right: 0;
+    top: 50%; transform: translateY(-50%); height: 44px;
+  }
+  /* El pie se quedaba en 12,8 px y ahí van los enlaces legales. En móvil, mínimo 13,6.
+     Va con `body footer` a propósito: cada página redefine `footer` en su <style> propio,
+     que se carga DESPUÉS de este fichero, así que a igual especificidad ganaba la página. */
+  body footer { font-size: 0.85rem; }
 }

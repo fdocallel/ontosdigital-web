@@ -14,8 +14,10 @@
   "78,4 kg": "78.4 kg",
   "peso": "weight",
   "estable este mes": "steady this month",
+  "14,2 %": "14.2%",
   "grasa corporal": "body fat",
   "▼ 0,4 este mes": "▼ 0.4 this month",
+  "22,1": "22.1",
   "FFMI": "FFMI",
   "▲ tendencia": "▲ trend",
   "Manda la tendencia, <em>no la báscula de un día</em>.": "The trend is what counts, <em>not one day on the scales</em>.",
@@ -45,7 +47,5 @@
   "Sin sonido. Demostración con datos de muestra.": "No sound. Demonstration with sample data.",
   "← ontosdigital.es": "← ontosdigital.es",
   "El cuerpo también entra en el sistema: entreno, nutrición, descanso.": "The body goes into the system too: training, nutrition, rest.",
-  "Ver otra vez": "Watch again",
-  "14,2 %": "14.2%",
-  "22,1": "22.1"
+  "Ver otra vez": "Watch again"
 }

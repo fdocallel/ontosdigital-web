@@ -212,6 +212,14 @@
   .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .card.demo .ver span { color: var(--sec); font-weight: 400; }
   .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
+     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
+  .cta-medio a {
+    color: var(--acento); text-decoration: none; font-weight: 600;
+    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
+  }
+  .cta-medio a:hover { text-decoration: underline; }
 
   /* ---- contacto ---- */
   .contacto { border-top: 1px solid var(--borde); }
@@ -407,6 +415,9 @@
     <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
     <div class="stat"><div class="n">100%</div><div class="l">local y privado</div></div>
   </div>
+  <!-- El contacto está a siete secciones de aquí: en móvil, a ocho pantallas. Quien se
+       convence lo hace viendo los casos, y ahí es donde tiene que tener el botón. -->
+  <p class="cta-medio">¿Te suena a lo que llevas tiempo queriendo? <a href="#contacto">Pídeme una demo ▸</a></p>
 </section>
 
 <section>
@@ -464,10 +475,13 @@
   <div class="rama">
     <div>
       <h3>Ingeniería de la información, por encargo</h3>
-      <p>El producto nació de resolver problemas reales, y sigo haciéndolo: automatización e IA a
-      medida, datos del mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea
-      más pedida ahora mismo es la <b>gestión de requisitos BIM en licitación pública</b>, con
-      diagnóstico de nivel BIM sin coste.</p>
+      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
+           No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
+      <p>El producto nació de poner en orden problemas reales, y sigo haciéndolo por encargo: me
+      cuentas qué os come horas y os monto la solución. Automatización e IA a medida, datos del
+      mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea más pedida ahora
+      mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
+      coste.</p>
     </div>
     <a class="cta secundario" href="bim.html">Ver la Oficina BIM ▸</a>
   </div>

@@ -26,10 +26,15 @@
   "<span data-cifra=\"18\">0</span> m": "<span data-cifra=\"18\">0</span> mo",
   "proyección cubierta": "projection covered",
   "Vivienda": "Housing",
+  "620 €": "€620",
   "Comida": "Food",
+  "410 €": "€410",
   "Coche": "Car",
+  "240 €": "€240",
   "Ocio": "Leisure",
+  "180 €": "€180",
   "Otros": "Other",
+  "392 €": "€392",
   "Los datos entran solos, por API. <em>Nadie teclea.</em>": "The data arrives on its own, by API. <em>Nobody types.</em>",
   "<b>1.140 €</b> en lo que va de año: seguro 480 €, taller 240 € (julio) y combustible 420 €. La próxima ITV es en noviembre.": "<b>€1,140</b> so far this year: insurance €480, garage €240 (July) and fuel €420. The next MOT is in November.",
   "<span>[[</span>coche<span>]]</span>": "<span>[[</span>car<span>]]</span>",
@@ -57,11 +62,5 @@
   "calendario · recogida jueves 10:00": "calendar · collection Thursday 10:00",
   "bitácora · entrada del día": "log · entry for the day",
   "¿cuánto llevo gastado en el coche este año?": "how much have I spent on the car this year?",
-  "Ver otra vez": "Watch again",
-  "620 €": "€620",
-  "410 €": "€410",
-  "240 €": "€240",
-  "180 €": "€180",
-  "392 €": "€392",
-  "1.140 €": "€1,140"
+  "Ver otra vez": "Watch again"
 }

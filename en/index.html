@@ -213,6 +213,14 @@
   .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .card.demo .ver span { color: var(--sec); font-weight: 400; }
   .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
+     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
+  .cta-medio a {
+    color: var(--acento); text-decoration: none; font-weight: 600;
+    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
+  }
+  .cta-medio a:hover { text-decoration: underline; }
 
   /* ---- contacto ---- */
   .contacto { border-top: 1px solid var(--borde); }
@@ -396,6 +404,9 @@
     <div class="stat"><div class="n">300+</div><div class="l">searchable documents</div></div>
     <div class="stat"><div class="n">100%</div><div class="l">local and private</div></div>
   </div>
+  <!-- El contacto está a siete secciones de aquí: en móvil, a ocho pantallas. Quien se
+       convence lo hace viendo los casos, y ahí es donde tiene que tener el botón. -->
+  <p class="cta-medio">Does this sound like what you have been wanting for a while? <a href="#contacto">Ask me for a demo ▸</a></p>
 </section>
 
 <section>
@@ -442,7 +453,9 @@
   <div class="rama">
     <div>
       <h3>Information engineering, to order</h3>
-      <p>The product was born out of solving real problems, and I still do that: bespoke automation and AI, data from the physical world with drone and photogrammetry, contract reading, websites. The line most in demand right now is <b>managing BIM requirements in public tenders</b>, with a free BIM readiness assessment.</p>
+      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
+           No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
+      <p>The product was born out of putting real problems in order, and I still do that on request: tell me what is eating your hours and I will build you the fix. Custom automation and AI, physical-world data from drone surveys and photogrammetry, contract reading, websites. The line most in demand right now is managing BIM requirements in public tenders, with a free BIM level assessment.</p>
     </div>
     <a class="cta secundario" href="/en/bim.html">See the BIM Office ▸</a>
   </div>
