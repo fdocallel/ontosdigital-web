@@ -34,6 +34,7 @@ PAGINAS = [
     ("organizacion-60s.html", False),
     ("salud-60s.html", False),
     ("gracias.html", False),
+    ("solicitud.html", False),
     ("privacidad.html", False),
     ("aviso-legal.html", False),
     ("404.html", False),
@@ -195,8 +196,18 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
 
     if nombre == "input":
         n = atrs.get("name", "")
-        if n == "_next":
-            pon("value", DOMINIO + "/en/gracias.html")
+        if n == "_next" and atrs.get("value"):
+            # El destino de vuelta de un formulario se traduce con ruta_en(), que ya sabe
+            # mandar cualquier pagina del espejo a /en/. Pero ruta_en() devuelve tal cual lo
+            # que no conoce, y eso aqui significa dejar al visitante ingles en la version
+            # espanola sin que nadie se entere: si el destino no acaba dentro de /en/, se
+            # para el generador y se dice cual es (26-ago-2026).
+            destino = ruta_en(atrs["value"])
+            if not destino.startswith("/en/"):
+                sys.exit("gen-en: %s · _next apunta a %s, que no esta en el espejo ingles. "
+                         "Anade esa pagina a PAGINAS o corrige el destino."
+                         % (pagina, atrs["value"]))
+            pon("value", DOMINIO + destino)
         elif n == "_subject" and atrs.get("value"):
             pon("value", tr(clave(atrs["value"])))
         elif atrs.get("value") and atrs.get("type") in ("submit", "button"):

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- GENERADO por i18n/gen-en.py desde ../solicitud.html · no editar a mano -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request access · ONTOS</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<meta name="description" content="ONTOS is invitation-only. This is where you ask for access: Fernando reads it and decides. There is no automatic sign-up.">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--sans); background:var(--bg); color:var(--texto);
+         font-size:16px; line-height:1.6; min-height:100vh;
+         display:flex; flex-direction:column; -webkit-font-smoothing:antialiased; }
+  main { flex:1; width:100%; max-width:40rem; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  h1 { font-family: var(--serif); font-size:clamp(1.6rem,4vw,2.1rem); font-weight:600;
+       line-height:1.25; margin-bottom:1rem; }
+  h2 { font-family: var(--sans); font-size:0.85rem; text-transform:uppercase;
+       letter-spacing:0.25em; color:var(--acento); font-weight:600;
+       margin:3rem 0 1.2rem; }
+  p { color:var(--sec); margin-bottom:1rem; }
+  .lead { font-size:1.08rem; }
+  strong { color:var(--texto); font-weight:600; }
+  a { color:var(--acento); }
+
+  /* Los pasos son el contrato de la pagina: que se vea que hay una persona decidiendo
+     en medio y que el alta no ocurre sola. Numeros fuera del texto, sin adornos. */
+  ol.pasos { list-style:none; counter-reset:paso; margin:0 0 1rem; }
+  ol.pasos li { counter-increment:paso; position:relative;
+                padding-left:2.4rem; margin-bottom:1rem; color:var(--sec); }
+  ol.pasos li::before {
+    content:counter(paso); position:absolute; left:0; top:0.05rem;
+    width:1.6rem; height:1.6rem; border-radius:999px;
+    border:1px solid var(--borde); background:var(--panel);
+    font-family:var(--serif); font-size:0.85rem; font-weight:650; color:var(--acento);
+    display:flex; align-items:center; justify-content:center;
+  }
+  ul.sabelo { list-style:none; margin:0 0 1rem; }
+  ul.sabelo li { position:relative; padding-left:1.2rem; margin-bottom:0.9rem; color:var(--sec); }
+  ul.sabelo li::before { content:"\00b7"; position:absolute; left:0.25rem; color:var(--acento); font-weight:700; }
+
+  /* Aviso de expectativa. Va en caja para que no se lea como relleno: es lo que evita
+     que alguien se quede esperando una cuenta que probablemente no llegue. */
+  .aviso { border:1px solid var(--borde); border-left:3px solid var(--teja);
+           background:var(--panel); border-radius:10px;
+           padding:1.1rem 1.2rem; margin:1.6rem 0; }
+  .aviso p:last-child { margin-bottom:0; }
+
+  /* La dirección y su botón de copiar: mismas medidas que en la portada, para que sea el
+     mismo sitio. flex con gap en vez de margin: al envolver en móvil, el botón quedaba
+     metido medio centímetro respecto al margen de la columna. */
+  .form-nota { font-size:0.8rem; color:var(--sec); margin-bottom:0; }
+  .alt-mail { margin:1.4rem 0 1.2rem; font-size:1.05rem; color:var(--sec);
+              display:flex; flex-wrap:wrap; align-items:center; gap:0.6rem; }
+  .alt-mail a { color:var(--acento); font-weight:600; text-decoration:none; border-bottom:1px solid var(--acento); }
+  .copiar {
+    padding:0.35rem 0.9rem; border-radius:999px;
+    font:inherit; font-size:0.8rem; border:1px solid var(--borde);
+    background:none; color:var(--sec); cursor:pointer;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .copiar:hover { color:var(--realce); border-color:var(--realce); }
+
+  footer { border-top:1px solid var(--borde); padding:2rem 1.5rem 3rem;
+           font-size:0.8rem; color:var(--sec); text-align:center; }
+  footer a { color:inherit; }
+  @media (max-width:34rem) {
+    body footer { font-size:0.85rem; }
+    /* Área táctil de 44 px con la MISMA técnica que la barra de tokens.css (25-ago-2026):
+       crece lo que el dedo toca con un pseudo-elemento y no cambia nada de lo que el ojo ve.
+       Aquí pesa más que en la portada: sin formulario, esta dirección y su botón son la única
+       puerta de la página, y medidos en WebKit a 390 px caían en 28 y 34 px de alto. */
+    .alt-mail a, .copiar { position:relative; }
+    .alt-mail a::after, .copiar::after {
+      content:''; position:absolute; left:0; right:0;
+      top:50%; transform:translateY(-50%); height:44px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/en/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="/en/#producto">The product</a>
+    <a class="item" href="/en/#casos">Cases</a>
+    <a class="item" href="/en/#escritos">Writing</a>
+    <a class="item" href="/en/#contacto">Contact</a>
+    <a class="item idioma" data-i18n-alt href="/solicitud.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Request access</h1>
+  <p class="lead">ONTOS has no sign-up. It is invitation-only: you ask me, I read it and I decide. <strong>This is not an account, it is a request</strong>, and the answer may be no.</p>
+
+  <h2>How it works</h2>
+  <ol class="pasos">
+    <li>You send the request. It lands in my inbox, not in a system that processes it on its own.</li>
+    <li>I read it and I reply, yes or no. It usually takes a few days.</li>
+    <li>If it is a yes, I set up your space by hand and write to you with the address you log in through.</li>
+    <li>The first time you log in you choose which modules you want, read the consent form built from what you chose, and accept it. That is what signing up means here, and it happens inside, not on this page.</li>
+  </ol>
+
+  <div class="aviso">
+    <p>Right now this is a pilot with very few people and I am going slowly on purpose. The likeliest answer is not for now. If I say no, I tell you why.</p>
+  </div>
+
+  <h2>Before you ask</h2>
+  <ul class="sabelo">
+    <li>Your ONTOS lives on a computer of mine, in Segovia, in a space separate from everyone else's. It is not hosted in the cloud. What does leave that machine, and when, is written in the consent form you will read before you write anything.</li>
+    <li>You log in with a one-time code sent to your email. There is no password to remember, and none that can be stolen somewhere else.</li>
+    <li>I administer the system, which means I have technical access to what is inside it. I am saying it here, and you will read it again in the consent form before you accept it.</li>
+    <li>You can leave whenever you want: you ask to be removed and you take a copy of everything of yours in files that can be read without ONTOS. Your folder on the computer I delete within 30 days at most, and that deletion is tested end to end, with a dated record. For the copies on the backup drive I still give you no date: they have to be removed by hand, one by one. You will see it put exactly like that, in those words, in the consent form.</li>
+  </ul>
+
+  <h2>The request</h2>
+  <!-- Sin formulario, y a propósito: un formulario alojado fuera mete a un tercero en medio
+       de datos personales de otra persona, y aquí lo que se pide es precisamente confiar en
+       que no hay nadie en medio. Va por correo, de tu buzón al mío. El botón de copiar es el
+       mismo remedio que la portada: el mailto falla mudo en escritorios sin cliente de correo
+       y sin el botón la dirección se queda sin poderse coger (26-ago-2026). -->
+  <p>Write me an email with four things: your <strong>name</strong>, the <strong>email address</strong> you would log in with, <strong>how we know each other</strong> and <strong>what you would want to keep in ONTOS</strong>. That is plenty for me to reply.</p>
+
+  <p class="alt-mail"><a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copy</button></p>
+
+  <p class="form-nota">There is no form on purpose: what you write goes from your inbox to mine without passing through any third-party service. It is used to read your request, decide on it and reply to you, and nothing else. Details in the <a href="/en/privacidad.html">privacy policy</a>.</p>
+</main>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a></p>
+</footer>
+
+<script>
+// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
+// (mismo remedio que la portada; si se toca uno, tocar el otro)
+document.querySelectorAll("[data-copiar]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    function hecho() {
+      var t = b.textContent; b.textContent = "copied ✓";
+      setTimeout(function () { b.textContent = t; }, 1600);
+    }
+    function fallback() { // navegadores sin clipboard API o escritura rechazada
+      var t = document.createElement("textarea");
+      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
+      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
+    else fallback();
+  });
+});
+</script>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
