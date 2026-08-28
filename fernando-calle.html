@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fernando Calle · ingeniero de caminos, automatización e IA</title>
+<meta name="description" content="Fernando Calle, ingeniero de caminos y fundador de ONTOS. Automatización, datos e IA: seis años en el metro de Sídney, HS2 y NEOM. Segovia y remoto.">
+<link rel="canonical" href="https://ontosdigital.es/fernando-calle.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/fernando-calle.html">
+<link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/fernando-calle.html">
+<link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/fernando-calle.html">
+<!-- /i18n:alt -->
+<meta property="og:title" content="Fernando Calle · ingeniero de caminos, automatización e IA">
+<meta property="og:description" content="Ingeniero de caminos y fundador de ONTOS. Seis años dirigiendo modelos, datos y automatización en el metro de Sídney, HS2 y NEOM.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ontosdigital.es/fernando-calle.html">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="ONTOS">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fernando Calle · ingeniero de caminos, automatización e IA">
+<meta name="twitter:description" content="Ingeniero de caminos y fundador de ONTOS. Automatización, datos e IA en grandes proyectos internacionales.">
+<meta name="twitter:image" content="https://ontosdigital.es/brand/og.png">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--sans); font-size: 16px; line-height: 1.7;
+    background: var(--bg); color: var(--texto);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: var(--serif); }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  .cabecera { padding: 3.5rem 0 1.6rem; }
+  h1 { font-size: clamp(2rem, 5.4vw, 2.9rem); font-weight: 600; line-height: 1.15; }
+  .meta {
+    margin-top: 1.1rem; font-size: 0.85rem; color: var(--sec);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  article { padding-bottom: 1rem; }
+  section { padding: 1.6rem 0; }
+  h2 { font-size: 1.45rem; font-weight: 600; margin: 1rem 0 0.9rem; line-height: 1.25; }
+  p { margin-bottom: 1rem; }
+  p:last-child { margin-bottom: 0; }
+  ul { margin: 0 0 1rem 1.2rem; }
+  li { margin-bottom: 0.45rem; }
+  strong { color: var(--realce); font-weight: 600; }
+  a { color: var(--acento); }
+
+  /* Retrato: brand/fernando.jpg, 600x800 (3:4), ~50 KB — mismas decisiones que la portada */
+  .presentacion { display: grid; grid-template-columns: 13rem 1fr; gap: 2.2rem; align-items: start; }
+  @media (max-width: 48rem) { .presentacion { grid-template-columns: 1fr; gap: 1.6rem; } }
+  .retrato { margin: 0; }
+  .retrato img {
+    width: 13rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
+    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
+  }
+  @media (prefers-color-scheme: dark) { .retrato img { border-color: rgba(255,255,255,0.12); } }
+  @media (max-width: 48rem) { .retrato img { width: 10rem; } }
+  .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
+
+  .stats { display: flex; gap: 3rem; flex-wrap: wrap; margin: 1.6rem 0; }
+  .stat .n { font-family: var(--serif); font-size: 2rem; font-weight: 650; }
+  .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .caja {
+    margin: 1.6rem 0; padding: 1.3rem 1.5rem;
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+  }
+  .caja h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .caja p:last-child { margin-bottom: 0; }
+  .fuente { font-size: 0.85rem; color: var(--sec); margin-top: 0.9rem; }
+
+  .lineas { list-style: none; margin-left: 0; }
+  .lineas li { padding: 0.7rem 0; border-top: 1px solid var(--borde); margin-bottom: 0; color: var(--sec); font-size: 0.95rem; }
+  .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
+
+  .cierre { text-align: center; padding: 2.6rem 0 3.5rem; border-top: 1px solid var(--borde); margin-top: 2rem; }
+  .cierre h2 { margin-bottom: 0.6rem; }
+  .cierre p { color: var(--sec); max-width: 32rem; margin: 0 auto 1.6rem; }
+  .cta {
+    display: inline-block; padding: 0.8rem 2rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .cierre .alt { display: block; margin-top: 1.2rem; font-size: 0.9rem; }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://ontosdigital.es/fernando-calle.html",
+      "inLanguage": "es",
+      "mainEntity": { "@id": "https://ontosdigital.es/fernando-calle.html#persona" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://ontosdigital.es/fernando-calle.html#persona",
+      "name": "Fernando Calle",
+      "jobTitle": "Ingeniero de Caminos, Canales y Puertos",
+      "description": "Ingeniero de caminos especializado en automatización, datos e inteligencia artificial. Fundador de ONTOS.",
+      "image": "https://ontosdigital.es/brand/fernando.jpg",
+      "url": "https://ontosdigital.es/fernando-calle.html",
+      "email": "hola@ontosdigital.es",
+      "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
+      "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
+      "knowsAbout": ["inteligencia artificial aplicada", "automatización de procesos", "gemelos digitales", "BIM", "ISO 19650", "ingeniería de la información", "ingeniería civil"],
+      "award": "Premio de I+D en automatización e IA (TYPSA)",
+      "worksFor": { "@type": "Organization", "name": "ONTOS", "url": "https://ontosdigital.es/" }
+    },
+    {
+      "@type": "ScholarlyArticle",
+      "headline": "Automation of tunnel modelling for enhanced project efficiency",
+      "author": { "@id": "https://ontosdigital.es/fernando-calle.html#persona" },
+      "inLanguage": "en",
+      "isPartOf": "19th Australasian Tunnelling Conference (ATC 2025)",
+      "sameAs": "https://doi.org/10.3316/informit.T2026010800016790478291249"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/"><svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+      <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+      <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+      <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+      <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+      <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+      <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+      <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+      <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+    </svg>ONTOS</a>
+    <a class="item" href="/#producto">El producto</a>
+    <a class="item" href="/#casos">Casos</a>
+    <a class="item" href="/#escritos">Escritos</a>
+    <a class="item" href="/#contacto">Contacto</a>
+    <a class="item idioma" data-i18n-alt href="/en/fernando-calle.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<div class="cabecera">
+  <h1>Fernando Calle</h1>
+  <p class="meta">Ingeniero de caminos · automatización e IA · fundador de ONTOS</p>
+</div>
+
+<article>
+
+<section>
+  <div class="presentacion">
+    <figure class="retrato">
+      <img src="brand/fernando.jpg" alt="Retrato de Fernando Calle, ingeniero de caminos y fundador de ONTOS"
+           width="600" height="800" decoding="async">
+      <figcaption>Fernando Calle · Segovia</figcaption>
+    </figure>
+    <div>
+      <p>Soy ingeniero de caminos y me dedico a <strong>poner en orden información con código e
+      inteligencia artificial</strong>. Vengo de los proyectos donde eso se aprende por las malas:
+      seis años dirigiendo modelos, datos y automatización en grandes obras internacionales, donde
+      un dato mal puesto cuesta millones.</p>
+      <p>Hoy trabajo desde Segovia, para España y en remoto, con dos frentes que se alimentan
+      entre sí. Construyo <a href="/">ONTOS</a>, un gemelo digital personal y empresarial que una
+      IA mantiene al día, y hago <strong>ingeniería de la información por encargo</strong>,
+      automatización, datos y BIM.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>De dónde vengo</h2>
+  <p>Los seis años anteriores a ONTOS los pasé en proyectos donde el volumen de información supera
+  a cualquier persona, y la única salida es construir sistemas que la ordenen sola.</p>
+  <ul class="lineas">
+    <li><b>Sydney Metro West (Australia)</b>Modelado y automatización en la obra del metro de
+    Sídney, con 41 cross passages resueltos con modelos generados por código.</li>
+    <li><b>HS2 (Reino Unido)</b>Modelos, datos y coordinación de información en la nueva línea de
+    alta velocidad británica.</li>
+    <li><b>Northern Water (Adelaida, Australia)</b>Infraestructura de agua de 140 ML/día, con el
+    dato como columna del proyecto.</li>
+    <li><b>NEOM (Arabia Saudí)</b>Automatización y gestión de información en uno de los mayores
+    desarrollos de infraestructura del mundo.</li>
+  </ul>
+  <p>Ese trabajo fue <strong>premiado por I+D en automatización e IA</strong>, y parte está
+  publicado.</p>
+  <div class="caja">
+    <h3>Publicación</h3>
+    <p>«Automation of tunnel modelling for enhanced project efficiency», 19th Australasian
+    Tunnelling Conference (ATC 2025).</p>
+    <p class="fuente"><a href="https://doi.org/10.3316/informit.T2026010800016790478291249" rel="noopener" target="_blank">DOI 10.3316/informit.T2026010800016790478291249</a></p>
+  </div>
+</section>
+
+<section>
+  <h2>Qué hago ahora</h2>
+  <p>Casi nadie tiene un problema de información: tiene un problema de orden. A eso me dedico,
+  desde dos frentes.</p>
+  <ul class="lineas">
+    <li><b>ONTOS, el producto</b>Un gemelo digital de tu vida o de tu negocio: un modelo ordenado
+    de lo que tienes, haces y sabes, mantenido al día por una IA y ejecutado en tu máquina.
+    <a href="/">Está funcionando y se puede ver</a>. En piloto privado.</li>
+    <li><b>Consultoría</b>Me cuentas qué os come horas y os monto la solución: automatización e IA
+    a medida, datos del mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea
+    más pedida es la <a href="bim.html">gestión de requisitos BIM en licitación pública</a>.</li>
+    <li><b>Escritos</b>De vez en cuando escribo sobre lo que veo en el sector, como
+    <a href="escrito-plan-bim-ingenieria.html">qué exige el Plan BIM a una ingeniería mediana
+    en 2026</a>.</li>
+  </ul>
+</section>
+
+</article>
+
+<section class="cierre">
+  <h2>Hablamos</h2>
+  <p>Si quieres ver ONTOS en vivo, o contarme qué os come horas, escríbeme. Contesto normalmente
+  en 24-48 horas.</p>
+  <a class="cta" href="/#contacto">Escríbeme</a>
+  <span class="alt">o en <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">LinkedIn</a> ·
+  <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a></span>
+</section>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
+  <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+</footer>
+
+</div>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
