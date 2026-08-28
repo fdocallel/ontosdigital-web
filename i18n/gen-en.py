@@ -25,6 +25,7 @@ PAGINAS = [
     ("index.html", True),
     ("bim.html", True),
     ("escrito-plan-bim-ingenieria.html", True),
+    ("fernando-calle.html", True),
     ("caso-sistema.html", True),
     ("caso-finanzas.html", True),
     ("caso-organizacion.html", True),

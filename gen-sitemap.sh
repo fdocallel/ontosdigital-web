@@ -4,7 +4,7 @@
 # Uso: ./gen-sitemap.sh   ·   se llama solo desde el pre-commit.
 set -e
 cd "$(dirname "$0")"
-PAGINAS="index.html bim.html escrito-plan-bim-ingenieria.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html"
+PAGINAS="index.html bim.html escrito-plan-bim-ingenieria.html fernando-calle.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html"
 fecha_de() {
   f=$(git log -1 --format=%cs -- "$1" 2>/dev/null)
   [ -n "$f" ] || f=$(date +%F)
