@@ -36,6 +36,7 @@ PAGINAS = [
     ("salud-60s.html", False),
     ("gracias.html", False),
     ("solicitud.html", False),
+    ("entrar.html", False),
     ("privacidad.html", False),
     ("aviso-legal.html", False),
     ("404.html", False),

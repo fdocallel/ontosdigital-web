@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- GENERADO por i18n/gen-en.py desde ../entrar.html · no editar a mano -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in · ONTOS</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<meta name="description" content="Log in to your ONTOS: no password, a one-time code sent to your email. If you don't have one yet, you request access.">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--sans); background:var(--bg); color:var(--texto);
+         font-size:16px; line-height:1.6; min-height:100vh;
+         display:flex; flex-direction:column; -webkit-font-smoothing:antialiased; }
+  main { flex:1; width:100%; max-width:40rem; margin:0 auto; padding:3rem 1.5rem 4rem; }
+  h1 { font-family: var(--serif); font-size:clamp(1.6rem,4vw,2.1rem); font-weight:600;
+       line-height:1.25; margin-bottom:1rem; }
+  h2 { font-family: var(--sans); font-size:0.85rem; text-transform:uppercase;
+       letter-spacing:0.25em; color:var(--acento); font-weight:600;
+       margin:3rem 0 1.2rem; }
+  p { color:var(--sec); margin-bottom:1rem; }
+  .lead { font-size:1.08rem; }
+  strong { color:var(--texto); font-weight:600; }
+  a { color:var(--acento); }
+
+  /* Botón grande de entrada: mismo trato visual que el CTA principal de la portada
+     (index.html), pero esta página vive sola y no importa esos estilos, así que se
+     repite aquí (autocontenida, como solicitud.html). */
+  .cta {
+    display:inline-block; padding:0.8rem 1.8rem; border-radius:999px;
+    background:var(--teja); color:#14100c; font-weight:600; text-decoration:none;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform:translateY(-2px); box-shadow:0 8px 30px rgba(212,113,59,0.35); }
+  .cta-wrap { margin:1.4rem 0 1.6rem; }
+
+  /* La puerta va CENTRADA y en vertical: es una pantalla de un solo gesto, y el ojo tiene
+     que caer en el botón sin tener que leer nada para encontrarlo. */
+  .puerta { min-height:60vh; display:flex; flex-direction:column;
+            align-items:center; justify-content:center; text-align:center; }
+  .sello { width:64px; height:64px; color:var(--texto); opacity:0.9; margin-bottom:1.6rem; }
+  .puerta h1 { margin-bottom:0.6rem; }
+  .puerta .lead { max-width:26rem; margin-bottom:0; }
+
+  /* Las dos salidas, en letra pequeña y al pie: quien viene a entrar no las necesita, y
+     quien las necesita las busca. Estaban en dos secciones enteras y sobraban ocho de cada
+     diez palabras; lo que NO se puede quitar es el camino cuando la puerta no abre. */
+  .pie { font-size:0.9rem; margin-bottom:0.5rem;
+         display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:0.5rem; }
+  .pie a { color:var(--acento); font-weight:600; text-decoration:none; border-bottom:1px solid var(--acento); }
+  .copiar {
+    padding:0.35rem 0.9rem; border-radius:999px;
+    font:inherit; font-size:0.8rem; border:1px solid var(--borde);
+    background:none; color:var(--sec); cursor:pointer;
+    transition:color 0.15s ease, border-color 0.15s ease;
+  }
+  .copiar:hover { color:var(--realce); border-color:var(--realce); }
+
+  footer { border-top:1px solid var(--borde); padding:2rem 1.5rem 3rem;
+           font-size:0.8rem; color:var(--sec); text-align:center; }
+  footer a { color:inherit; }
+  @media (max-width:34rem) {
+    body footer { font-size:0.85rem; }
+    /* Área táctil de 44 px con la misma técnica que la barra de tokens.css: crece lo que
+       el dedo toca con un pseudo-elemento y no cambia nada de lo que el ojo ve. */
+    .pie a, .copiar { position:relative; }
+    .pie a::after, .copiar::after {
+      content:''; position:absolute; left:0; right:0;
+      top:50%; transform:translateY(-50%); height:44px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/en/">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="/en/#producto">The product</a>
+    <a class="item" href="/en/#casos">Cases</a>
+    <a class="item" href="/en/#escritos">Writing</a>
+    <a class="item" href="/en/#contacto">Contact</a>
+    <a class="item idioma" data-i18n-alt href="/entrar.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Una puerta se cruza, no se lee (decisión de Fernando, 1-sep-2026: la primera versión
+       explicaba el login en cuatro pasos y listaba los dos fallos posibles, y eso convertía
+       una puerta en un folleto). Queda el gesto y una sola frase, porque esa frase SÍ hace
+       falta: quien llega no espera que no le pidan contraseña. El resto de lo que había se
+       cuenta solo cuando toca — en la carta de bienvenida, que es cuando alguien entra por
+       primera vez, y en solicitud.html, que es de quien todavía no tiene. La marca hace de
+       imagen: no hay nada que ilustrar en una puerta salvo de quién es. -->
+  <div class="puerta">
+    <svg class="sello" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+      <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+      <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+      <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+      <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+      <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+      <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+      <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+      <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+    </svg>
+
+    <h1>Log in</h1>
+    <p class="lead">No password: you enter your email and a one-time code reaches you.</p>
+
+    <p class="cta-wrap"><a class="cta" href="https://entrar.ontosdigital.es">Log in to ONTOS ▸</a></p>
+
+    <p class="pie">No ONTOS yet? It is by invitation: <a href="/en/solicitud.html">request access ▸</a></p>
+    <p class="pie">Cannot get in? <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copy</button></p>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a></p>
+</footer>
+
+<script>
+// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
+// (mismo remedio que la portada y que solicitud.html; si se toca uno, tocar los otros)
+document.querySelectorAll("[data-copiar]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    function hecho() {
+      var t = b.textContent; b.textContent = "copiado ✓";
+      setTimeout(function () { b.textContent = t; }, 1600);
+    }
+    function fallback() { // navegadores sin clipboard API o escritura rechazada
+      var t = document.createElement("textarea");
+      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
+      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
+    else fallback();
+  });
+});
+</script>
+
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
