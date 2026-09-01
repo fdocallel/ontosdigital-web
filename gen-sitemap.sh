@@ -4,7 +4,7 @@
 # Uso: ./gen-sitemap.sh   ·   se llama solo desde el pre-commit.
 set -e
 cd "$(dirname "$0")"
-PAGINAS="index.html bim.html escrito-plan-bim-ingenieria.html fernando-calle.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html"
+PAGINAS="index.html bim.html escrito-plan-bim-ingenieria.html fernando-calle.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html editor-pdf/index.html"
 fecha_de() {
   f=$(git log -1 --format=%cs -- "$1" 2>/dev/null)
   [ -n "$f" ] || f=$(date +%F)
@@ -17,7 +17,11 @@ fecha_de() {
     [ -f "$f" ] || continue
     grep -q '<meta name="robots" content="noindex"' "$f" && continue
     fecha=$(fecha_de "$f")
-    if [ "$f" = "index.html" ]; then loc="https://ontosdigital.es/"; else loc="https://ontosdigital.es/$f"; fi
+    case "$f" in
+      index.html) loc="https://ontosdigital.es/" ;;
+      editor-pdf/index.html) loc="https://ontosdigital.es/editor-pdf/" ;;  # app bilingüe en sí misma, sin espejo /en/
+      *) loc="https://ontosdigital.es/$f" ;;
+    esac
     printf '  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n  </url>\n' "$loc" "$fecha"
     # espejo inglés: cambia cuando cambia la página española o su traducción
     en="en/$f"

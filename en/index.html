@@ -64,12 +64,15 @@
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
   h1, h3, .serif { font-family: var(--serif); }
 
-  /* ---- hero ---- */
+  /* ---- hero ----
+     v3 (29-ago-2026, estudio 2026-08-portada-producto §5): el hero deja de ser solo texto.
+     Antes tenía min-height:78vh y 62 palabras antes del CTA, y era el único de los siete
+     sitios medidos sin ningún rastro visual del producto. Ahora la altura la marca el
+     contenido y debajo del CTA entra una captura real: se ve el producto sin bajar. */
   .hero {
-    min-height: 78vh;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; position: relative; overflow: hidden;
-    padding: 4rem 1.5rem 3.5rem;
+    padding: 3.2rem 1.5rem 0;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0;
@@ -115,7 +118,70 @@
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
   .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
   .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
-  .hero .plazo { margin-top: 1.4rem; font-size: 0.85rem; color: var(--sec); }
+  .hero .plazo { margin-top: 1.3rem; font-size: 0.85rem; color: var(--sec); }
+  /* Las tres cifras suben al hero (§5.4): Fathom las pega al CTA y aquí vivían dos
+     secciones más abajo. Fila compacta, no el bloque grande de .stats. */
+  .cifras-hero {
+    margin-top: 1.6rem; display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.5rem 1.6rem; font-size: 0.9rem; color: var(--sec);
+  }
+  .cifras-hero b { font-family: var(--serif); font-weight: 650; color: var(--texto); }
+  /* Móvil: el hero medía 1.000 px y la captura caía dos pantallas por debajo del pliegue,
+     que es exactamente lo que la v3 venía a arreglar. Se aprieta el aire, no el contenido. */
+  @media (max-width: 40rem) {
+    .hero { padding-top: 2rem; }
+    .arco-svg { width: 72px; margin-bottom: 1rem; }
+    .wordmark { font-size: 1rem; margin-bottom: 1.1rem; }
+    .hero .lema { margin-top: 0.9rem; }
+    .hero .ctas { margin-top: 1.6rem; gap: 0.7rem; }
+    .cifras-hero { margin-top: 1.1rem; gap: 0.1rem 1.2rem; font-size: 0.85rem; }
+    .hero .plazo { margin-top: 0.9rem; }
+  }
+
+  /* ---- capturas reales del producto (producto/, #335) ----
+     Marco sobrio: la captura tiene su propio borde de app y un marco pesado la ensucia. */
+  .toma { margin: 0; }
+  .toma picture { display: block; }
+  .toma img {
+    display: block; width: 100%; height: auto;
+    border-radius: 12px; border: 1px solid var(--borde);
+    background: var(--panel);
+    box-shadow: 0 18px 50px -30px rgba(0,0,0,0.45);
+  }
+  .toma figcaption { margin-top: 0.55rem; font-size: 0.78rem; color: var(--sec); }
+  /* El hero abre con la pantalla del día (02, la fuerte). Es una captura vertical:
+     se recorta a 16:10 desde arriba a propósito, para que se lea el brief y la página
+     no se coma media pantalla con una imagen de 1.500 px. */
+  .toma-hero { margin-top: 3rem; width: 100%; max-width: 52rem; text-align: left; }
+  .toma-hero img {
+    aspect-ratio: 16 / 10; object-fit: cover; object-position: top center;
+    border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0;
+  }
+  .toma-hero figcaption { text-align: center; }
+  @media (max-width: 40rem) { .toma-hero { margin-top: 1.8rem; } .toma-hero img { aspect-ratio: 4 / 3; } }
+  /* La tira de la sección de casos: cuatro planos del sistema corriendo. Va en dos
+     columnas de flujo y NO en rejilla con recorte: las cuatro capturas tienen relaciones
+     muy distintas (1,54 · 0,98 · 0,80 · 0,51) y forzarlas a 4:3 partía el menú lateral
+     por la mitad, que es justo lo que delata una captura de relleno. */
+  .tomas { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1.8rem; align-items: start; }
+  @media (max-width: 34rem) { .tomas { grid-template-columns: 1fr; } }
+  /* Dos columnas INDEPENDIENTES (no filas de rejilla): con filas, la más corta del par
+     dejaba un hueco de 170 px debajo. Repartidas así las dos columnas miden casi igual. */
+  .tomas .columna { display: grid; gap: 1.4rem; align-content: start; }
+  /* La del móvil se queda a ancho de teléfono: a 470 px de ancho medía 900 de alto. */
+  .tomas .toma.vertical img { max-width: 15rem; margin: 0 auto; }
+  .tomas .toma.vertical figcaption { text-align: center; }
+  .tomas-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  /* «Qué es ONTOS»: la rueda de áreas a la izquierda y las tres piezas apiladas a la
+     derecha. La columna de la imagen se lleva también la nota del método: si no, la
+     imagen (relación 1,42) queda a media altura de tres tarjetas y deja un hueco. */
+  .producto-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 1.8rem; }
+  @media (max-width: 52rem) { .producto-visual { grid-template-columns: 1fr; gap: 1.4rem; } }
+  .producto-visual .piezas { margin-top: 0; }
+  .producto-visual .cards { grid-template-columns: 1fr; gap: 1rem; }
+  .producto-visual .card { padding: 1.3rem 1.4rem; }
+  .producto-visual .card .icono { margin-bottom: 0.5rem; }
+  .producto-visual .metodo { margin-top: 1.5rem; }
 
   /* ---- secciones ---- */
   section { padding: 4.2rem 0; }
@@ -174,6 +240,8 @@
   .rama p { color: var(--sec); font-size: 0.95rem; max-width: 38rem; }
 
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
+  .metodo a { color: var(--acento); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .metodo a:hover { text-decoration: underline; }
   /* escritos: la escritura fechada es la señal de que el sitio está vivo */
   .escrito {
     display: block; text-decoration: none; color: var(--texto);
@@ -304,39 +372,67 @@
   <circle class="nucleo" cx="50" cy="50" r="14" fill="#d4713b"/>
   </svg>
   <div class="wordmark">ONTOS</div>
-  <h1>A digital model of everything that is yours, and an AI that keeps it up to date.</h1>
-  <p class="lema">Finances, documents, admin, projects, diary, health: all in one place, on your machine, and available just by asking. I built it for myself and I use it every day.</p>
+  <h1>Everything that is yours, in order and up to date.</h1>
+  <p class="lema">A digital model of your life and your business that an AI keeps up to date, on your machine.</p>
   <div class="ctas">
     <a class="cta" href="#casos">See it working</a>
     <a class="cta secundario" href="#contacto">Ask me for a demo</a>
   </div>
-  <p class="plazo">In private pilot. Everything runs locally: your data never leaves your computer.</p>
+  <p class="cifras-hero">
+    <span><b>400+</b> log entries</span>
+    <span><b>300+</b> searchable documents</span>
+    <span><b>100%</b> local and private</span>
+  </p>
+  <p class="plazo">In private pilot. I built it for myself and I use it every day.</p>
+  <figure class="toma toma-hero">
+    <picture>
+      <source srcset="/producto/02-hoy-cockpit.webp" type="image/webp">
+      <!-- ruta absoluta a propósito: gen-en.py reescribe src pero no srcset, y desde /en/
+           una ruta relativa apuntaría a /en/producto/, que no existe -->
+      <img src="/producto/02-hoy-cockpit.jpg" width="1185" height="1499" decoding="async" fetchpriority="high"
+           alt="The Today screen in ONTOS: the daily briefing written by the AI, the tasks in focus with their next step, the week ahead, net worth and rest.">
+    </picture>
+    <figcaption>The daily screen, shown with demonstration data.</figcaption>
+  </figure>
 </div>
 
 <div class="wrap">
 
 <section class="intro" id="producto">
   <h2>What ONTOS is</h2>
-  <p><em>Ontos</em>, from the Greek ὄντος: <span class="serif">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head, knowledge lives in each person's experience, and putting the whole picture together costs more than the decision you had to make.</p>
-  <p>ONTOS is the <strong>digital twin</strong> of that: an ordered model of what you have, what you do and what you know, with artificial intelligence working on top of it every day.</p>
-  <div class="cards piezas">
-    <div class="card pieza">
-      <span class="icono">◉</span>
-      <h3>The data, in one place</h3>
-      <p>Every fact lives once. Views, reports and summaries are generated from it, so nothing contradicts itself or goes stale in a forgotten copy.</p>
+  <!-- v3: los dos párrafos de prosa se comprimen a una frase de enlace. El desarrollo largo
+       (el problema del orden, las tres capas, la auditoría) vive entero en caso-sistema.html. -->
+  <p><em>Ontos</em>, from the Greek ὄντος, <span class="serif">“that which is”</span>: the <strong>digital twin</strong> of what you have, what you do and what you know, with artificial intelligence working on top of it every day.</p>
+  <div class="producto-visual">
+    <div>
+      <figure class="toma">
+        <picture>
+          <source srcset="/producto/01-portada-sistema.webp" type="image/webp">
+          <img src="/producto/01-portada-sistema.jpg" width="1400" height="984" loading="lazy" decoding="async"
+               alt="The ONTOS home screen: the eight areas of the system laid out in a wheel around the core, with the navigation menu alongside.">
+        </picture>
+        <figcaption>The eight areas of the system, shown with demonstration data.</figcaption>
+      </figure>
+      <p class="metodo">Everything runs on your machine: no compulsory cloud, no account to create. <a href="/en/caso-sistema.html">How it is put together inside ▸</a></p>
     </div>
-    <div class="card pieza">
-      <span class="icono">✦</span>
-      <h3>The AI that operates it</h3>
-      <p>You tell it in one sentence what has happened and it updates everything that is affected. You ask in plain language and it answers with your own data, citing where each thing comes from.</p>
-    </div>
-    <div class="card pieza">
-      <span class="icono">✓</span>
-      <h3>The audit that keeps watch</h3>
-      <p>A system nobody watches degrades. An automatic check runs every day to make sure nothing is lost, that the views match their source and that no loose end is left hanging.</p>
+    <div class="cards piezas">
+      <div class="card pieza">
+        <span class="icono">◉</span>
+        <h3>The data, in one place</h3>
+        <p>Every fact lives once. Views and reports are generated from it.</p>
+      </div>
+      <div class="card pieza">
+        <span class="icono">✦</span>
+        <h3>The AI that operates it</h3>
+        <p>You tell it in one sentence what has happened, and it answers with your own data, citing the source.</p>
+      </div>
+      <div class="card pieza">
+        <span class="icono">✓</span>
+        <h3>The audit that keeps watch</h3>
+        <p>An automatic check runs every day to make sure nothing is lost or goes stale.</p>
+      </div>
     </div>
   </div>
-  <p class="metodo">Everything runs on your machine. No compulsory cloud, no account to create, none of your data feeding anybody's product.</p>
 </section>
 
 <section>
@@ -345,23 +441,21 @@
     <div class="card edicion">
       <span class="icono">◈</span>
       <h3>ONTOS personal</h3>
-      <p class="edicion-desc">Your whole life in a single model, and the boring part done for you.</p>
+      <p class="edicion-desc">Your whole life in one model, with the modules you ask for: an inheritance, a building project, a course.</p>
       <ul class="lineas">
-        <li><b>The core</b>Today, notes, diary and calendar, projects and contacts.</li>
-        <li><b>Money</b>Net worth, income and spending, investing with written rules.</li>
-        <li><b>Body</b>Training with progression, body composition, nutrition and rest.</li>
-        <li><b>Your own things</b>Whatever matters to you: an inheritance, a building project, a language, a course. Modules switch on when you ask for them.</li>
+        <li><b>The core</b>Today, diary, projects and contacts.</li>
+        <li><b>Money</b>Net worth, spending and investing with written rules.</li>
+        <li><b>Body</b>Training, body composition, nutrition and rest.</li>
       </ul>
     </div>
     <div class="card edicion">
       <span class="icono">▣</span>
       <h3>ONTOS for business</h3>
-      <p class="edicion-desc">The model of your business: data, processes and knowledge in one place.</p>
+      <p class="edicion-desc">The model of your business: data, processes and the firm's documents, searchable by asking and answered with a citation.</p>
       <ul class="lineas">
-        <li><b>Sales</b>Pipeline of opportunities, clients with their history and their next step.</li>
-        <li><b>Operations</b>Work in progress, deadlines ahead, services and deliverables.</li>
-        <li><b>Administration</b>Invoicing, expenses, and obligations watched and flagged.</li>
-        <li><b>Knowledge</b>The firm's documents, searchable by asking and answered with a citation.</li>
+        <li><b>Sales</b>Opportunities and clients with their next step.</li>
+        <li><b>Operations</b>Work in progress, deadlines and deliverables.</li>
+        <li><b>Administration</b>Invoicing, expenses and obligations watched.</li>
       </ul>
     </div>
   </div>
@@ -370,8 +464,49 @@
 <section id="casos">
   <h2>See it working</h2>
   <div class="intro">
-  <p>I built the first digital twin for myself, and it is the proof that this works: a model of my entire life kept up to date every day with AI. Each case tells you how it is put together inside, with its demo in motion.</p>
+  <p>I built the first digital twin for myself. This is the system running.</p>
   </div>
+  <!-- v3 (#336): las capturas del producto (#335) van aquí, antes de los casos escritos.
+       El trabajo, el dinero, la gente y el móvil: los tres planos que faltaban más el bolsillo. -->
+  <div class="tomas">
+    <div class="columna">
+      <figure class="toma">
+        <picture>
+          <source srcset="/producto/03-agenda-backlog.webp" type="image/webp">
+          <img src="/producto/03-agenda-backlog.jpg" width="1400" height="908" loading="lazy" decoding="async"
+               alt="The ONTOS diary: outstanding work split by status, this week, available and later on, with the count of each block at the top.">
+        </picture>
+        <figcaption>The work</figcaption>
+      </figure>
+      <figure class="toma">
+        <picture>
+          <source srcset="/producto/05-red-crm.webp" type="image/webp">
+          <img src="/producto/05-red-crm.jpg" width="1200" height="1500" loading="lazy" decoding="async"
+               alt="The contacts network in ONTOS: each person with their circle of closeness, how often to be in touch and the next step still pending with them.">
+        </picture>
+        <figcaption>The people</figcaption>
+      </figure>
+    </div>
+    <div class="columna">
+      <figure class="toma">
+        <picture>
+          <source srcset="/producto/04-patrimonio.webp" type="image/webp">
+          <img src="/producto/04-patrimonio.jpg" width="1400" height="1422" loading="lazy" decoding="async"
+               alt="The net worth screen in ONTOS: the weekly trend as a chart, the split by category and every holding one by one.">
+        </picture>
+        <figcaption>The money</figcaption>
+      </figure>
+      <figure class="toma vertical">
+        <picture>
+          <source srcset="/producto/06-hoy-movil.webp" type="image/webp">
+          <img src="/producto/06-hoy-movil.jpg" width="600" height="1169" loading="lazy" decoding="async"
+               alt="ONTOS on the phone: the same daily screen with the morning briefing, laid out for a mobile screen.">
+        </picture>
+        <figcaption>In your pocket</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="tomas-nota">Real screenshots of the system, taken with demonstration data: what you see there does not exist.</p>
   <div class="cards demos">
     <a class="card demo" href="/en/caso-sistema.html">
       <span class="icono">◉</span>
@@ -399,11 +534,8 @@
     </a>
   </div>
   <p class="demos-nota">Every case comes with its animated demo. No sound, sample data.</p>
-  <div class="stats">
-    <div class="stat"><div class="n">400+</div><div class="l">log entries</div></div>
-    <div class="stat"><div class="n">300+</div><div class="l">searchable documents</div></div>
-    <div class="stat"><div class="n">100%</div><div class="l">local and private</div></div>
-  </div>
+  <!-- Las tres cifras (400+ / 300+ / 100%) vivían aquí; en la v3 suben al hero (§5.4 del
+       estudio: Fathom las pega al CTA). Siguen enteras en caso-sistema.html §Resultado. -->
   <!-- El contacto está a siete secciones de aquí: en móvil, a ocho pantallas. Quien se
        convence lo hace viendo los casos, y ahí es donde tiene que tener el botón. -->
   <p class="cta-medio">Does this sound like what you have been wanting for a while? <a href="#contacto">Ask me for a demo ▸</a></p>
@@ -412,10 +544,11 @@
 <section>
   <h2>Where it stands today</h2>
   <div class="estado">
-    <p><strong>ONTOS is not a promise: it is what I use every day</strong> since June 2026. What you see in the cases is running on my own instance, with my real data.</p>
-    <p>It is <strong>in private pilot</strong>, and I open it up one person at a time: I sit down with each of them on day one, we build their model and we switch on only the modules that are useful to them. You learn and you fix before taking the next step.</p>
-    <p><strong>There is no public price yet.</strong> I would rather learn with the first few people before putting a figure on it, and tell you so straight instead of selling you a list of features.</p>
-    <p>If this sounds like what you have been wanting for a while, write to me and I will show you live.</p>
+    <!-- v3: de cuatro párrafos a tres frases. El contenido no se toca: es la pieza más
+         honesta de la página y la que el estudio de remodelado §9 marcó como intocable. -->
+    <p><strong>This is not a promise: it is what I use every day</strong> since June 2026, with my real data.</p>
+    <p>It is <strong>in private pilot</strong> and I open it up one person at a time: we sit down together on day one, we build your model and we switch on only the modules that are useful to you.</p>
+    <p><strong>There is no public price yet.</strong> I would rather learn with the first few people than sell you a list of features.</p>
   </div>
 </section>
 
@@ -428,7 +561,7 @@
       <figcaption>Fernando Calle · Segovia</figcaption>
     </figure>
     <div>
-      <p>I am <strong>Fernando Calle</strong>, a civil engineer. Six years leading models, data and automation on major international projects (the Sydney Metro, HS2, NEOM), where one piece of data in the wrong place costs millions. That engineer's way of thinking, <strong>awarded for R&amp;D in automation and AI</strong>, is what sits behind ONTOS: systems instead of heroics, and results you can measure.</p>
+      <p>I am <strong>Fernando Calle</strong>, a civil engineer. Six years leading models, data and automation on major international projects (the Sydney Metro, HS2, NEOM), where one piece of data in the wrong place costs millions. That way of thinking, <strong>awarded for R&amp;D in automation and AI</strong>, is what sits behind ONTOS.</p>
       <div class="stats">
         <div class="stat"><div class="n">6</div><div class="l">years on major projects</div></div>
         <div class="stat"><div class="n">R&amp;D</div><div class="l">automation and AI award</div></div>
