@@ -1,11 +1,18 @@
 #!/bin/sh
 # Hook del repo web. Instalar con:  ln -sf ../../hooks/pre-commit .git/hooks/pre-commit
-# 1) regenera el espejo inglés  2) regenera el sitemap  3) mete lo generado en el commit
+# 1) regenera el espejo inglés  2) regenera el sitemap  3) re-añade SOLO lo que ya estaba staged
+# OJO (1-sep-2026): antes hacía `git add en ./*.html` y coló en un commit la portada v3 que
+# estaba a propósito sin publicar. Lo generado solo entra si su fuente entraba en este commit.
 set -e
 raiz=$(git rev-parse --show-toplevel)
 cd "$raiz"
+staged=$(git diff --cached --name-only --diff-filter=ACM)
 ./i18n/gen-en.py
 ./gen-sitemap.sh
-git add en sitemap.xml
-# las páginas españolas llevan el bloque hreflang que inyecta el generador
-git add ./*.html
+git add sitemap.xml
+for f in $staged; do
+  [ -f "$f" ] && git add "$f"   # la página española staged, con el hreflang que inyecta el generador
+  case "$f" in
+    *.html) [ -f "en/$f" ] && git add "en/$f" ;;   # y su espejo inglés recién regenerado
+  esac
+done
