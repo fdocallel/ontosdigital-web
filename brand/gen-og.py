@@ -23,6 +23,7 @@ TEXTO = (236, 231, 222)
 PIEDRA = (69, 63, 53)
 
 AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
+FRAUNCES = __file__.rsplit("/", 1)[0] + "/fraunces-600.ttf"  # wordmark (decision 1-sep-2026, colores.md)
 DEMI, MEDIUM = 2, 5
 
 img = Image.new("RGB", (W * S, H * S), NOCHE)
@@ -71,7 +72,7 @@ def draw_centered(y, text, f, fill, tracking=0.0):
         d.text((x, y * S), ch, font=f, fill=fill)
         x += d.textlength(ch, font=f) + tracking * S
 
-draw_centered(322, "ONTOS", font(DEMI, 92), TEXTO, tracking=18.4)
+draw_centered(322, "ONTOS", ImageFont.truetype(FRAUNCES, 92 * S), TEXTO, tracking=1.8)
 draw_centered(468, "El modelo digital de tu negocio, operado con IA", font(MEDIUM, 31), GRANITO_CLARO)
 draw_centered(541, "ontosdigital.es", font(DEMI, 22), TEJA, tracking=0.6)
 

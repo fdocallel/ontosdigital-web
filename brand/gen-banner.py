@@ -52,6 +52,7 @@ RADIO_1, RADIO_2, RADIO_W = _g['RADIO_1'], _g['RADIO_2'], _g['RADIO_W']
 NUCLEO_R = float(_g['NUCLEO_R'])
 
 AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
+FRAUNCES = __file__.rsplit("/", 1)[0] + "/fraunces-600.ttf"  # wordmark (decision 1-sep-2026, colores.md)
 DEMI, MEDIUM = 2, 5
 
 WORDMARK = "ONTOS"
@@ -132,6 +133,10 @@ def av(idx, size):
     return ImageFont.truetype(AVENIR, int(size * S), index=idx)
 
 
+def fr(size):
+    return ImageFont.truetype(FRAUNCES, int(size * S))
+
+
 def texto(d, x, baseline, s, f, fill, tracking=0.0):
     """dibuja sobre la LÍNEA DE BASE con tracking, descontando el side bearing
     izquierdo para que todos los bloques compartan borde óptico"""
@@ -153,12 +158,12 @@ def lockup(d):
     centrado en la banda que LinkedIn deja ver."""
     logo(d, (X0 + R_MARCA) * S, CY * S, R_MARCA * S)
     X = X0 + 2 * R_MARCA + 60
-    f_w, f_l, f_d = av(DEMI, CUERPO_WORD), av(MEDIUM, CUERPO_LEMA), av(DEMI, CUERPO_DOM)
+    f_w, f_l, f_d = fr(CUERPO_WORD), av(MEDIUM, CUERPO_LEMA), av(DEMI, CUERPO_DOM)
     sep1, sep2 = 84, 64
     desc = CUERPO_DOM * 0.24
     top = CY - (cap(f_w) + sep1 + sep2 + desc) / 2
     b1 = top + cap(f_w)
-    texto(d, X, b1, WORDMARK, f_w, TEXTO, tracking=CUERPO_WORD * 0.20)
+    texto(d, X, b1, WORDMARK, f_w, TEXTO, tracking=CUERPO_WORD * 0.02)
     texto(d, X, b1 + sep1, LEMA, f_l, GRANITO_CLARO)
     texto(d, X, b1 + sep1 + sep2, DOMINIO, f_d, TEJA, tracking=CUERPO_DOM * 0.06)
 

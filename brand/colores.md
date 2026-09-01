@@ -48,11 +48,19 @@ Matriz de contraste (umbral: 3:1 gráfico/texto grande · 4,5:1 texto AA):
 
 Tokens listos para CSS en `tokens.css`.
 
-## Tipografía (22-jul-2026, tras revisión del banner)
+## Tipografía (22-jul-2026 · wordmark redefinido 1-sep-2026)
 
-- **Gráficos/display** (banner, piezas de marca): **Avenir Next** — Demi Bold para el wordmark
-  (tracking ~0.2em), Medium para texto, Demi pequeño para el dominio. Una familia, tres pesos:
-  la O geométrica de Avenir rima con el anillo de dovelas. Nunca Helvetica Bold con tracking ancho.
+- **WORDMARK «ONTOS»: Fraunces SemiBold (600), tracking corto (~0.02em)** — en TODOS los soportes
+  (barra web, cierres de vídeo, banners, OG). Decisión de Fernando 1-sep-2026 sobre draft con 4
+  candidatas en contexto real (`ONTOS/data/_cache/estilo-wordmark/`): la serif artesanal rima con
+  teja y piedra y ya está autoalojada; mata la dispersión que causaba Avenir (fuente de Apple, no
+  autoalojable — la web la aproximaba con la sans del sistema y los vídeos derivaron por su cuenta).
+  El **punto teja «ONTOS.»** va en piezas de cierre/display; en la barra de navegación, sin punto.
+  Para los generadores PIL: `fraunces-600.ttf` (estático, en esta carpeta).
+- **Acompañamiento del wordmark** (lema, dominio) en sans; en los generadores locales puede seguir
+  siendo Avenir Next Medium/Demi (no se sirve como fuente, solo pinta PNG).
+- (Histórico 22-jul, superseded para el wordmark: Avenir Next Demi tracking ~0.2em, «la O geométrica
+  rima con el anillo». Sigue valiendo para texto secundario de piezas generadas.)
 - **Web** (remodelado v2, 19-ago-2026): titulares en **Fraunces** variable (400-700), autoalojada
   en `brand/fraunces.woff2` (67 KB, subset latin, `font-display: swap`) — carácter artesanal que
   rima con teja/piedra, sin conectar con servidores de terceros. Cuerpo sigue en system stack
