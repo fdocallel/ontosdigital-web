@@ -5,36 +5,46 @@
 <title>Editor PDF — une, escanea y ordena PDFs sin que salgan de tu ordenador | ONTOS</title>
 <meta name="description" content="Une, gira y reordena páginas de PDF, y convierte fotos de folios en páginas A4 limpias. Gratis, sin registro, sin marca de agua: todo ocurre en tu navegador y ningún archivo sale de tu ordenador.">
 <link rel="canonical" href="https://ontosdigital.es/editor-pdf/">
-<link rel="icon" type="image/svg+xml" href="lib/logo.svg">
-<link rel="alternate icon" href="lib/logo.png">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/brand/tokens.css">
 <style>
+  /* Mapa de las variables de la app a los tokens de marca (fuente única: /brand/tokens.css).
+     --bg y --panel ya vienen con esos nombres del propio tokens.css, claro y oscuro. */
   :root {
-    --bg: #f4f5f7; --panel: #ffffff; --border: #d9dce1;
-    --accent: #2563eb; --accent-soft: #dbeafe; --danger: #dc2626;
-    --text: #1f2937; --muted: #6b7280;
+    --border: var(--borde); --text: var(--texto); --muted: var(--sec);
+    --accent: var(--acento);
+    --accent-soft: color-mix(in srgb, var(--acento) 16%, var(--panel));
+    --danger: #dc2626;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
-  header {
-    background: var(--panel); border-bottom: 1px solid var(--border);
-    padding: 10px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 10;
+  #top { position: sticky; top: 0; z-index: 10; }
+  #top .barra { position: static; }
+  #top .barra nav { max-width: none; padding: 0.55rem 16px; gap: 1rem; }
+  .titulo-app { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--text); margin: 0; }
+  .titulo-app span { color: var(--accent); }
+  #btnLang {
+    margin-left: auto; border: 1px solid var(--border); border-radius: 999px;
+    padding: 2px 10px; font-size: 12px; background: transparent; color: var(--muted);
   }
-  header h1 { font-size: 16px; font-weight: 600; margin-right: 12px; }
-  header h1 span { color: var(--accent); }
-  header .logo { width: 26px; height: 26px; display: block; }
+  #btnLang:hover { color: var(--accent); border-color: var(--accent); background: transparent; }
+  #toolbar {
+    background: var(--panel); border-bottom: 1px solid var(--border);
+    padding: 8px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
   .sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
   button {
     font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 8px;
     border: 1px solid var(--border); background: var(--panel); color: var(--text);
     cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
   }
-  button:hover:not(:disabled) { background: #eef1f5; }
+  button:hover:not(:disabled) { background: color-mix(in srgb, var(--text) 6%, var(--panel)); }
   button:disabled { opacity: .4; cursor: default; }
   button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  button.primary:hover:not(:disabled) { background: #1d4ed8; }
-  button.danger:hover:not(:disabled) { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+  button.primary:hover:not(:disabled) { background: color-mix(in srgb, var(--accent) 84%, black); }
+  button.danger:hover:not(:disabled) { background: color-mix(in srgb, var(--danger) 12%, var(--panel)); border-color: var(--danger); color: var(--danger); }
   #status { margin-left: auto; font-size: 12px; color: var(--muted); }
 
   main { flex: 1; padding: 16px; }
@@ -63,35 +73,35 @@
   .thumb-box canvas { max-width: 100%; max-height: 100%; box-shadow: 0 1px 4px rgba(0,0,0,.25); transition: transform .15s; }
   .card .label { text-align: center; font-size: 12px; color: var(--muted); margin-top: 6px; }
   .card .badge {
-    position: absolute; top: 6px; left: 6px; background: rgba(31,41,55,.75); color: #fff;
+    position: absolute; top: 6px; left: 6px; background: rgba(28,26,23,.78); color: #fff;
     font-size: 11px; padding: 2px 7px; border-radius: 10px; pointer-events: none;
   }
   .card .mini {
     position: absolute; top: 6px; right: 6px; display: none; gap: 4px;
   }
   .card:hover .mini { display: flex; }
-  .mini button { padding: 4px 7px; font-size: 12px; border-radius: 6px; background: rgba(255,255,255,.95); }
+  .mini button { padding: 4px 7px; font-size: 12px; border-radius: 6px; background: color-mix(in srgb, var(--panel) 95%, transparent); }
 
   footer { padding: 8px 16px; font-size: 12px; color: var(--muted); text-align: center; }
   input[type=file] { display: none; }
 
   #cornerModal {
     display: none; position: fixed; inset: 0; z-index: 50;
-    background: rgba(13, 17, 24, .88);
+    background: rgba(15, 14, 12, .88);
     align-items: center; justify-content: center; flex-direction: column; gap: 14px;
   }
   #cornerModal.open { display: flex; }
   #cornerWrap { position: relative; touch-action: none; box-shadow: 0 8px 40px rgba(0,0,0,.6); }
   #cornerCanvas { display: block; }
   #cornerSvg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  #cornerSvg polygon { fill: rgba(37, 99, 235, .12); stroke: #3b82f6; stroke-width: 2.5; }
-  #cornerSvg circle { fill: #fff; stroke: #2563eb; stroke-width: 4; cursor: grab; }
-  #cornerModal .hint { color: #cbd5e1; font-size: 13px; }
+  #cornerSvg polygon { fill: color-mix(in srgb, var(--teja) 18%, transparent); stroke: var(--teja); stroke-width: 2.5; }
+  #cornerSvg circle { fill: #fff; stroke: var(--teja); stroke-width: 4; cursor: grab; }
+  #cornerModal .hint { color: #cbc4b8; font-size: 13px; }
 
   /* ---- firma digital ---- */
   #signModal {
     display: none; position: fixed; inset: 0; z-index: 60;
-    background: rgba(13, 17, 24, .88); align-items: center; justify-content: center;
+    background: rgba(15, 14, 12, .88); align-items: center; justify-content: center;
   }
   #signModal.open { display: flex; }
   #signPanel {
@@ -99,10 +109,10 @@
     display: flex; gap: 16px; max-height: 94vh; box-shadow: 0 10px 50px rgba(0,0,0,.5);
   }
   #signLeft { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  #signWrap { position: relative; background: #e5e7eb; touch-action: none; line-height: 0; }
+  #signWrap { position: relative; background: var(--border); touch-action: none; line-height: 0; }
   #signWrap canvas { display: block; box-shadow: 0 1px 6px rgba(0,0,0,.3); }
   #signBox {
-    position: absolute; border: 2px solid var(--accent); background: rgba(37,99,235,.14);
+    position: absolute; border: 2px solid var(--accent); background: color-mix(in srgb, var(--teja) 14%, transparent);
     cursor: move; box-sizing: border-box;
   }
   #signBox::after {
@@ -118,19 +128,46 @@
   #signSide label { display: block; color: var(--muted); font-size: 12px; margin-bottom: 3px; }
   #signSide input[type=text], #signSide select {
     font: inherit; font-size: 13px; width: 100%; padding: 6px 8px;
-    border: 1px solid var(--border); border-radius: 7px; background: #fff; color: var(--text);
+    border: 1px solid var(--border); border-radius: 7px; background: var(--panel); color: var(--text);
   }
   #signSide .chk { display: flex; align-items: center; gap: 6px; color: var(--text); }
   #signNav { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
   #signHint { font-size: 12px; color: var(--muted); text-align: center; }
   #signCert { font-size: 11px; color: var(--muted); line-height: 1.35; }
   #signMsg { font-size: 12px; color: var(--accent); min-height: 16px; }
+  @media (prefers-color-scheme: dark) {
+    button.primary { color: #181410; }
+    button.primary:hover:not(:disabled) { background: var(--realce); border-color: var(--realce); }
+  }
+  .pie-marca { margin-top: 2px; }
+  .pie-marca a { color: var(--accent); text-decoration: none; }
+  .pie-marca a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-<header>
-  <img class="logo" src="lib/logo.svg" alt="">
-  <h1 data-i18n-html="h1">Editor de páginas <span>PDF</span></h1>
+<div id="top">
+<header class="barra">
+  <nav>
+    <a class="marca" href="https://ontosdigital.es/">
+      <!-- Logo ONTOS: la O de dovelas con el núcleo teja (brand/logo.svg) -->
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+      <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+      <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+      <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+      <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+      <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+      <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+      <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+      <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <h1 class="titulo-app" data-i18n-html="h1">Editor de páginas <span>PDF</span></h1>
+    <button id="btnLang" title="Change language / Cambiar idioma">🌐 English</button>
+  </nav>
+</header>
+<div id="toolbar">
   <button id="btnOpen" class="primary" data-i18n="open">📂 Abrir PDF</button>
   <button id="btnAdd" disabled data-i18n="add">➕ Añadir otro PDF</button>
   <div class="sep"></div>
@@ -147,20 +184,33 @@
   <label style="display:inline-flex;align-items:center;gap:5px;font-size:13px;cursor:pointer" data-i18n-title="scanT">
     <input type="checkbox" id="chkScan" checked> <span data-i18n="scan">🖨 Efecto escáner en fotos</span>
   </label>
-  <button id="btnLang" title="Change language / Cambiar idioma">🌐 English</button>
   <span id="status"></span>
-</header>
+</div>
+</div>
 
 <main>
   <div id="dropzone">
-    <img src="lib/logo.svg" alt="" style="width:84px;height:84px;opacity:.92">
+    <span style="width:84px;height:84px;display:block;color:var(--piedra-logo)" aria-hidden="true"><svg style="width:100%;height:100%" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+      <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+      <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+      <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+      <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+      <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+      <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+      <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+      <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg></span>
     <strong data-i18n="dzTitle">Arrastra aquí un PDF o fotos (JPG/PNG)</strong>
     <span data-i18n-html="dzText">o haz clic para elegir archivos. Las fotos se convierten en páginas (con efecto escáner opcional).<br>Después: haz clic en las páginas para seleccionarlas, arrástralas para reordenar,<br>y usa los botones para girar, quitar o añadir hojas de otro PDF.</span>
   </div>
   <div id="grid"></div>
 </main>
 
-<footer data-i18n="footer">Todo se procesa en tu ordenador: ningún archivo se sube a internet. Atajos: clic = seleccionar · arrastrar = reordenar · R / L = girar · Supr = quitar</footer>
+<footer>
+  <div data-i18n="footer">Todo se procesa en tu ordenador: ningún archivo se sube a internet. Atajos: clic = seleccionar · arrastrar = reordenar · R / L = girar · Supr = quitar</div>
+  <div class="pie-marca" data-i18n-html="pieMarca">Una herramienta de <a href="https://ontosdigital.es">ONTOS · ontosdigital.es</a></div>
+</footer>
 
 <input type="file" id="fileInput" accept="application/pdf,image/jpeg,image/png,image/webp" multiple>
 <input type="file" id="fileInputAdd" accept="application/pdf,image/jpeg,image/png,image/webp" multiple>
@@ -231,6 +281,7 @@ const I18N = {
   es: {
     docTitle: 'Editor de páginas PDF',
     h1: 'Editor de páginas <span>PDF</span>',
+    pieMarca: 'Una herramienta de <a href="https://ontosdigital.es">ONTOS · ontosdigital.es</a>',
     open: '📂 Abrir PDF', add: '➕ Añadir otro PDF',
     rotL: '⟲ Girar izq.', rotLT: 'Girar 90° a la izquierda (tecla L)',
     rotR: '⟳ Girar der.', rotRT: 'Girar 90° a la derecha (tecla R)',
@@ -283,6 +334,7 @@ const I18N = {
   en: {
     docTitle: 'PDF page editor',
     h1: '<span>PDF</span> page editor',
+    pieMarca: 'A tool by <a href="https://ontosdigital.es">ONTOS · ontosdigital.es</a>',
     open: '📂 Open PDF', add: '➕ Add another PDF',
     rotL: '⟲ Rotate left', rotLT: 'Rotate 90° counter-clockwise (key L)',
     rotR: '⟳ Rotate right', rotRT: 'Rotate 90° clockwise (key R)',
