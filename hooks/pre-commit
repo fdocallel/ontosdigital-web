@@ -11,8 +11,8 @@ staged=$(git diff --cached --name-only --diff-filter=ACM)
 ./gen-sitemap.sh
 git add sitemap.xml
 for f in $staged; do
-  [ -f "$f" ] && git add "$f"   # la página española staged, con el hreflang que inyecta el generador
+  if [ -f "$f" ]; then git add "$f"; fi           # la página staged, con el hreflang que inyecta el generador
   case "$f" in
-    *.html) [ -f "en/$f" ] && git add "en/$f" ;;   # y su espejo inglés recién regenerado
+    *.html) if [ -f "en/$f" ]; then git add "en/$f"; fi ;;   # y su espejo inglés recién regenerado
   esac
 done

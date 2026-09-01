@@ -735,7 +735,12 @@ async function loadImage(file, append) {
   }
 }
 
+// embudo de uso (GoatCounter, solo contadores: ni ficheros ni datos de nadie salen del navegador)
+let gcUsado = false;
+function gcEvento(p) { try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: p, event: true }); } catch (e) {} }
+
 async function loadPdf(file, append) {
+  if (!gcUsado) { gcUsado = true; gcEvento('editor-pdf-uso'); }
   if (isImage(file)) return loadImage(file, append);
   setStatus(T.loading(file.name));
   try {
@@ -970,6 +975,7 @@ let ocrOk = false;
 render(); cargarCertificados();
 
 function downloadPdf(bytes, name) {
+  gcEvento('editor-pdf-guardar');
   const blob = new Blob([bytes], { type: 'application/pdf' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
