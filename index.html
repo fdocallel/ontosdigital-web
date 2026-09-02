@@ -16,7 +16,9 @@
 <meta name="msvalidate.01" content="515812BC9718626E8FC3D1D0174B09DB">
 <meta name="description" content="ONTOS es un modelo digital de todo lo tuyo (finanzas, documentos, trámites, salud) que una IA mantiene al día y responde preguntando. Todo en tu máquina.">
 <meta property="og:title" content="ONTOS · el gemelo digital de tu vida y de tu negocio">
-<meta property="og:description" content="Un modelo ordenado de todo lo tuyo y una IA que lo mantiene al día. Todo en local: tus datos no salen de tu ordenador.">
+<!-- og:description y la description del JSON-LD repiten la meta description a propósito:
+     una promesa, no tres (data/mensaje.json web.description; lo vigila build-mensaje.js) -->
+<meta property="og:description" content="ONTOS es un modelo digital de todo lo tuyo (finanzas, documentos, trámites, salud) que una IA mantiene al día y responde preguntando. Todo en tu máquina.">
 <meta property="og:image" content="https://ontosdigital.es/brand/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -34,7 +36,7 @@
       "url": "https://ontosdigital.es/",
       "applicationCategory": "BusinessApplication",
       "operatingSystem": "macOS, Windows, Linux",
-      "description": "Gemelo digital personal y empresarial: un modelo ordenado de los datos, documentos y procesos propios, operado con inteligencia artificial y ejecutado en local.",
+      "description": "ONTOS es un modelo digital de todo lo tuyo (finanzas, documentos, trámites, salud) que una IA mantiene al día y responde preguntando. Todo en tu máquina.",
       "inLanguage": "es",
       "author": { "@type": "Person", "name": "Fernando Calle" }
     },
@@ -63,19 +65,23 @@
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
   h1, h3, .serif { font-family: var(--serif); }
 
-  /* ---- hero ---- */
+  /* ---- hero ----
+     v3 (29-ago-2026, estudio 2026-08-portada-producto §5): el hero deja de ser solo texto y
+     debajo del CTA entra una captura real. v3.1 (2-sep-2026, #336): se aprieta el aire de
+     arriba (el wordmark repetía la barra y costaba 180 px) para que en 1440x900 asome más
+     de la mitad de la captura y no un cuarto. Los valores que antes eran solo de móvil
+     pasan a la regla base. */
   .hero {
-    min-height: 78vh;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; position: relative; overflow: hidden;
-    padding: 4rem 1.5rem 3.5rem;
+    padding: 2.2rem 1.5rem 0;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0;
     background: radial-gradient(ellipse 60% 45% at 50% 28%, rgba(212,113,59,0.10), transparent 70%);
     pointer-events: none;
   }
-  .arco-svg { width: 104px; color: var(--piedra-logo); margin-bottom: 1.6rem; }
+  .arco-svg { width: 72px; color: var(--piedra-logo); margin-bottom: 1rem; }
   /* el sistema se monta: las áreas aparecen de abajo arriba, el núcleo llega, los radios conectan */
   .arco-svg .dovela { opacity: 0; animation: dovela 0.4s ease forwards; animation-delay: 0.4s; }
   .arco-svg .dovela:nth-child(4), .arco-svg .dovela:nth-child(6) { animation-delay: 0.3s; }
@@ -91,20 +97,15 @@
     .arco-svg .dovela, .arco-svg .nucleo { animation: none; opacity: 1; }
     .arco-svg .radio { animation: none; stroke-dashoffset: 0; }
   }
-  .wordmark {
-    font-family: var(--sans); font-size: 1.1rem; font-weight: 650;
-    letter-spacing: 0.3em; text-indent: 0.3em; color: var(--sec);
-    margin-bottom: 1.8rem;
-  }
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
-    margin-top: 1.2rem; max-width: 40rem;
+    margin-top: 1rem; max-width: 40rem; text-wrap: balance; /* a 1440 «máquina.» quedaba huérfano */
     font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
   }
-  .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .hero .ctas { margin-top: 1.8rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
     display: inline-block;
     padding: 0.8rem 1.8rem; border-radius: 999px;
@@ -114,7 +115,85 @@
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
   .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
   .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
-  .hero .plazo { margin-top: 1.4rem; font-size: 0.85rem; color: var(--sec); }
+  .hero .plazo { margin-top: 0.8rem; font-size: 0.85rem; color: var(--sec); }
+  /* Las tres cifras van pegadas al CTA (§5.4): fila compacta, no el bloque grande de .stats. */
+  .cifras-hero {
+    margin-top: 1.2rem; display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 0.5rem 1.6rem; font-size: 0.9rem; color: var(--sec);
+  }
+  .cifras-hero b { font-family: var(--serif); font-weight: 650; color: var(--texto); }
+  /* Móvil: solo lo que de verdad difiere. Las cifras en una línea con puntos (§5.4 manda
+     que se vean; en tres líneas apiladas medían 127 px entre el CTA y el producto). */
+  @media (max-width: 40rem) {
+    .hero { padding-top: 1.4rem; }
+    .arco-svg { width: 56px; margin-bottom: 0.8rem; }
+    .hero .lema { margin-top: 0.8rem; }
+    .hero .ctas { margin-top: 1.4rem; gap: 0.7rem; }
+    /* tres mini-cifras en fila (número encima, etiqueta debajo): en tres líneas apiladas
+       con punto delante se leía como una lista rota */
+    .cifras-hero { margin-top: 1rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 0.6rem; font-size: 0.72rem; line-height: 1.25; max-width: 22rem; }
+    .cifras-hero b { display: block; font-size: 1.1rem; line-height: 1.2; }
+    .hero .plazo { margin-top: 0.7rem; }
+  }
+
+  /* ---- capturas reales del producto (producto/, #335) ----
+     Marco sobrio: la captura tiene su propio borde de app y un marco pesado la ensucia. */
+  .toma { margin: 0; }
+  .toma picture { display: block; }
+  .toma img {
+    display: block; width: 100%; height: auto;
+    border-radius: 12px; border: 1px solid var(--borde);
+    background: var(--panel);
+    box-shadow: 0 18px 50px -30px rgba(0,0,0,0.45);
+  }
+  .toma figcaption { margin-top: 0.55rem; font-size: 0.78rem; color: var(--sec); }
+  /* El hero abre con la pantalla del día (02, la fuerte). Es una captura vertical:
+     se recorta a 16:10 desde arriba a propósito, para que se lea el brief y la página
+     no se coma media pantalla con una imagen de 1.500 px. */
+  .toma-hero { margin-top: 2rem; width: 100%; max-width: 52rem; text-align: left; }
+  .toma-hero img {
+    aspect-ratio: 16 / 10; object-fit: cover; object-position: top center;
+    border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0;
+  }
+  .toma-hero figcaption { text-align: center; }
+  /* Móvil: el <picture> sirve la 06 (la misma pantalla en el teléfono). A ancho de
+     teléfono el brief SE LEE; la 02 a 342 px era una mancha de texto de 3 px. */
+  @media (max-width: 40rem) {
+    .toma-hero { margin-top: 1.4rem; }
+    .toma-hero img {
+      aspect-ratio: 3 / 4; max-width: 15rem; margin: 0 auto;
+      border-radius: 18px 18px 0 0;
+    }
+  }
+  /* La tira de casos: dos planos, el dinero (04) grande y el teléfono (06) al lado. Los
+     otros dos de la v3 (03 agenda, 05 red) repetían la barra lateral y a 477 px se leían
+     como textura; 02 (hero) ya enseña trabajo, agenda y red. */
+  .tomas { display: grid; grid-template-columns: 1.7fr 1fr; gap: 1.4rem; margin-top: 1.8rem; align-items: start; }
+  /* Ventana sobre la 04: la barra lateral (254 px de 1.400, el 18,1 %) la enseña ya el hero.
+     Se oculta el 18,5 % (259 px): el título «Patrimonio» empieza en x=281 y queda entero.
+     Recorte por CSS hasta que capturas-web.js exporte la 04 sin barra. */
+  .toma.recorte picture {
+    overflow: hidden; border-radius: 12px; border: 1px solid var(--borde);
+    background: var(--panel); box-shadow: 0 18px 50px -30px rgba(0,0,0,0.45);
+  }
+  .toma.recorte img { width: 122.7%; max-width: none; margin-left: -22.7%; border: 0; border-radius: 0; box-shadow: none; }
+  /* La del móvil se queda a ancho de teléfono: a 470 px de ancho medía 900 de alto. */
+  .tomas .toma.vertical img { max-width: 15rem; margin: 0 auto; }
+  .tomas .toma.vertical figcaption { text-align: center; }
+  @media (max-width: 40rem) {
+    .tomas { grid-template-columns: 1fr; }
+    /* en móvil el hero ya enseña la 06: no se repite */
+    .tomas .toma.vertical { display: none; }
+  }
+  .tomas-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  /* «Qué es ONTOS»: la rueda de áreas a la izquierda y las tres piezas apiladas a la derecha. */
+  .producto-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 1.8rem; }
+  @media (max-width: 52rem) { .producto-visual { grid-template-columns: 1fr; gap: 1.4rem; } }
+  .producto-visual .piezas { margin-top: 0; }
+  .producto-visual .cards { grid-template-columns: 1fr; gap: 1rem; }
+  .producto-visual .card { padding: 1.3rem 1.4rem; }
+  .producto-visual .card .icono { margin-bottom: 0.5rem; }
+  .producto-visual .metodo { margin-top: 1.2rem; }
 
   /* ---- secciones ---- */
   section { padding: 4.2rem 0; }
@@ -151,8 +230,7 @@
   @media (max-width: 48rem) { .ediciones { grid-template-columns: 1fr; } }
   .edicion .icono { font-size: 2rem; }
   .edicion h3 { font-size: 1.25rem; }
-  .edicion .edicion-desc { font-size: 0.98rem; color: var(--sec); }
-  .edicion .lineas { list-style: none; margin-top: 1.2rem; }
+  .edicion .lineas { list-style: none; margin-top: 1rem; }
   .edicion .lineas li { font-size: 0.92rem; color: var(--sec); padding: 0.7rem 0; border-top: 1px solid var(--borde); }
   .edicion .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
 
@@ -164,26 +242,12 @@
   .estado p + p { margin-top: 0.9rem; }
   .estado p { color: var(--sec); }
   .estado strong { color: var(--texto); font-weight: 600; }
-
-  /* consultoría, la rama */
-  .rama { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
-    border: 1px solid var(--borde); border-radius: 14px; padding: 1.6rem 1.7rem; }
-  @media (max-width: 48rem) { .rama { grid-template-columns: 1fr; } }
-  .rama h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-  .rama p { color: var(--sec); font-size: 0.95rem; max-width: 38rem; }
+  .estado a { color: var(--acento); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .estado a:hover { text-decoration: underline; }
 
   .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
-  /* escritos: la escritura fechada es la señal de que el sitio está vivo */
-  .escrito {
-    display: block; text-decoration: none; color: var(--texto);
-    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
-    padding: 1.6rem 1.6rem; transition: border-color 0.15s ease, transform 0.15s ease;
-  }
-  .escrito:hover { border-color: var(--teja); transform: translateY(-3px); }
-  .escrito .fecha { font-size: 0.78rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.1em; }
-  .escrito h3 { font-size: 1.25rem; margin: 0.5rem 0 0.6rem; }
-  .escrito p { color: var(--sec); font-size: 0.95rem; }
-  .escrito .ver { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
+  .metodo a { color: var(--acento); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .metodo a:hover { text-decoration: underline; }
   .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
   .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
   /* Retrato de Quién: brand/fernando.jpg, 600x800 (3:4), ~50 KB */
@@ -204,14 +268,15 @@
 
   /* casos */
   .demos { margin-top: 1.8rem; grid-template-columns: repeat(4, 1fr); }
-  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 30rem) { .demos { grid-template-columns: 1fr; } }
+  /* v3.1: sin resumen, la tarjeta es título + enlace y cabe a dos columnas también en el
+     teléfono (a una columna eran 800 px de aire para cuatro títulos). */
+  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); gap: 0.9rem; } }
+  @media (max-width: 30rem) { .card.demo { padding: 1.3rem 1.1rem 1.1rem; } .card.demo h3 { font-size: 1.05rem; } }
   .card.demo { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); }
-  .card.demo .icono { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1; }
-  .card.demo p { flex: 1; }
-  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
-  .card.demo .ver span { color: var(--sec); font-weight: 400; }
-  .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  .card.demo .icono { font-size: 2rem; margin-bottom: 0.6rem; line-height: 1; }
+  /* v3.1: título + enlace, sin resumen. La lista de módulos vive solo en «Dos ediciones»;
+     aquí repetía lo mismo a treinta líneas. */
+  .card.demo .ver { margin-top: auto; padding-top: 1.2rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
      reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
   .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
@@ -220,6 +285,30 @@
     white-space: nowrap; display: inline-block; padding: 0.6rem 0;
   }
   .cta-medio a:hover { text-decoration: underline; }
+
+  /* ---- consultoría: la rama, en banda propia (2-sep-2026, criterio (a) de #336) ----
+     Fondo panel + regla teja arriba: el ojo ve que aquí cambia de rama. Sin tarjeta dentro
+     (una tarjeta dentro de una banda son dos marcos). La nav aterriza en #consultoria (v3.1:
+     el ítem «Escritos» pasa a «Consultoría» en las 12 páginas con barra). El escrito del Plan
+     BIM vive dentro con su id="escritos", que se queda para cualquier enlace viejo /#escritos. */
+  .consultoria {
+    background: var(--panel); border: 1px solid var(--borde); border-top: 3px solid var(--teja);
+    border-radius: 14px; padding: 2.4rem 2rem 2rem; margin-top: 1rem;
+  }
+  @media (max-width: 40rem) { .consultoria { padding: 1.8rem 1.3rem 1.5rem; } }
+  .consultoria h2 { color: var(--sec); margin-bottom: 1.4rem; }
+  .rama { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center; }
+  @media (max-width: 48rem) { .rama { grid-template-columns: 1fr; } }
+  .rama h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .rama p { color: var(--sec); font-size: 0.95rem; max-width: 38rem; }
+  .escrito-linea {
+    margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid var(--borde);
+    font-size: 0.92rem; color: var(--sec);
+  }
+  .escrito-linea .fecha { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.75rem; margin-right: 0.6rem; }
+  @media (max-width: 40rem) { .escrito-linea .fecha { display: block; margin: 0 0 0.25rem; } }
+  .escrito-linea a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .escrito-linea a:hover { text-decoration: underline; }
 
   /* ---- contacto ---- */
   .contacto { border-top: 1px solid var(--borde); }
@@ -275,7 +364,7 @@
     </a>
     <a class="item" href="#producto">El producto</a>
     <a class="item" href="#casos">Casos</a>
-    <a class="item" href="#escritos">Escritos</a>
+    <a class="item" href="#consultoria">Consultoría</a>
     <a class="item" href="#contacto">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
@@ -302,49 +391,123 @@
   <line class="radio" x1="39.04" y1="39.04" x2="29.21" y2="29.21" stroke="currentColor" stroke-width="3.2"/>
   <circle class="nucleo" cx="50" cy="50" r="14" fill="#d4713b"/>
   </svg>
-  <div class="wordmark">ONTOS</div>
-  <h1>Un modelo digital de todo lo tuyo, y una IA que lo mantiene al día.</h1>
-  <p class="lema">Finanzas, documentos, trámites, proyectos, agenda, salud: ordenados en un solo sitio,
-  en tu máquina, y consultables preguntando. Lo construí para mí y lo uso todos los días.</p>
+  <!-- mensaje:web.h1 — gobernado por data/mensaje.json (build-mensaje.js compara) -->
+  <h1>Todo lo tuyo, ordenado y al día.</h1>
+  <!-- mensaje:web.lema — ídem -->
+  <p class="lema">Un modelo digital de tu vida y tu negocio que una IA mantiene al día,
+  en tu máquina.</p>
   <div class="ctas">
     <a class="cta" href="#casos">Míralo funcionando</a>
     <a class="cta secundario" href="#contacto">Pídeme una demo</a>
   </div>
-  <p class="plazo">En piloto privado. Todo funciona en local: tus datos no salen de tu ordenador.</p>
+  <p class="cifras-hero">
+    <span><b>1.000+</b> entradas de bitácora</span>
+    <span><b>500+</b> documentos consultables</span>
+    <span><b>100%</b> local y privado</span>
+  </p>
+  <p class="plazo">En piloto privado. Lo construí para mí.</p>
+  <figure class="toma toma-hero">
+    <picture>
+      <!-- en móvil, la misma pantalla en el teléfono (06): a 15 rem el brief se lee -->
+      <source media="(max-width: 40rem)" srcset="/producto/06-hoy-movil.webp" type="image/webp">
+      <source srcset="/producto/02-hoy-cockpit.webp" type="image/webp">
+      <!-- ruta absoluta a propósito: gen-en.py reescribe src pero no srcset, y desde /en/
+           una ruta relativa apuntaría a /en/producto/, que no existe -->
+      <img src="/producto/02-hoy-cockpit.jpg" width="1185" height="1499" decoding="async" fetchpriority="high"
+           alt="La pantalla Hoy de ONTOS: el resumen del día escrito por la IA, las tareas en foco con su siguiente paso, la agenda de la semana, el patrimonio y el descanso.">
+    </picture>
+    <figcaption>La pantalla del día, con datos de demostración.</figcaption>
+  </figure>
 </div>
 
 <div class="wrap">
 
 <section class="intro" id="producto">
   <h2>Qué es ONTOS</h2>
-  <p><em>Ontos</em>, del griego ὄντος: <span class="serif">«lo que es»</span>. Casi nadie tiene un
-  problema de información: tiene un problema de <strong>orden</strong>. Los datos viven en carpetas,
-  los trámites en la cabeza, el conocimiento en la experiencia de cada uno, y juntar la foto completa
-  cuesta más que la decisión que había que tomar.</p>
-  <p>ONTOS es el <strong>gemelo digital</strong> de eso: un modelo ordenado de lo que tienes, lo que
-  haces y lo que sabes, con una inteligencia artificial trabajando encima todos los días.</p>
-  <div class="cards piezas">
-    <div class="card pieza">
-      <span class="icono">◉</span>
-      <h3>El dato, en un solo sitio</h3>
-      <p>Cada hecho vive una vez. Las vistas, los informes y los resúmenes se generan solos a partir
-      de él, así que nada se contradice ni se queda viejo en una copia olvidada.</p>
+  <!-- Una frase: la idea madre (data/mensaje.json nucleo.idea_madre) y qué es. El desarrollo
+       (las tres capas, la auditoría, el local) vive entero en caso-sistema.html. -->
+  <p>Casi nadie tiene un problema de información: tiene un problema de <strong>orden</strong>.
+  ONTOS es el <strong>gemelo digital</strong> de lo que tienes, haces y sabes.</p>
+  <div class="producto-visual">
+    <div>
+      <figure class="toma">
+        <picture>
+          <source srcset="/producto/01-portada-sistema.webp" type="image/webp">
+          <img src="/producto/01-portada-sistema.jpg" width="1400" height="984" loading="lazy" decoding="async"
+               alt="La portada de ONTOS: las ocho áreas del sistema dispuestas en rueda alrededor del núcleo, con el menú de navegación al lado.">
+        </picture>
+        <figcaption>Las ocho áreas del sistema.</figcaption>
+      </figure>
+      <p class="metodo"><a href="caso-sistema.html">Cómo está montado por dentro ▸</a></p>
     </div>
-    <div class="card pieza">
-      <span class="icono">✦</span>
-      <h3>La IA que lo opera</h3>
-      <p>Le cuentas en una frase lo que ha pasado y actualiza todo lo que toca. Le preguntas en
-      lenguaje natural y responde con tus datos, citando de dónde sale cada cosa.</p>
-    </div>
-    <div class="card pieza">
-      <span class="icono">✓</span>
-      <h3>La auditoría que vigila</h3>
-      <p>Un sistema sin vigilancia se degrada. Una comprobación automática revisa a diario que nada
-      se pierda, que las vistas cuadren con la fuente y que ningún cabo quede suelto.</p>
+    <div class="cards piezas">
+      <div class="card pieza">
+        <span class="icono">◉</span>
+        <h3>El dato, en un solo sitio</h3>
+        <p>Cada hecho vive una vez; las pantallas salen solas.</p>
+      </div>
+      <div class="card pieza">
+        <span class="icono">✦</span>
+        <h3>La IA que lo opera</h3>
+        <p>Le cuentas qué pasó; responde con tus datos y cita la fuente.</p>
+      </div>
+      <div class="card pieza">
+        <span class="icono">✓</span>
+        <h3>La auditoría que vigila</h3>
+        <p>Cada día comprueba que nada se pierda ni envejezca.</p>
+      </div>
     </div>
   </div>
-  <p class="metodo">Todo se ejecuta en tu máquina. Sin nube obligatoria, sin cuenta que crear, sin
-  tus datos alimentando el producto de nadie.</p>
+</section>
+
+<section id="casos">
+  <h2>Míralo funcionando</h2>
+  <!-- v3.1: dos planos (dinero y teléfono). Los de agenda (03) y red (05) salen de la
+       portada: repetían la barra lateral que ya enseña el hero y a 477 px eran textura. -->
+  <div class="tomas">
+    <figure class="toma recorte">
+      <picture>
+        <source srcset="/producto/04-patrimonio.webp" type="image/webp">
+        <img src="/producto/04-patrimonio.jpg" width="1400" height="1422" loading="lazy" decoding="async"
+             alt="La pantalla de patrimonio de ONTOS: la evolución semanal en una gráfica, el reparto por categoría y las posiciones una a una.">
+      </picture>
+      <figcaption>El dinero</figcaption>
+    </figure>
+    <figure class="toma vertical">
+      <picture>
+        <source srcset="/producto/06-hoy-movil.webp" type="image/webp">
+        <img src="/producto/06-hoy-movil.jpg" width="600" height="1169" loading="lazy" decoding="async"
+             alt="ONTOS en el teléfono: la misma pantalla del día con el resumen de la mañana, adaptada a la pantalla de un móvil.">
+      </picture>
+      <figcaption>En el teléfono</figcaption>
+    </figure>
+  </div>
+  <p class="tomas-nota">Capturas reales, con datos de demostración.</p>
+  <div class="cards demos">
+    <a class="card demo" href="caso-sistema.html">
+      <span class="icono">◉</span>
+      <h3>El sistema completo</h3>
+      <span class="ver">Caso y demo ▸</span>
+    </a>
+    <a class="card demo" href="caso-finanzas.html">
+      <span class="icono">€</span>
+      <h3>Finanzas</h3>
+      <span class="ver">Caso y demo ▸</span>
+    </a>
+    <a class="card demo" href="caso-organizacion.html">
+      <span class="icono">☰</span>
+      <h3>Organización</h3>
+      <span class="ver">Caso y demo ▸</span>
+    </a>
+    <a class="card demo" href="caso-salud.html">
+      <span class="icono">♥</span>
+      <h3>Salud</h3>
+      <span class="ver">Caso y demo ▸</span>
+    </a>
+  </div>
+  <!-- El contacto está a cuatro secciones de aquí. Quien se convence lo hace viendo los
+       casos, y ahí es donde tiene que tener el botón. -->
+  <p class="cta-medio">¿Lo quieres para lo tuyo? <a href="#contacto">Pídeme una demo ▸</a></p>
 </section>
 
 <section>
@@ -353,84 +516,36 @@
     <div class="card edicion">
       <span class="icono">◈</span>
       <h3>ONTOS personal</h3>
-      <p class="edicion-desc">Tu vida entera en un solo modelo, y la parte aburrida hecha sola.</p>
       <ul class="lineas">
-        <li><b>El núcleo</b>Hoy, notas, agenda y calendario, proyectos y red de contactos.</li>
-        <li><b>Dinero</b>Patrimonio, gastos e ingresos, inversiones con reglas escritas.</li>
-        <li><b>Cuerpo</b>Entreno con progresión, composición, nutrición y descanso.</li>
-        <li><b>Lo tuyo</b>Los expedientes que te importen: una herencia, una obra, un idioma,
-        unos estudios. Los módulos se encienden cuando los pides.</li>
+        <li><b>El núcleo</b>Hoy, agenda, proyectos y contactos.</li>
+        <li><b>Dinero</b>Patrimonio, gastos e inversión con reglas.</li>
+        <li><b>Cuerpo</b>Entreno, composición, nutrición y descanso.</li>
       </ul>
     </div>
     <div class="card edicion">
       <span class="icono">▣</span>
       <h3>ONTOS empresarial</h3>
-      <p class="edicion-desc">El modelo de tu negocio: datos, procesos y conocimiento en un sitio.</p>
       <ul class="lineas">
-        <li><b>Comercial</b>Pipeline de oportunidades, clientes con su historia y su siguiente paso.</li>
-        <li><b>Operación</b>Trabajos en curso, horizonte de plazos, servicios y entregables.</li>
-        <li><b>Administración</b>Facturación, gastos y las obligaciones vigiladas con aviso.</li>
-        <li><b>Conocimiento</b>Los documentos de la casa, consultables preguntando y con cita.</li>
+        <li><b>Comercial</b>Oportunidades y clientes con su siguiente paso.</li>
+        <li><b>Operación</b>Trabajos en curso, plazos y entregables.</li>
+        <li><b>Administración</b>Facturación, gastos y obligaciones vigiladas.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section id="casos">
-  <h2>Míralo funcionando</h2>
-  <div class="intro">
-  <p>El primer gemelo digital lo construí para mí, y es la prueba de que esto funciona: un modelo de
-  mi vida completa mantenido a diario con IA. Cada caso cuenta cómo está montado por dentro, con su
-  demo en movimiento.</p>
-  </div>
-  <div class="cards demos">
-    <a class="card demo" href="caso-sistema.html">
-      <span class="icono">◉</span>
-      <h3>El sistema completo</h3>
-      <p>El modelo entero y la IA operándolo: datos, documentos, respuestas con citas.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 90 s</span></span>
-    </a>
-    <a class="card demo" href="caso-finanzas.html">
-      <span class="icono">€</span>
-      <h3>Finanzas</h3>
-      <p>Gastos por API, proyección a 18 meses, ayudas vigiladas, inversión con reglas.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 70 s</span></span>
-    </a>
-    <a class="card demo" href="caso-organizacion.html">
-      <span class="icono">☰</span>
-      <h3>Organización</h3>
-      <p>Proyectos con su siguiente paso, tareas, calendario y contactos al día.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 60 s</span></span>
-    </a>
-    <a class="card demo" href="caso-salud.html">
-      <span class="icono">♥</span>
-      <h3>Salud</h3>
-      <p>Entreno con progresión automática, composición, nutrición y descanso del wearable.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 60 s</span></span>
-    </a>
-  </div>
-  <p class="demos-nota">Cada caso incluye su demo animada. Sin sonido, con datos de muestra.</p>
-  <div class="stats">
-    <div class="stat"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
-    <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
-    <div class="stat"><div class="n">100%</div><div class="l">local y privado</div></div>
-  </div>
-  <!-- El contacto está a siete secciones de aquí: en móvil, a ocho pantallas. Quien se
-       convence lo hace viendo los casos, y ahí es donde tiene que tener el botón. -->
-  <p class="cta-medio">¿Te suena a lo que llevas tiempo queriendo? <a href="#contacto">Pídeme una demo ▸</a></p>
-</section>
-
 <section>
   <h2>Dónde está hoy</h2>
   <div class="estado">
-    <p><strong>ONTOS no es una promesa: es lo que uso todos los días</strong> desde junio de 2026.
-    Lo que ves en los casos está funcionando en mi propia instancia, con mis datos reales.</p>
-    <p>Está <strong>en piloto privado</strong>, y lo abro de una persona en una: me siento con cada
-    una el primer día, montamos su modelo y encendemos solo los módulos que le sirven. Se aprende y
-    se arregla antes de dar el siguiente paso.</p>
-    <p><strong>Todavía no tiene precio público.</strong> Prefiero aprender con las primeras personas
-    antes de ponerle una cifra, y decírtelo así antes que venderte una lista de funciones.</p>
-    <p>Si esto te suena a lo que llevas tiempo queriendo, escríbeme y te lo enseño en vivo.</p>
+    <!-- La pieza más honesta de la página (web-remodelado §9): el contenido no se toca,
+         solo la redacción. La puerta del piloto vive aquí, que es donde se habla de él. -->
+    <p><strong>No es una promesa: lo uso todos los días</strong> desde junio de 2026, con mis
+    datos reales.</p>
+    <p>Está <strong>en piloto privado</strong>, persona a persona: montamos tu modelo y
+    encendemos solo los módulos que te sirven.</p>
+    <p><strong>Todavía no tiene precio público.</strong> Prefiero aprender con las primeras
+    personas antes que venderte una lista de funciones.</p>
+    <p><a href="solicitud.html">Solicita el acceso ▸</a></p>
   </div>
 </section>
 
@@ -440,68 +555,51 @@
     <figure class="retrato">
       <img src="brand/fernando.jpg" alt="Retrato de Fernando Calle, ingeniero de caminos y fundador de ONTOS"
            width="600" height="800" decoding="async">
-      <figcaption>Fernando Calle · Segovia</figcaption>
     </figure>
     <div>
-      <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos
-      y automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), donde
-      un dato mal puesto cuesta millones. Esa cabeza de ingeniero,
-      <strong>premiada por I+D en automatización e IA</strong>, es la que está detrás de ONTOS:
-      sistemas en vez de heroicidades, y resultados que se miden.</p>
+      <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos,
+      datos y automatización en el metro de Sídney, HS2 y NEOM, donde un dato mal puesto cuesta
+      millones.</p>
       <div class="stats">
         <div class="stat"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
         <div class="stat"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
       </div>
-      <p class="verificable">Puedes comprobarlo:
-      <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">mi perfil profesional en LinkedIn</a>
-      · o leer <a href="fernando-calle.html">quién soy y de dónde vengo</a>.</p>
+      <p class="verificable">Compruébalo en
+      <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">LinkedIn</a>
+      · o lee <a href="fernando-calle.html">de dónde vengo</a>.</p>
     </div>
   </div>
 </section>
 
-<section id="escritos">
-  <h2>Escritos</h2>
-  <a class="escrito" href="escrito-plan-bim-ingenieria.html">
-    <span class="fecha">19 de agosto de 2026 · 7 min</span>
-    <h3>Qué exige el Plan BIM a una ingeniería mediana en 2026</h3>
-    <p>Qué obliga hoy, a quién alcanza y desde cuándo; qué significa en la práctica; los cuatro
-    errores típicos al responder un pliego con requisitos BIM; y una lista de comprobación honesta
-    de diez preguntas para saber si estás listo.</p>
-    <span class="ver">Leer ▸</span>
-  </a>
-</section>
-
-<section>
-  <h2>También, consultoría</h2>
+<section class="consultoria" id="consultoria">
+  <h2>Consultoría</h2>
   <div class="rama">
     <div>
-      <h3>Ingeniería de la información, por encargo</h3>
+      <h3>Por encargo, para ingenierías y constructoras</h3>
       <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
            No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
-      <p>El producto nació de poner en orden problemas reales, y sigo haciéndolo por encargo: me
-      cuentas qué os come horas y os monto la solución. Automatización e IA a medida, datos del
-      mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea más pedida ahora
-      mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
-      coste.</p>
+      <p>Me cuentas qué os come horas y os monto la solución. Lo que más me piden es la gestión de
+      requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin coste.</p>
     </div>
-    <a class="cta secundario" href="bim.html">Ver la Oficina BIM ▸</a>
+    <a class="cta secundario" href="bim.html">Requisitos BIM en licitación ▸</a>
   </div>
-  <p class="metodo">Cada encargo enseña algo que el producto incorpora. Por eso las dos cosas
-  conviven: la consultoría paga el pan, ONTOS es a lo que voy.</p>
+  <!-- id="escritos": ancla heredada (enlaces viejos /#escritos); la nav ya apunta a #consultoria.
+       El escrito es tema de consultoría y aquí es donde segrega bien (web-remodelado §5). -->
+  <p class="escrito-linea" id="escritos"><span class="fecha">Último escrito · 19 ago 2026</span>
+  <a href="escrito-plan-bim-ingenieria.html">Qué exige el Plan BIM a una ingeniería mediana en 2026 ▸</a></p>
 </section>
 
 <section class="contacto" id="contacto">
   <h2>Contacto</h2>
-  <p class="lead">Cuéntame qué te come horas, o qué querrías saber de lo tuyo y hoy no puedes.
-  Si quieres ver ONTOS por dentro, dilo y quedamos. Contesto normalmente en 24-48 horas.</p>
+  <p class="lead">Si quieres ver ONTOS por dentro, dime quién eres y quedamos. Contesto en 24-48 horas.</p>
   <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
     <div><label for="f-nombre">Nombre</label>
     <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
-    <div><label for="f-org">Empresa u organismo (si lo hay)</label>
+    <div><label for="f-org">Empresa u organismo (opcional)</label>
     <input type="text" id="f-org" name="organizacion" autocomplete="organization"></div>
     <div><label for="f-email">Correo</label>
     <input type="email" id="f-email" name="email" required autocomplete="email"></div>
-    <div><label for="f-msg">Qué te come horas</label>
+    <div><label for="f-msg">Qué quieres ver o preguntar</label>
     <textarea id="f-msg" name="mensaje" required></textarea></div>
     <input type="hidden" name="_subject" value="Contacto web · Portada">
     <input type="hidden" name="_next" value="https://ontosdigital.es/gracias.html">
@@ -513,12 +611,11 @@
   </form>
   <p class="alt-mail">O directamente:
   <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button></p>
-  <p class="cta-medio">¿Lo que quieres es usar ONTOS tú, no encargarme un trabajo? Se entra por invitación: <a href="solicitud.html">solicita el acceso ▸</a></p>
 </section>
 
 <footer>
-  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
-  <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+  <p>© 2026 ONTOS · Ingeniería de la información · Fernando Calle · La Lastrilla (Segovia) ·
+  <a href="entrar.html">Entrar</a> · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
 </footer>
 
 </div>
