@@ -24,6 +24,7 @@ DOMINIO = "https://ontosdigital.es"
 PAGINAS = [
     ("index.html", True),
     ("bim.html", True),
+    ("servicios.html", True),
     ("escrito-plan-bim-ingenieria.html", True),
     ("fernando-calle.html", True),
     ("caso-sistema.html", True),
