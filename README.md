@@ -52,3 +52,15 @@ El importador admite solo los dos motores procedurales y la malla del Alcázar c
 `i18n/en/experiencias-runtime.json` contiene los mensajes dinámicos traducidos; el generador produce `experiencias/i18n.js`. Al añadir mensajes al motor, actualizar ese diccionario, volver a importar y regenerar. Los HTML españoles y `experiencias/demo.css` definen la presentación pública.
 
 Antes de publicar una actualización de motores, revisar el diff y comprobar las tres demos con teclado y controles táctiles: movimiento, saludo, zoom, pausa/reinicio, errores WebGL, vuelta a Servicios y versión inglesa. La importación nunca se ejecuta automáticamente desde el despliegue público.
+
+## Medición de Servicios · 11-sep-2026
+
+Servicios y las demos usan la cuenta GoatCounter existente. Las visitas mantienen sus rutas ES/EN; la visita 3D distingue `?mundo=normal` y `?mundo=segovia` aunque ambas compartan canonical de SEO.
+
+Los cinco enlaces «Probar» de Servicios emiten `servicio-probar-editor-pdf`, `servicio-probar-juego-2d`, `servicio-probar-animacion-3d`, `servicio-probar-mundo-normal` y `servicio-probar-segovia`. Los ids son estables entre idiomas. Son **clics de intención**, no usuarios únicos ni prueba de que se haya usado una función. `data-goatcounter-no-session="1"` conserva clics repetidos; no calcular una conversión de personas dividiendo estos clics por visitas. No hay tracking retrospectivo anterior al despliegue. Los referidos ayudan a relacionar tráfico con LinkedIn, pero no identifican por sí solos un post concreto ni demuestran causalidad.
+
+Para excluir las visitas propias en cada navegador/perfil, abrir una vez [Servicios sin estadísticas](https://ontosdigital.es/servicios.html?sinestadisticas=1). Es idempotente y muestra confirmación. La preferencia nativa `skipgc=t` se conserva en ese navegador y afecta también al Editor PDF y al resto del sitio, cuyos contadores existentes la respetan. No depende de una IP fija. [Reactivar explícitamente](https://ontosdigital.es/servicios.html?sinestadisticas=0) elimina la preferencia; la siguiente página vuelve a contar. Las visitas de configuración no cuentan. Borrar almacenamiento, usar incógnito o cambiar navegador/perfil requiere excluir de nuevo.
+
+La integración sigue la documentación oficial de [eventos](https://www.goatcounter.com/help/events), [API JavaScript](https://www.goatcounter.com/help/js) y [exclusión de visitas propias](https://www.goatcounter.com/help/skip-dev), comprobada el 11-sep-2026. No añade proveedores ni identificadores propios de visitantes.
+
+Prueba sin contaminar analítica: descargar `https://gc.zgo.at/count.js` a un fichero temporal y ejecutar `node scripts/test-servicios-analytics.cjs /tmp/count.js` desde este repo. Utiliza Chrome headless y Playwright de ONTOS (o `PLAYWRIGHT_MODULE`); intercepta **todas** las peticiones y simula el host público localmente. Comprueba ES/EN, rutas y cinco eventos, exclusión persistente/idempotente, páginas anteriores y reactivación.
