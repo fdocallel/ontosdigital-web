@@ -38,16 +38,16 @@ en cada commit, así que en la práctica basta con editar la página española y
 
 ## Demos interactivas de Servicios
 
-`juego-2d.html`, `animacion-3d.html` y `visita-3d.html` son páginas públicas independientes, con teclado, controles táctiles y regreso a Servicios. La visita contiene únicamente el mundo normal. Sus espejos ingleses se generan con el flujo anterior.
+`juego-2d.html`, `animacion-3d.html` y `visita-3d.html` son páginas públicas independientes, con teclado, controles táctiles y regreso a Servicios. La visita abre el mundo normal por defecto; `?mundo=segovia` muestra Segovia. Sus espejos ingleses se generan con el flujo anterior.
 
-Los motores de `experiencias/` son **copias de entrega generadas**, no fuentes para editar. `experiencias/provenance.json` registra la procedencia y las huellas SHA256 de entrada y salida. La actualización es explícita:
+Los motores y la malla de `experiencias/` son **copias de entrega generadas**, no fuentes para editar. `experiencias/provenance.json` registra la procedencia y las huellas SHA256 de entrada y salida. La actualización es explícita:
 
 ```sh
 python3 scripts/import-experiencias.py /ruta/al/repositorio/ONTOS
 ./i18n/gen-en.py
 ```
 
-El importador admite solo los dos motores procedurales, elimina la geometría y carga de assets de Segovia y valida ambos antes de escribir. No copia la navegación, los datos ni los servicios de la consola privada. Si cambia la estructura de las fuentes, el importador falla para que se revise la transformación.
+El importador admite solo los dos motores procedurales y la malla del Alcázar con campos y licencia validados antes de escribir. Solo Segovia solicita esa malla; el mundo normal y la figurita no la descargan. No copia la navegación, los datos ni los servicios de la consola privada. Si cambia la estructura de las fuentes, el importador falla para que se revise la transformación.
 
 `i18n/en/experiencias-runtime.json` contiene los mensajes dinámicos traducidos; el generador produce `experiencias/i18n.js`. Al añadir mensajes al motor, actualizar ese diccionario, volver a importar y regenerar. Los HTML españoles y `experiencias/demo.css` definen la presentación pública.
 

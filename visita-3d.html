@@ -33,22 +33,29 @@ body #ontos-demo{top:var(--sp-2);bottom:auto}
 <body>
 <nav class="demo-nav" aria-label="Navegación"><a href="servicios.html">← Servicios</a><a class="idioma" data-i18n-alt href="/en/visita-3d.html" aria-label="View this page in English">EN</a></nav>
 <main class="wrap ot-wrap">
-<header class="ot-top"><div><span class="ot-label">ONTOS vivo · un mundo para explorar</span><h1>Nuestro pequeño mundo.</h1></div><div class="ot-tools"><a class="btn" href="juego-2d.html">2D</a><a class="btn" href="animacion-3d.html">Figurita 3D</a><button class="btn" id="ot-pause" aria-pressed="false">Pausa</button><button class="btn" id="ot-center">Centrar</button><button class="btn" id="ot-reset">Reiniciar</button></div></header>
+<header class="ot-top"><div><span class="ot-label">ONTOS vivo · un mundo para explorar</span><h1>Nuestro pequeño mundo.</h1></div><div class="ot-tools"><a class="btn" href="visita-3d.html?mundo=normal">Mundo normal</a><a class="btn" href="visita-3d.html?mundo=segovia">Mundo Segovia</a><a class="btn" href="juego-2d.html">2D</a><a class="btn" href="animacion-3d.html">Figurita 3D</a><button class="btn" id="ot-pause" aria-pressed="false">Pausa</button><button class="btn" id="ot-center">Centrar</button><button class="btn" id="ot-reset">Reiniciar</button></div></header>
 <section class="ot-stage" aria-label="El jardín tridimensional de ONTOS">
 <canvas class="ot-canvas" id="ot-world" tabindex="0" aria-label="Jardín 3D. WASD o flechas para caminar; espacio saltar; Mayús turbo; E coger o plantar; H saludar. Arrastra para mirar alrededor.">El jardín necesita WebGL. Puedes volver al <a href="juego-2d.html">patio 2D</a>.</canvas>
 <div class="ot-hud"><span id="ot-objective">I · Encuentra la semilla</span><span id="ot-score">Destellos 0 / 8</span></div>
 <div class="ot-overlay" id="ot-overlay" hidden><strong id="ot-overlay-title">Un pequeño respiro.</strong><p id="ot-overlay-text">Pulsa Continuar o P para volver al jardín.</p><a class="btn" href="juego-2d.html">Abrir el patio 2D</a></div>
 <div class="ot-caption" id="ot-message" role="status" aria-live="polite">Un mundo pequeño, sin bordes. Camina alrededor o aléjate para verlo entero.</div>
 </section>
-<div class="ot-zoom" aria-label="Distancia de cámara"><button class="btn" id="ot-near" aria-label="Acercar cámara">＋ Acercar</button><button class="btn" id="ot-far" aria-label="Alejar cámara">− Alejar</button><button class="btn" id="ot-overview" aria-pressed="false">Ver planeta</button></div>
+<div class="ot-zoom" aria-label="Distancia de cámara"><button class="btn" id="ot-segovia">Ver Segovia</button><button class="btn" id="ot-near" aria-label="Acercar cámara">＋ Acercar</button><button class="btn" id="ot-far" aria-label="Alejar cámara">− Alejar</button><button class="btn" id="ot-overview" aria-pressed="false">Ver planeta</button></div>
 <div class="ot-controls" aria-label="Controles táctiles">
 <div class="ot-pad"><button class="btn" data-ot-hold="forward" aria-label="Avanzar" aria-pressed="false">↑</button><button class="btn" data-ot-hold="left" aria-label="Ir a la izquierda" aria-pressed="false">←</button><button class="btn" data-ot-hold="back" aria-label="Retroceder" aria-pressed="false">↓</button><button class="btn" data-ot-hold="right" aria-label="Ir a la derecha" aria-pressed="false">→</button></div>
 <div class="ot-actions"><button class="btn" data-ot-hold="boost" aria-pressed="false">Turbo ⇧</button><button class="btn" data-ot-action="jump">Saltar</button><button class="btn" data-ot-action="grab">Coger / plantar</button><button class="btn" data-ot-action="wave">Saludar</button></div>
 </div>
 <details class="ot-help"><summary>Cómo jugar · teclado, cámara y objetivo</summary><p><kbd>WASD / ↑↓←→</kbd> moverse hacia donde miras · <kbd>Espacio</kbd> saltar · <kbd>Mayús</kbd> hacerse rueda · <kbd>E</kbd> coger, dejar o plantar · <kbd>H</kbd> saludar · <kbd>P</kbd> pausa. Arrastra el paisaje para girar la cámara; rueda del ratón para acercarte o alejarte.  Ver planeta muestra la esfera entera; Seguir a ONTOS vuelve al paseo. En móvil, mantén una flecha y usa el otro pulgar para saltar o arrastrar el paisaje. Pellizca con dos dedos para cambiar la distancia.</p><p>Lleva la semilla al pedestal entre los arcos. Los ocho destellos son un paseo opcional. Puedes dar la vuelta completa: la gravedad te mantiene sobre la esfera. Reiniciar comienza un jardín nuevo.</p><a class="btn" href="juego-2d.html">Volver al patio 2D</a></details>
+<details class="ot-help" id="ot-segovia-credit"><summary>Alcázar · créditos y descarga</summary><p>Fotogrametría de Néstor F. Marqués / Virtuanostrum, publicada por Alcázar de Segovia en <a href="https://commons.wikimedia.org/wiki/File:Alc%C3%A1zar_de_Segovia.stl">Wikimedia Commons</a>. Malla original y adaptación bajo <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p><p>Adaptación ONTOS: simplificación, recorte, giro, escala y coloración sin texturas. Catedral y acueducto: geometría propia simplificada. Es una miniatura escénica.</p><a href="/experiencias/ontos-alcazar.json" download>Descargar malla adaptada y créditos</a></details>
 </main>
 <script src="/experiencias/i18n.js"></script>
 <script src="/experiencias/mundo-3d.js"></script>
+<script>
+if(new URLSearchParams(location.search).get('mundo')==='segovia'){
+ document.querySelector('h1').textContent=window.ONTOS_DEMO_TRANSLATE('Un paseo por Segovia.');
+ document.querySelector('[data-i18n-alt]').search='?mundo=segovia';
+}
+</script>
 
 </body>
 </html>

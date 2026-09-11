@@ -107,6 +107,9 @@ def ruta_en(destino):
     if destino == "/":
         return "/en/"
     base, sep, ancla = destino.partition("#")
+    base, query_sep, query = base.partition("?")
+    ancla = query_sep + query + sep + ancla
+    sep = ""
     if base in ("./", "."):
         return "/en/" + sep + ancla
     if base in ESPEJO:

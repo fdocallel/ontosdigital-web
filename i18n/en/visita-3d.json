@@ -37,5 +37,12 @@
   "<kbd>WASD / ↑↓←→</kbd> moverse hacia donde miras · <kbd>Espacio</kbd> saltar · <kbd>Mayús</kbd> hacerse rueda · <kbd>E</kbd> coger, dejar o plantar · <kbd>H</kbd> saludar · <kbd>P</kbd> pausa. Arrastra el paisaje para girar la cámara; rueda del ratón para acercarte o alejarte. Ver planeta muestra la esfera entera; Seguir a ONTOS vuelve al paseo. En móvil, mantén una flecha y usa el otro pulgar para saltar o arrastrar el paisaje. Pellizca con dos dedos para cambiar la distancia.": "<kbd>WASD / ↑↓←→</kbd> move towards where you are looking · <kbd>Space</kbd> jump · <kbd>Shift</kbd> roll · <kbd>E</kbd> pick up, drop or plant · <kbd>H</kbd> wave · <kbd>P</kbd> pause. Drag the scenery to rotate the camera; use the mouse wheel to zoom. View planet shows the whole sphere; Follow ONTOS returns to the walk. On mobile, hold an arrow and use your other thumb to jump or drag the scenery. Pinch with two fingers to change distance.",
   "Lleva la semilla al pedestal entre los arcos. Los ocho destellos son un paseo opcional. Puedes dar la vuelta completa: la gravedad te mantiene sobre la esfera. Reiniciar comienza un jardín nuevo.": "Take the seed to the pedestal between the arches. The eight sparkles are an optional walk. You can go all the way around: gravity keeps you on the sphere. Restart begins a new garden.",
   "Volver al patio 2D": "Back to the 2D playground",
-  "Abrir el patio 2D": "Open the 2D playground"
+  "Abrir el patio 2D": "Open the 2D playground",
+  "Mundo normal": "Normal world",
+  "Mundo Segovia": "Segovia world",
+  "Ver Segovia": "View Segovia",
+  "Alcázar · créditos y descarga": "Alcázar · credits and download",
+  "Descargar malla adaptada y créditos": "Download adapted mesh and credits",
+  "Fotogrametría de Néstor F. Marqués / Virtuanostrum, publicada por Alcázar de Segovia en <a href=\"https://commons.wikimedia.org/wiki/File:Alc%C3%A1zar_de_Segovia.stl\">Wikimedia Commons</a>. Malla original y adaptación bajo <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>.": "Photogrammetry by Néstor F. Marqués / Virtuanostrum, published by Alcázar de Segovia on <a href=\"https://commons.wikimedia.org/wiki/File:Alc%C3%A1zar_de_Segovia.stl\">Wikimedia Commons</a>. Original mesh and adaptation licensed under <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>.",
+  "Adaptación ONTOS: simplificación, recorte, giro, escala y coloración sin texturas. Catedral y acueducto: geometría propia simplificada. Es una miniatura escénica.": "ONTOS adaptation: simplification, cropping, rotation, scaling and colouring without textures. Cathedral and aqueduct: original simplified geometry. This is a scenic miniature."
 }

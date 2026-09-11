@@ -12,30 +12,20 @@ outputs={}
 def once(text,old,new):
     assert text.count(old)==1, "Unexpected source marker: "+old
     return text.replace(old,new)
-def marker(text,value):
-    assert text.count(value)==1, "Unexpected source marker: "+value
-    return text.index(value)
 translations=json.loads((root/"i18n/en/experiencias-runtime.json").read_text())
 for src,dst in [("ontos-vivo.js","juego-2d.js"),("ontos-tierra.js","mundo-3d.js")]:
     raw=(source/src).read_bytes(); s=raw.decode()
     if src=="ontos-tierra.js":
-        start=marker(s,"const segoviaWorld="); end=marker(s,"const figure=")
-        s=s[:start]+s[end:]
-        s=once(s,"let figureAspect=0,alcazarAsset=null;","let figureAspect=0;")
-        s=once(s,"const RADIUS=9.2,ALCAZAR_SCALE=1.85;","const RADIUS=9.2;")
-        s,count=re.subn(r"^\$\('ot-segovia'\)\.onclick=.*\n", "",s,flags=re.M)
-        assert count==1, "Missing world control marker"
-        start=marker(s,"// Architectural coordinates"); end=marker(s,"function makeWorld()")
-        s=s[:start]+"function landmarkBlocked(){return false;}\n"+s[end:]
-        s=once(s,"if(segoviaWorld){makeSegovia(m);makeAlcazar(m);}","")
-        start=marker(s,"landmarks.some(l=>"); end=marker(s,"||surfaceDistance(up,[0,1,0])")
-        s=s[:start]+"false"+s[end:]
-        start=marker(s,"(async()=>{if(!figurine&&!walk)"); end=marker(s,"try{initGL();")
-        s=s[:start]+"(()=>{"+s[end:]
+        s=once(s,".get('mundo')!=='normal'", ".get('mundo')==='segovia'")
+        s=once(s,"fetch('lib/ontos-alcazar.json'", "fetch('/experiencias/ontos-alcazar.json'")
+        s=once(s,"document.title='ONTOS · Mundo ('+(segoviaWorld?'Segovia':'normal')+')';", "document.title=(segoviaWorld?'Segovia en 3D · ONTOS':'Visita 3D · ONTOS');")
+        s=once(s,"label.textContent='ONTOS vivo · Mundo ('+(segoviaWorld?'Segovia':'normal')+')';", "label.textContent=(segoviaWorld?'ONTOS vivo · Mundo Segovia':'ONTOS vivo · un mundo para explorar');")
+        s=once(s,'// docs/estudios/2026-09-10-catedral-segovia-geometria.md. Local x=south, z=west.','// Procedural cathedral. Local x=south, z=west.')
     s=s.replace("La figura está en reposo.","No se ha podido mostrar la figura.").replace("El jardín está en reposo.","No se ha podido mostrar el jardín.")
     # Source comment only describes local public snapshot; no private repo pointers.
     s=re.sub(r"^/\*.*?\*/", "/* ONTOS public procedural experience. See provenance.json. */",s,count=1,flags=re.S)
-    assert not re.search(r"fetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|ontos-alcazar|loadAlcazar|makeSegovia|segoviaWorld|docs/|data/",s), "Unexpected dependency; review import before publishing"
+    network_checked=s.replace("fetch('/experiencias/ontos-alcazar.json',{signal:controller.signal})", "ALLOWED_ASSET")
+    assert not re.search(r"fetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|docs/|data/",network_checked), "Unexpected dependency; review import before publishing"
     s=s.replace("'use strict';", "'use strict';\nconst T=window.ONTOS_DEMO_TRANSLATE|| (text=>text);",1)
     for phrase in sorted(translations,key=len,reverse=True):
         literal="'"+phrase.replace("'","\\'")+"'"
@@ -43,6 +33,16 @@ for src,dst in [("ontos-vivo.js","juego-2d.js"),("ontos-tierra.js","mundo-3d.js"
     s=s.replace("`Destellos ${", "`${T('Destellos')} ${")
     outputs[dst]=s
     records[dst]={"source":"ONTOS/app/lib/"+src,"source_sha256":hashlib.sha256(raw).hexdigest(),"public_sha256":hashlib.sha256(s.encode()).hexdigest()}
+raw=(source/'ontos-alcazar.json').read_bytes()
+asset=json.loads(raw)
+allowed={'_doc','version','title','attribution','source','original','sourceDate','sourceSha256','license','licenseUrl','changes','sourceTriangles','bounds','vertices','faces','materials','boundary'}
+assert set(asset)==allowed, 'Unexpected mesh fields; review public projection'
+assert asset['license']=='CC BY-SA 4.0' and asset['licenseUrl']=='https://creativecommons.org/licenses/by-sa/4.0/', 'Invalid mesh license'
+assert asset['source']=='https://commons.wikimedia.org/wiki/File:Alc%C3%A1zar_de_Segovia.stl', 'Unexpected mesh source'
+assert asset['attribution'] and asset['changes'] and len(raw)<1000000, 'Invalid mesh provenance or budget'
+asset['_doc']='GENERATED public Alcázar mesh snapshot; import-experiencias.py. Adaptation CC BY-SA 4.0.'
+outputs['ontos-alcazar.json']=json.dumps(asset,ensure_ascii=False,separators=(',',':'))+'\n'
+records['ontos-alcazar.json']={'source':'ONTOS/app/lib/ontos-alcazar.json','source_sha256':hashlib.sha256(raw).hexdigest(),'public_sha256':hashlib.sha256(outputs['ontos-alcazar.json'].encode()).hexdigest()}
 for dst,s in outputs.items():
     (root/"experiencias"/dst).write_text(s)
-(root/"experiencias/provenance.json").write_text(json.dumps({"_doc":"Reviewed snapshots. Regenerate only with scripts/import-experiencias.py; Segovia geometry and asset loading excluded.","engines":records},ensure_ascii=False,indent=2)+"\n")
+(root/"experiencias/provenance.json").write_text(json.dumps({"_doc":"Reviewed snapshots. Regenerate only with scripts/import-experiencias.py; Segovia mesh is allowlisted and loaded only for mundo=segovia; mesh adaptation CC BY-SA 4.0.","engines":records},ensure_ascii=False,indent=2)+"\n")

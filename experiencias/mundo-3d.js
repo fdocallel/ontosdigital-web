@@ -7,8 +7,16 @@ let canvas=$('ot-world');
 let figurine=!!(canvas&&canvas.dataset.mode==='figure');
 let walk=!!(canvas&&canvas.dataset.mode==='walk');
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const segoviaWorld=new URLSearchParams(location.search).get('mundo')==='segovia';
+if(canvas&&canvas.dataset.mode!=='figure'&&canvas.dataset.mode!=='walk'){
+ document.title=(segoviaWorld?T('Segovia en 3D · ONTOS'):T('Visita 3D · ONTOS'));
+ const label=document.querySelector('.ot-label');if(label)label.textContent=(segoviaWorld?T('ONTOS vivo · Mundo Segovia'):T('ONTOS vivo · un mundo para explorar'));
+ const view=$('ot-segovia');if(view&&!segoviaWorld)view.style.display='none';
+ const help=$('ot-segovia-help');if(help&&!segoviaWorld)help.hidden=true;
+ const credit=$('ot-segovia-credit');if(credit&&!segoviaWorld)credit.hidden=true;
+}
 const figure={rotating:false,rolled:false,living:!reducedMotion};
-let figureAspect=0;
+let figureAspect=0,alcazarAsset=null;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x)), mix=(a,b,t)=>a.map((v,i)=>v+(b[i]-v)*t);
 const sub=(a,b)=>a.map((v,i)=>v-b[i]), add=(a,b)=>a.map((v,i)=>v+b[i]);
 const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
@@ -21,7 +29,7 @@ C.sky=mix(C.ink,C.bronze,.14);C.grass=mix(C.sand,C.olive,.32);C.stone=mix(C.pape
 let gl,program,staticBuffer,dynamicBuffer,staticCount,locations,failed=false;
 let player,seed,stars,delivered=false,paused=false,time=0,wave=0,last=0,fold=0,angle=0,frames=0;
 let wanderDir=1,wanderClock=3,lastInput=-10,raf=0,wiredWindow=false;
-const RADIUS=9.2;
+const RADIUS=9.2,ALCAZAR_SCALE=1.85;
 const camera={yaw:0,pitch:.4,distance:12,overview:false}, held=new Set(),touch=new Map(),drag=new Map(),obstacles=[],landmarks=[];
 // Coordinates of landmarks are surface normals, never latitude-based player state.
 const site=(x,z)=>{const a=Math.hypot(x,z)/RADIUS;if(a<1e-9)return [0,1,0];return [x/Math.hypot(x,z)*Math.sin(a),Math.cos(a),z/Math.hypot(x,z)*Math.sin(a)];};
@@ -57,6 +65,7 @@ window.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,select
 window.addEventListener('keyup',e=>held.delete(e.code));window.addEventListener('blur',()=>pause(true));document.addEventListener('visibilitychange',()=>{if(document.hidden)pause(true);});
 $('ot-pause').onclick=()=>pause(!paused);$('ot-reset').onclick=reset;$('ot-center').onclick=()=>{Object.assign(camera,{yaw:0,pitch:.4,segovia:false});zoom(12);};
 $('ot-near').onclick=()=>zoom(camera.distance-4);$('ot-far').onclick=()=>zoom(camera.distance+4);$('ot-overview').onclick=()=>{if(camera.segovia){camera.segovia=false;Object.assign(camera,{yaw:0,pitch:.4});zoom(12);}else zoom(camera.overview?12:48);};
+$('ot-segovia').onclick=()=>{camera.segovia=true;Object.assign(camera,{yaw:0,pitch:.8});zoom(Math.max(RADIUS*4,RADIUS*4*canvas.clientHeight/canvas.clientWidth));say(T('Segovia en miniatura: acueducto, catedral y Alcázar sobre su peñón. Arrastra para contemplarlos; Centrar vuelve a ONTOS.'));};
 document.querySelectorAll('[data-ot-action]').forEach(b=>{b.addEventListener('pointerdown',e=>{e.preventDefault();action(b.dataset.otAction);});b.addEventListener('click',e=>{if(e.detail===0)action(b.dataset.otAction);});});
 document.querySelectorAll('[data-ot-hold]').forEach(b=>{b.addEventListener('pointerdown',e=>{if(paused||failed)return;e.preventDefault();b.setPointerCapture(e.pointerId);touch.set(e.pointerId,b.dataset.otHold);b.setAttribute('aria-pressed','true');});const release=e=>{touch.delete(e.pointerId);b.setAttribute('aria-pressed',String([...touch.values()].includes(b.dataset.otHold)));};b.addEventListener('pointerup',release);b.addEventListener('pointercancel',release);b.addEventListener('lostpointercapture',release);b.addEventListener('keydown',e=>{if((e.code==='Space'||e.code==='Enter')&&!paused){e.preventDefault();held.add('button-'+b.dataset.otHold);b.setAttribute('aria-pressed','true');}});const up=()=>{held.delete('button-'+b.dataset.otHold);b.setAttribute('aria-pressed','false');};b.addEventListener('keyup',up);b.addEventListener('blur',up);});
 canvas.addEventListener('pointerdown',e=>{if(paused||failed)return;canvas.focus({preventScroll:true});canvas.setPointerCapture(e.pointerId);drag.set(e.pointerId,[e.clientX,e.clientY]);});
@@ -127,7 +136,146 @@ return new Mesh(v=>{const rx=v[0]*c+v[2]*s,rz=-v[0]*s+v[2]*c;return [player.x+rx
 const b=basis(up,tangent);return new Mesh(v=>[0,1,2].map(i=>up[i]*(RADIUS+v[1])+b.right[i]*v[0]+b.back[i]*v[2]));
 }
 function shadow(m,up,r){const b=basis(up),base=mix(C.grass,C.sand,.25);const point=(a,rr)=>scale(norm(add(up,add(scale(b.right,Math.cos(a)*rr/RADIUS),scale(b.back,Math.sin(a)*rr*.66/RADIUS)))),RADIUS+.027);for(let ring=0;ring<4;ring++){const inner=r*ring/4,outer=r*(ring+1)/4,col=mix(base,C.olive,.10+(1-ring/4)*.26);for(let i=0;i<16;i++)m.quad(point(i/16*TAU,inner),point(i/16*TAU,outer),point((i+1)/16*TAU,outer),point((i+1)/16*TAU,inner),col);}}
-function landmarkBlocked(){return false;}
+// Architectural coordinates bend around the planet; y is true radial altitude.
+function monumentFrame(up,angle=0){const b=basis(up,norm(sub([0,0,1],scale(up,up[2])))),right=add(scale(b.right,Math.cos(angle)),scale(b.back,Math.sin(angle))),back=norm(cross(right,up));return {up,right,back};}
+function monumentPoint(f,v){return scale(norm(add(scale(f.up,RADIUS),add(scale(f.right,v[0]),scale(f.back,v[2])))),RADIUS+v[1]);}
+function monumentLocal(f,up){const d=dot(up,f.up);if(d<=.1)return [1e3,1e3];return [RADIUS*dot(up,f.right)/d,RADIUS*dot(up,f.back)/d];}
+function landmarkBlocked(up,altitude){for(const monument of landmarks){const [x,z]=monumentLocal(monument.frame,up);for(const box of monument.solids)if(Math.abs(x-box.x)<box.w/2+.27&&Math.abs(z-box.z)<box.d/2+.27&&altitude<box.top&&altitude+1.75>box.bottom)return true;
+if(monument.id==='acueducto'&&Math.abs(z)<.48){for(const bay of monument.bays){const dx=Math.abs(x-bay);if(dx<.73&&altitude+1.75>2.14+Math.sqrt(Math.max(0,.73*.73-dx*dx)))return true;}}}return false;}
+class CurvedMesh extends Mesh{
+tri(a,b,c,color,glow=0){const edge=(p,q)=>Math.hypot(p[0]-q[0],p[2]-q[2]);const ab=edge(a,b),bc=edge(b,c),ca=edge(c,a);if(Math.max(ab,bc,ca)>.72){if(ab>=bc&&ab>=ca){const mid=scale(add(a,b),.5);this.tri(a,mid,c,color,glow);this.tri(mid,b,c,color,glow);}else if(bc>=ca){const mid=scale(add(b,c),.5);this.tri(a,b,mid,color,glow);this.tri(a,mid,c,color,glow);}else{const mid=scale(add(c,a),.5);this.tri(a,b,mid,color,glow);this.tri(mid,b,c,color,glow);}return;}super.tri(a,b,c,color,glow);}
+}
+function makeSegovia(m){
+const granite=mix(C.stone,C.ink,.18),joint=mix(granite,C.bronze,.21),sandstone=mix(mix(C.stone,C.gold,.44),C.bronze,.16),stoneLight=mix(sandstone,C.paper,.10),stoneShade=mix(sandstone,C.bronze,.13),roof=mix(mix(C.clay,C.bronze,.50),C.stone,.28),dome=sandstone,recess=mix(C.ink,C.bronze,.20);
+function monument(id,name,up,angle){const frame=monumentFrame(up,angle),record={id,name,up,frame,solids:[],bays:[]};landmarks.push(record);return {record,mesh:new CurvedMesh(v=>monumentPoint(frame,v))};}
+function solid(rec,x,z,w,d,top,bottom=0){rec.solids.push({x,z,w,d,top,bottom});}
+// Six double bays: a readable toy-scale stretch, not a replica of all 167 arches.
+const aq=monument('acueducto','Acueducto de Segovia',site(-6.8,-3.6),Math.PI/2),a=aq.mesh,spacing=1.78,start=-spacing*3;
+for(let i=0;i<=6;i++){const x=start+i*spacing;a.box([x,.07,0],[.56,.22,.70],granite);for(let row=0;row<7;row++){const y=.15+row*.295;for(let half=0;half<2;half++)a.box([x+(half?1:-1)*.121,y+.143,0],[.235,.28,.48],mix(granite,C.paper,((i+row+half)%4)*.035));}a.box([x,2.16,0],[.58,.12,.58],granite);solid(aq.record,x,0,.50,.52,5.25);}
+for(let i=0;i<6;i++){const x=start+(i+.5)*spacing;aq.record.bays.push(x);for(const [spring,inner,outer] of [[2.14,.73,.91],[4.02,.73,.91]]){for(let j=0;j<11;j++)a.arc([x,spring,0],inner,outer,j*Math.PI/11+.007,(j+1)*Math.PI/11-.007,.48,mix(granite,C.paper,((j+i)%4)*.035));
+// Fill the spandrels above each arch so the upper arcade rests on masonry.
+for(let j=0;j<12;j++){const left=-.89+j*1.78/12,right=left+1.78/12,top=spring+.94;const y1=spring+Math.sqrt(Math.max(0,.91*.91-left*left)),y2=spring+Math.sqrt(Math.max(0,.91*.91-right*right));for(const side of [-1,1])a.quad([x+left,y1,side*.24],[x+right,y2,side*.24],[x+right,top,side*.24],[x+left,top,side*.24],mix(granite,C.paper,(j%3)*.025));}
+}for(const y of [3.12,5.02])a.box([x,y,0],[spacing,.14,.59],joint);}
+for(let i=0;i<=6;i++){const x=start+i*spacing;for(let row=0;row<3;row++)a.box([x,3.30+row*.25,0],[.42,.24,.46],mix(granite,C.paper,row*.03));}
+// Terminal abutments extend outward only: the six full openings retain their width.
+// Closed ashlar boxes give every end a proper return face, not a sliced arcade.
+for(const side of [-1,1]){const edge=side*spacing*3;
+for(const [bottom,top,w,d] of [[0,.24,1.02,1.04],[.24,2.12,.78,.78],[2.12,3.20,.65,.68],[3.20,4.94,.56,.62]]){
+const x=edge+side*(w/2-.25),rows=Math.ceil((top-bottom)/.29),h=(top-bottom)/rows;
+for(let row=0;row<rows;row++){const col=mix(granite,C.paper,((row+(side+1))%4)*.03);for(let half=0;half<2;half++)a.box([x+(half?1:-1)*w/4,bottom+(row+.5)*h,0],[w/2-.008,h-.009,d],col);}
+solid(aq.record,x,0,w,d,top,bottom);
+}
+for(const [y,w,d] of [[2.16,.89,.88],[3.12,.82,.79],[5.02,.78,.73]])a.box([edge+side*(w/2-.25),y,0],[w,.14,d],joint);
+}
+// Water channel is an open trough, with two parapets and closed end stones.
+a.box([0,5.15,0],[spacing*6+1.10,.10,.61],granite);for(const side of [-1,1])a.box([0,5.28,side*.27],[spacing*6+1.10,.18,.10],granite);
+for(const side of [-1,1])a.box([side*(spacing*3+.50),5.27,0],[.12,.20,.61],granite);
+append(m,a);
+const ca=monument('catedral','Catedral de Segovia',site(7.8,-5.2),0),c=ca.mesh;
+function block(x,y,z,w,h,d,col=sandstone,collide=false){if(col===sandstone)col=mix(stoneShade,stoneLight,.38+.28*Math.sin(x*2.1+y*1.9+z*.8));c.box([x,y,z],[w,h,d],col);if(collide)solid(ca.record,x,z,w,d,y+h/2,y-h/2);}
+function pinnacle(x,z,y,h=.60){c.rod([x,y,z],[x,y+.15,z],.10,sandstone,4);c.rod([x,y+.15,z],[x,y+h,z],.105,sandstone,4,.008);}
+function pitchedRoof(x,z,w,d,eave,ridge){c.quad([x-w/2,eave,z-d/2],[x,eave+ridge,z-d/2],[x,eave+ridge,z+d/2],[x-w/2,eave,z+d/2],roof);c.quad([x,eave+ridge,z-d/2],[x+w/2,eave,z-d/2],[x+w/2,eave,z+d/2],[x,eave+ridge,z+d/2],roof);for(const zz of [z-d/2,z+d/2])c.tri([x-w/2,eave,zz],[x+w/2,eave,zz],[x,eave+ridge,zz],sandstone);}
+function windowAt(x,y,z,w,h,side=0){const window=new Mesh(v=>c.transform(side? [x+v[2]*side,y+v[1],z+v[0]]:[x+v[0],y+v[1],z+v[2]]));window.quad([-w/2,0,0],[w/2,0,0],[w/2,h*.65,0],[0,h,0],recess);window.tri([-w/2,0,0],[0,h,0],[-w/2,h*.65,0],recess);window.rod([0,0,.009],[0,h*.79,.009],.016,sandstone,4);window.rod([-w/2,h*.44,.009],[w/2,h*.44,.009],.012,sandstone,4);append(c,window);}
+// Exterior reconstructed from the cathedral's published dimensions and the 1984 survey.
+// Own schematic geometry; no third-party mesh imported. Sources/uncertainties:
+// Procedural cathedral. Local x=south, z=west.
+// 0.064 world units/metre: temple 105 x 50 m, tower 88 m; no vertical exaggeration.
+const front=1.9,westEnd=-1.46,crossZ=-1.92,apseZ=-3.14;
+block(0,.035,-1.40,3.26,.10,6.78,stoneShade);
+// Five western bays: lower chapels, two aisles, and a distinct high central nave.
+block(0,.53,.22,3.20,1.06,3.36,sandstone,true);
+block(0,.79,.22,2.30,1.58,3.36,sandstone,true);
+block(0,1.10,.22,1.10,2.20,3.36,sandstone,true);
+pitchedRoof(0,.22,1.20,3.40,2.20,.28);
+for(const side of [-1,1]){pitchedRoof(side*.87,.22,.65,3.40,1.58,.16);pitchedRoof(side*1.40,.22,.43,3.40,1.06,.12);}
+// Short transept arms, not a long basilica with an apse attached to its end.
+block(0,1.10,crossZ,3.20,2.20,.92,sandstone,true);
+const tr=new CurvedMesh(v=>c.transform([v[2],v[1],crossZ+v[0]]));
+for(const side of [-1,1]){tr.quad([-.50,2.20,side*.55],[0,2.48,side*.55],[0,2.48,side*1.64],[-.50,2.20,side*1.64],roof);tr.quad([0,2.48,side*.55],[.50,2.20,side*.55],[.50,2.20,side*1.64],[0,2.48,side*1.64],roof);}
+for(const side of [-1,1])tr.tri([-.50,2.20,side*1.64],[.50,2.20,side*1.64],[0,2.48,side*1.64],sandstone);
+append(c,tr);
+// Presbytery and ambulatory form three nested heights, with five radial chapels.
+block(0,.76,-2.78,2.30,1.52,.80,sandstone,true);block(0,1.10,-2.78,1.10,2.20,.80,sandstone,true);pitchedRoof(0,-2.78,1.20,.85,2.20,.28);
+function halfApse(r,height,rise,col){for(let j=0;j<10;j++){const aa=j*Math.PI/10,bb=(j+1)*Math.PI/10,p=[r*Math.cos(aa),0,apseZ-r*Math.sin(aa)],q=[r*Math.cos(bb),0,apseZ-r*Math.sin(bb)];c.quad(p,q,[q[0],height,q[2]],[p[0],height,p[2]],sandstone);c.tri([p[0],height,p[2]],[q[0],height,q[2]],[0,height+rise,apseZ],col);}solid(ca.record,0,apseZ-r*.43,r*1.8,r*.88,height);}
+halfApse(1.14,1.52,.16,roof);halfApse(.55,2.20,.28,roof);
+for(let i=0;i<5;i++){
+ const t=(i+.5)*Math.PI/5,n=[Math.cos(t),-Math.sin(t)],u=[-n[1],n[0]],cx=n[0]*1.09,cz=apseZ+n[1]*1.09;
+ // Each chapel has a five-sided outline, with the point projecting radially.
+ const outline=[[-.34,0],[.34,0],[.39,.32],[0,.61],[-.39,.32]].map(([a,b])=>[cx+u[0]*a+n[0]*b,cz+u[1]*a+n[1]*b]);
+ for(let j=0;j<5;j++){const p=outline[j],q=outline[(j+1)%5];c.quad([p[0],0,p[1]],[q[0],0,q[1]],[q[0],1.06,q[1]],[p[0],1.06,p[1]],sandstone);c.tri([p[0],1.06,p[1]],[q[0],1.06,q[1]],[cx+n[0]*.20,1.20,cz+n[1]*.20],roof);if(j>0&&j<4)pinnacle(p[0],p[1],1.08,.31);}
+ solid(ca.record,cx+n[0]*.28,cz+n[1]*.28,.63,.63,1.2);
+ c.rod([n[0]*1.39,1.14,apseZ+n[1]*1.39],[n[0]*.58,2.10,apseZ+n[1]*.58],.034,stoneLight,5);
+ pinnacle(n[0]*1.17,apseZ+n[1]*1.17,1.55,.44);
+}
+for(const side of [-1,1]){block(side*1.39,.53,-2.78,.42,1.06,.78,sandstone,true);pitchedRoof(side*1.39,-2.78,.46,.80,1.06,.12);}
+// Buttresses and flying arches follow the five western structural bays.
+for(const side of [-1,1])for(let i=0;i<=5;i++){const z=front-i*(front-westEnd)/5;block(side*1.61,.57,z,.12,1.14,.14);pinnacle(side*1.61,z,1.14,.42);block(side*1.13,1.12,z,.12,.94,.14);pinnacle(side*1.13,z,1.60,.49);c.rod([side*1.15,1.65,z],[side*.58,2.15,z],.038,stoneLight,5);if(i<5){windowAt(side*1.606,.37,z-.32,.20,.52,side);windowAt(side*.557,1.66,z-.32,.22,.40,side);}}
+// Crossing: square crested body, a low hemisphere and lantern, four corner pinnacles.
+function crown(x,z,base,r,height){c.rod([x,base,z],[x,base+.12,z],r,sandstone,12);for(let ring=0;ring<5;ring++)for(let j=0;j<16;j++){const point=(k,t)=>{const a=k*Math.PI/10;return [x+Math.cos(t)*r*Math.cos(a),base+.12+Math.sin(a)*height,z+Math.sin(t)*r*Math.cos(a)];};c.quad(point(ring,j*TAU/16),point(ring,(j+1)*TAU/16),point(ring+1,(j+1)*TAU/16),point(ring+1,j*TAU/16),dome);}}
+block(0,2.35,crossZ,1.22,.30,1.22);for(const side of [-1,1]){block(side*.60,2.53,crossZ,.07,.13,1.27);block(0,2.53,crossZ+side*.60,1.27,.13,.07);for(const s of [-1,1])pinnacle(side*.57,crossZ+s*.57,2.49,.52);}
+crown(0,crossZ,2.49,.49,.41);c.rod([0,3.0,crossZ],[0,3.18,crossZ],.09,sandstone,8,.06);c.rod([0,3.18,crossZ],[0,3.296,crossZ],.075,dome,8,.008);
+// West front: three portals and a pointed clerestory window; no invented rose.
+for(const x of [-.88,0,.88]){windowAt(x,.02,front+.015,x===0?.42:.27,x===0?.74:.49);for(const side of [-1,1])block(x+side*(x===0?.24:.17),.27,front+.035,.035,.54,.06,stoneLight);}
+windowAt(0,1.72,front+.015,.25,.38);for(const side of [-1,1]){block(side*.59,1.12,front+.02,.11,2.24,.13);pinnacle(side*.59,front,2.25,.46);pinnacle(side*1.14,front,1.60,.45);}
+// San Frutos, north transept: a small classical portal facing the plaza.
+windowAt(-1.606,.05,crossZ,.43,.78,-1);for(const z of [crossZ-.31,crossZ+.31]){block(-1.65,.48,z,.09,.96,.09,granite);pinnacle(-1.65,z,1.02,.20);}block(-1.65,1.04,crossZ,.10,.12,.80,granite);
+// Single SW bell tower: tall square shaft, open belfry, octagonal crown and lantern.
+const tx=1.38,tz=1.48;
+block(tx,1.82,tz,.72,3.64,.72,sandstone,true);for(const y of [.14,1.30,2.22,3.13,3.64])block(tx,y,tz,.80,.075,.80);
+for(const side of [-1,1])for(const y of [1.52,2.48,3.22]){windowAt(tx+side*.366,y,tz,.11,.31,side);windowAt(tx,y,tz+side*.366,.11,.31);}
+for(const sx of [-1,1])for(const sz of [-1,1])block(tx+sx*.30,4.04,tz+sz*.30,.15,.80,.15);
+block(tx,4.45,tz,.83,.12,.83);solid(ca.record,tx,tz,.72,.72,4.51,3.64);
+for(const sx of [-1,1])for(const sz of [-1,1])pinnacle(tx+sx*.36,tz+sz*.36,4.48,.62);
+c.rod([tx,4.51,tz],[tx,4.80,tz],.37,sandstone,8,.34);crown(tx,tz,4.78,.33,.31);
+c.rod([tx,5.21,tz],[tx,5.48,tz],.075,sandstone,8,.05);c.rod([tx,5.48,tz],[tx,5.57,tz],.075,dome,8,.01);c.rod([tx,5.57,tz],[tx,5.632,tz],.009,C.bronze,4);
+// South cloister: genuinely open square court and five arcade bays per gallery.
+const inner=Math.sqrt(588)*.064,outer=inner+.72,clx=1.60+outer/2,clz=-.17;
+block(clx,.025,clz,outer,.07,outer,stoneShade);block(clx,.069,clz,inner,.018,inner,mix(C.grass,C.stone,.25));
+for(const side of [-1,1]){
+ block(clx+side*(outer/2-.07),.43,clz,.14,.86,outer,sandstone,true);
+ block(clx,.43,clz+side*(outer/2-.07),outer,.86,.14,sandstone,true);
+ pitchedRoof(clx+side*(inner/2+.18),clz,.43,outer,.87,.12);
+ const gallery=new CurvedMesh(v=>c.transform([clx+v[2],v[1],clz+v[0]]));
+ gallery.quad([side*(inner/2-.02),.87,-outer/2],[side*(inner/2+.18),.99,-outer/2],[side*(inner/2+.18),.99,outer/2],[side*(inner/2-.02),.87,outer/2],roof);
+ gallery.quad([side*(inner/2+.18),.99,-outer/2],[side*(outer/2+.02),.87,-outer/2],[side*(outer/2+.02),.87,outer/2],[side*(inner/2+.18),.99,outer/2],roof);append(c,gallery);
+ for(let i=0;i<=5;i++){const along=-inner/2+i*inner/5;block(clx+side*inner/2,.39,clz+along,.055,.78,.055);block(clx+along,.39,clz+side*inner/2,.055,.78,.055);}
+ for(let i=0;i<5;i++){const along=-inner/2+(i+.5)*inner/5;const ar=new Mesh(v=>c.transform([clx+v[2]+side*inner/2,v[1],clz+along+v[0]]));ar.arc([0,.57,0],.112,.145,0,Math.PI,.055,sandstone);append(c,ar);c.arc([clx+along,.57,clz+side*inner/2],.112,.145,0,Math.PI,.055,sandstone);}
+}
+append(m,c);
+}
+// CC BY-SA 4.0 photogrammetry imported from Commons; attribution in the page and asset.
+// Rigid placement preserves the scanned proportions; the skirt meets the curved ground.
+function makeAlcazar(m){
+const up=site(0,11.5),f=monumentFrame(up,0),rec={id:'alcazar',name:'Alcázar de Segovia',up,frame:f,solids:[],bays:[]};landmarks.push(rec);
+const part=new Mesh(v=>add(scale(f.up,RADIUS+v[1]),add(scale(f.right,v[0]),scale(f.back,v[2]))));
+const stone=mix(mix(C.stone,C.gold,.31),C.bronze,.13),slate=mix(C.ink,C.stone,.23),rock=mix(C.stone,C.bronze,.34),palette=[stone,slate,rock,mix(C.olive,C.stone,.20)];
+const v=alcazarAsset.vertices.map(n=>n*ALCAZAR_SCALE),faces=alcazarAsset.faces,point=i=>v.slice(i*3,i*3+3),cells=new Map(),cell=.35;
+for(let i=0;i<faces.length;i+=3){const p=point(faces[i]),q=point(faces[i+1]),r=point(faces[i+2]);part.tri(p,q,r,palette[alcazarAsset.materials[i/3]]);
+// Conservative occupied columns from every projected triangle (not just its centroid).
+const lo=[Math.min(p[0],q[0],r[0]),Math.min(p[2],q[2],r[2])],hi=[Math.max(p[0],q[0],r[0]),Math.max(p[2],q[2],r[2])],top=Math.max(p[1],q[1],r[1]);
+for(let x=Math.floor(lo[0]/cell);x<=Math.floor(hi[0]/cell);x++)for(let z=Math.floor(lo[1]/cell);z<=Math.floor(hi[1]/cell);z++){const key=x+','+z;cells.set(key,Math.max(cells.get(key)||0,top));}
+}
+// Low faceted rock support, instead of extruding hundreds of ragged scan edges.
+const footprint=[];for(let i=0;i<v.length;i+=3)footprint.push([v[i],v[i+2]]);
+footprint.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);const turn=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]);
+const half=points=>{const h=[];for(const p of points){while(h.length>1&&turn(h[h.length-2],h[h.length-1],p)<=0)h.pop();h.push(p);}return h;};
+const hull=half(footprint).slice(0,-1).concat(half([...footprint].reverse()).slice(0,-1));
+// Faceted talus follows the spherical ground instead of a flat vertical skirt.
+for(let i=0;i<hull.length;i++){const p=hull[i],q=hull[(i+1)%hull.length],segments=Math.max(1,Math.ceil(Math.hypot(p[0]-q[0],p[1]-q[1])/.7));
+const at=(t,level)=>{const x=(p[0]+(q[0]-p[0])*t)*(1+level*.10),z=(p[1]+(q[1]-p[1])*t)*(1+level*.10),ground=Math.sqrt(Math.max(0,RADIUS*RADIUS-x*x-z*z))-RADIUS-.10;return [x,.10*(1-level)+ground*level,z];};
+for(let j=0;j<segments;j++){const t=j/segments,u=(j+1)/segments,col=mix(rock,C.stone,.10+.12*((i+j)%3));
+for(const [low,high] of [[0,.45],[.45,1]]){const a=at(t,low),b=at(u,low),c=at(u,high),d=at(t,high);part.tri(a,b,c,col);part.tri(a,c,d,mix(col,C.bronze,.08));}}
+part.tri([0,.10,0],at(0,0),at(1,0),rock);}
+for(const [key,top] of cells){const [x,z]=key.split(',').map(Number);rec.solids.push({x:(x+.5)*cell,z:(z+.5)*cell,w:cell,d:cell,top:top+.15,bottom:-1});}
+append(m,part);
+}
+async function loadAlcazar(){
+const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),10000);
+try{const response=await fetch('/experiencias/ontos-alcazar.json',{signal:controller.signal});if(!response.ok)throw new Error('Alcázar HTTP '+response.status);const data=await response.json();
+if(!Array.isArray(data.vertices)||!Array.isArray(data.faces)||!Array.isArray(data.materials)||!Array.isArray(data.boundary)||data.vertices.length<9||data.vertices.length>180000||data.vertices.length%3||data.faces.length%3||data.faces.length>90000||data.materials.length!==data.faces.length/3||data.boundary.length%2||data.boundary.length>60000||!data.vertices.every(n=>Number.isFinite(n)&&Math.abs(n)<20)||![...data.faces,...data.boundary].every(n=>Number.isInteger(n)&&n>=0&&n<data.vertices.length/3)||!data.materials.every(n=>Number.isInteger(n)&&n>=0&&n<=3))throw new Error('Malla del Alcázar inválida');alcazarAsset=data;
+}finally{clearTimeout(timeout);}
+}
+
 function makeWorld(){const m=new Mesh();obstacles.length=0;landmarks.length=0;
 // Uniform icosphere triangles avoid a visible fan at either pole. Radius stays exact.
 const g=(1+Math.sqrt(5))/2,vertices=[[-1,g,0],[1,g,0],[-1,-g,0],[1,-g,0],[0,-1,g],[0,1,g],[0,-1,-g],[0,1,-g],[g,0,-1],[g,0,1],[-g,0,-1],[-g,0,1]].map(norm);
@@ -139,9 +287,9 @@ for(let z=1;z>-9;z-=.45){const up=site(Math.sin(z*.45)*.22,z);const point=(x,zz)
 function arch(up,size){const part=localMesh(up);for(const side of [-1,1]){const x=side*size*.72;part.box([x,.1,0],[.55,.2,.55],C.stone);part.rod([x,.15,0],[x,size*1.1,0],.16,C.stone,9,.14);part.box([x,size*1.1,0],[.48,.16,.45],C.stone);const foot=norm(atSurface(up,[x,0,0]));obstacles.push({up:foot,r:.21,h:size*1.4});}for(let j=0;j<9;j++)part.bevelArc([0,size*1.1,0],size*.58,size*.87,j*Math.PI/9+.018,(j+1)*Math.PI/9-.018,.35,mix(C.stone,C.gold,j%3===0?.2:.03));append(m,part);shadow(m,up,size);}
 arch(site(-2.5,-6.8),1.25);arch(site(2.5,-9),1.35);arch(site(14,9),1.15);arch(site(-15,-7),1.3);
 const pl=localMesh(pedestal.up);pl.rod([0,0,0],[0,.12,0],.66,C.stone,12);pl.rod([0,.12,0],[0,.64,0],.36,C.stone,8);pl.rod([0,.64,0],[0,.75,0],.52,C.gold,8);for(let i=0;i<8;i++){const a=i/8*TAU;pl.rod([Math.cos(a)*.355,.22,Math.sin(a)*.355],[Math.cos(a)*.355,.53,Math.sin(a)*.355],.014,C.bronze,4);}append(m,pl);
-
+if(segoviaWorld){makeSegovia(m);makeAlcazar(m);}
 // Groves wrap around the entire planet, including its southern hemisphere.
-for(let i=0;i<25;i++){const y=1-2*(i+.5)/25,lon=i*2.399963,up=[Math.sqrt(1-y*y)*Math.cos(lon),y,Math.sqrt(1-y*y)*Math.sin(lon)];if(false||surfaceDistance(up,[0,1,0])<3||surfaceDistance(up,seed.up)<2||surfaceDistance(up,pedestal.up)<2)continue;const part=localMesh(up),h=1.05+(i%3)*.2;part.rod([0,0,0],[.06,h,0],.095,C.bronze,7,.055);if(i%3===0)part.rod([0,.3,0],[0,h+1.15,0],.42,C.olive,7,.025);else{part.rod([0,h*.7,0],[-.35,h+.1,0],.05,C.bronze,6,.025);part.ball([0,h,0],.6,mix(C.olive,C.gold,.13),0,7,4,[1.5,.72,1]);part.ball([-.35,h+.15,0],.4,mix(C.olive,C.sand,.18),0,7,4);}append(m,part);shadow(m,up,.65);obstacles.push({up,r:.13,h});}
+for(let i=0;i<25;i++){const y=1-2*(i+.5)/25,lon=i*2.399963,up=[Math.sqrt(1-y*y)*Math.cos(lon),y,Math.sqrt(1-y*y)*Math.sin(lon)];if(landmarks.some(l=>{const [x,z]=monumentLocal(l.frame,up);return l.id==='alcazar'?Math.abs(x)<4.1*ALCAZAR_SCALE&&Math.abs(z)<2.8*ALCAZAR_SCALE:l.id==='acueducto'?Math.abs(x)<6.8&&Math.abs(z)<2.0:x>-2.1&&x<4.1&&z>-5.2&&z<2.4;})||surfaceDistance(up,[0,1,0])<3||surfaceDistance(up,seed.up)<2||surfaceDistance(up,pedestal.up)<2)continue;const part=localMesh(up),h=1.05+(i%3)*.2;part.rod([0,0,0],[.06,h,0],.095,C.bronze,7,.055);if(i%3===0)part.rod([0,.3,0],[0,h+1.15,0],.42,C.olive,7,.025);else{part.rod([0,h*.7,0],[-.35,h+.1,0],.05,C.bronze,6,.025);part.ball([0,h,0],.6,mix(C.olive,C.gold,.13),0,7,4,[1.5,.72,1]);part.ball([-.35,h+.15,0],.4,mix(C.olive,C.sand,.18),0,7,4);}append(m,part);shadow(m,up,.65);obstacles.push({up,r:.13,h});}
 for(let i=0;i<65;i++){const y=1-2*(i+.5)/65,lon=i*2.399963,up=[Math.sqrt(1-y*y)*Math.cos(lon),y,Math.sqrt(1-y*y)*Math.sin(lon)];const part=localMesh(up);part.ball([0,.04,0],.1+(i%3)*.025,C.stone,0,5,3,[1,.6,1]);append(m,part);}
 // Small botanical clusters concentrate detail around landmarks, leaving open ground.
 for(const [cluster,x,z] of [[0,-1.3,-1.8],[1,2.2,-5.5],[2,-3.4,-8.8],[3,8,10],[4,-12,7],[5,3,20]]){
@@ -303,7 +451,7 @@ walk=canvas.dataset.mode==='walk';
 failed=false;paused=false;frames=0;
 if(figurine)wireFigure();
 reset();
-(()=>{try{initGL();raf=requestAnimationFrame(frame);}catch(error){console.error('ONTOS Tierra:',error);fail(T('Este navegador no ha podido iniciar WebGL. Prueba un navegador con aceleración gráfica o vuelve al patio 2D.'));}})();
+(async()=>{if(!figurine&&!walk){try{if(segoviaWorld)await loadAlcazar();}catch(error){console.error('ONTOS Alcázar:',error);fail(T('No se ha podido cargar el modelo local del Alcázar. Recarga la página o vuelve al patio 2D.'));return;}}try{initGL();raf=requestAnimationFrame(frame);}catch(error){console.error('ONTOS Tierra:',error);fail(T('Este navegador no ha podido iniciar WebGL. Prueba un navegador con aceleración gráfica o vuelve al patio 2D.'));}})();
 }
 const api=Object.freeze({snapshot:()=>JSON.parse(JSON.stringify({mode:figurine?'figure':walk?'walk':'planet',figure,staticVertices:staticCount,landmarks:landmarks.map(({id,name,up,frame,solids,bays})=>({id,name,up,frame,solids,bays})),radius:RADIUS,player:{...player,forward:walk?[Math.cos(player.yaw||0),0,Math.sin(player.yaw||0)]:cameraBasis().forward,right:walk?[-Math.sin(player.yaw||0),0,Math.cos(player.yaw||0)]:cameraBasis().right},camera,seed:{...seed,pos:scale(seed.up,RADIUS)},pedestal:{...pedestal,pos:scale(pedestal.up,RADIUS)},delivered,paused,wave,fold,stars:stars?.filter(s=>s.got).length||0,frames,failed,held:held.size+touch.size,walk:!!walk})),stop:stopLoop,boot:bootTierra});
 Object.defineProperty(window,figurine?'ONTOS_FIGURA':'ONTOS_TIERRA',{value:api,writable:false});
