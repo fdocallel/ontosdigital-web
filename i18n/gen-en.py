@@ -25,6 +25,9 @@ PAGINAS = [
     ("index.html", True),
     ("bim.html", True),
     ("servicios.html", True),
+    ("juego-2d.html", True),
+    ("animacion-3d.html", True),
+    ("visita-3d.html", True),
     ("escrito-plan-bim-ingenieria.html", True),
     ("fernando-calle.html", True),
     ("caso-sistema.html", True),
@@ -451,6 +454,16 @@ def main():
     print("/en/ generado · %d páginas" % len(PAGINAS))
     return 0
 
+
+# Dynamic experience copy is shared by both language wrappers.
+_runtime_path = os.path.join(I18N, "experiencias-runtime.json")
+if "--extraer" not in sys.argv and os.path.exists(_runtime_path):
+    with open(_runtime_path, encoding="utf-8") as _f:
+        _runtime = json.load(_f)
+    if not all(_runtime.values()):
+        raise SystemExit("Missing experience runtime translation")
+    with open(os.path.join(RAIZ, "experiencias", "i18n.js"), "w", encoding="utf-8") as _f:
+        _f.write("/* GENERATED from i18n/en/experiencias-runtime.json */\n(()=>{const en=" + json.dumps(_runtime, ensure_ascii=False) + ";window.ONTOS_DEMO_TRANSLATE=text=>document.documentElement.lang==='en'?(en[text]||text):text;})();\n")
 
 if __name__ == "__main__":
     sys.exit(main())

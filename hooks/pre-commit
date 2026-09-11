@@ -13,6 +13,8 @@ git add sitemap.xml
 for f in $staged; do
   if [ -f "$f" ]; then git add "$f"; fi           # la página staged, con el hreflang que inyecta el generador
   case "$f" in
+    i18n/en/experiencias-runtime.json|i18n/gen-en.py)
+      if [ -f "experiencias/i18n.js" ]; then git add experiencias/i18n.js; fi ;;
     *.html) if [ -f "en/$f" ]; then git add "en/$f"; fi ;;   # y su espejo inglés recién regenerado
   esac
 done
