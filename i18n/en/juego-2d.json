@@ -2,7 +2,7 @@
   "_doc": "Traducción al inglés de juego-2d.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "ONTOS vivo · Patio de juegos": "ONTOS alive · Playground",
   "Navegación": "Navigation",
-  "← Servicios": "← Services",
+  "← Aplicaciones": "← Applications",
   "Patio de juegos · materia y movimiento": "Playground · matter and motion",
   "ONTOS está vivo.": "ONTOS is alive.",
   "Tierra 3D": "3D world",
