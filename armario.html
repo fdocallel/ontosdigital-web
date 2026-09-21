@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Armario · Tu ropa, fichada y colgada en baldas · ONTOS</title>
+<meta name="description" content="Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y propone conjuntos que puedes ver puestos. Prueba la demo con 10 prendas y mira el vídeo.">
+<meta name="theme-color" content="#faf8f5">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="canonical" href="https://ontosdigital.es/armario.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/armario.html">
+<link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/armario.html">
+<link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/armario.html">
+<!-- /i18n:alt -->
+<meta property="og:title" content="Armario: tu ropa, fichada y colgada en baldas">
+<meta property="og:description" content="Diez prendas para colocar por color o por tipo, y el armario real en vídeo. Todo en tu teléfono.">
+<meta property="og:url" content="https://ontosdigital.es/armario.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ontosdigital.es/brand/servicios/armario.png">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--texto); font: 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+h1,h2,h3 { font-family: var(--serif); font-weight: 600; line-height: 1.18; }
+a { color: var(--acento); text-underline-offset: .2em; }
+a:focus-visible { outline: 3px solid var(--acento); outline-offset: 5px; }
+.wrap { max-width: 64rem; margin: auto; padding: 0 1.5rem; }
+.hero { padding: 5rem 0 3.5rem; }
+.etiqueta { color: var(--acento); font-size: .85rem; letter-spacing: .15em; text-transform: uppercase; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 19ch; margin: 1rem 0 1.5rem; }
+.hero .intro { max-width: 43rem; color: var(--sec); font-size: 1.15rem; }
+.acciones { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: 1.7rem; }
+.acciones > a { display: inline-flex; align-items: center; min-height: 46px; }
+.cta { display: inline-flex; justify-content: center; align-items: center; min-height: 46px; padding: .7rem 1.35rem; border-radius: 999px; background: var(--teja); color: #14100c; text-decoration: none; font-weight: 600; }
+section { padding: 3rem 0; border-top: 1px solid var(--borde); }
+h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
+.bajada { max-width: 42rem; color: var(--sec); }
+.catalogo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
+.servicio { border: 1px solid var(--borde); border-radius: 16px; background: var(--panel); overflow: hidden; }
+.servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--borde); }
+.servicio .texto { padding: 1.6rem; }
+.servicio h3 { font-size: 1.55rem; margin: .6rem 0 1rem; }
+.servicio p { color: var(--sec); }
+.servicio p + p { margin-top: .9rem; }
+.servicio .caso { border-top: 1px solid var(--borde); padding-top: 1rem; margin-top: 1.2rem; font-size: .95rem; }
+.servicio strong { color: var(--texto); font-weight: 600; }
+.servicio a { display: inline-block; margin-top: 1rem; min-height: 44px; padding: .5rem 0; font-weight: 600; }
+.pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; margin-top: 2rem; counter-reset: paso; }
+.pasos li { counter-increment: paso; color: var(--sec); }
+.pasos li::before { content: '0' counter(paso); display: block; color: var(--acento); margin-bottom: .5rem; }
+.pasos h3 { color: var(--texto); font-size: 1.2rem; margin-bottom: .8rem; }
+.bim { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.bim p { max-width: 39rem; color: var(--sec); }
+.bim a { flex-shrink: 0; padding: .7rem 0; }
+.contacto { padding-bottom: 4rem; }
+.contacto p { max-width: 41rem; color: var(--sec); }
+footer { border-top: 1px solid var(--borde); padding: 2rem 0; color: var(--sec); font-size: .85rem; }
+footer a { color: inherit; }
+@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo,.pasos { grid-template-columns: 1fr; } .bim { display: block; } .bim a { display: inline-block; margin-top: 1rem; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.pelicula{max-width:640px;margin:0 auto}
+.pelicula video{display:block;width:100%;aspect-ratio:1/1;background:#faf8f5;border:1px solid var(--border,#e3ddd2);border-radius:12px}
+.pelicula figcaption{margin-top:.75rem;font-size:.95rem;color:var(--muted,#6b6257);text-align:center}
+.limites{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.limites div{border:1px solid var(--border,#e3ddd2);border-radius:12px;padding:1.1rem 1.25rem;background:var(--surface,#fff)}
+.limites h3{margin:0 0 .4rem;font-size:1.05rem}
+.limites p{margin:0}
+/* ---- Armario: la demo de 10 prendas ---- */
+.armario-demo { margin-top: 1.6rem; }
+.modos { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: .8rem; }
+.modos button { min-height: 44px; padding: .5rem 1.1rem; border: 1px solid var(--borde); border-radius: 999px; background: var(--panel); color: var(--texto); font: 600 .95rem var(--sans); cursor: pointer; }
+.modos button:hover { border-color: var(--acento); }
+.modos button[aria-pressed="true"] { background: var(--acento); border-color: var(--acento); color: #fff; }
+.modos button:focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
+.criterio { color: var(--sec); font-size: .9rem; margin-bottom: .8rem; }
+.baldas { border: 8px solid var(--borde); border-radius: 16px; background: var(--panel); padding: .4rem 0 .5rem; }
+.balda + .balda { border-top: 1px solid var(--borde); }
+.rotulo { display: flex; align-items: center; gap: .5rem; margin: .7rem 1.4rem 0; font: 700 .72rem var(--serif); letter-spacing: .09em; text-transform: uppercase; color: var(--sec); }
+.rotulo i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; border: 1px solid var(--borde); }
+.rotulo b { font-weight: 400; }
+.carril { position: relative; display: flex; align-items: flex-start; gap: 0; padding: 16px 28px 0; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+.carril::before { content: ''; position: absolute; top: 24px; left: 14px; right: 14px; height: 5px; border-radius: 4px; background: linear-gradient(var(--sec), var(--borde)); }
+.prenda { position: relative; flex: 0 0 92px; width: 92px; height: 222px; margin: 0; perspective: 800px; }  /* diez caben en una fila dentro de .wrap */
+.prenda img { display: block; position: absolute; top: 12px; left: 50%; width: 170px; height: auto; aspect-ratio: 1; object-fit: contain; transform: translateX(-50%) rotateY(20deg) rotateZ(-2deg); transform-origin: 50% 0; transition: transform .45s cubic-bezier(.2,.8,.25,1); filter: drop-shadow(8px 6px 5px rgba(0,0,0,.14)); pointer-events: none; }
+.prenda:hover { z-index: 2; }
+.prenda:hover img { transform: translateX(-50%) translateY(-7px) rotateY(0deg) scale(1.05); }
+.prenda figcaption { position: absolute; bottom: 4px; width: 100%; text-align: center; font-size: .72rem; line-height: 1.35; color: var(--sec); }
+.nota-demo { margin-top: 1rem; color: var(--sec); font-size: .9rem; max-width: 42rem; }
+@media (max-width: 720px) {
+  .prenda { flex-basis: 84px; width: 84px; height: 200px; }
+  .prenda img { width: 140px; }
+  .carril { padding: 14px 16px 0; }
+  .limites { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .prenda img { transition: none; } }
+
+</style>
+</head>
+<body>
+<header class="barra">
+  <nav>
+    <a class="marca" href="/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="/#producto">El producto</a>
+    <a class="item" href="/#casos">Casos</a>
+    <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="#contacto">Contacto</a>
+    <a class="item idioma" data-i18n-alt href="/en/armario.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
+  </nav>
+</header>
+<main class="wrap">
+<div class="hero">
+<p class="etiqueta">Aplicaciones · Armario</p>
+<h1>Tu ropa, fichada y colgada en baldas.</h1>
+<p class="intro">Una foto de cada prenda y una ficha: tipo, marca, talla, color. Con eso, el armario entero se ordena por tonalidad o por tipo, dice qué usas y qué no, y propone conjuntos que puedes ver puestos. Todo en tu teléfono, sin que las fotos salgan de él.</p>
+<div class="acciones"><a class="cta" href="#demo">Probar con 10 prendas</a><a href="#pelicula">Ver el vídeo</a><a href="aplicaciones.html">Volver a Aplicaciones</a></div>
+</div>
+<section id="demo">
+<h2>Pruébalo: coloca estas 10 prendas</h2>
+<p class="bajada">Son diez prendas de mi armario real, recreadas sobre percha. Colócalas por color, por tipo o en dos baldas, arriba y abajo. Pasa el cursor o toca una prenda para sacarla de la barra.</p>
+<div class="armario-demo" id="armario-demo">
+<div class="modos" role="group" aria-label="Cómo colocar las prendas">
+<button type="button" data-modo="color" aria-pressed="false">Por color</button>
+<button type="button" data-modo="tipo" aria-pressed="false">Por tipo</button>
+<button type="button" data-modo="cat" aria-pressed="false">Arriba y abajo</button>
+<button type="button" data-modo="mezcla" aria-pressed="false">Mezclar</button>
+</div>
+<p class="criterio" id="criterio"><span data-para="">Como llegaron: sin orden.</span><span data-para="color" hidden>Por color: neutros de claro a oscuro, después por tono.</span><span data-para="tipo" hidden>Por tipo: las iguales, juntas.</span><span data-para="cat" hidden>Arriba y abajo: lo que va cerca de la cara, primero.</span><span data-para="mezcla" hidden>Mezcladas. Vuelve a colocarlas.</span><span data-cat="arriba" hidden>Arriba</span><span data-cat="abajo" hidden>Abajo</span></p>
+<div class="baldas" id="baldas">
+<div class="balda"><div class="carril" id="fuente">
+<figure class="prenda" data-id="pr-083" data-cat="arriba" data-hex="#f8f8f6"><img src="brand/servicios/armario/pr-083.webp" alt="Camiseta blanca en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Camiseta</span> · <span class="c">Blanco</span></figcaption></figure>
+<figure class="prenda" data-id="pr-008" data-cat="abajo" data-hex="#1f2a44"><img src="brand/servicios/armario/pr-008.webp" alt="Chino azul marino en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Chino</span> · <span class="c">Azul marino</span></figcaption></figure>
+<figure class="prenda" data-id="pr-112" data-cat="arriba" data-hex="#2e7d4f"><img src="brand/servicios/armario/pr-112.webp" alt="Polo verde en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Polo</span> · <span class="c">Verde</span></figcaption></figure>
+<figure class="prenda" data-id="pr-023" data-cat="abajo" data-hex="#1c1c1c"><img src="brand/servicios/armario/pr-023.webp" alt="Pantalón negro en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Pantalón</span> · <span class="c">Negro</span></figcaption></figure>
+<figure class="prenda" data-id="pr-054" data-cat="arriba" data-hex="#2f5bd0"><img src="brand/servicios/armario/pr-054.webp" alt="Camisa azul en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Camisa</span> · <span class="c">Azul</span></figcaption></figure>
+<figure class="prenda" data-id="pr-009" data-cat="abajo" data-hex="#d8c29a"><img src="brand/servicios/armario/pr-009.webp" alt="Chino beige en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Chino</span> · <span class="c">Beige</span></figcaption></figure>
+<figure class="prenda" data-id="pr-040" data-cat="arriba" data-hex="#6e4b2a"><img src="brand/servicios/armario/pr-040.webp" alt="Cazadora marrón en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Cazadora</span> · <span class="c">Marrón</span></figcaption></figure>
+<figure class="prenda" data-id="pr-108" data-cat="arriba" data-hex="#c4c4c4"><img src="brand/servicios/armario/pr-108.webp" alt="Sudadera gris con capucha en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Sudadera</span> · <span class="c">Gris</span></figcaption></figure>
+<figure class="prenda" data-id="pr-013" data-cat="abajo" data-hex="#2f5bd0"><img src="brand/servicios/armario/pr-013.webp" alt="Vaquero azul en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Vaquero</span> · <span class="c">Azul</span></figcaption></figure>
+<figure class="prenda" data-id="pr-107" data-cat="arriba" data-hex="#6e1f2e"><img src="brand/servicios/armario/pr-107.webp" alt="Sudadera burdeos en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Sudadera</span> · <span class="c">Burdeos</span></figcaption></figure>
+</div></div>
+</div>
+<p class="nota-demo" id="nota-demo">En la aplicación, además, cada prenda tiene su ficha y su veredicto de color y de corte; y las baldas se combinan con filtros, marca y búsqueda.</p>
+</div>
+</section>
+<section id="pelicula">
+<h2>El armario real, en 35 segundos</h2>
+<p class="bajada">Es mi ropa: 82 prendas fichadas. El vídeo enseña las tarjetas, la barra de perchas, las baldas por tipo y por color, y tres conjuntos puestos en mí con IA.</p>
+<figure class="pelicula">
+<video controls playsinline preload="metadata" poster="/brand/servicios/armario-poster.jpg" width="1080" height="1080" data-goatcounter-click="armario-play" data-goatcounter-no-session="1">
+<source src="/brand/servicios/armario.mp4" type="video/mp4">
+Tu navegador no reproduce este vídeo. <a href="brand/servicios/armario.mp4">Descárgalo</a>.
+</video>
+<figcaption>Tarjetas → perchas → baldas por tipo → baldas por color → puestas en mí.</figcaption>
+</figure>
+</section>
+<section>
+<h2>Cómo funciona</h2>
+<p class="bajada">Tres pasos, y el trabajo pesado lo hace el teléfono.</p>
+<ol class="pasos">
+<li><h3>Una foto por prenda</h3><p>Se recorta sola, se propone el tipo y el color, y queda una ficha con marca, talla y composición si se leen en la etiqueta.</p></li>
+<li><h3>El armario se ordena</h3><p>Perchas, tarjetas o tabla. Baldas por color, tipo, marca o por lo que mejor te sienta. Filtros y búsqueda por encima.</p></li>
+<li><h3>Conjuntos y veredictos</h3><p>Con tu tono de piel y tu silueta, cada prenda recibe un veredicto de color y de corte, y salen conjuntos que puedes ver puestos.</p></li>
+</ol>
+</section>
+<section>
+<h2>Lo que es y lo que no</h2>
+<div class="limites">
+<div><h3>Un prototipo en uso</h3><p>Es la aplicación que uso cada día con mi ropa. La primera versión pública será para iPhone.</p></div>
+<div><h3>Nada sale del teléfono</h3><p>Las fotos y las fichas viven en tu dispositivo. Exportar e importar es cosa tuya, sin cuenta ni servidor.</p></div>
+<div><h3>Las pruebas en mí son IA</h3><p>Los conjuntos puestos son simulaciones para comparar. La talla y la caída exacta se comprueban al vestirse.</p></div>
+<div><h3>El estilista sigue siendo humano</h3><p>Los veredictos de color y corte parten de un análisis hecho por un profesional. La aplicación lo aplica a cada prenda; no lo sustituye.</p></div>
+</div>
+</section>
+<section class="contacto" id="contacto">
+<h2>¿Quieres estar en la primera versión?</h2>
+<p>Escríbeme y te aviso cuando salga para iPhone. Si tienes una idea parecida para otra colección, cuéntamela: la misma base sirve para cualquier cosa que se fotografíe y se ordene.</p>
+<div class="acciones"><a class="cta" href="mailto:hola@ontosdigital.es?subject=Armario" data-goatcounter-click="armario-contacto" data-goatcounter-no-session="1">Escríbeme a hola@ontosdigital.es</a><a href="/#contacto">Usar el formulario de contacto</a></div>
+</section>
+</main>
+<script>
+(function(){
+  var demo=document.getElementById('armario-demo'), baldas=document.getElementById('baldas'), criterio=document.getElementById('criterio');
+  var prendas=Array.prototype.slice.call(baldas.querySelectorAll('.prenda'));
+  var reducido=window.matchMedia('(prefers-reduced-motion: reduce)');
+  function texto(p,sel){var e=p.querySelector(sel);return e?e.textContent.trim():'';}
+  // clave de color: neutros de claro a oscuro, después por tono (misma regla que la aplicación)
+  function claveColor(p){
+    var h=(p.getAttribute('data-hex')||'').replace('#','');
+    if(!/^[0-9a-f]{6}$/i.test(h))return[2,0,0];
+    var r=parseInt(h.slice(0,2),16)/255,g=parseInt(h.slice(2,4),16)/255,b=parseInt(h.slice(4,6),16)/255;
+    var max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min,l=(max+min)/2;
+    var sat=d?d/(1-Math.abs(2*l-1)):0,tono=0;
+    if(d)tono=(((max===r?(g-b)/d:max===g?(b-r)/d+2:(r-g)/d+4)*60)+360)%360;
+    return sat<.16?[0,-l,0]:[1,tono,-l];
+  }
+  function compara(a,b){for(var i=0;i<a.length;i++){if(a[i]!==b[i])return a[i]-b[i];}return 0;}
+  var modos={
+    color:{clave:function(p){return texto(p,'.c');},orden:function(a,b){return compara(claveColor(a.prendas[0]),claveColor(b.prendas[0]));},rotulo:function(p){return texto(p,'.c');},muestra:true},
+    tipo:{clave:function(p){return texto(p,'.t');},orden:function(a,b){return b.prendas.length-a.prendas.length||a.rotulo.localeCompare(b.rotulo);},rotulo:function(p){return texto(p,'.t');}},
+    cat:{clave:function(p){return p.getAttribute('data-cat');},orden:function(a,b){return (a.clave==='arriba'?0:1)-(b.clave==='arriba'?0:1);},rotulo:function(p){var e=criterio.querySelector('[data-cat="'+p.getAttribute('data-cat')+'"]');return e?e.textContent:p.getAttribute('data-cat');}}
+  };
+  // con diez prendas caben en una fila: color y tipo REORDENAN la barra; solo arriba/abajo la parte en baldas
+  function agrupa(lista,modo){
+    if(!modo)return[{clave:'',rotulo:'',prendas:lista}];
+    if(modo==='color')return[{clave:'',rotulo:'',prendas:lista.slice().sort(function(a,b){return compara(claveColor(a),claveColor(b));})}];
+    if(modo==='tipo')return[{clave:'',rotulo:'',prendas:lista.slice().sort(function(a,b){return texto(a,'.t').localeCompare(texto(b,'.t'))||compara(claveColor(a),claveColor(b));})}];
+    var m=modos[modo],grupos=[],idx={};
+    lista.forEach(function(p){var k=m.clave(p);if(!(k in idx)){idx[k]=grupos.length;grupos.push({clave:k,rotulo:m.rotulo(p),hex:m.muestra?p.getAttribute('data-hex'):null,prendas:[]});}grupos[idx[k]].prendas.push(p);});
+    if(modo==='color')grupos.forEach(function(g){g.prendas.sort(function(a,b){return compara(claveColor(a),claveColor(b));});});
+    return grupos.sort(m.orden);
+  }
+  function mezcla(lista){var a=lista.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  var orden=prendas.slice(), modoActual='';
+  function pinta(modo){
+    var antes={};prendas.forEach(function(p){antes[p.getAttribute('data-id')]=p.getBoundingClientRect();});
+    var grupos=agrupa(orden,modo);
+    baldas.innerHTML='';
+    grupos.forEach(function(g){
+      var balda=document.createElement('div');balda.className='balda';
+      if(g.rotulo){var h=document.createElement('h3');h.className='rotulo';if(g.hex){var i=document.createElement('i');i.style.background=g.hex;h.appendChild(i);}h.appendChild(document.createTextNode(g.rotulo+' '));var n=document.createElement('b');n.textContent=g.prendas.length;h.appendChild(n);balda.appendChild(h);}
+      var carril=document.createElement('div');carril.className='carril';g.prendas.forEach(function(p){carril.appendChild(p);});balda.appendChild(carril);baldas.appendChild(balda);
+    });
+    if(!reducido.matches){prendas.forEach(function(p){var a=antes[p.getAttribute('data-id')],d=p.getBoundingClientRect();var dx=a.left-d.left,dy=a.top-d.top;if(!dx&&!dy)return;
+      p.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:520,easing:'cubic-bezier(.2,.8,.25,1)'});});}
+    demo.querySelectorAll('[data-modo]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-modo')===modo));});
+  }
+  demo.querySelectorAll('[data-modo]').forEach(function(b){b.addEventListener('click',function(){
+    var modo=b.getAttribute('data-modo');
+    if(modo==='mezcla'){orden=mezcla(prendas);modoActual='';}else{modoActual=modo;}
+    pinta(modoActual);criterio.querySelectorAll('[data-para]').forEach(function(e){e.hidden=e.getAttribute('data-para')!==modo;});
+  });});
+})();
+</script>
+<footer><div class="wrap"><p>© 2026 ONTOS · Fernando Calle · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a></p></div></footer>
+<script src="/brand/analytics-preferences.js?v=2"></script>
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
