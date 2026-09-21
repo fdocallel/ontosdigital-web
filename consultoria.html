@@ -11,9 +11,9 @@
 <!-- i18n:alt -->
 <link rel="alternate" hreflang="es" href="https://ontosdigital.es/consultoria.html">
 <!-- /i18n:alt -->
-<meta name="description" content="Consultoría por encargo desde Segovia: automatización y BIM en licitación pública, aplicaciones y webs a medida, experiencias 2D y 3D. Diagnóstico sin coste.">
+<meta name="description" content="Consultoría por encargo: automatización, BIM en licitación pública, aplicaciones y webs a medida, experiencias 2D y 3D. Diagnóstico de nivel BIM sin coste.">
 <meta property="og:title" content="Consultoría · ingeniería de la información por encargo · ONTOS">
-<meta property="og:description" content="Consultoría por encargo desde Segovia: automatización y BIM en licitación pública, aplicaciones y webs a medida, experiencias 2D y 3D. Diagnóstico sin coste.">
+<meta property="og:description" content="Consultoría por encargo: automatización, BIM en licitación pública, aplicaciones y webs a medida, experiencias 2D y 3D. Diagnóstico de nivel BIM sin coste.">
 <meta property="og:image" content="https://ontosdigital.es/brand/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -109,9 +109,8 @@
   .cta-medio a:hover { text-decoration: underline; }
 
 
-  /* las tres familias, numeradas */
-  .familias { margin-top: 0; grid-template-columns: repeat(3, 1fr); }
-  @media (max-width: 56rem) { .familias { grid-template-columns: 1fr; } }
+  /* las cinco familias, numeradas */
+  .familias { margin-top: 0; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
   .familia { display: flex; flex-direction: column; }
   .familia .num { display: block; font-size: 0.8rem; color: var(--acento); letter-spacing: 0.15em; margin-bottom: 0.8rem; font-weight: 600; }
   .familia p { flex: 1; }
@@ -154,8 +153,9 @@
     </a>
     <a class="item" href="producto.html">Producto</a>
     <a class="item" aria-current="page" href="consultoria.html">Consultoría</a>
+    <a class="item" href="aplicaciones.html">Aplicaciones</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
-    <a class="item" href="/#contacto">Contacto</a>
+    <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
 </header>
@@ -172,36 +172,55 @@
   coste.</p>
   <div class="ctas">
     <a class="cta" href="bim.html">La oferta BIM</a>
-    <a class="cta secundario" href="/#contacto">Cuéntame tu caso</a>
+    <a class="cta secundario" href="contacto.html">Cuéntame tu caso</a>
   </div>
 </div>
 
 <div class="wrap">
 
 <section id="familias">
-  <h2>Tres familias</h2>
+  <h2>Cinco familias</h2>
   <div class="cards familias">
     <div class="card familia">
       <span class="num">01</span>
-      <h3>Automatización y BIM</h3>
-      <p>Para equipos que repiten operaciones, revisan documentación o tienen que responder a un pliego
-      con requisitos BIM. Recibes un flujo automatizado, una comprobación o una herramienta concreta.</p>
+      <h3>Automatización</h3>
+      <p>Para equipos que repiten operaciones o revisan documentación a mano. Flujos automáticos,
+      comprobaciones y herramientas que conectan tus fuentes de datos, con IA donde aporta.</p>
+      <ul class="enlaces">
+        <li><a href="contacto.html">Cuéntame tu caso ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">02</span>
+      <h3>BIM</h3>
+      <p>Requisitos de información, coordinación y control de entregables para ingenierías y contratación
+      pública. Empieza con un diagnóstico de nivel BIM sin coste.</p>
       <ul class="enlaces">
         <li><a href="bim.html">Requisitos BIM en licitación pública ▸</a></li>
         <li><a href="escrito-plan-bim-ingenieria.html">Qué exige el Plan BIM a una ingeniería mediana ▸</a></li>
       </ul>
     </div>
     <div class="card familia">
-      <span class="num">02</span>
-      <h3>Aplicaciones y webs a medida</h3>
-      <p>Para convertir una colección, unos documentos o un proceso en una herramienta que se usa. Una web
-      que el cliente mantiene, un editor de PDF, una casa en 3D desde un vuelo de dron.</p>
+      <span class="num">03</span>
+      <h3>Aplicaciones a medida</h3>
+      <p>Para convertir unos documentos, una colección o un proceso en una herramienta que se usa: un
+      editor de PDF, una app de armario, una casa en 3D desde un vuelo de dron.</p>
       <ul class="enlaces">
         <li><a href="aplicaciones.html">Ver las aplicaciones ▸</a></li>
       </ul>
     </div>
     <div class="card familia">
-      <span class="num">03</span>
+      <span class="num">04</span>
+      <h3>Webs</h3>
+      <p>Páginas para enseñar un trabajo o una obra, con lo que haga falta para que su dueño las actualice
+      sin depender de nadie. La galería de José María Casado, pintor, es una.</p>
+      <ul class="enlaces">
+        <li><a href="https://josemariacasado.com" rel="noopener" target="_blank">Visitar josemariacasado.com ▸</a></li>
+        <li><a href="aplicaciones.html#webs">Cómo se hizo ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">05</span>
       <h3>Experiencias interactivas 2D y 3D</h3>
       <p>Para explorar una marca, un personaje o un lugar desde el navegador. Un juego, una figura que
       saluda, un mundo al que entrar.</p>
@@ -227,7 +246,7 @@
   <p>Lo que voy construyendo, para probar en el navegador: editor PDF, juego 2D, figura 3D, mundos 3D,
   modelado desde dron y la web de un pintor.</p>
   <a class="cta secundario" href="aplicaciones.html">Ver las aplicaciones ▸</a>
-  <p class="cta-medio">Cuéntame qué os come horas: <a href="/#contacto">formulario ▸</a> · <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a></p>
+  <p class="cta-medio">Cuéntame qué os come horas: <a href="contacto.html">formulario ▸</a> · <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a></p>
 </section>
 
 <footer>

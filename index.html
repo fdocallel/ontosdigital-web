@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ONTOS Digital · producto y consultoría</title>
+<title>ONTOS · todo lo tuyo, ordenado y al día</title>
 <meta name="theme-color" content="#faf8f5">
 <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
@@ -14,9 +14,9 @@
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/">
 <!-- /i18n:alt -->
 <meta name="msvalidate.01" content="515812BC9718626E8FC3D1D0174B09DB">
-<meta name="description" content="ONTOS Digital, Segovia. ONTOS, un gemelo digital de tu vida y tu negocio que una IA mantiene al día; y consultoría por encargo: automatización, BIM, apps y 3D.">
-<meta property="og:title" content="ONTOS Digital · producto y consultoría">
-<meta property="og:description" content="ONTOS Digital, Segovia. ONTOS, un gemelo digital de tu vida y tu negocio que una IA mantiene al día; y consultoría por encargo: automatización, BIM, apps y 3D.">
+<meta name="description" content="ONTOS: un gemelo digital de tu vida y tu negocio que una IA mantiene al día, y consultoría por encargo: automatización, BIM, aplicaciones, webs y 3D.">
+<meta property="og:title" content="ONTOS · todo lo tuyo, ordenado y al día">
+<meta property="og:description" content="ONTOS: un gemelo digital de tu vida y tu negocio que una IA mantiene al día, y consultoría por encargo: automatización, BIM, aplicaciones, webs y 3D.">
 <meta property="og:image" content="https://ontosdigital.es/brand/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -28,7 +28,7 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "ONTOS Digital",
+  "name": "ONTOS",
   "url": "https://ontosdigital.es/",
   "email": "hola@ontosdigital.es",
   "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
@@ -100,108 +100,14 @@
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
   .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
   .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
-  .hero .plazo { margin-top: 1.4rem; font-size: 0.85rem; color: var(--sec); }
 
-  /* ---- secciones ---- */
-  section { padding: 4.2rem 0; }
-  h2 {
-    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
-    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
-  }
-  .intro p { max-width: 42rem; font-size: 1.12rem; }
-  .intro p + p { margin-top: 1rem; }
-  .intro strong { color: var(--realce); font-weight: 600; }
-
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
-  .card {
-    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
-    padding: 1.8rem 1.6rem;
-    transition: transform 0.15s ease, border-color 0.15s ease;
-  }
-  .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
-  .card p { font-size: 0.95rem; color: var(--sec); }
-  .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
-  a.card:hover { transform: translateY(-4px); border-color: var(--teja); }
-
-  /* las dos maneras de trabajar: misma rejilla que las ediciones del producto */
-  .ediciones { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  @media (max-width: 48rem) { .ediciones { grid-template-columns: 1fr; } }
-  a.edicion { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); }
-  .edicion .icono { font-size: 2rem; }
-  .edicion h3 { font-size: 1.25rem; }
-  .edicion .edicion-desc { font-size: 0.98rem; color: var(--sec); flex: 1; }
-  .edicion .edicion-desc + .edicion-desc { margin-top: 0.8rem; flex: 0; }
-  .edicion .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
-  /* lo último: el vídeo de Armario, vertical, sin autoplay */
-  .ultimo { display: grid; grid-template-columns: 18rem 1fr; gap: 2.4rem; align-items: center; margin: 0; }
-  @media (max-width: 48rem) { .ultimo { grid-template-columns: 1fr; gap: 1.4rem; } }
-  .ultimo video { width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; border-radius: 14px; border: 1px solid var(--borde); background: var(--panel); }
-  .ultimo figcaption { color: var(--sec); font-size: 0.95rem; }
-  .ultimo figcaption p + p { margin-top: 0.8rem; }
-  .ultimo figcaption a { color: var(--acento); font-weight: 600; text-decoration: none; }
-  .ultimo figcaption a:hover { text-decoration: underline; }
-
-  .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
-  .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
-  /* Retrato de Quién: brand/fernando.jpg, 600x800 (3:4), ~50 KB */
-  .quien-con-foto { display: grid; grid-template-columns: 13rem 1fr; gap: 2.4rem; align-items: start; }
-  @media (max-width: 48rem) { .quien-con-foto { grid-template-columns: 1fr; gap: 1.6rem; } }
-  .retrato { margin: 0; }
-  .retrato img {
-    /* height:auto es obligatorio: el atributo height="800" del HTML es una pista de
-       presentación que gana a aspect-ratio y estiraba el retrato a 800 px de alto. */
-    width: 13rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
-    /* borde algo más marcado que --borde: la pared beige de la foto y el fondo hueso
-       se diferencian solo un 5 % y la silueta se disolvía en la página */
-    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
-  }
-  @media (prefers-color-scheme: dark) { .retrato img { border-color: rgba(255,255,255,0.12); } }
-  @media (max-width: 48rem) { .retrato img { width: 10rem; } }
-  .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
-
-  /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
-     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
-  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
-  .cta-medio a {
-    color: var(--acento); text-decoration: none; font-weight: 600;
-    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
-  }
-  .cta-medio a:hover { text-decoration: underline; }
-
-  /* ---- contacto ---- */
-  .contacto { border-top: 1px solid var(--borde); }
-  .contacto .lead { color: var(--sec); max-width: 34rem; }
-  form { max-width: 34rem; margin-top: 2rem; display: grid; gap: 0.9rem; }
-  label { font-size: 0.85rem; color: var(--sec); display: block; margin-bottom: 0.3rem; }
-  input[type="text"], input[type="email"], select, textarea {
-    width: 100%; padding: 0.7rem 0.9rem; border-radius: 10px;
-    border: 1px solid var(--borde); background: var(--panel); color: var(--texto);
-    font: inherit; font-size: 0.95rem;
-  }
-  /* el select nativo de WebKit ignora padding y borde: se pinta como los inputs y se le
-     dibuja la flecha a mano */
-  select {
-    -webkit-appearance: none; appearance: none; cursor: pointer; padding-right: 2.4rem;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23d4713b' stroke-width='1.8'/></svg>");
-    background-repeat: no-repeat; background-position: right 0.9rem center;
-  }
-  select:invalid { color: var(--sec); }
-  input:focus, select:focus, textarea:focus { outline: 2px solid var(--teja); outline-offset: 1px; border-color: transparent; }
-  textarea { min-height: 7rem; resize: vertical; }
-  form .cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
-  .form-nota { font-size: 0.8rem; color: var(--sec); }
-  /* flex con gap en vez de margin: al envolver en móvil, el botón quedaba metido
-     medio centímetro respecto al margen de la columna */
-  .alt-mail { margin-top: 2.2rem; font-size: 0.95rem; color: var(--sec);
-    display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
-  .alt-mail a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
-  .copiar {
-    padding: 0.35rem 0.9rem; border-radius: 999px;
-    font: inherit; font-size: 0.8rem; border: 1px solid var(--borde);
-    background: none; color: var(--sec); cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .copiar:hover { color: var(--realce); border-color: var(--realce); }
+  /* ---- el vídeo de Armario, solo, centrado ---- */
+  section { padding: 3rem 0 4.2rem; }
+  .video { margin: 0 auto; max-width: 32rem; }
+  .video video { width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; border-radius: 14px; border: 1px solid var(--borde); background: var(--panel); }
+  .video figcaption { margin-top: 0.9rem; text-align: center; color: var(--sec); font-size: 0.95rem; }
+  .video figcaption a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .video figcaption a:hover { text-decoration: underline; }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -230,8 +136,9 @@
     </a>
     <a class="item" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
+    <a class="item" href="aplicaciones.html">Aplicaciones</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
-    <a class="item" href="#contacto">Contacto</a>
+    <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
 </header>
@@ -259,106 +166,22 @@
   </svg>
   <div class="wordmark">ONTOS</div>
   <h1>Todo lo tuyo, ordenado y al día.</h1>
-  <p class="lema">Casi nadie tiene un problema de información: tiene un problema de orden. A eso se dedica
-  ONTOS Digital, desde Segovia.</p>
+  <p class="lema">Casi nadie tiene un problema de información: tiene un problema de orden. A eso se dedica ONTOS.</p>
   <div class="ctas">
     <a class="cta" href="producto.html">El producto</a>
     <a class="cta secundario" href="consultoria.html">La consultoría</a>
   </div>
-  <p class="plazo">Un producto en piloto privado y una consultoría por encargo.</p>
 </div>
 
 <div class="wrap">
 
-<section id="maneras">
-  <h2>Dos maneras de trabajar</h2>
-  <div class="ediciones">
-    <a class="card edicion" href="producto.html">
-      <span class="icono">◈</span>
-      <h3>ONTOS, el producto</h3>
-      <p class="edicion-desc">Un modelo digital de todo lo tuyo, y una IA que lo mantiene al día. Finanzas,
-      documentos, trámites, proyectos, agenda y salud, en tu máquina y consultables preguntando. Lo construí
-      para mí y lo uso todos los días.</p>
-      <p class="edicion-desc">En piloto privado, por invitación.</p>
-      <span class="ver">Ver el producto ▸</span>
-    </a>
-    <a class="card edicion" href="consultoria.html">
-      <span class="icono">▣</span>
-      <h3>Consultoría</h3>
-      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
-           No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
-      <p class="edicion-desc">El producto nació de poner en orden problemas reales, y sigo haciéndolo por encargo: me
-      cuentas qué os come horas y os monto la solución. Automatización e IA a medida, datos del
-      mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea más pedida ahora
-      mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
-      coste.</p>
-      <span class="ver">Ver la consultoría ▸</span>
-    </a>
-  </div>
-</section>
-
-<section id="ultimo">
-  <h2>Lo último</h2>
-  <figure class="ultimo">
+<section id="video">
+  <figure class="video">
     <video controls playsinline preload="none" poster="brand/servicios/armario-poster.jpg" width="1080" height="1080">
       <source src="brand/servicios/armario.mp4" type="video/mp4">
     </video>
-    <figcaption>
-      <p><a href="armario.html">Armario, 35 s</a> · la app de ropa del producto, con demo de 10 prendas.</p>
-      <p>Más piezas para probar en el navegador: <a href="aplicaciones.html">Aplicaciones ▸</a></p>
-    </figcaption>
+    <figcaption>Armario, 35 s · la app de ropa del producto. <a href="armario.html">Probar con 10 prendas ▸</a></figcaption>
   </figure>
-</section>
-
-<section class="intro" id="quien">
-  <h2>Quién</h2>
-  <div class="quien-con-foto">
-    <figure class="retrato">
-      <img src="brand/fernando.jpg" alt="Retrato de Fernando Calle, ingeniero de caminos y fundador de ONTOS"
-           width="600" height="800" decoding="async">
-      <figcaption>Fernando Calle · Segovia</figcaption>
-    </figure>
-    <div>
-      <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos y
-      automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), premiado por I+D
-      en automatización e IA. Esa cabeza está detrás de las dos cosas.</p>
-      <p class="verificable"><a href="fernando-calle.html">Quién soy y de dónde vengo ▸</a>
-      · <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">LinkedIn</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="contacto" id="contacto">
-  <h2>Contacto</h2>
-  <p class="lead">Cuéntame qué te come horas, o dime que quieres ver ONTOS por dentro. Contesto normalmente
-  en 24-48 horas.</p>
-  <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
-    <div><label for="f-nombre">Nombre</label>
-    <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
-    <div><label for="f-org">Empresa u organismo (si lo hay)</label>
-    <input type="text" id="f-org" name="organizacion" autocomplete="organization"></div>
-    <div><label for="f-email">Correo</label>
-    <input type="email" id="f-email" name="email" required autocomplete="email"></div>
-    <div><label for="f-interes">Qué buscas</label>
-    <select id="f-interes" name="interes" required>
-      <option value="" disabled selected>Elige</option>
-      <option value="consultoria">Un encargo (consultoría)</option>
-      <option value="producto">Usar ONTOS (producto)</option>
-      <option value="otra">Otra cosa</option>
-    </select></div>
-    <div><label for="f-msg">Qué te come horas</label>
-    <textarea id="f-msg" name="mensaje" required></textarea></div>
-    <input type="hidden" name="_subject" value="Contacto web · Portada">
-    <input type="hidden" name="_next" value="https://ontosdigital.es/gracias.html">
-    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-    <input type="hidden" name="_captcha" value="false">
-    <button class="cta" type="submit">Enviar</button>
-    <p class="form-nota">El envío pasa por FormSubmit solo para llegar a mi correo;
-    detalle en la <a href="privacidad.html" style="color:inherit">política de privacidad</a>.</p>
-  </form>
-  <p class="alt-mail">O directamente:
-  <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button></p>
-  <p class="cta-medio">¿Lo que quieres es usar ONTOS tú, no encargarme un trabajo? Se entra por invitación: <a href="solicitud.html">solicita el acceso ▸</a></p>
 </section>
 
 <footer>
@@ -366,26 +189,6 @@
 </footer>
 
 </div>
-
-<script>
-// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
-document.querySelectorAll("[data-copiar]").forEach(function (b) {
-  b.addEventListener("click", function () {
-    function hecho() {
-      var t = b.textContent; b.textContent = "copiado ✓";
-      setTimeout(function () { b.textContent = t; }, 1600);
-    }
-    function fallback() { // navegadores sin clipboard API o escritura rechazada
-      var t = document.createElement("textarea");
-      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
-      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
-      document.body.removeChild(t);
-    }
-    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
-    else fallback();
-  });
-});
-</script>
 
 <!-- GoatCounter: recuento anónimo, sin cookies -->
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacto · ONTOS</title>
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="canonical" href="https://ontosdigital.es/contacto.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/contacto.html">
+<!-- /i18n:alt -->
+<meta name="description" content="Cuéntame qué te come horas o pide ver ONTOS por dentro. Formulario, correo hola@ontosdigital.es y acceso por invitación.">
+<meta property="og:title" content="Contacto · ONTOS">
+<meta property="og:description" content="Cuéntame qué te come horas o pide ver ONTOS por dentro. Formulario, correo hola@ontosdigital.es y acceso por invitación.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ontosdigital.es/contacto.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg); color: var(--texto);
+    font-size: 1rem; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+  h1, h3, .serif { font-family: var(--serif); }
+
+  /* ---- cabecera ---- */
+  .hero {
+    min-height: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 4rem 1.5rem 1rem;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 45% at 50% 28%, rgba(212,113,59,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+  }
+  .hero .lema {
+    margin-top: 1.2rem; max-width: 40rem;
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+  }
+  .kicker {
+    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
+  }
+  .cta {
+    display: inline-block;
+    padding: 0.8rem 1.8rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+
+  /* Puente al acceso al producto. Sobrio a propósito: es una invitación, no un
+     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
+  .cta-medio a {
+    color: var(--acento); text-decoration: none; font-weight: 600;
+    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
+  }
+  .cta-medio a:hover { text-decoration: underline; }
+
+  /* ---- contacto ---- */
+  section { padding: 2rem 0 4.2rem; }
+  .contacto { max-width: 34rem; margin: 0 auto; }
+  form { max-width: 34rem; display: grid; gap: 0.9rem; }
+  label { font-size: 0.85rem; color: var(--sec); display: block; margin-bottom: 0.3rem; }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%; padding: 0.7rem 0.9rem; border-radius: 10px;
+    border: 1px solid var(--borde); background: var(--panel); color: var(--texto);
+    font: inherit; font-size: 0.95rem;
+  }
+  /* el select nativo de WebKit ignora padding y borde: se pinta como los inputs y se le
+     dibuja la flecha a mano */
+  select {
+    -webkit-appearance: none; appearance: none; cursor: pointer; padding-right: 2.4rem;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23d4713b' stroke-width='1.8'/></svg>");
+    background-repeat: no-repeat; background-position: right 0.9rem center;
+  }
+  select:invalid { color: var(--sec); }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--teja); outline-offset: 1px; border-color: transparent; }
+  textarea { min-height: 7rem; resize: vertical; }
+  form .cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
+  .form-nota { font-size: 0.8rem; color: var(--sec); }
+  /* flex con gap en vez de margin: al envolver en móvil, el botón quedaba metido
+     medio centímetro respecto al margen de la columna */
+  .alt-mail { margin-top: 2.2rem; font-size: 0.95rem; color: var(--sec);
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
+  .alt-mail a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
+  .copiar {
+    padding: 0.35rem 0.9rem; border-radius: 999px;
+    font: inherit; font-size: 0.8rem; border: 1px solid var(--borde);
+    background: none; color: var(--sec); cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .copiar:hover { color: var(--realce); border-color: var(--realce); }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="producto.html">Producto</a>
+    <a class="item" href="consultoria.html">Consultoría</a>
+    <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="fernando-calle.html">Sobre mí</a>
+    <a class="item" aria-current="page" href="contacto.html">Contacto</a>
+    <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <p class="kicker">Contacto</p>
+  <h1>Hablamos.</h1>
+  <p class="lema">Cuéntame qué te come horas, o dime que quieres ver ONTOS por dentro. Contesto normalmente
+  en 24-48 horas.</p>
+</div>
+
+<div class="wrap">
+
+<section class="contacto" id="formulario">
+  <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
+    <div><label for="f-nombre">Nombre</label>
+    <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
+    <div><label for="f-org">Empresa u organismo (si lo hay)</label>
+    <input type="text" id="f-org" name="organizacion" autocomplete="organization"></div>
+    <div><label for="f-email">Correo</label>
+    <input type="email" id="f-email" name="email" required autocomplete="email"></div>
+    <div><label for="f-interes">Qué buscas</label>
+    <select id="f-interes" name="interes" required>
+      <option value="" disabled selected>Elige</option>
+      <option value="consultoria">Un encargo (consultoría)</option>
+      <option value="producto">Usar ONTOS (producto)</option>
+      <option value="otra">Otra cosa</option>
+    </select></div>
+    <div><label for="f-msg">Qué te come horas</label>
+    <textarea id="f-msg" name="mensaje" required></textarea></div>
+    <input type="hidden" name="_subject" value="Contacto web · Contacto">
+    <input type="hidden" name="_next" value="https://ontosdigital.es/gracias.html">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+    <input type="hidden" name="_captcha" value="false">
+    <button class="cta" type="submit">Enviar</button>
+    <p class="form-nota">El envío pasa por FormSubmit solo para llegar a mi correo;
+    detalle en la <a href="privacidad.html" style="color:inherit">política de privacidad</a>.</p>
+  </form>
+  <p class="alt-mail">O directamente:
+  <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copiar</button></p>
+  <p class="cta-medio">¿Lo que quieres es usar ONTOS tú, no encargarme un trabajo? Se entra por invitación: <a href="solicitud.html">solicita el acceso ▸</a></p>
+</section>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+</footer>
+
+</div>
+
+<script>
+// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
+document.querySelectorAll("[data-copiar]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    function hecho() {
+      var t = b.textContent; b.textContent = "copiado ✓";
+      setTimeout(function () { b.textContent = t; }, 1600);
+    }
+    function fallback() { // navegadores sin clipboard API o escritura rechazada
+      var t = document.createElement("textarea");
+      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
+      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
+      document.body.removeChild(t);
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
+    else fallback();
+  });
+});
+</script>
+
+<!-- GoatCounter: recuento anónimo, sin cookies -->
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

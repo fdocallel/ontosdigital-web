@@ -81,10 +81,6 @@
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
     letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
   }
-  /* la pantalla Hoy, vertical (1185x1499), como una tarjeta más */
-  .pantalla { margin: 0 auto 1rem; max-width: 30rem; text-align: center; }
-  .pantalla img { width: 100%; height: auto; display: block; border-radius: 14px; border: 1px solid var(--borde); }
-  .pantalla figcaption { margin-top: 0.7rem; font-size: 0.85rem; color: var(--sec); }
 
   /* ---- secciones ---- */
   section { padding: 4.2rem 0; }
@@ -155,17 +151,22 @@
   @media (max-width: 48rem) { .retrato img { width: 10rem; } }
   .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
 
-  /* casos */
-  /* cinco tarjetas: a 64rem de ancho caben con 11rem de mínimo (con 13rem la quinta caía sola) */
-  .demos { margin-top: 1.8rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1rem; }
+  /* casos: cuatro tarjetas; el título lleva al caso y el pie da el caso o el vídeo directo
+     (dos enlaces dentro de la tarjeta, por eso la tarjeta es un div y no un <a>) */
+  .demos { margin-top: 1.8rem; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 30rem) { .demos { grid-template-columns: 1fr; } }
-  .card.demo { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); padding: 1.5rem 1.2rem; }
+  .card.demo { display: flex; flex-direction: column; color: var(--texto); padding: 1.5rem 1.2rem; }
+  .card.demo:hover { transform: translateY(-4px); border-color: var(--teja); }
   .card.demo h3 { font-size: 1.05rem; }
+  .card.demo h3 a { color: inherit; text-decoration: none; }
+  .card.demo h3 a:hover { text-decoration: underline; }
   .card.demo p { font-size: 0.9rem; }
   .card.demo .icono { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1; }
   .card.demo p { flex: 1; }
-  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
-  .card.demo .ver span { color: var(--sec); font-weight: 400; }
+  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--sec); }
+  .card.demo .ver a { display: inline-block; padding: 0.3rem 0; color: var(--acento); text-decoration: none; white-space: nowrap; }
+  .card.demo .ver a:hover { text-decoration: underline; }
   .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
   /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
      reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
@@ -204,8 +205,9 @@
     </a>
     <a class="item" aria-current="page" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
+    <a class="item" href="aplicaciones.html">Aplicaciones</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
-    <a class="item" href="/#contacto">Contacto</a>
+    <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
 </header>
@@ -223,15 +225,6 @@
 </div>
 
 <div class="wrap">
-
-<figure class="pantalla">
-  <picture>
-    <source srcset="producto/02-hoy-cockpit.webp" type="image/webp">
-    <img src="producto/02-hoy-cockpit.jpg" width="1185" height="1499" decoding="async"
-         alt="La pantalla Hoy de ONTOS: el día entero en una vista, con datos de muestra">
-  </picture>
-  <figcaption>Modo demo, datos de muestra.</figcaption>
-</figure>
 
 <section class="intro" id="producto">
   <h2>Qué es ONTOS</h2>
@@ -273,11 +266,10 @@
       <h3>ONTOS personal</h3>
       <p class="edicion-desc">Tu vida entera en un solo modelo, y la parte aburrida hecha sola.</p>
       <ul class="lineas">
-        <li><b>El núcleo</b>Hoy, notas, agenda y calendario, proyectos y red de contactos.</li>
+        <li><b>Organización</b>Hoy, notas, agenda y calendario, proyectos, documentos y red de contactos.</li>
+        <li><b>Salud</b>Entreno con progresión, composición, nutrición y descanso.</li>
         <li><b>Dinero</b>Patrimonio, gastos e ingresos, inversiones con reglas escritas.</li>
-        <li><b>Cuerpo</b>Entreno con progresión, composición, nutrición y descanso.</li>
-        <li><b>Lo tuyo</b>Los expedientes que te importen: una herencia, una obra, un idioma,
-        unos estudios. Los módulos se encienden cuando los pides.</li>
+        <li><b>Carrera</b>Formación, idiomas, trayectoria y tu propio negocio cuando lo tienes.</li>
       </ul>
     </div>
     <div class="card edicion">
@@ -302,31 +294,30 @@
   demo en movimiento.</p>
   </div>
   <div class="cards demos">
-    <a class="card demo" href="caso-sistema.html">
+    <div class="card demo">
       <span class="icono">◉</span>
-      <h3>El sistema completo</h3>
+      <h3><a href="caso-sistema.html">El sistema completo</a></h3>
       <p>El modelo entero y la IA operándolo: datos, documentos, respuestas con citas.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 90 s</span></span>
-    </a>
-    <a class="card demo" href="caso-finanzas.html">
+      <span class="ver"><a href="caso-sistema.html">Leer el caso ▸</a> · <a href="caso-90s.html">▶ Ver el vídeo</a></span>
+    </div>
+    <div class="card demo">
       <span class="icono">€</span>
-      <h3>Finanzas</h3>
+      <h3><a href="caso-finanzas.html">Finanzas</a></h3>
       <p>Gastos por API, proyección a 18 meses, ayudas vigiladas, inversión con reglas.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 70 s</span></span>
-    </a>
-    <a class="card demo" href="caso-organizacion.html">
+      <span class="ver"><a href="caso-finanzas.html">Leer el caso ▸</a> · <a href="finanzas-70s.html">▶ Ver el vídeo</a></span>
+    </div>
+    <div class="card demo">
       <span class="icono">☰</span>
-      <h3>Organización</h3>
+      <h3><a href="caso-organizacion.html">Organización</a></h3>
       <p>Proyectos con su siguiente paso, tareas, calendario y contactos al día.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 60 s</span></span>
-    </a>
-    <a class="card demo" href="caso-salud.html">
+      <span class="ver"><a href="caso-organizacion.html">Leer el caso ▸</a> · <a href="organizacion-60s.html">▶ Ver el vídeo</a></span>
+    </div>
+    <div class="card demo">
       <span class="icono">♥</span>
-      <h3>Salud</h3>
+      <h3><a href="caso-salud.html">Salud</a></h3>
       <p>Entreno con progresión automática, composición, nutrición y descanso del wearable.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 60 s</span></span>
-    </a>
-    <a class="card demo" href="armario.html"><span class="icono">▤</span><h3>Armario</h3><p>Armario: cada prenda fichada, colgada en baldas por color o tipo, y conjuntos para ver puestos.</p><span class="ver">Probar la demo <span>· ▶ vídeo 35 s</span></span></a>
+      <span class="ver"><a href="caso-salud.html">Leer el caso ▸</a> · <a href="salud-60s.html">▶ Ver el vídeo</a></span>
+    </div>
   </div>
   <p class="demos-nota">Cada caso incluye su demo animada. Sin sonido, con datos de muestra.</p>
   <div class="stats">
@@ -334,9 +325,8 @@
     <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
     <div class="stat"><div class="n">100%</div><div class="l">local y privado</div></div>
   </div>
-  <!-- El contacto vive en la portada; quien se convence lo hace viendo las áreas, y aquí
-       tiene que tener el botón. -->
-  <p class="cta-medio">¿Te suena a lo que llevas tiempo queriendo? <a href="/#contacto">Pídeme una demo ▸</a></p>
+  <!-- Quien se convence lo hace viendo las áreas, y aquí tiene que tener el botón. -->
+  <p class="cta-medio">¿Te suena a lo que llevas tiempo queriendo? <a href="contacto.html">Pídeme una demo ▸</a></p>
 </section>
 
 <section>

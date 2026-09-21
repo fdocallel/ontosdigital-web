@@ -25,6 +25,7 @@ PAGINAS = [
     ("index.html", True),
     ("producto.html", True),
     ("consultoria.html", True),
+    ("contacto.html", True),
     ("bim.html", True),
     ("aplicaciones.html", True),
     ("modelado-3d.html", True),

@@ -77,13 +77,17 @@
 /* Móvil: cuatro enlaces no caben a tamaño completo. Se aprieta el ritmo y, si aun así
    no entran, la fila se desplaza a los lados en vez de partirse. */
 @media (max-width: 34rem) {
-  /* 21-sep-2026: cinco ítems (Producto · Consultoría · Sobre mí · Contacto · EN); a 390 px
-     Contacto quedaba fuera del pliegue. Se aprieta gap y tamaño; sigue desplazable si no cabe. */
-  .barra nav { gap: 0.5rem; padding: 0.6rem 0.7rem; overflow-x: auto; scrollbar-width: none; }
+  /* 21-sep-2026: seis ítems (Producto · Consultoría · Aplicaciones · Sobre mí · Contacto · EN).
+     A 390 px no caben todos (medido en WebKit: 462 px con el wordmark); se aprieta gap y
+     tamaño para que «Sobre mí» quede entero a la vista, y «Contacto» aparece deslizando la
+     fila, con EN siempre pegado al borde. */
+  .barra nav { gap: 0.4rem; padding: 0.6rem 0.6rem; overflow-x: auto; scrollbar-width: none; }
   .barra nav::-webkit-scrollbar { display: none; }
-  .barra .marca { font-size: 0.9rem; letter-spacing: 0.02em; gap: 0.35rem; margin-right: 0.25rem; }
-  .barra .marca svg { width: 17px; height: 17px; }
-  .barra a.item { font-size: 0.72rem; }
+  /* Solo el logo: el wordmark «ONTOS» del enlace se oculta (font-size 0 conserva el nombre
+     accesible del enlace) y así entran los seis ítems en 390 px sin bajar de 11 px. */
+  .barra .marca { font-size: 0; gap: 0; margin-right: 0; }
+  .barra .marca svg { width: 20px; height: 20px; }
+  .barra a.item { font-size: 0.7rem; }
   /* Si la fila llega a desplazarse, el idioma se queda pegado al borde: es el enlace
      que un visitante que no lee español tiene que poder ver siempre. */
   .barra a.item.idioma {
