@@ -1,13 +1,15 @@
 {
   "_doc": "Traducción al inglés de caso-salud.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "Caso Salud: entreno, nutrición y descanso en un gemelo digital · ONTOS": "Health case: training, nutrition and rest in a digital twin · ONTOS",
+  "Caso Salud: entreno, nutrición y descanso en un gemelo digital · ONTOS": "Health case: training, nutrition and rest, in a digital twin",
   "Cómo un gemelo digital lleva entreno con progresión automática, composición corporal, nutrición y descanso del wearable. Caso real del sistema ONTOS.": "How a digital twin runs training with automatic progression, body composition, nutrition and rest from the wearable. A real case from the ONTOS system.",
   "Caso Salud: entreno, nutrición y descanso en un gemelo digital": "Health case: training, nutrition and rest in a digital twin",
   "Entreno con progresión automática, composición corporal medida con protocolo, nutrición registrada y descanso del wearable. Caso del sistema ONTOS.": "Training with automatic progression, body composition measured to a protocol, nutrition logged and rest from the wearable. A case from the ONTOS system.",
   "ONTOS": "ONTOS",
-  "El producto": "The product",
-  "Casos": "Cases",
-  "Escritos": "Writing",
+  "Producto": "Product",
+  "Consultoría": "Consulting",
+  "Aplicaciones": "Applications",
+  "Blog": "Blog",
+  "Sobre mí": "About me",
   "Contacto": "Contact",
   "Salud: el cuerpo también entra en el sistema": "Health: the body goes into the system too",
   "Entreno, composición corporal, nutrición y descanso, unidos en un solo modelo que la IA mantiene al día. Soy Fernando Calle y esto es lo que construí para mí.": "Training, body composition, nutrition and rest, brought together in a single model the AI keeps up to date. I am Fernando Calle and this is what I built for myself.",
@@ -35,6 +37,6 @@
   "Cuéntame qué te come horas": "Tell me what eats your hours",
   "Si en tu negocio hay datos repartidos en cuatro sitios que nadie junta, esto mismo se construye para eso.": "If your business has data scattered across four places that nobody brings together, this same thing gets built for exactly that.",
   "hola@ontosdigital.es": "hola@ontosdigital.es",
-  "o escríbeme desde <a href=\"/#contacto\">la página de contacto</a>": "or write to me from <a href=\"/#contacto\">the contact page</a>",
+  "o escríbeme desde <a href=\"contacto.html\">la página de contacto</a>": "or write to me from <a href=\"contacto.html\">the contact page</a>",
   "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }

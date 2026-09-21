@@ -4,9 +4,11 @@
   "El caso Finanzas de ONTOS: movimientos bancarios por API, proyección de tesorería a 18 meses, ayudas vigiladas e inversión con reglas escritas.": "The ONTOS finances case: bank transactions by API, an 18-month cash projection, grants watched and investing by written rules.",
   "Movimientos bancarios por API, proyección de tesorería a 18 meses, ayudas vigiladas e inversión con reglas escritas. Todo local y privado.": "Bank transactions by API, an 18-month cash projection, grants watched and investing by written rules. All local and private.",
   "ONTOS": "ONTOS",
-  "El producto": "The product",
-  "Casos": "Cases",
-  "Escritos": "Writing",
+  "Producto": "Product",
+  "Consultoría": "Consulting",
+  "Aplicaciones": "Applications",
+  "Blog": "Blog",
+  "Sobre mí": "About me",
   "Contacto": "Contact",
   "Finanzas: el dinero, al día y sin tocarlo": "Finances: money up to date without touching it",
   "Cómo un gemelo digital lleva mis finanzas completas: los movimientos entran solos, la proyección se recalcula y las reglas se cumplen. Este es el primer caso del sistema ONTOS.": "How a digital twin runs my finances end to end: transactions arrive on their own, the projection is recalculated and the rules are followed. This is the first case of the ONTOS system.",
@@ -35,6 +37,6 @@
   "Cuéntame qué te come horas": "Tell me what eats your hours",
   "Soy Fernando Calle, ingeniero de caminos: seis años en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM) y premio de I+D en automatización e IA. Si tu dinero, o el de tu negocio, vive en cabezas y en Excels, se puede ordenar.": "I am Fernando Calle, a civil engineer: six years on major international projects (the Sydney Metro, HS2, NEOM) and an R&amp;D award for automation and AI. If your money, or your company's, lives in people's heads and in spreadsheets, it can be put in order.",
   "hola@ontosdigital.es": "hola@ontosdigital.es",
-  "o escríbeme desde <a href=\"/#contacto\">la página de contacto</a>": "or write to me from <a href=\"/#contacto\">the contact page</a>",
+  "o escríbeme desde <a href=\"contacto.html\">la página de contacto</a>": "or write to me from <a href=\"contacto.html\">the contact page</a>",
   "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }

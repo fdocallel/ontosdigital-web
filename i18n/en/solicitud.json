@@ -3,9 +3,11 @@
   "Solicitar acceso · ONTOS": "Request access · ONTOS",
   "ONTOS se entra por invitación. Desde aquí se solicita el acceso: lo lee Fernando y decide. No es un alta automática.": "ONTOS is invitation-only. This is where you ask for access: Fernando reads it and decides. There is no automatic sign-up.",
   "ONTOS": "ONTOS",
-  "El producto": "The product",
-  "Casos": "Cases",
-  "Escritos": "Writing",
+  "Producto": "Product",
+  "Consultoría": "Consulting",
+  "Aplicaciones": "Applications",
+  "Blog": "Blog",
+  "Sobre mí": "About me",
   "Contacto": "Contact",
   "Solicitar acceso": "Request access",
   "ONTOS no tiene registro. Se entra por invitación: me lo pides, lo leo yo y decido. <strong>No es un alta, es una petición</strong>, y puede salir que no.": "ONTOS has no sign-up. It is invitation-only: you ask me, I read it and I decide. <strong>This is not an account, it is a request</strong>, and the answer may be no.",
@@ -25,6 +27,6 @@
   "hola@ontosdigital.es": "hola@ontosdigital.es",
   "copiar": "copy",
   "No hay formulario a propósito: así lo que escribes va de tu correo al mío sin pasar por ningún servicio de terceros. Se usa para leer tu petición, decidir y contestarte, y nada más. Detalle en la <a href=\"privacidad.html\">política de privacidad</a>.": "There is no form on purpose: what you write goes from your inbox to mine without passing through any third-party service. It is used to read your request, decide on it and reply to you, and nothing else. Details in the <a href=\"privacidad.html\">privacy policy</a>.",
-  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a>": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a>",
+  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count.",
   "copiado ✓": "copied ✓"
 }

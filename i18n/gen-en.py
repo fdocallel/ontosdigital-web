@@ -198,6 +198,20 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
             if nueva != atrs[attr]:
                 pon(attr, nueva)
 
+    # srcset: lista de candidatos "url [descriptor]" separados por coma; cada url se
+    # reescribe como un src (21-sep-2026: el póster de la demo del inicio daba 404 en /en/)
+    if "srcset" in atrs:
+        candidatos = []
+        for c in atrs["srcset"].split(","):
+            trozos = c.strip().split(None, 1)
+            if not trozos:
+                continue
+            trozos[0] = ruta_en(trozos[0])
+            candidatos.append(" ".join(trozos))
+        nueva = ", ".join(candidatos)
+        if nueva != atrs["srcset"]:
+            pon("srcset", nueva)
+
     if nombre == "link" and atrs.get("rel", "").lower() == "canonical":
         pon("href", url_en(pagina))
 

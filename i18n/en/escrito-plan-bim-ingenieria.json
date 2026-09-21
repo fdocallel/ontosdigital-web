@@ -1,6 +1,6 @@
 {
   "_doc": "Traducción al inglés de escrito-plan-bim-ingenieria.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "Qué exige el Plan BIM a una ingeniería mediana en 2026 · ONTOS": "What Spain's BIM Plan demands of a mid-sized engineering firm in 2026 · ONTOS",
+  "Qué exige el Plan BIM a una ingeniería mediana en 2026 · ONTOS": "What Spain's BIM Plan asks of a mid-sized firm, 2026 · ONTOS",
   "Qué obliga hoy el Plan BIM, a quién alcanza y desde cuándo, qué significa en la práctica y cómo saber si tu ingeniería está lista para el próximo pliego.": "What Spain's BIM Plan requires today, who it reaches and from when, what it means in practice and how to tell whether your firm is ready for the next tender.",
   "Qué exige el Plan BIM a una ingeniería mediana en 2026": "What Spain's BIM Plan demands of a mid-sized engineering firm in 2026",
   "Umbrales vigentes, alcance real, entregables y errores típicos al responder un pliego con requisitos BIM. Con una lista de comprobación honesta.": "Thresholds in force, real scope, deliverables and the typical mistakes when answering a tender with BIM requirements. With an honest checklist.",
@@ -8,9 +8,11 @@
   "Fernando Calle": "Fernando Calle",
   "Ingeniero de Caminos, Canales y Puertos": "Civil Engineer",
   "ONTOS": "ONTOS",
-  "El producto": "The product",
-  "Casos": "Cases",
-  "Escritos": "Writing",
+  "Producto": "Product",
+  "Consultoría": "Consulting",
+  "Aplicaciones": "Applications",
+  "Blog": "Blog",
+  "Sobre mí": "About me",
   "Contacto": "Contact",
   "19 de agosto de 2026 · 7 minutos de lectura · Fernando Calle": "19 August 2026 · 7 minutes' reading · Fernando Calle",
   "El calendario está corriendo y el vocabulario de los pliegos ya ha cambiado, pero en muchas oficinas técnicas el asunto se resuelve la semana antes de presentar. Esto es lo que obliga de verdad, lo que significa en el día a día y cómo saber si llegas.": "The calendar is running and the vocabulary of tender documents has already changed, but in many design offices the matter gets sorted out the week before submission. This is what really binds you, what it means day to day and how to tell whether you are ready.",
@@ -75,6 +77,6 @@
   "Si prefieres que la escriba yo": "If you would rather I wrote it",
   "Diagnóstico de nivel BIM sin coste: me envías un pliego o el último proyecto entregado y recibes una página con el nivel que te exige la norma, qué te falta, qué riesgo tienes y qué haría yo primero. Si te sirve, seguimos. Si no, te quedas el diagnóstico.": "Free BIM readiness check: you send me a tender document or the last project you delivered and you get one page with the level the rules require of you, what you are missing, what risk you are carrying and what I would do first. If it is useful, we carry on. If not, the assessment is yours to keep.",
   "Ver el diagnóstico de nivel BIM": "See the BIM readiness check",
-  "o escríbeme desde <a href=\"/#contacto\">la página de contacto</a>": "or write to me from <a href=\"/#contacto\">the contact page</a>",
+  "o escríbeme desde <a href=\"contacto.html\">la página de contacto</a>": "or write to me from <a href=\"contacto.html\">the contact page</a>",
   "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }

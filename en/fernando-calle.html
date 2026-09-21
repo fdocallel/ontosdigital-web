@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fernando Calle · civil engineer, automation and AI</title>
-<meta name="description" content="Fernando Calle, civil engineer and founder of ONTOS. Automation, data and AI: six years on the Sydney metro, HS2 and NEOM. Segovia and remote.">
+<meta name="description" content="Fernando Calle, civil engineer and founder of ONTOS. Automation, data and AI: six years on the Sydney metro, HS2 and NEOM.">
 <link rel="canonical" href="https://ontosdigital.es/en/fernando-calle.html">
 <!-- i18n:alt -->
 <link rel="alternate" hreflang="es" href="https://ontosdigital.es/fernando-calle.html">
@@ -40,7 +40,7 @@
   .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.5rem; }
 
   .cabecera { padding: 3.5rem 0 1.6rem; }
-  h1 { font-size: clamp(2rem, 5.4vw, 2.9rem); font-weight: 600; line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 5.4vw, 2.9rem); font-weight: 600; line-height: 1.15; text-wrap: balance; }
   .meta {
     margin-top: 1.1rem; font-size: 0.85rem; color: var(--sec);
     text-transform: uppercase; letter-spacing: 0.08em;
@@ -83,6 +83,8 @@
   .lineas { list-style: none; margin-left: 0; }
   .lineas li { padding: 0.7rem 0; border-top: 1px solid var(--borde); margin-bottom: 0; color: var(--sec); font-size: 0.95rem; }
   .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
+  /* prosa justificada (Fernando, 21-sep-2026); lo centrado (.cierre) se queda como está */
+  .presentacion p, .lineas li, .caja p, article > section > p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 
   .cierre { text-align: center; padding: 2.6rem 0 3.5rem; border-top: 1px solid var(--borde); margin-top: 2rem; }
   .cierre h2 { margin-bottom: 0.6rem; }
@@ -133,7 +135,7 @@
       "author": { "@id": "https://ontosdigital.es/fernando-calle.html#persona" },
       "inLanguage": "en",
       "isPartOf": "19th Australasian Tunnelling Conference (ATC 2025)",
-      "sameAs": "https://doi.org/10.3316/informit.T2026010800016790478291249"
+      "sameAs": "https://search.informit.org/doi/abs/10.3316/informit.T2026010800016790478291249"
     }
   ]
 }
@@ -154,10 +156,12 @@
       <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
       <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
     </svg>ONTOS</a>
-    <a class="item" href="/en/#producto">The product</a>
-    <a class="item" href="/en/#casos">Cases</a>
-    <a class="item" href="/en/#escritos">Writing</a>
-    <a class="item" href="/en/#contacto">Contact</a>
+    <a class="item" href="/en/producto.html">Product</a>
+    <a class="item" href="/en/consultoria.html">Consulting</a>
+    <a class="item" href="/en/aplicaciones.html">Applications</a>
+    <a class="item" href="/en/blog.html">Blog</a>
+    <a class="item" aria-current="page" href="/en/fernando-calle.html">About me</a>
+    <a class="item" href="/en/contacto.html">Contact</a>
     <a class="item idioma" data-i18n-alt href="/fernando-calle.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
   </nav>
 </header>
@@ -179,8 +183,8 @@
       <figcaption>Fernando Calle · Segovia</figcaption>
     </figure>
     <div>
-      <p>I am a civil engineer, and my work is <strong>putting information in order with code and artificial intelligence</strong>. I come from the projects where you learn that the hard way: six years leading models, data and automation on major international works, where a misplaced piece of data costs millions.</p>
-      <p>Today I work from Segovia, for Spain and remotely, on two fronts that feed each other. I build <a href="/en/">ONTOS</a>, a personal and business digital twin kept up to date by an AI, and I do <strong>information engineering on commission</strong>: automation, data and BIM.</p>
+      <p>I am a civil engineer, and my work is <strong>putting information in order with code and artificial intelligence</strong>. I come from the projects where you learn that the hard way: six years leading models, data and automation on major international works, where the order of the information sets the deadlines and the costs.</p>
+      <p>Today I work on two fronts that feed each other. I build <a href="/en/producto.html">ONTOS</a>, a personal and business digital twin that an AI keeps up to date, and I do <a href="/en/consultoria.html"><strong>information engineering on demand</strong></a>: automation, data and BIM.</p>
     </div>
   </div>
 </section>
@@ -188,28 +192,20 @@
 <section>
   <h2>Where I come from</h2>
   <p>I spent the six years before ONTOS on projects where the volume of information outgrows any one person, and the only way through is building systems that keep it in order on their own.</p>
+  <!-- Fuente: las cuatro primeras entradas son las de la web anterior (main). Red Sea: proyecto listado en el CV corporativo de TYPSA (ene-2026); la formación en GIS al equipo de Riad es palabra de Fernando (21-sep-2026). -->
   <ul class="lineas">
     <li><b>Sydney Metro West (Australia)</b>Modelling and automation on the Sydney metro works, with 41 cross passages delivered through code-generated models.</li>
     <li><b>HS2 (United Kingdom)</b>Models, data and information coordination on the new British high-speed line.</li>
     <li><b>Northern Water (Adelaide, Australia)</b>Water infrastructure of 140 ML per day, with data as the backbone of the project.</li>
+    <li><b>Red Sea Governorates Urban Development Plan (Saudi Arabia)</b>Urban development plan for the Red Sea governorates, with GIS training for the team in Riyadh.</li>
     <li><b>NEOM (Saudi Arabia)</b>Automation and information management on one of the largest infrastructure developments in the world.</li>
   </ul>
-  <p>That work earned an <strong>R&D award for automation and AI</strong>, and part of it is published.</p>
   <div class="caja">
     <h3>Publication</h3>
     <p>“Automation of tunnel modelling for enhanced project efficiency”, 19th Australasian Tunnelling Conference (ATC 2025).</p>
-    <p class="fuente"><a href="https://doi.org/10.3316/informit.T2026010800016790478291249" rel="noopener" target="_blank">DOI 10.3316/informit.T2026010800016790478291249</a></p>
+    <!-- Ficha comprobada en search.informit.org el 21-sep-2026 (autores, editor, páginas, ISBN 9780858250024). El DOI 10.3316 no está registrado en doi.org. -->
+    <p class="fuente">P. Bueno Leal, F. Calle Lamelas, F. Ceballos Martínez · Australian Tunnelling Society, Perth, November 2025, pp. 1029-1036 · <a href="https://search.informit.org/doi/abs/10.3316/informit.T2026010800016790478291249" rel="noopener" target="_blank">record on Informit</a></p>
   </div>
-</section>
-
-<section>
-  <h2>What I do now</h2>
-  <p>Almost nobody has an information problem. They have an order problem. That is what I work on, from two fronts.</p>
-  <ul class="lineas">
-    <li><b>ONTOS, the product</b>A digital twin of your life or your business: an ordered model of what you own, do and know, kept up to date by an AI and running on your machine. <a href="/en/">It works and you can see it</a>. In private pilot.</li>
-    <li><b>Consulting</b>Tell me what is eating your hours and I will build you the fix: bespoke automation and AI, data from the physical world with drone and photogrammetry, contract reading, websites. The most requested line is <a href="/en/bim.html">BIM requirements management in public procurement</a>.</li>
-    <li><b>Writing</b>Every now and then I write about what I see in the sector, such as <a href="/en/escrito-plan-bim-ingenieria.html">what the BIM Plan demands of a mid-sized engineering firm in 2026</a>.</li>
-  </ul>
 </section>
 
 </article>
@@ -217,7 +213,7 @@
 <section class="cierre">
   <h2>Let’s talk</h2>
   <p>If you want to see ONTOS live, or tell me what is eating your hours, write to me. I normally reply within 24-48 hours.</p>
-  <a class="cta" href="/en/#contacto">Write to me</a>
+  <a class="cta" href="/en/contacto.html">Write to me</a>
   <span class="alt">or on <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">LinkedIn</a> · <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a></span>
 </section>
 

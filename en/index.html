@@ -4,7 +4,7 @@
 <!-- GENERADO por i18n/gen-en.py desde ../index.html · no editar a mano -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ONTOS · the digital twin of your life and your business</title>
+<title>ONTOS · everything that's yours, in order and up to date</title>
 <meta name="theme-color" content="#faf8f5">
 <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
@@ -15,9 +15,9 @@
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/">
 <!-- /i18n:alt -->
 <meta name="msvalidate.01" content="515812BC9718626E8FC3D1D0174B09DB">
-<meta name="description" content="A digital model of everything that is yours: finances, documents, admin, health. An AI keeps it up to date and answers when you ask. All on your machine.">
-<meta property="og:title" content="ONTOS · the digital twin of your life and your business">
-<meta property="og:description" content="An ordered model of everything that is yours, and an AI that keeps it up to date. All local: your data never leaves your computer.">
+<meta name="description" content="ONTOS: a digital twin of your life and business that an AI keeps up to date, and consulting on demand: automation, BIM, apps, websites and 3D.">
+<meta property="og:title" content="ONTOS · everything that's yours, in order and up to date">
+<meta property="og:description" content="ONTOS: a digital twin of your life and business that an AI keeps up to date, and consulting on demand: automation, BIM, apps, websites and 3D.">
 <meta property="og:image" content="https://ontosdigital.es/brand/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -28,28 +28,14 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "ONTOS",
-      "url": "https://ontosdigital.es/en/",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "macOS, Windows, Linux",
-      "description": "A personal and business digital twin: an ordered model of your own data, documents and processes, operated with artificial intelligence and run locally.",
-      "inLanguage": "en",
-      "author": { "@type": "Person", "name": "Fernando Calle" }
-    },
-    {
-      "@type": "ProfessionalService",
-      "name": "ONTOS",
-      "url": "https://ontosdigital.es/en/",
-      "email": "hola@ontosdigital.es",
-      "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
-      "areaServed": "ES",
-      "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
-      "founder": { "@type": "Person", "@id": "https://ontosdigital.es/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Civil Engineer", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/en/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
-    }
-  ]
+  "@type": "ProfessionalService",
+  "name": "ONTOS",
+  "url": "https://ontosdigital.es/en/",
+  "email": "hola@ontosdigital.es",
+  "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
+  "areaServed": "ES",
+  "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
+  "founder": { "@type": "Person", "@id": "https://ontosdigital.es/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Civil Engineer", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/en/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
 }
 </script>
 <style>
@@ -99,11 +85,11 @@
   }
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
     margin-top: 1.2rem; max-width: 40rem;
-    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
   }
   .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
@@ -115,139 +101,49 @@
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
   .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
   .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
-  .hero .plazo { margin-top: 1.4rem; font-size: 0.85rem; color: var(--sec); }
 
-  /* ---- secciones ---- */
-  section { padding: 4.2rem 0; }
+  /* ---- Qué es ONTOS: un párrafo, centrado en la página y justificado ---- */
+  section { padding: 3rem 0 4.2rem; }
   h2 {
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
-    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
   }
-  .intro p { max-width: 42rem; font-size: 1.12rem; }
-  .intro p + p { margin-top: 1rem; }
+  .intro { padding-top: 1rem; padding-bottom: 1.5rem; }
+  .intro h2 { text-align: center; }
+  .intro p {
+    max-width: 44rem; margin: 0 auto; font-size: 1.12rem;
+    text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+  }
   .intro strong { color: var(--realce); font-weight: 600; }
 
-  .stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; }
-  .stat .n { font-family: var(--serif); font-size: 2rem; font-weight: 650; }
-  .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
-
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
-  .card {
-    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
-    padding: 1.8rem 1.6rem;
-    transition: transform 0.15s ease, border-color 0.15s ease;
+  /* ---- la demo del sistema, integrada: póster de su primera escena y, al pulsar, la animación ---- */
+  .demo-sistema { display: block; color: var(--sec); }
+  .demo-sistema .marco {
+    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 14px; border: 1px solid var(--borde); background: #100f0d; overflow: hidden;
   }
-  .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
-  .card p { font-size: 0.95rem; color: var(--sec); }
-  .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
-  a.card:hover { transform: translateY(-4px); border-color: var(--teja); }
-
-  /* las tres piezas del producto */
-  .piezas { margin-top: 1.8rem; }
-  .pieza .icono { font-size: 1.8rem; }
-  .pieza h3 { font-size: 1.1rem; }
-
-  /* ediciones */
-  .ediciones { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  @media (max-width: 48rem) { .ediciones { grid-template-columns: 1fr; } }
-  .edicion .icono { font-size: 2rem; }
-  .edicion h3 { font-size: 1.25rem; }
-  .edicion .edicion-desc { font-size: 0.98rem; color: var(--sec); }
-  .edicion .lineas { list-style: none; margin-top: 1.2rem; }
-  .edicion .lineas li { font-size: 0.92rem; color: var(--sec); padding: 0.7rem 0; border-top: 1px solid var(--borde); }
-  .edicion .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
-
-  /* estado honesto */
-  .estado {
-    background: var(--panel); border: 1px solid var(--borde); border-left: 4px solid var(--teja);
-    border-radius: 14px; padding: 1.8rem 1.8rem; max-width: 46rem;
+  .demo-play {
+    display: block; width: 100%; height: 100%; padding: 0; margin: 0; border: 0;
+    background: none; cursor: pointer; font: inherit; color: inherit; text-align: inherit;
   }
-  .estado p + p { margin-top: 0.9rem; }
-  .estado p { color: var(--sec); }
-  .estado strong { color: var(--texto); font-weight: 600; }
-
-  /* consultoría, la rama */
-  .rama { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
-    border: 1px solid var(--borde); border-radius: 14px; padding: 1.6rem 1.7rem; }
-  @media (max-width: 48rem) { .rama { grid-template-columns: 1fr; } }
-  .rama h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-  .rama p { color: var(--sec); font-size: 0.95rem; max-width: 38rem; }
-
-  .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
-  /* escritos: la escritura fechada es la señal de que el sitio está vivo */
-  .escrito {
-    display: block; text-decoration: none; color: var(--texto);
-    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
-    padding: 1.6rem 1.6rem; transition: border-color 0.15s ease, transform 0.15s ease;
+  .demo-play picture, .demo-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .demo-play .play {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 92px; height: 92px; border-radius: 50%;
+    background: var(--teja); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.30);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .escrito:hover { border-color: var(--teja); transform: translateY(-3px); }
-  .escrito .fecha { font-size: 0.78rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.1em; }
-  .escrito h3 { font-size: 1.25rem; margin: 0.5rem 0 0.6rem; }
-  .escrito p { color: var(--sec); font-size: 0.95rem; }
-  .escrito .ver { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
-  .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
-  .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
-  /* Retrato de Quién: brand/fernando.jpg, 600x800 (3:4), ~50 KB */
-  .quien-con-foto { display: grid; grid-template-columns: 13rem 1fr; gap: 2.4rem; align-items: start; }
-  @media (max-width: 48rem) { .quien-con-foto { grid-template-columns: 1fr; gap: 1.6rem; } }
-  .retrato { margin: 0; }
-  .retrato img {
-    /* height:auto es obligatorio: el atributo height="800" del HTML es una pista de
-       presentación que gana a aspect-ratio y estiraba el retrato a 800 px de alto. */
-    width: 13rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
-    /* borde algo más marcado que --borde: la pared beige de la foto y el fondo hueso
-       se diferencian solo un 5 % y la silueta se disolvía en la página */
-    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
-  }
-  @media (prefers-color-scheme: dark) { .retrato img { border-color: rgba(255,255,255,0.12); } }
-  @media (max-width: 48rem) { .retrato img { width: 10rem; } }
-  .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
-
-  /* casos */
-  .demos { margin-top: 1.8rem; grid-template-columns: repeat(4, 1fr); }
-  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 30rem) { .demos { grid-template-columns: 1fr; } }
-  .card.demo { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); }
-  .card.demo .icono { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1; }
-  .card.demo p { flex: 1; }
-  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
-  .card.demo .ver span { color: var(--sec); font-weight: 400; }
-  .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
-  /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
-     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
-  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
-  .cta-medio a {
-    color: var(--acento); text-decoration: none; font-weight: 600;
-    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
-  }
-  .cta-medio a:hover { text-decoration: underline; }
-
-  /* ---- contacto ---- */
-  .contacto { border-top: 1px solid var(--borde); }
-  .contacto .lead { color: var(--sec); max-width: 34rem; }
-  form { max-width: 34rem; margin-top: 2rem; display: grid; gap: 0.9rem; }
-  label { font-size: 0.85rem; color: var(--sec); display: block; margin-bottom: 0.3rem; }
-  input[type="text"], input[type="email"], textarea {
-    width: 100%; padding: 0.7rem 0.9rem; border-radius: 10px;
-    border: 1px solid var(--borde); background: var(--panel); color: var(--texto);
-    font: inherit; font-size: 0.95rem;
-  }
-  input:focus, textarea:focus { outline: 2px solid var(--teja); outline-offset: 1px; border-color: transparent; }
-  textarea { min-height: 7rem; resize: vertical; }
-  form .cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
-  .form-nota { font-size: 0.8rem; color: var(--sec); }
-  /* flex con gap en vez de margin: al envolver en móvil, el botón quedaba metido
-     medio centímetro respecto al margen de la columna */
-  .alt-mail { margin-top: 2.2rem; font-size: 0.95rem; color: var(--sec);
-    display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; }
-  .alt-mail a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
-  .copiar {
-    padding: 0.35rem 0.9rem; border-radius: 999px;
-    font: inherit; font-size: 0.8rem; border: 1px solid var(--borde);
-    background: none; color: var(--sec); cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
-  }
-  .copiar:hover { color: var(--realce); border-color: var(--realce); }
+  .demo-play .play svg { width: 40px; height: 40px; margin-left: 6px; fill: currentColor; }
+  .demo-play:hover .play, .demo-play:focus-visible .play { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 14px 50px rgba(212,113,59,0.45); }
+  .demo-play:focus-visible { outline: 3px solid var(--acento); outline-offset: -3px; }
+  .demo-sistema iframe { display: block; width: 100%; height: 100%; border: 0; background: #100f0d; }
+  .demo-sistema .pie { margin-top: 0.9rem; text-align: center; font-size: 0.95rem; }
+  .demo-sistema .pie a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .demo-sistema .pie a:hover { text-decoration: underline; }
+  @media (max-width: 34rem) { .demo-play .play { width: 64px; height: 64px; } .demo-play .play svg { width: 28px; height: 28px; margin-left: 4px; } }
+  @media (prefers-reduced-motion: reduce) { .demo-play .play { transition: none; } }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -274,10 +170,12 @@
       </svg>
       ONTOS
     </a>
-    <a class="item" href="#producto">The product</a>
-    <a class="item" href="#casos">Cases</a>
+    <a class="item" href="/en/producto.html">Product</a>
+    <a class="item" href="/en/consultoria.html">Consulting</a>
     <a class="item" href="/en/aplicaciones.html">Applications</a>
-    <a class="item" href="#contacto">Contact</a>
+    <a class="item" href="/en/blog.html">Blog</a>
+    <a class="item" href="/en/fernando-calle.html">About me</a>
+    <a class="item" href="/en/contacto.html">Contact</a>
     <a class="item idioma" data-i18n-alt href="/" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
   </nav>
 </header>
@@ -304,212 +202,64 @@
   <circle class="nucleo" cx="50" cy="50" r="14" fill="#d4713b"/>
   </svg>
   <div class="wordmark">ONTOS</div>
-  <h1>A digital model of everything that is yours, and an AI that keeps it up to date.</h1>
-  <p class="lema">Finances, documents, admin, projects, diary, health: all in one place, on your machine, and available just by asking. I built it for myself and I use it every day.</p>
+  <h1>Everything that's yours, in order and up to date.</h1>
+  <p class="lema">From experience and the application of artificial intelligence, what used to be science fiction is now a reality.</p>
   <div class="ctas">
-    <a class="cta" href="#casos">See it working</a>
-    <a class="cta secundario" href="#contacto">Ask me for a demo</a>
+    <a class="cta" href="/en/producto.html">The product</a>
+    <a class="cta secundario" href="/en/consultoria.html">Consulting</a>
   </div>
-  <p class="plazo">In private pilot. Everything runs locally: your data never leaves your computer.</p>
 </div>
 
 <div class="wrap">
 
-<section class="intro" id="producto">
+<section class="intro" id="que-es">
   <h2>What ONTOS is</h2>
   <p><em>Ontos</em>, from the Greek ὄντος: <span class="serif">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head, knowledge lives in each person's experience, and putting the whole picture together costs more than the decision you had to make.</p>
-  <p>ONTOS is the <strong>digital twin</strong> of that: an ordered model of what you have, what you do and what you know, with artificial intelligence working on top of it every day.</p>
-  <div class="cards piezas">
-    <div class="card pieza">
-      <span class="icono">◉</span>
-      <h3>The data, in one place</h3>
-      <p>Every fact lives once. Views, reports and summaries are generated from it, so nothing contradicts itself or goes stale in a forgotten copy.</p>
-    </div>
-    <div class="card pieza">
-      <span class="icono">✦</span>
-      <h3>The AI that operates it</h3>
-      <p>You tell it in one sentence what has happened and it updates everything that is affected. You ask in plain language and it answers with your own data, citing where each thing comes from.</p>
-    </div>
-    <div class="card pieza">
-      <span class="icono">✓</span>
-      <h3>The audit that keeps watch</h3>
-      <p>A system nobody watches degrades. An automatic check runs every day to make sure nothing is lost, that the views match their source and that no loose end is left hanging.</p>
-    </div>
-  </div>
-  <p class="metodo">Everything runs on your machine. No compulsory cloud, no account to create, none of your data feeding anybody's product.</p>
 </section>
 
-<section>
-  <h2>Two editions</h2>
-  <div class="ediciones">
-    <div class="card edicion">
-      <span class="icono">◈</span>
-      <h3>ONTOS personal</h3>
-      <p class="edicion-desc">Your whole life in a single model, and the boring part done for you.</p>
-      <ul class="lineas">
-        <li><b>The core</b>Today, notes, diary and calendar, projects and contacts.</li>
-        <li><b>Money</b>Net worth, income and spending, investing with written rules.</li>
-        <li><b>Body</b>Training with progression, body composition, nutrition and rest.</li>
-        <li><b>Your own things</b>Whatever matters to you: an inheritance, a building project, a language, a course. Modules switch on when you ask for them.</li>
-      </ul>
+<section id="demo">
+  <div class="demo-sistema">
+    <div class="marco" id="demo-marco">
+      <button type="button" class="demo-play" data-goatcounter-click="inicio-demo-sistema" aria-label="Play the ONTOS system demo, 80 seconds">
+        <picture>
+          <source srcset="/brand/servicios/sistema-poster.webp" type="image/webp">
+          <img src="/brand/servicios/sistema-poster.jpg" width="1280" height="720" alt="First scene of the ONTOS system demo" decoding="async">
+        </picture>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
+      </button>
     </div>
-    <div class="card edicion">
-      <span class="icono">▣</span>
-      <h3>ONTOS for business</h3>
-      <p class="edicion-desc">The model of your business: data, processes and knowledge in one place.</p>
-      <ul class="lineas">
-        <li><b>Sales</b>Pipeline of opportunities, clients with their history and their next step.</li>
-        <li><b>Operations</b>Work in progress, deadlines ahead, services and deliverables.</li>
-        <li><b>Administration</b>Invoicing, expenses, and obligations watched and flagged.</li>
-        <li><b>Knowledge</b>The firm's documents, searchable by asking and answered with a citation.</li>
-      </ul>
-    </div>
+    <p class="pie">The whole system, in 80 seconds · animated demo, no sound, sample data · <a href="/en/caso-90s.html">open full screen ▸</a></p>
   </div>
 </section>
-
-<section id="casos">
-  <h2>See it working</h2>
-  <div class="intro">
-  <p>I built the first digital twin for myself, and it is the proof that this works: a model of my entire life kept up to date every day with AI. Each case tells you how it is put together inside, with its demo in motion.</p>
-  </div>
-  <div class="cards demos">
-    <a class="card demo" href="/en/caso-sistema.html">
-      <span class="icono">◉</span>
-      <h3>The whole system</h3>
-      <p>The full model with the AI operating it: data, documents, answers with citations.</p>
-      <span class="ver">Read the case <span>· ▶ 90 s demo</span></span>
-    </a>
-    <a class="card demo" href="/en/caso-finanzas.html">
-      <span class="icono">€</span>
-      <h3>Finances</h3>
-      <p>Spending by API, an 18-month projection, grants watched, investing by rules.</p>
-      <span class="ver">Read the case <span>· ▶ 70 s demo</span></span>
-    </a>
-    <a class="card demo" href="/en/caso-organizacion.html">
-      <span class="icono">☰</span>
-      <h3>Organisation</h3>
-      <p>Projects with their next step, tasks, calendar and contacts up to date.</p>
-      <span class="ver">Read the case <span>· ▶ 60 s demo</span></span>
-    </a>
-    <a class="card demo" href="/en/caso-salud.html">
-      <span class="icono">♥</span>
-      <h3>Health</h3>
-      <p>Training with automatic progression, body composition, nutrition and rest from the wearable.</p>
-      <span class="ver">Read the case <span>· ▶ 60 s demo</span></span>
-    </a>
-  </div>
-  <p class="demos-nota">Every case comes with its animated demo. No sound, sample data.</p>
-  <div class="stats">
-    <div class="stat"><div class="n">400+</div><div class="l">log entries</div></div>
-    <div class="stat"><div class="n">300+</div><div class="l">searchable documents</div></div>
-    <div class="stat"><div class="n">100%</div><div class="l">local and private</div></div>
-  </div>
-  <!-- El contacto está a siete secciones de aquí: en móvil, a ocho pantallas. Quien se
-       convence lo hace viendo los casos, y ahí es donde tiene que tener el botón. -->
-  <p class="cta-medio">Does this sound like what you have been wanting for a while? <a href="#contacto">Ask me for a demo ▸</a></p>
-</section>
-
-<section>
-  <h2>Where it stands today</h2>
-  <div class="estado">
-    <p><strong>ONTOS is not a promise: it is what I use every day</strong> since June 2026. What you see in the cases is running on my own instance, with my real data.</p>
-    <p>It is <strong>in private pilot</strong>, and I open it up one person at a time: I sit down with each of them on day one, we build their model and we switch on only the modules that are useful to them. You learn and you fix before taking the next step.</p>
-    <p><strong>There is no public price yet.</strong> I would rather learn with the first few people before putting a figure on it, and tell you so straight instead of selling you a list of features.</p>
-    <p>If this sounds like what you have been wanting for a while, write to me and I will show you live.</p>
-  </div>
-</section>
-
-<section class="intro">
-  <h2>Who</h2>
-  <div class="quien-con-foto">
-    <figure class="retrato">
-      <img src="/brand/fernando.jpg" alt="Portrait of Fernando Calle, civil engineer and founder of ONTOS"
-           width="600" height="800" decoding="async">
-      <figcaption>Fernando Calle · Segovia</figcaption>
-    </figure>
-    <div>
-      <p>I am <strong>Fernando Calle</strong>, a civil engineer. Six years leading models, data and automation on major international projects (the Sydney Metro, HS2, NEOM), where one piece of data in the wrong place costs millions. That engineer's way of thinking, <strong>awarded for R&amp;D in automation and AI</strong>, is what sits behind ONTOS: systems instead of heroics, and results you can measure.</p>
-      <div class="stats">
-        <div class="stat"><div class="n">6</div><div class="l">years on major projects</div></div>
-        <div class="stat"><div class="n">R&amp;D</div><div class="l">automation and AI award</div></div>
-      </div>
-      <p class="verificable">You can check it: <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">my professional profile on LinkedIn</a> · or read <a href="/en/fernando-calle.html">who I am and where I come from</a>.</p>
-    </div>
-  </div>
-</section>
-
-<section id="escritos">
-  <h2>Writing</h2>
-  <a class="escrito" href="/en/escrito-plan-bim-ingenieria.html">
-    <span class="fecha">19 August 2026 · 7 min</span>
-    <h3>What Spain's BIM Plan demands of a mid-sized engineering firm in 2026</h3>
-    <p>What it requires today, who it reaches and from when; what it means in practice; the four typical mistakes when answering a tender with BIM requirements; and an honest ten-question checklist to tell whether you are ready.</p>
-    <span class="ver">Read ▸</span>
-  </a>
-</section>
-
-<section>
-  <h2>Applications</h2>
-  <div class="rama">
-    <div>
-      <h3>Information engineering, to order</h3>
-      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
-           No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
-      <p>The product was born out of putting real problems in order, and I still do that on request: tell me what is eating your hours and I will build you the fix. Custom automation and AI, physical-world data from drone surveys and photogrammetry, contract reading, websites. The line most in demand right now is managing BIM requirements in public tenders, with a free BIM level assessment.</p>
-    </div>
-    <a class="cta secundario" href="/en/aplicaciones.html">Explore the applications ▸</a>
-  </div>
-  <p class="metodo">Every commission teaches something the product takes on board. That is why the two live together: consultancy pays the bills, ONTOS is where I am going.</p>
-</section>
-
-<section class="contacto" id="contacto">
-  <h2>Contact</h2>
-  <p class="lead">Tell me what eats your hours, or what you would like to know about your own affairs and today cannot. If you want to see inside ONTOS, say so and we will find a time. I normally reply within 24-48 hours.</p>
-  <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
-    <div><label for="f-nombre">Name</label>
-    <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
-    <div><label for="f-org">Company or organisation (if any)</label>
-    <input type="text" id="f-org" name="organizacion" autocomplete="organization"></div>
-    <div><label for="f-email">Email</label>
-    <input type="email" id="f-email" name="email" required autocomplete="email"></div>
-    <div><label for="f-msg">What eats your hours</label>
-    <textarea id="f-msg" name="mensaje" required></textarea></div>
-    <input type="hidden" name="_subject" value="Web contact · Home · EN">
-    <input type="hidden" name="_next" value="https://ontosdigital.es/en/gracias.html">
-    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-    <input type="hidden" name="_captcha" value="false">
-    <button class="cta" type="submit">Send</button>
-    <p class="form-nota">The form goes through FormSubmit only so it reaches my inbox; details in the <a href="/en/privacidad.html" style="color:inherit">privacy policy</a>.</p>
-  </form>
-  <p class="alt-mail">Or directly: <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copy</button></p>
-  <p class="cta-medio">Do you want to use ONTOS yourself, rather than hire me for a job? It is invitation-only: <a href="/en/solicitud.html">request access ▸</a></p>
-</section>
+<script>
+(() => {
+  // La demo es caso-90s.html (animación HTML). Solo se carga al pulsar; con ?autoplay arranca sola dentro del marco.
+  const marco = document.getElementById("demo-marco");
+  const boton = marco.querySelector(".demo-play");
+  if (!marco || !boton) return;
+  boton.addEventListener("click", () => {
+    const f = document.createElement("iframe");
+    f.src = "caso-90s.html?autoplay";
+    f.title = "ONTOS · el sistema, en 80 segundos";
+    f.loading = "lazy";
+    f.setAttribute("allow", "fullscreen");
+    boton.replaceWith(f);
+    f.focus();
+  });
+  // Al terminar, la animación avisa al padre: vuelve el póster para poder verla otra vez.
+  addEventListener("message", e => {
+    if (e.data !== "ontos-intro-fin") return;
+    const f = marco.querySelector("iframe");
+    if (f) f.replaceWith(boton);
+  });
+})();
+</script>
 
 <footer>
   <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a> · Cookie-free website · anonymous visit count.</p>
 </footer>
 
 </div>
-
-<script>
-// Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
-document.querySelectorAll("[data-copiar]").forEach(function (b) {
-  b.addEventListener("click", function () {
-    function hecho() {
-      var t = b.textContent; b.textContent = "copied ✓";
-      setTimeout(function () { b.textContent = t; }, 1600);
-    }
-    function fallback() { // navegadores sin clipboard API o escritura rechazada
-      var t = document.createElement("textarea");
-      t.value = b.dataset.copiar; document.body.appendChild(t); t.select();
-      try { if (document.execCommand("copy")) hecho(); } catch (e) {}
-      document.body.removeChild(t);
-    }
-    if (navigator.clipboard) navigator.clipboard.writeText(b.dataset.copiar).then(hecho, fallback);
-    else fallback();
-  });
-});
-</script>
 
 <!-- GoatCounter: recuento anónimo, sin cookies -->
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>

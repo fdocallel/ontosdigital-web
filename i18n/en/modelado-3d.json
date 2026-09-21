@@ -1,13 +1,15 @@
 {
   "_doc": "Traducción al inglés de modelado-3d.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "Modelado 3D desde dron · De un vuelo a una casa en 3D · ONTOS": "3D modelling from a drone · From a flight to a house in 3D · ONTOS",
-  "Una vuelta con el dron de 26 segundos y, sin que las imágenes salgan del ordenador, el exterior de una casa en 3D: escaneado con textura y geometría simple. Fotogrametría con herramientas de código abierto.": "A 26-second drone orbit and, without the images ever leaving the computer, the exterior of a house in 3D: textured scan and simple geometry. Photogrammetry with open-source tools.",
+  "Modelado 3D desde dron · De un vuelo a una casa en 3D · ONTOS": "3D modelling from a drone · From a flight to a house · ONTOS",
+  "Una vuelta con el dron de 26 segundos y, sin que las imágenes salgan del ordenador, el exterior de una casa en 3D: escaneado con textura y geometría simple. Fotogrametría con herramientas de código abierto.": "A 26-second drone orbit and, without the images leaving the computer, the exterior of a house in 3D: textured scan, simple geometry. Open-source photogrammetry.",
   "De un vuelo de dron a una casa en 3D": "From a drone flight to a house in 3D",
   "26 segundos de vídeo, 131 fotogramas, una malla con textura y una geometría simple con la que trabajar. Todo en local.": "26 seconds of video, 131 frames, a textured mesh and a simple geometry to work with. All processed locally.",
   "ONTOS": "ONTOS",
-  "El producto": "The product",
-  "Casos": "Cases",
+  "Producto": "Product",
+  "Consultoría": "Consulting",
   "Aplicaciones": "Applications",
+  "Blog": "Blog",
+  "Sobre mí": "About me",
   "Contacto": "Contact",
   "Aplicaciones · Modelado 3D desde dron": "Applications · 3D modelling from a drone",
   "De un vuelo de dron a una casa en 3D.": "From a drone flight to a house in 3D.",
@@ -43,5 +45,5 @@
   "Cuéntame qué quieres ver en 3D y para qué. Si hace falta escala de obra, lo planteamos desde el vuelo.": "Tell me what you want to see in 3D and what for. If construction-grade scale is needed, we plan for it from the flight itself.",
   "Escríbeme a hola@ontosdigital.es": "Write to me at hola@ontosdigital.es",
   "Usar el formulario de contacto": "Use the contact form",
-  "© 2026 ONTOS · Fernando Calle · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a>": "© 2026 ONTOS · Fernando Calle · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a>"
+  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }
