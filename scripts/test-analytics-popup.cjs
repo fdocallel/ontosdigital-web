@@ -6,7 +6,7 @@ const ROOT=path.resolve(__dirname,'..'),nonce='0123456789abcdef0123456789abcdef'
  const browser=await chromium.launch({channel:'chrome',headless:true}),context=await browser.newContext();
  await context.route('**/*',async route=>{
   const url=new URL(route.request().url());
-  if(url.hostname==='control.example')return route.fulfill({contentType:'text/html',body:`<button id="open">Open</button><script>window.received=[];window.addEventListener('message',e=>{received.push({origin:e.origin,fromPopup:e.source===window.popup,data:e.data})});document.querySelector('#open').onclick=()=>{window.popup=window.open('https://ontosdigital.es/servicios.html?sinestadisticas=1&ontos_request=${nonce}','test-popup')};</script>`});
+  if(url.hostname==='control.example')return route.fulfill({contentType:'text/html',body:`<button id="open">Open</button><script>window.received=[];window.addEventListener('message',e=>{received.push({origin:e.origin,fromPopup:e.source===window.popup,data:e.data})});document.querySelector('#open').onclick=()=>{window.popup=window.open('https://ontosdigital.es/aplicaciones.html?sinestadisticas=1&ontos_request=${nonce}','test-popup')};</script>`});
   if(url.hostname==='ontosdigital.es'){
    const file=path.join(ROOT,url.pathname);if(fs.existsSync(file)&&fs.statSync(file).isFile())return route.fulfill({body:fs.readFileSync(file),contentType:{'.html':'text/html','.js':'application/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png'}[path.extname(file)]||'application/octet-stream'});
   }

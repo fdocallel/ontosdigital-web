@@ -1,12 +1,12 @@
 // Offline integration: real GoatCounter script, all HTTP requests intercepted.
-// Usage: node scripts/test-servicios-analytics.cjs /tmp/count.js
+// Usage: node scripts/test-aplicaciones-analytics.cjs /tmp/count.js
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||path.resolve('../ONTOS/scripts/verify/node_modules/playwright'));
 const ROOT=path.resolve(__dirname,'..'),script=fs.readFileSync(process.argv[2],'utf8');
 const ids=['editor-pdf','juego-2d','animacion-3d','mundo-normal','segovia'];
 (async()=>{
  const browser=await chromium.launch({channel:'chrome',headless:true});const evidence=[];
- for(const language of ['','en/'])for(const route of ['servicios.html','juego-2d.html','animacion-3d.html','visita-3d.html','visita-3d.html?mundo=segovia','visita-3d.html?mundo=unknown']){
+ for(const language of ['','en/'])for(const route of ['aplicaciones.html','juego-2d.html','animacion-3d.html','visita-3d.html','visita-3d.html?mundo=segovia','visita-3d.html?mundo=unknown']){
   const context=await browser.newContext(),hits=[];let outbound=0;
   await context.route('**/*',async r=>{
    const url=new URL(r.request().url());
@@ -25,7 +25,7 @@ const ids=['editor-pdf','juego-2d','animacion-3d','mundo-normal','segovia'];
   const expected='/'+language+(route.startsWith('visita-3d')?'visita-3d.html?mundo='+(route.includes('=segovia')?'segovia':'normal'):route);
   assert.strictEqual(hits.filter(x=>x.e!=='true').length,1,route+' must emit exactly one pageview');
   assert.strictEqual(hits[0].p,expected);
-  if(route==='servicios.html'){
+  if(route==='aplicaciones.html'){
    await page.evaluate(()=>document.addEventListener('click',e=>{if(e.target.closest('a[data-goatcounter-click]'))e.preventDefault();},true));
    for(const id of ids)await page.locator(`[data-goatcounter-click="servicio-probar-${id}"]`).click();
    await page.waitForTimeout(100);const events=hits.filter(x=>x.e==='true');
@@ -33,10 +33,10 @@ const ids=['editor-pdf','juego-2d','animacion-3d','mundo-normal','segovia'];
    const href=await page.locator('[data-goatcounter-click="servicio-probar-segovia"]').getAttribute('href');assert(href.includes(language+'visita-3d.html?mundo=segovia'));
   }
   evidence.push({route:language+route,hits:hits.map(({p,e,ns})=>({path:p,event:e==='true',...(ns?{allClicks:ns==='true'}:{})}))});
-  if(route==='servicios.html'){
+  if(route==='aplicaciones.html'){
    hits.length=0;
    for(const suffix of ['?sinestadisticas=1','?sinestadisticas=1']){
-    await page.goto('https://ontosdigital.es/'+language+'servicios.html'+suffix);await page.waitForFunction(()=>typeof goatcounter.count==='function');
+    await page.goto('https://ontosdigital.es/'+language+'aplicaciones.html'+suffix);await page.waitForFunction(()=>typeof goatcounter.count==='function');
     assert.strictEqual(await page.evaluate(()=>localStorage.getItem('skipgc')),'t');
     assert.strictEqual(hits.length,0,'Opt-out activation must not count');
     if(process.env.QA_SCREENSHOT&&!language&&!fs.existsSync(process.env.QA_SCREENSHOT))await page.screenshot({path:process.env.QA_SCREENSHOT,fullPage:false});
@@ -46,7 +46,7 @@ const ids=['editor-pdf','juego-2d','animacion-3d','mundo-normal','segovia'];
     await page.evaluate(()=>goatcounter.count({path:'test-must-not-count',event:true}));await page.waitForTimeout(80);
     assert.strictEqual(hits.length,0,'Existing pageview/event must honour opt-out: '+target);
    }
-   await page.goto('https://ontosdigital.es/'+language+'servicios.html?sinestadisticas=0');await page.waitForFunction(()=>typeof goatcounter.count==='function');
+   await page.goto('https://ontosdigital.es/'+language+'aplicaciones.html?sinestadisticas=0');await page.waitForFunction(()=>typeof goatcounter.count==='function');
    assert.strictEqual(await page.evaluate(()=>localStorage.getItem('skipgc')),null);assert.strictEqual(hits.length,0,'Reactivation itself must not count');
    await page.goto('https://ontosdigital.es/index.html');await page.waitForFunction(()=>typeof goatcounter.count==='function');await page.waitForTimeout(80);
    assert.strictEqual(hits.length,1,'Next pageview should count after explicit reactivation');

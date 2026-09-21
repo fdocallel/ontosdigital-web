@@ -24,7 +24,8 @@ DOMINIO = "https://ontosdigital.es"
 PAGINAS = [
     ("index.html", True),
     ("bim.html", True),
-    ("servicios.html", True),
+    ("aplicaciones.html", True),
+    ("servicios.html", False),   # redirección: la URL antigua de Aplicaciones (21-sep-2026), sin índice
     ("juego-2d.html", True),
     ("animacion-3d.html", True),
     ("visita-3d.html", True),
@@ -200,6 +201,11 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
             pon("content", tr(clave(atrs.get("content", ""))))
         elif clave_meta == "og:url":
             pon("content", url_en(pagina))
+        # redirecciones (servicios.html → aplicaciones.html): el destino del refresh también va a /en/
+        if atrs.get("http-equiv", "").lower() == "refresh":
+            m_url = re.match(r"(\s*\d+\s*;\s*url=)(.+)$", atrs.get("content", ""), re.I)
+            if m_url:
+                pon("content", m_url.group(1) + ruta_en(m_url.group(2).strip()))
         elif clave_meta == "og:locale":
             pon("content", "en_GB")
 
