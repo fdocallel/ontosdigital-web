@@ -170,7 +170,10 @@
   .card.demo p { font-size: 0.9rem; }
   .card.demo .icono { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1; }
   .card.demo p { flex: 1; }
-  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--sec); }
+  /* flex con wrap: en inglés «Read the case ▸ · ▶ Watch the video» no cabe en una línea a cuatro
+     columnas y el separador quedaba colgando al final de la primera */
+  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--sec);
+    display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.4rem; }
   .card.demo .ver a { display: inline-block; padding: 0.3rem 0; color: var(--acento); text-decoration: none; white-space: nowrap; }
   .card.demo .ver a:hover { text-decoration: underline; }
   .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }

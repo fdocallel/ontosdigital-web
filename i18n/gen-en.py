@@ -128,7 +128,12 @@ def ruta_en(destino):
         if hoja in ESPEJO:
             return "/en/" + hoja + sep + ancla
         return destino
-    # activo compartido (brand/…): a ruta absoluta, que /en/ está un nivel abajo
+    # activo compartido (brand/…): a ruta absoluta, que /en/ está un nivel abajo.
+    # Si existe una versión inglesa propia con sufijo -en (brand/x-en.jpg junto a brand/x.jpg),
+    # el espejo la usa (21-sep-2026: el póster de la demo del inicio lleva texto).
+    raiz_activo, ext = os.path.splitext(base)
+    if ext and os.path.exists(os.path.join(RAIZ, raiz_activo + "-en" + ext)):
+        base = raiz_activo + "-en" + ext
     return "/" + base + sep + ancla
 
 
