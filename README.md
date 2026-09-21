@@ -2,6 +2,17 @@
 
 Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a main).
 
+## Estructura v4 (21-sep-2026, rama web-v4-empresa)
+
+- `/` — portada de **empresa**: dos maneras de trabajar, lo último, quién, contacto.
+- `producto.html` — Qué es ONTOS, Dos ediciones, Áreas (= los antiguos casos + Armario), Dónde está hoy, entrada a `solicitud.html` y `entrar.html`.
+- `consultoria.html` — tres familias, oferta BIM, así empieza un encargo, `aplicaciones.html` como galería.
+- `fernando-calle.html` — en la barra como «Sobre mí».
+- Barra única de 5 ítems en todas las páginas con `<header class="barra">`: Producto · Consultoría · Sobre mí · Contacto (`/#contacto`) · EN.
+- `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
+
+**Inglés PARADO hasta OK de Fernando: `/en/` sigue en v2.1; gen-en no se ha ejecutado en esta rama; los commits van con `--no-verify`.**
+
 ## Español e inglés
 
 El sitio está en dos idiomas y cumple DATO ÚNICO: **la estructura vive una sola vez**.

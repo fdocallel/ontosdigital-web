@@ -39,6 +39,7 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 19ch; margin: 1rem 0 1.5r
 section { padding: 3rem 0; border-top: 1px solid var(--borde); }
 h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .bajada { max-width: 42rem; color: var(--sec); }
+.nota-armario { margin-top: 1.6rem; }
 .catalogo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
 .servicio { border: 1px solid var(--borde); border-radius: 16px; background: var(--panel); overflow: hidden; }
 .servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--borde); }
@@ -49,18 +50,11 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .servicio .caso { border-top: 1px solid var(--borde); padding-top: 1rem; margin-top: 1.2rem; font-size: .95rem; }
 .servicio strong { color: var(--texto); font-weight: 600; }
 .servicio a { display: inline-block; margin-top: 1rem; min-height: 44px; padding: .5rem 0; font-weight: 600; }
-.pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; margin-top: 2rem; counter-reset: paso; }
-.pasos li { counter-increment: paso; color: var(--sec); }
-.pasos li::before { content: '0' counter(paso); display: block; color: var(--acento); margin-bottom: .5rem; }
-.pasos h3 { color: var(--texto); font-size: 1.2rem; margin-bottom: .8rem; }
-.bim { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
-.bim p { max-width: 39rem; color: var(--sec); }
-.bim a { flex-shrink: 0; padding: .7rem 0; }
 .contacto { padding-bottom: 4rem; }
 .contacto p { max-width: 41rem; color: var(--sec); }
 footer { border-top: 1px solid var(--borde); padding: 2rem 0; color: var(--sec); font-size: .85rem; }
 footer a { color: inherit; }
-@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo,.pasos { grid-template-columns: 1fr; } .bim { display: block; } .bim a { display: inline-block; margin-top: 1rem; } }
+@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
@@ -81,16 +75,16 @@ footer a { color: inherit; }
       </svg>
       ONTOS
     </a>
-    <a class="item" href="/#producto">El producto</a>
-    <a class="item" href="/#casos">Casos</a>
-    <a class="item" href="aplicaciones.html" aria-current="page">Aplicaciones</a>
-    <a class="item" href="#contacto">Contacto</a>
+    <a class="item" href="producto.html">Producto</a>
+    <a class="item" aria-current="page" href="consultoria.html">Consultoría</a>
+    <a class="item" href="fernando-calle.html">Sobre mí</a>
+    <a class="item" href="/#contacto">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/aplicaciones.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
 </header>
 <main class="wrap">
 <div class="hero">
-<p class="etiqueta">Aplicaciones · Desarrollo a medida</p>
+<p class="etiqueta">Consultoría · Aplicaciones</p>
 <h1>Herramientas que resuelven. Experiencias que se exploran.</h1>
 <p class="intro">Hay ideas que necesitan una herramienta. Otras, un personaje, un juego o un mundo en el que entrar. Diseño y desarrollo esas piezas para que funcionen en el navegador.</p>
 <div class="acciones"><a class="cta" href="#trabajos">Probar las experiencias</a><a href="#contacto">Cuéntame tu idea</a></div>
@@ -145,30 +139,10 @@ footer a { color: inherit; }
 <h3>Una web que el cliente puede mantener</h3>
 <p>Páginas para enseñar un trabajo o una obra, con lo que haga falta para que su dueño la actualice sin depender de nadie.</p>
 <p class="caso"><strong>Ya construido: la galería de José María Casado, pintor.</strong> Su web convertida en galería con una base de datos de obras que él mismo edita: colecciones, fichas y destacadas en portada.</p>
-<a href="http://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visitar josemariacasado.com ▸</a></div>
-</article>
-<article class="servicio" id="armario">
-<img src="brand/servicios/armario.png" alt="Ropa colgada en baldas ordenadas por color: blancos, grises, negros" width="1240" height="698">
-<div class="texto"><p class="etiqueta">07 · Armario</p>
-<h3>Tu ropa, fichada y colgada en baldas</h3>
-<p>Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y qué no, y propone conjuntos que puedes ver puestos. Todo en tu teléfono.</p>
-<p class="caso"><strong>En uso: mi armario, 82 prendas.</strong> Prueba a colocar diez prendas por color o por tipo y mira el armario real en vídeo.</p>
-<a href="armario.html" data-goatcounter-click="servicio-probar-armario" data-goatcounter-no-session="1">Probar con 10 prendas ▸</a></div>
+<a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visitar josemariacasado.com ▸</a></div>
 </article>
 </div>
-</section>
-<section>
-<h2>Así empieza un encargo</h2>
-<p class="bajada">Partimos de lo que quieres que una persona pueda hacer o sentir. A partir de ahí, acordamos qué construir.</p>
-<ol class="pasos">
-<li><h3>La idea y su uso</h3><p>Definimos el público, los contenidos, las interacciones y los dispositivos en los que debe funcionar.</p></li>
-<li><h3>Una primera versión</h3><p>Probamos la dirección visual y la interacción con una pieza concreta que puedas revisar.</p></li>
-<li><h3>La entrega acordada</h3><p>Archivos, instrucciones y comprobaciones. El alcance, el presupuesto, los plazos y el mantenimiento se concretan por encargo.</p></li>
-</ol>
-</section>
-<section class="bim">
-<div><h2>También, ingeniería de la información</h2><p>La consultoría BIM tiene su propio espacio: requisitos de información, coordinación y control de entregables para ingeniería y contratación pública.</p></div>
-<a href="bim.html">Ver la Oficina BIM ▸</a>
+<p class="bajada nota-armario">Armario, la app de ropa, es parte del producto: <a href="producto.html#areas">verla en Producto › Áreas ▸</a></p>
 </section>
 <section class="contacto" id="contacto">
 <h2>¿Qué te gustaría construir?</h2>
@@ -176,7 +150,7 @@ footer a { color: inherit; }
 <div class="acciones"><a class="cta" href="mailto:hola@ontosdigital.es">Escríbeme a hola@ontosdigital.es</a><a href="/#contacto">Usar el formulario de contacto</a></div>
 </section>
 </main>
-<footer><div class="wrap"><p>© 2026 ONTOS · Fernando Calle · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a></p></div></footer>
+<footer><div class="wrap"><p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p></div></footer>
 <script src="/brand/analytics-preferences.js?v=2"></script>
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>

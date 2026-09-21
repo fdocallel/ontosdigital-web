@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consultoría · ingeniería de la información por encargo · ONTOS</title>
+<meta name="theme-color" content="#faf8f5">
+<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
+<link rel="canonical" href="https://ontosdigital.es/consultoria.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/consultoria.html">
+<link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/consultoria.html">
+<link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/consultoria.html">
+<!-- /i18n:alt -->
+<meta name="description" content="Consultoría por encargo desde Segovia: automatización y BIM en licitación pública, aplicaciones y webs a medida, experiencias 2D y 3D. Diagnóstico sin coste.">
+<meta property="og:title" content="Consultoría · ingeniería de la información por encargo · ONTOS">
+<meta property="og:description" content="Consultoría por encargo desde Segovia: automatización y BIM en licitación pública, aplicaciones y webs a medida, experiencias 2D y 3D. Diagnóstico sin coste.">
+<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ontosdigital.es/consultoria.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="brand/tokens.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg); color: var(--texto);
+    font-size: 1rem; line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
+  h1, h3, .serif { font-family: var(--serif); }
+
+  /* ---- hero ---- */
+  .hero {
+    min-height: 0;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 4rem 1.5rem 3.5rem;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 45% at 50% 28%, rgba(212,113,59,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+  }
+  .hero .lema {
+    margin-top: 1.2rem; max-width: 40rem;
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+  }
+  .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .cta {
+    display: inline-block;
+    padding: 0.8rem 1.8rem; border-radius: 999px;
+    background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
+  .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
+  .hero .plazo { margin-top: 1.4rem; font-size: 0.85rem; color: var(--sec); }
+  .kicker {
+    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
+  }
+
+  /* ---- secciones ---- */
+  section { padding: 4.2rem 0; }
+  h2 {
+    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
+  }
+  .intro p { max-width: 42rem; font-size: 1.12rem; }
+  .intro p + p { margin-top: 1rem; }
+  .intro strong { color: var(--realce); font-weight: 600; }
+
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
+  .card {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.8rem 1.6rem;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .card p { font-size: 0.95rem; color: var(--sec); }
+  .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
+  a.card:hover { transform: translateY(-4px); border-color: var(--teja); }
+
+
+
+
+
+  .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
+  .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
+  .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
+
+  /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
+     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
+  .cta-medio a {
+    color: var(--acento); text-decoration: none; font-weight: 600;
+    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
+  }
+  .cta-medio a:hover { text-decoration: underline; }
+
+
+  /* las tres familias, numeradas */
+  .familias { margin-top: 0; grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 56rem) { .familias { grid-template-columns: 1fr; } }
+  .familia { display: flex; flex-direction: column; }
+  .familia .num { display: block; font-size: 0.8rem; color: var(--acento); letter-spacing: 0.15em; margin-bottom: 0.8rem; font-weight: 600; }
+  .familia p { flex: 1; }
+  .familia .enlaces { list-style: none; margin-top: 1.2rem; border-top: 1px solid var(--borde); padding-top: 0.6rem; }
+  .familia .enlaces li a { display: inline-block; padding: 0.45rem 0; font-size: 0.9rem; font-weight: 600; color: var(--acento); text-decoration: none; }
+  .familia .enlaces li a:hover { text-decoration: underline; }
+  /* así empieza un encargo (traído de aplicaciones.html) */
+  .bajada { max-width: 42rem; color: var(--sec); }
+  .pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; margin-top: 2rem; counter-reset: paso; }
+  .pasos li { counter-increment: paso; color: var(--sec); }
+  .pasos li::before { content: '0' counter(paso); display: block; color: var(--acento); margin-bottom: .5rem; }
+  .pasos h3 { color: var(--texto); font-size: 1.2rem; margin-bottom: .8rem; }
+  @media (max-width: 40rem) { .pasos { grid-template-columns: 1fr; } }
+  .apps p { max-width: 42rem; color: var(--sec); font-size: 1.05rem; margin-bottom: 1.6rem; }
+
+  footer {
+    border-top: 1px solid var(--borde);
+    padding: 2rem 0 3rem; font-size: 0.8rem; color: var(--sec);
+  }
+  footer a { color: inherit; }
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <nav>
+    <a class="marca" href="/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="producto.html">Producto</a>
+    <a class="item" aria-current="page" href="consultoria.html">Consultoría</a>
+    <a class="item" href="fernando-calle.html">Sobre mí</a>
+    <a class="item" href="/#contacto">Contacto</a>
+    <a class="item idioma" data-i18n-alt href="/en/consultoria.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <p class="kicker">Consultoría</p>
+  <h1>Ingeniería de la información, por encargo.</h1>
+      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
+       No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
+  <p class="lema">El producto nació de poner en orden problemas reales, y sigo haciéndolo por encargo: me
+  cuentas qué os come horas y os monto la solución. Automatización e IA a medida, datos del
+  mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea más pedida ahora
+  mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
+  coste.</p>
+  <div class="ctas">
+    <a class="cta" href="bim.html">La oferta BIM</a>
+    <a class="cta secundario" href="/#contacto">Cuéntame tu caso</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<section id="familias">
+  <h2>Tres familias</h2>
+  <div class="cards familias">
+    <div class="card familia">
+      <span class="num">01</span>
+      <h3>Automatización y BIM</h3>
+      <p>Para equipos que repiten operaciones, revisan documentación o tienen que responder a un pliego
+      con requisitos BIM. Recibes un flujo automatizado, una comprobación o una herramienta concreta.</p>
+      <ul class="enlaces">
+        <li><a href="bim.html">Requisitos BIM en licitación pública ▸</a></li>
+        <li><a href="escrito-plan-bim-ingenieria.html">Qué exige el Plan BIM a una ingeniería mediana ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">02</span>
+      <h3>Aplicaciones y webs a medida</h3>
+      <p>Para convertir una colección, unos documentos o un proceso en una herramienta que se usa. Una web
+      que el cliente mantiene, un editor de PDF, una casa en 3D desde un vuelo de dron.</p>
+      <ul class="enlaces">
+        <li><a href="aplicaciones.html">Ver las aplicaciones ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">03</span>
+      <h3>Experiencias interactivas 2D y 3D</h3>
+      <p>Para explorar una marca, un personaje o un lugar desde el navegador. Un juego, una figura que
+      saluda, un mundo al que entrar.</p>
+      <ul class="enlaces">
+        <li><a href="aplicaciones.html#juegos-2d">Probar las experiencias ▸</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="encargo">
+  <h2>Así empieza un encargo</h2>
+  <p class="bajada">Partimos de lo que quieres que una persona pueda hacer o sentir. A partir de ahí, acordamos qué construir.</p>
+<ol class="pasos">
+<li><h3>La idea y su uso</h3><p>Definimos el público, los contenidos, las interacciones y los dispositivos en los que debe funcionar.</p></li>
+<li><h3>Una primera versión</h3><p>Probamos la dirección visual y la interacción con una pieza concreta que puedas revisar.</p></li>
+<li><h3>La entrega acordada</h3><p>Archivos, instrucciones y comprobaciones. El alcance, el presupuesto, los plazos y el mantenimiento se concretan por encargo.</p></li>
+</ol>
+</section>
+
+<section class="apps" id="aplicaciones">
+  <h2>Aplicaciones</h2>
+  <p>Lo que voy construyendo, para probar en el navegador: editor PDF, juego 2D, figura 3D, mundos 3D,
+  modelado desde dron y la web de un pintor.</p>
+  <a class="cta secundario" href="aplicaciones.html">Ver las aplicaciones ▸</a>
+  <p class="cta-medio">Cuéntame qué os come horas: <a href="/#contacto">formulario ▸</a> · <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a></p>
+</section>
+
+<footer>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+</footer>
+
+</div>
+
+<!-- GoatCounter: recuento anónimo, sin cookies -->
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

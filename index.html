@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ONTOS · el gemelo digital de tu vida y de tu negocio</title>
+<title>ONTOS Digital · producto y consultoría</title>
 <meta name="theme-color" content="#faf8f5">
 <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="brand/favicon.svg">
@@ -14,9 +14,9 @@
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/">
 <!-- /i18n:alt -->
 <meta name="msvalidate.01" content="515812BC9718626E8FC3D1D0174B09DB">
-<meta name="description" content="ONTOS es un modelo digital de todo lo tuyo (finanzas, documentos, trámites, salud) que una IA mantiene al día y responde preguntando. Todo en tu máquina.">
-<meta property="og:title" content="ONTOS · el gemelo digital de tu vida y de tu negocio">
-<meta property="og:description" content="Un modelo ordenado de todo lo tuyo y una IA que lo mantiene al día. Todo en local: tus datos no salen de tu ordenador.">
+<meta name="description" content="ONTOS Digital, Segovia. ONTOS, un gemelo digital de tu vida y tu negocio que una IA mantiene al día; y consultoría por encargo: automatización, BIM, apps y 3D.">
+<meta property="og:title" content="ONTOS Digital · producto y consultoría">
+<meta property="og:description" content="ONTOS Digital, Segovia. ONTOS, un gemelo digital de tu vida y tu negocio que una IA mantiene al día; y consultoría por encargo: automatización, BIM, apps y 3D.">
 <meta property="og:image" content="https://ontosdigital.es/brand/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -27,28 +27,14 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "ONTOS",
-      "url": "https://ontosdigital.es/",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "macOS, Windows, Linux",
-      "description": "Gemelo digital personal y empresarial: un modelo ordenado de los datos, documentos y procesos propios, operado con inteligencia artificial y ejecutado en local.",
-      "inLanguage": "es",
-      "author": { "@type": "Person", "name": "Fernando Calle" }
-    },
-    {
-      "@type": "ProfessionalService",
-      "name": "ONTOS",
-      "url": "https://ontosdigital.es/",
-      "email": "hola@ontosdigital.es",
-      "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
-      "areaServed": "ES",
-      "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
-      "founder": { "@type": "Person", "@id": "https://ontosdigital.es/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Ingeniero de Caminos, Canales y Puertos", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
-    }
-  ]
+  "@type": "ProfessionalService",
+  "name": "ONTOS Digital",
+  "url": "https://ontosdigital.es/",
+  "email": "hola@ontosdigital.es",
+  "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
+  "areaServed": "ES",
+  "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
+  "founder": { "@type": "Person", "@id": "https://ontosdigital.es/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Ingeniero de Caminos, Canales y Puertos", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
 }
 </script>
 <style>
@@ -126,10 +112,6 @@
   .intro p + p { margin-top: 1rem; }
   .intro strong { color: var(--realce); font-weight: 600; }
 
-  .stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; }
-  .stat .n { font-family: var(--serif); font-size: 2rem; font-weight: 650; }
-  .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
-
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
   .card {
     background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
@@ -141,49 +123,24 @@
   .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
   a.card:hover { transform: translateY(-4px); border-color: var(--teja); }
 
-  /* las tres piezas del producto */
-  .piezas { margin-top: 1.8rem; }
-  .pieza .icono { font-size: 1.8rem; }
-  .pieza h3 { font-size: 1.1rem; }
-
-  /* ediciones */
+  /* las dos maneras de trabajar: misma rejilla que las ediciones del producto */
   .ediciones { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
   @media (max-width: 48rem) { .ediciones { grid-template-columns: 1fr; } }
+  a.edicion { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); }
   .edicion .icono { font-size: 2rem; }
   .edicion h3 { font-size: 1.25rem; }
-  .edicion .edicion-desc { font-size: 0.98rem; color: var(--sec); }
-  .edicion .lineas { list-style: none; margin-top: 1.2rem; }
-  .edicion .lineas li { font-size: 0.92rem; color: var(--sec); padding: 0.7rem 0; border-top: 1px solid var(--borde); }
-  .edicion .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
+  .edicion .edicion-desc { font-size: 0.98rem; color: var(--sec); flex: 1; }
+  .edicion .edicion-desc + .edicion-desc { margin-top: 0.8rem; flex: 0; }
+  .edicion .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
+  /* lo último: el vídeo de Armario, vertical, sin autoplay */
+  .ultimo { display: grid; grid-template-columns: 18rem 1fr; gap: 2.4rem; align-items: center; margin: 0; }
+  @media (max-width: 48rem) { .ultimo { grid-template-columns: 1fr; gap: 1.4rem; } }
+  .ultimo video { width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; border-radius: 14px; border: 1px solid var(--borde); background: var(--panel); }
+  .ultimo figcaption { color: var(--sec); font-size: 0.95rem; }
+  .ultimo figcaption p + p { margin-top: 0.8rem; }
+  .ultimo figcaption a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .ultimo figcaption a:hover { text-decoration: underline; }
 
-  /* estado honesto */
-  .estado {
-    background: var(--panel); border: 1px solid var(--borde); border-left: 4px solid var(--teja);
-    border-radius: 14px; padding: 1.8rem 1.8rem; max-width: 46rem;
-  }
-  .estado p + p { margin-top: 0.9rem; }
-  .estado p { color: var(--sec); }
-  .estado strong { color: var(--texto); font-weight: 600; }
-
-  /* consultoría, la rama */
-  .rama { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center;
-    border: 1px solid var(--borde); border-radius: 14px; padding: 1.6rem 1.7rem; }
-  @media (max-width: 48rem) { .rama { grid-template-columns: 1fr; } }
-  .rama h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
-  .rama p { color: var(--sec); font-size: 0.95rem; max-width: 38rem; }
-
-  .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
-  /* escritos: la escritura fechada es la señal de que el sitio está vivo */
-  .escrito {
-    display: block; text-decoration: none; color: var(--texto);
-    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
-    padding: 1.6rem 1.6rem; transition: border-color 0.15s ease, transform 0.15s ease;
-  }
-  .escrito:hover { border-color: var(--teja); transform: translateY(-3px); }
-  .escrito .fecha { font-size: 0.78rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.1em; }
-  .escrito h3 { font-size: 1.25rem; margin: 0.5rem 0 0.6rem; }
-  .escrito p { color: var(--sec); font-size: 0.95rem; }
-  .escrito .ver { display: inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
   .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
   .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
   /* Retrato de Quién: brand/fernando.jpg, 600x800 (3:4), ~50 KB */
@@ -202,16 +159,6 @@
   @media (max-width: 48rem) { .retrato img { width: 10rem; } }
   .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
 
-  /* casos */
-  .demos { margin-top: 1.8rem; grid-template-columns: repeat(4, 1fr); }
-  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 30rem) { .demos { grid-template-columns: 1fr; } }
-  .card.demo { display: flex; flex-direction: column; text-decoration: none; color: var(--texto); }
-  .card.demo .icono { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1; }
-  .card.demo p { flex: 1; }
-  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--acento); }
-  .card.demo .ver span { color: var(--sec); font-weight: 400; }
-  .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
   /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
      reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
   .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
@@ -226,12 +173,20 @@
   .contacto .lead { color: var(--sec); max-width: 34rem; }
   form { max-width: 34rem; margin-top: 2rem; display: grid; gap: 0.9rem; }
   label { font-size: 0.85rem; color: var(--sec); display: block; margin-bottom: 0.3rem; }
-  input[type="text"], input[type="email"], textarea {
+  input[type="text"], input[type="email"], select, textarea {
     width: 100%; padding: 0.7rem 0.9rem; border-radius: 10px;
     border: 1px solid var(--borde); background: var(--panel); color: var(--texto);
     font: inherit; font-size: 0.95rem;
   }
-  input:focus, textarea:focus { outline: 2px solid var(--teja); outline-offset: 1px; border-color: transparent; }
+  /* el select nativo de WebKit ignora padding y borde: se pinta como los inputs y se le
+     dibuja la flecha a mano */
+  select {
+    -webkit-appearance: none; appearance: none; cursor: pointer; padding-right: 2.4rem;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23d4713b' stroke-width='1.8'/></svg>");
+    background-repeat: no-repeat; background-position: right 0.9rem center;
+  }
+  select:invalid { color: var(--sec); }
+  input:focus, select:focus, textarea:focus { outline: 2px solid var(--teja); outline-offset: 1px; border-color: transparent; }
   textarea { min-height: 7rem; resize: vertical; }
   form .cta { border: 0; cursor: pointer; font: inherit; font-weight: 600; justify-self: start; }
   .form-nota { font-size: 0.8rem; color: var(--sec); }
@@ -273,9 +228,9 @@
       </svg>
       ONTOS
     </a>
-    <a class="item" href="#producto">El producto</a>
-    <a class="item" href="#casos">Casos</a>
-    <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="producto.html">Producto</a>
+    <a class="item" href="consultoria.html">Consultoría</a>
+    <a class="item" href="fernando-calle.html">Sobre mí</a>
     <a class="item" href="#contacto">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
@@ -303,138 +258,59 @@
   <circle class="nucleo" cx="50" cy="50" r="14" fill="#d4713b"/>
   </svg>
   <div class="wordmark">ONTOS</div>
-  <h1>Un modelo digital de todo lo tuyo, y una IA que lo mantiene al día.</h1>
-  <p class="lema">Finanzas, documentos, trámites, proyectos, agenda, salud: ordenados en un solo sitio,
-  en tu máquina, y consultables preguntando. Lo construí para mí y lo uso todos los días.</p>
+  <h1>Todo lo tuyo, ordenado y al día.</h1>
+  <p class="lema">Casi nadie tiene un problema de información: tiene un problema de orden. A eso se dedica
+  ONTOS Digital, desde Segovia.</p>
   <div class="ctas">
-    <a class="cta" href="#casos">Míralo funcionando</a>
-    <a class="cta secundario" href="#contacto">Pídeme una demo</a>
+    <a class="cta" href="producto.html">El producto</a>
+    <a class="cta secundario" href="consultoria.html">La consultoría</a>
   </div>
-  <p class="plazo">En piloto privado. Todo funciona en local: tus datos no salen de tu ordenador.</p>
+  <p class="plazo">Un producto en piloto privado y una consultoría por encargo.</p>
 </div>
 
 <div class="wrap">
 
-<section class="intro" id="producto">
-  <h2>Qué es ONTOS</h2>
-  <p><em>Ontos</em>, del griego ὄντος: <span class="serif">«lo que es»</span>. Casi nadie tiene un
-  problema de información: tiene un problema de <strong>orden</strong>. Los datos viven en carpetas,
-  los trámites en la cabeza, el conocimiento en la experiencia de cada uno, y juntar la foto completa
-  cuesta más que la decisión que había que tomar.</p>
-  <p>ONTOS es el <strong>gemelo digital</strong> de eso: un modelo ordenado de lo que tienes, lo que
-  haces y lo que sabes, con una inteligencia artificial trabajando encima todos los días.</p>
-  <div class="cards piezas">
-    <div class="card pieza">
-      <span class="icono">◉</span>
-      <h3>El dato, en un solo sitio</h3>
-      <p>Cada hecho vive una vez. Las vistas, los informes y los resúmenes se generan solos a partir
-      de él, así que nada se contradice ni se queda viejo en una copia olvidada.</p>
-    </div>
-    <div class="card pieza">
-      <span class="icono">✦</span>
-      <h3>La IA que lo opera</h3>
-      <p>Le cuentas en una frase lo que ha pasado y actualiza todo lo que toca. Le preguntas en
-      lenguaje natural y responde con tus datos, citando de dónde sale cada cosa.</p>
-    </div>
-    <div class="card pieza">
-      <span class="icono">✓</span>
-      <h3>La auditoría que vigila</h3>
-      <p>Un sistema sin vigilancia se degrada. Una comprobación automática revisa a diario que nada
-      se pierda, que las vistas cuadren con la fuente y que ningún cabo quede suelto.</p>
-    </div>
-  </div>
-  <p class="metodo">Todo se ejecuta en tu máquina. Sin nube obligatoria, sin cuenta que crear, sin
-  tus datos alimentando el producto de nadie.</p>
-</section>
-
-<section>
-  <h2>Dos ediciones</h2>
+<section id="maneras">
+  <h2>Dos maneras de trabajar</h2>
   <div class="ediciones">
-    <div class="card edicion">
+    <a class="card edicion" href="producto.html">
       <span class="icono">◈</span>
-      <h3>ONTOS personal</h3>
-      <p class="edicion-desc">Tu vida entera en un solo modelo, y la parte aburrida hecha sola.</p>
-      <ul class="lineas">
-        <li><b>El núcleo</b>Hoy, notas, agenda y calendario, proyectos y red de contactos.</li>
-        <li><b>Dinero</b>Patrimonio, gastos e ingresos, inversiones con reglas escritas.</li>
-        <li><b>Cuerpo</b>Entreno con progresión, composición, nutrición y descanso.</li>
-        <li><b>Lo tuyo</b>Los expedientes que te importen: una herencia, una obra, un idioma,
-        unos estudios. Los módulos se encienden cuando los pides.</li>
-      </ul>
-    </div>
-    <div class="card edicion">
+      <h3>ONTOS, el producto</h3>
+      <p class="edicion-desc">Un modelo digital de todo lo tuyo, y una IA que lo mantiene al día. Finanzas,
+      documentos, trámites, proyectos, agenda y salud, en tu máquina y consultables preguntando. Lo construí
+      para mí y lo uso todos los días.</p>
+      <p class="edicion-desc">En piloto privado, por invitación.</p>
+      <span class="ver">Ver el producto ▸</span>
+    </a>
+    <a class="card edicion" href="consultoria.html">
       <span class="icono">▣</span>
-      <h3>ONTOS empresarial</h3>
-      <p class="edicion-desc">El modelo de tu negocio: datos, procesos y conocimiento en un sitio.</p>
-      <ul class="lineas">
-        <li><b>Comercial</b>Pipeline de oportunidades, clientes con su historia y su siguiente paso.</li>
-        <li><b>Operación</b>Trabajos en curso, horizonte de plazos, servicios y entregables.</li>
-        <li><b>Administración</b>Facturación, gastos y las obligaciones vigiladas con aviso.</li>
-        <li><b>Conocimiento</b>Los documentos de la casa, consultables preguntando y con cita.</li>
-      </ul>
-    </div>
+      <h3>Consultoría</h3>
+      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
+           No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
+      <p class="edicion-desc">El producto nació de poner en orden problemas reales, y sigo haciéndolo por encargo: me
+      cuentas qué os come horas y os monto la solución. Automatización e IA a medida, datos del
+      mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea más pedida ahora
+      mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
+      coste.</p>
+      <span class="ver">Ver la consultoría ▸</span>
+    </a>
   </div>
 </section>
 
-<section id="casos">
-  <h2>Míralo funcionando</h2>
-  <div class="intro">
-  <p>El primer gemelo digital lo construí para mí, y es la prueba de que esto funciona: un modelo de
-  mi vida completa mantenido a diario con IA. Cada caso cuenta cómo está montado por dentro, con su
-  demo en movimiento.</p>
-  </div>
-  <div class="cards demos">
-    <a class="card demo" href="caso-sistema.html">
-      <span class="icono">◉</span>
-      <h3>El sistema completo</h3>
-      <p>El modelo entero y la IA operándolo: datos, documentos, respuestas con citas.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 90 s</span></span>
-    </a>
-    <a class="card demo" href="caso-finanzas.html">
-      <span class="icono">€</span>
-      <h3>Finanzas</h3>
-      <p>Gastos por API, proyección a 18 meses, ayudas vigiladas, inversión con reglas.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 70 s</span></span>
-    </a>
-    <a class="card demo" href="caso-organizacion.html">
-      <span class="icono">☰</span>
-      <h3>Organización</h3>
-      <p>Proyectos con su siguiente paso, tareas, calendario y contactos al día.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 60 s</span></span>
-    </a>
-    <a class="card demo" href="caso-salud.html">
-      <span class="icono">♥</span>
-      <h3>Salud</h3>
-      <p>Entreno con progresión automática, composición, nutrición y descanso del wearable.</p>
-      <span class="ver">Leer el caso <span>· ▶ demo 60 s</span></span>
-    </a>
-  </div>
-  <p class="demos-nota">Cada caso incluye su demo animada. Sin sonido, con datos de muestra.</p>
-  <div class="stats">
-    <div class="stat"><div class="n">400+</div><div class="l">entradas de bitácora</div></div>
-    <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
-    <div class="stat"><div class="n">100%</div><div class="l">local y privado</div></div>
-  </div>
-  <!-- El contacto está a siete secciones de aquí: en móvil, a ocho pantallas. Quien se
-       convence lo hace viendo los casos, y ahí es donde tiene que tener el botón. -->
-  <p class="cta-medio">¿Te suena a lo que llevas tiempo queriendo? <a href="#contacto">Pídeme una demo ▸</a></p>
+<section id="ultimo">
+  <h2>Lo último</h2>
+  <figure class="ultimo">
+    <video controls playsinline preload="none" poster="brand/servicios/armario-poster.jpg" width="1080" height="1080">
+      <source src="brand/servicios/armario.mp4" type="video/mp4">
+    </video>
+    <figcaption>
+      <p><a href="armario.html">Armario, 35 s</a> · la app de ropa del producto, con demo de 10 prendas.</p>
+      <p>Más piezas para probar en el navegador: <a href="aplicaciones.html">Aplicaciones ▸</a></p>
+    </figcaption>
+  </figure>
 </section>
 
-<section>
-  <h2>Dónde está hoy</h2>
-  <div class="estado">
-    <p><strong>ONTOS no es una promesa: es lo que uso todos los días</strong> desde junio de 2026.
-    Lo que ves en los casos está funcionando en mi propia instancia, con mis datos reales.</p>
-    <p>Está <strong>en piloto privado</strong>, y lo abro de una persona en una: me siento con cada
-    una el primer día, montamos su modelo y encendemos solo los módulos que le sirven. Se aprende y
-    se arregla antes de dar el siguiente paso.</p>
-    <p><strong>Todavía no tiene precio público.</strong> Prefiero aprender con las primeras personas
-    antes de ponerle una cifra, y decírtelo así antes que venderte una lista de funciones.</p>
-    <p>Si esto te suena a lo que llevas tiempo queriendo, escríbeme y te lo enseño en vivo.</p>
-  </div>
-</section>
-
-<section class="intro">
+<section class="intro" id="quien">
   <h2>Quién</h2>
   <div class="quien-con-foto">
     <figure class="retrato">
@@ -443,57 +319,19 @@
       <figcaption>Fernando Calle · Segovia</figcaption>
     </figure>
     <div>
-      <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos
-      y automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), donde
-      un dato mal puesto cuesta millones. Esa cabeza de ingeniero,
-      <strong>premiada por I+D en automatización e IA</strong>, es la que está detrás de ONTOS:
-      sistemas en vez de heroicidades, y resultados que se miden.</p>
-      <div class="stats">
-        <div class="stat"><div class="n">6</div><div class="l">años en grandes proyectos</div></div>
-        <div class="stat"><div class="n">I+D</div><div class="l">premio automatización e IA</div></div>
-      </div>
-      <p class="verificable">Puedes comprobarlo:
-      <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">mi perfil profesional en LinkedIn</a>
-      · o leer <a href="fernando-calle.html">quién soy y de dónde vengo</a>.</p>
+      <p>Soy <strong>Fernando Calle</strong>, ingeniero de caminos. Seis años dirigiendo modelos, datos y
+      automatización en grandes proyectos internacionales (el metro de Sídney, HS2, NEOM), premiado por I+D
+      en automatización e IA. Esa cabeza está detrás de las dos cosas.</p>
+      <p class="verificable"><a href="fernando-calle.html">Quién soy y de dónde vengo ▸</a>
+      · <a href="https://www.linkedin.com/in/fercalle-ontos" rel="me noopener" target="_blank">LinkedIn</a></p>
     </div>
   </div>
-</section>
-
-<section id="escritos">
-  <h2>Escritos</h2>
-  <a class="escrito" href="escrito-plan-bim-ingenieria.html">
-    <span class="fecha">19 de agosto de 2026 · 7 min</span>
-    <h3>Qué exige el Plan BIM a una ingeniería mediana en 2026</h3>
-    <p>Qué obliga hoy, a quién alcanza y desde cuándo; qué significa en la práctica; los cuatro
-    errores típicos al responder un pliego con requisitos BIM; y una lista de comprobación honesta
-    de diez preguntas para saber si estás listo.</p>
-    <span class="ver">Leer ▸</span>
-  </a>
-</section>
-
-<section>
-  <h2>Aplicaciones</h2>
-  <div class="rama">
-    <div>
-      <h3>Ingeniería de la información, por encargo</h3>
-      <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
-           No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
-      <p>El producto nació de poner en orden problemas reales, y sigo haciéndolo por encargo: me
-      cuentas qué os come horas y os monto la solución. Automatización e IA a medida, datos del
-      mundo físico con dron y fotogrametría, lectura de contratos, webs. La línea más pedida ahora
-      mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
-      coste.</p>
-    </div>
-    <a class="cta secundario" href="aplicaciones.html">Ver las aplicaciones ▸</a>
-  </div>
-  <p class="metodo">Cada encargo enseña algo que el producto incorpora. Por eso las dos cosas
-  conviven: la consultoría paga el pan, ONTOS es a lo que voy.</p>
 </section>
 
 <section class="contacto" id="contacto">
   <h2>Contacto</h2>
-  <p class="lead">Cuéntame qué te come horas, o qué querrías saber de lo tuyo y hoy no puedes.
-  Si quieres ver ONTOS por dentro, dilo y quedamos. Contesto normalmente en 24-48 horas.</p>
+  <p class="lead">Cuéntame qué te come horas, o dime que quieres ver ONTOS por dentro. Contesto normalmente
+  en 24-48 horas.</p>
   <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
     <div><label for="f-nombre">Nombre</label>
     <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
@@ -501,6 +339,13 @@
     <input type="text" id="f-org" name="organizacion" autocomplete="organization"></div>
     <div><label for="f-email">Correo</label>
     <input type="email" id="f-email" name="email" required autocomplete="email"></div>
+    <div><label for="f-interes">Qué buscas</label>
+    <select id="f-interes" name="interes" required>
+      <option value="" disabled selected>Elige</option>
+      <option value="consultoria">Un encargo (consultoría)</option>
+      <option value="producto">Usar ONTOS (producto)</option>
+      <option value="otra">Otra cosa</option>
+    </select></div>
     <div><label for="f-msg">Qué te come horas</label>
     <textarea id="f-msg" name="mensaje" required></textarea></div>
     <input type="hidden" name="_subject" value="Contacto web · Portada">
@@ -517,8 +362,7 @@
 </section>
 
 <footer>
-  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) ·
-  <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
+  <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
 </footer>
 
 </div>
