@@ -47,11 +47,11 @@
   }
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
     margin-top: 1.2rem; max-width: 40rem;
-    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
   }
   .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
@@ -75,6 +75,8 @@
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
     letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
   }
+  /* prosa justificada (Fernando, 21-sep-2026); las tarjetas se quedan a la izquierda */
+  .intro p, .metodo, .bajada { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .intro p { max-width: 42rem; font-size: 1.12rem; }
   .intro p + p { margin-top: 1rem; }
   .intro strong { color: var(--realce); font-weight: 600; }
@@ -117,14 +119,24 @@
   .familia .enlaces { list-style: none; margin-top: 1.2rem; border-top: 1px solid var(--borde); padding-top: 0.6rem; }
   .familia .enlaces li a { display: inline-block; padding: 0.45rem 0; font-size: 0.9rem; font-weight: 600; color: var(--acento); text-decoration: none; }
   .familia .enlaces li a:hover { text-decoration: underline; }
-  /* así empieza un encargo (traído de aplicaciones.html) */
+  /* así empieza un encargo: tres tarjetas en fila con una flecha entre cada dos */
   .bajada { max-width: 42rem; color: var(--sec); }
-  .pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; margin-top: 2rem; counter-reset: paso; }
-  .pasos li { counter-increment: paso; color: var(--sec); }
-  .pasos li::before { content: '0' counter(paso); display: block; color: var(--acento); margin-bottom: .5rem; }
-  .pasos h3 { color: var(--texto); font-size: 1.2rem; margin-bottom: .8rem; }
-  @media (max-width: 40rem) { .pasos { grid-template-columns: 1fr; } }
-  .apps p { max-width: 42rem; color: var(--sec); font-size: 1.05rem; margin-bottom: 1.6rem; }
+  .pasos {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0.8rem;
+    list-style: none; margin-top: 2rem;
+  }
+  .pasos .paso { align-self: stretch; }
+  .pasos .num { display: block; font-size: 0.8rem; color: var(--acento); letter-spacing: 0.15em; margin-bottom: 0.8rem; font-weight: 600; }
+  .pasos h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .pasos .flecha { color: var(--teja); display: flex; align-items: center; justify-content: center; }
+  .pasos .flecha svg { width: 2.4rem; height: auto; display: block; animation: desliza 1.6s ease-in-out infinite; }
+  @keyframes desliza { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  @media (max-width: 48rem) {
+    .pasos { grid-template-columns: 1fr; }
+    .pasos .flecha svg { transform: rotate(90deg); animation-name: desliza-abajo; }
+    @keyframes desliza-abajo { 0%, 100% { transform: rotate(90deg) translateX(0); } 50% { transform: rotate(90deg) translateX(6px); } }
+  }
+  @media (prefers-reduced-motion: reduce) { .pasos .flecha svg { animation: none; } }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -154,6 +166,7 @@
     <a class="item" href="producto.html">Producto</a>
     <a class="item" aria-current="page" href="consultoria.html">Consultoría</a>
     <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="blog.html">Blog</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
     <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
@@ -171,8 +184,7 @@
   mismo es la gestión de requisitos BIM en licitación pública, con diagnóstico de nivel BIM sin
   coste.</p>
   <div class="ctas">
-    <a class="cta" href="bim.html">La oferta BIM</a>
-    <a class="cta secundario" href="contacto.html">Cuéntame tu caso</a>
+    <a class="cta" href="contacto.html">Cuéntame tu caso</a>
   </div>
 </div>
 
@@ -234,18 +246,28 @@
 <section id="encargo">
   <h2>Así empieza un encargo</h2>
   <p class="bajada">Partimos de lo que quieres que una persona pueda hacer o sentir. A partir de ahí, acordamos qué construir.</p>
-<ol class="pasos">
-<li><h3>La idea y su uso</h3><p>Definimos el público, los contenidos, las interacciones y los dispositivos en los que debe funcionar.</p></li>
-<li><h3>Una primera versión</h3><p>Probamos la dirección visual y la interacción con una pieza concreta que puedas revisar.</p></li>
-<li><h3>La entrega acordada</h3><p>Archivos, instrucciones y comprobaciones. El alcance, el presupuesto, los plazos y el mantenimiento se concretan por encargo.</p></li>
-</ol>
+  <ol class="pasos">
+    <li class="card paso">
+      <span class="num">01</span>
+      <h3>La idea y su uso</h3>
+      <p>Definimos el público, los contenidos, las interacciones y los dispositivos en los que debe funcionar.</p>
+    </li>
+    <li class="flecha" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M2 12h34M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+    <li class="card paso">
+      <span class="num">02</span>
+      <h3>Una primera versión</h3>
+      <p>Probamos la dirección visual y la interacción con una pieza concreta que puedas revisar.</p>
+    </li>
+    <li class="flecha" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M2 12h34M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+    <li class="card paso">
+      <span class="num">03</span>
+      <h3>La entrega acordada</h3>
+      <p>Archivos, instrucciones y comprobaciones. El alcance, el presupuesto, los plazos y el mantenimiento se concretan por encargo.</p>
+    </li>
+  </ol>
 </section>
 
-<section class="apps" id="aplicaciones">
-  <h2>Aplicaciones</h2>
-  <p>Lo que voy construyendo, para probar en el navegador: editor PDF, juego 2D, figura 3D, mundos 3D,
-  modelado desde dron y la web de un pintor.</p>
-  <a class="cta secundario" href="aplicaciones.html">Ver las aplicaciones ▸</a>
+<section id="contacto-medio">
   <p class="cta-medio">Cuéntame qué os come horas: <a href="contacto.html">formulario ▸</a> · <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a></p>
 </section>
 

@@ -39,7 +39,7 @@
   .wrap { max-width: 42rem; margin: 0 auto; padding: 0 1.5rem; }
 
   .cabecera { padding: 3.5rem 0 1.6rem; }
-  h1 { font-size: clamp(2rem, 5.4vw, 2.9rem); font-weight: 600; line-height: 1.15; }
+  h1 { font-size: clamp(2rem, 5.4vw, 2.9rem); font-weight: 600; line-height: 1.15; text-wrap: balance; }
   .meta {
     margin-top: 1.1rem; font-size: 0.85rem; color: var(--sec);
     text-transform: uppercase; letter-spacing: 0.08em;
@@ -82,6 +82,8 @@
   .lineas { list-style: none; margin-left: 0; }
   .lineas li { padding: 0.7rem 0; border-top: 1px solid var(--borde); margin-bottom: 0; color: var(--sec); font-size: 0.95rem; }
   .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
+  /* prosa justificada (Fernando, 21-sep-2026); lo centrado (.cierre) se queda como está */
+  .presentacion p, .lineas li, .caja p, article > section > p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
 
   .cierre { text-align: center; padding: 2.6rem 0 3.5rem; border-top: 1px solid var(--borde); margin-top: 2rem; }
   .cierre h2 { margin-bottom: 0.6rem; }
@@ -156,6 +158,7 @@
     <a class="item" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
     <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="blog.html">Blog</a>
     <a class="item" aria-current="page" href="fernando-calle.html">Sobre mí</a>
     <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/fernando-calle.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
@@ -189,13 +192,14 @@
   <h2>De dónde vengo</h2>
   <p>Los seis años anteriores a ONTOS los pasé en proyectos donde el volumen de información supera
   a cualquier persona, y la única salida es construir sistemas que la ordenen sola.</p>
+  <!-- Fuente: CV corporativo de TYPSA (ene-2026) volcado a LinkedIn. Nada añadido. -->
   <ul class="lineas">
-    <li><b>Sydney Metro West (Australia)</b>BIM Manager de los 41 cross passages minados entre The Bays y Sydney Olympic Park, resueltos con modelos generados por código.</li>
-    <li><b>Northern Water (Adelaida, Australia)</b>BIM Manager de la desaladora de 140 ML/día, con obra marítima y bombeos, y el dato como columna del proyecto.</li>
-    <li><b>Riad (Arabia Saudí, 2025)</b>Master Plan de Yuba: la base de datos del plan en PostgreSQL, los cuadros de mando en Power BI y la formación en GIS del equipo del cliente.</li>
-    <li><b>HS2 (Reino Unido)</b>Modelos, datos y coordinación de información en la nueva línea de alta velocidad británica.</li>
-    <li><b>NEOM (Arabia Saudí)</b>Automatización y gestión de información en The Line y en la línea de agua RE3 de Trojena.</li>
-    <li><b>Antes</b>Rail Baltica (Letonia), autopistas en Texas y la A465 en Gales, con captura por dron y aplicaciones GIS; en FCC monté el hub corporativo de ArcGIS Online.</li>
+    <li><b>TYPSA Australia (2023-2026)</b>BIM Manager en dos paquetes: los 41 cross passages minados del Sydney Metro West, entre The Bays y Sydney Olympic Park, y la desaladora del Northern Water Supply Project de Adelaida (140 ML/día, con obra marítima y bombeos). Automaticé el modelado de los cross passages con validación de metadatos contra los requisitos de Sydney Metro y TfNSW: de ahí salieron el paper del ATC 2025 y el premio de I+D. También Malabar/Glenfield y Liverpool WRRF (Sydney Water), el Red Sea Governorates Urban Development Plan y la línea de agua RE3-Trojena de NEOM.</li>
+    <li><b>Riad (Arabia Saudí, 2025)</b>Master Plan de Yuba y formación en GIS al equipo de Riad.</li>
+    <li><b>TYPSA España (2023)</b>Coordinación de entregables digitales del HS2, tramos C2-C3 (Londres-Birmingham): QA contra requisitos de cliente, modelos federados, detección de interferencias y gestión de información en ProjectWise.</li>
+    <li><b>FCC Construcción (2022-2023)</b>Llevé la adopción de GIS en la organización: monté y mantuve el hub corporativo de ArcGIS Online. En la A465 Heads of the Valleys (17 km de autovía) construí aplicaciones que integraban BIM y GIS y capturaban datos de vuelos con dron; en los túneles de NEOM The Line (28 km) redacté los procedimientos GIS del BEP de construcción. Participé en DIGICHECKS, iniciativa europea de smart contracts.</li>
+    <li><b>INECO (2021-2022)</b>Estructuras Singulares en Rail Baltica (tramo de Riga): modelado estructural y automatización de la colocación de pantallas acústicas con GenerativeComponents y C#.</li>
+    <li><b>FHECOR (2020-2021)</b>Apoyo al diseño en construcción de North Tarrant Express, South East Connector y SH99 Grand Parkway (Texas).</li>
   </ul>
   <p>Ese trabajo fue <strong>premiado por I+D en automatización e IA</strong>, y parte está
   publicado.</p>

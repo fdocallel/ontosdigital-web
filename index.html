@@ -84,11 +84,11 @@
   }
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
     margin-top: 1.2rem; max-width: 40rem;
-    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
   }
   .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
@@ -101,13 +101,45 @@
   .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
   .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
 
-  /* ---- el vídeo de Armario, solo, centrado ---- */
+  /* ---- Qué es ONTOS: un párrafo, centrado en la página y justificado ---- */
   section { padding: 3rem 0 4.2rem; }
-  .video { margin: 0 auto; max-width: 32rem; }
-  .video video { width: 100%; height: auto; aspect-ratio: 1 / 1; display: block; border-radius: 14px; border: 1px solid var(--borde); background: var(--panel); }
-  .video figcaption { margin-top: 0.9rem; text-align: center; color: var(--sec); font-size: 0.95rem; }
-  .video figcaption a { color: var(--acento); font-weight: 600; text-decoration: none; }
-  .video figcaption a:hover { text-decoration: underline; }
+  h2 {
+    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
+  }
+  .intro { padding-top: 1rem; padding-bottom: 1.5rem; }
+  .intro h2 { text-align: center; }
+  .intro p {
+    max-width: 44rem; margin: 0 auto; font-size: 1.12rem;
+    text-align: justify; hyphens: auto; -webkit-hyphens: auto;
+  }
+  .intro strong { color: var(--realce); font-weight: 600; }
+
+  /* ---- la demo del sistema completo, a un clic, a todo el ancho ---- */
+  .demo-sistema {
+    display: block; text-decoration: none; color: var(--sec);
+  }
+  .demo-sistema .marco { position: relative; display: block; }
+  .demo-sistema img, .demo-sistema picture {
+    display: block; width: 100%; height: auto;
+    border-radius: 14px; border: 1px solid var(--borde); background: var(--panel);
+  }
+  .demo-sistema .play {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 92px; height: 92px; border-radius: 50%;
+    background: var(--teja); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.30);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .demo-sistema .play svg { width: 40px; height: 40px; margin-left: 6px; fill: currentColor; }
+  .demo-sistema:hover .play, .demo-sistema:focus-visible .play { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 14px 50px rgba(212,113,59,0.45); }
+  .demo-sistema:focus-visible { outline: 3px solid var(--acento); outline-offset: 6px; border-radius: 14px; }
+  .demo-sistema .pie { margin-top: 0.9rem; text-align: center; font-size: 0.95rem; }
+  .demo-sistema .pie b { color: var(--acento); font-weight: 600; }
+  .demo-sistema:hover .pie b { text-decoration: underline; }
+  @media (max-width: 34rem) { .demo-sistema .play { width: 64px; height: 64px; } .demo-sistema .play svg { width: 28px; height: 28px; margin-left: 4px; } }
+  @media (prefers-reduced-motion: reduce) { .demo-sistema .play { transition: none; } }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -137,6 +169,7 @@
     <a class="item" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
     <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="blog.html">Blog</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
     <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
@@ -166,7 +199,7 @@
   </svg>
   <div class="wordmark">ONTOS</div>
   <h1>Todo lo tuyo, ordenado y al día.</h1>
-  <p class="lema">Casi nadie tiene un problema de información: tiene un problema de orden. A eso se dedica ONTOS.</p>
+  <p class="lema">A partir de la experiencia y la aplicación de la inteligencia artificial, lo que antes era ciencia ficción es ahora una realidad.</p>
   <div class="ctas">
     <a class="cta" href="producto.html">El producto</a>
     <a class="cta secundario" href="consultoria.html">La consultoría</a>
@@ -175,13 +208,22 @@
 
 <div class="wrap">
 
-<section id="video">
-  <figure class="video">
-    <video controls playsinline preload="none" poster="brand/servicios/armario-poster.jpg" width="1080" height="1080">
-      <source src="brand/servicios/armario.mp4" type="video/mp4">
-    </video>
-    <figcaption>Armario, 35 s · la app de ropa del producto. <a href="armario.html">Probar con 10 prendas ▸</a></figcaption>
-  </figure>
+<section class="intro" id="que-es">
+  <h2>Qué es ONTOS</h2>
+  <p><em>Ontos</em>, del griego ὄντος: <span class="serif">«lo que es»</span>. Casi nadie tiene un problema de información: tiene un problema de <strong>orden</strong>. Los datos viven en carpetas, los trámites en la cabeza, el conocimiento en la experiencia de cada uno, y juntar la foto completa cuesta más que la decisión que había que tomar.</p>
+</section>
+
+<section id="demo">
+  <a class="demo-sistema" href="caso-90s.html" data-goatcounter-click="inicio-demo-sistema">
+    <span class="marco">
+      <picture>
+        <source srcset="producto/01-portada-sistema.webp" type="image/webp">
+        <img src="producto/01-portada-sistema.jpg" width="1400" height="984" alt="La portada de ONTOS: las ocho áreas del sistema en una rueda, con datos de muestra" decoding="async">
+      </picture>
+      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
+    </span>
+    <span class="pie"><b>El sistema completo, en 80 segundos ▸</b> · demo animada, sin sonido, con datos de muestra</span>
+  </a>
 </section>
 
 <footer>

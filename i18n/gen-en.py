@@ -35,6 +35,7 @@ PAGINAS = [
     ("animacion-3d.html", True),
     ("visita-3d.html", True),
     ("escrito-plan-bim-ingenieria.html", True),
+    ("blog.html", True),
     ("fernando-calle.html", True),
     ("caso-sistema.html", True),
     ("caso-finanzas.html", True),

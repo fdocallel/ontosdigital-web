@@ -60,11 +60,11 @@
   }
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
     margin-top: 1.2rem; max-width: 40rem;
-    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
   }
   .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
@@ -88,6 +88,9 @@
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
     letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
   }
+  /* prosa justificada (Fernando, 21-sep-2026: los párrafos «estaban como partidos»);
+     las tarjetas estrechas (.card p) y lo centrado se quedan a la izquierda */
+  .intro p, .metodo, .estado p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .intro p { max-width: 42rem; font-size: 1.12rem; }
   .intro p + p { margin-top: 1rem; }
   .intro strong { color: var(--realce); font-weight: 600; }
@@ -206,6 +209,7 @@
     <a class="item" aria-current="page" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
     <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="blog.html">Blog</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
     <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
@@ -227,13 +231,9 @@
 <div class="wrap">
 
 <section class="intro" id="producto">
-  <h2>Qué es ONTOS</h2>
-  <p><em>Ontos</em>, del griego ὄντος: <span class="serif">«lo que es»</span>. Casi nadie tiene un
-  problema de información: tiene un problema de <strong>orden</strong>. Los datos viven en carpetas,
-  los trámites en la cabeza, el conocimiento en la experiencia de cada uno, y juntar la foto completa
-  cuesta más que la decisión que había que tomar.</p>
-  <p>ONTOS es el <strong>gemelo digital</strong> de eso: un modelo ordenado de lo que tienes, lo que
-  haces y lo que sabes, con una inteligencia artificial trabajando encima todos los días.</p>
+  <h2>Cómo funciona</h2>
+  <p>ONTOS es un <strong>gemelo digital</strong>: un modelo ordenado de lo que tienes, lo que haces y
+  lo que sabes, con una inteligencia artificial trabajando encima todos los días.</p>
   <div class="cards piezas">
     <div class="card pieza">
       <span class="icono">◉</span>
@@ -325,8 +325,6 @@
     <div class="stat"><div class="n">300+</div><div class="l">documentos consultables</div></div>
     <div class="stat"><div class="n">100%</div><div class="l">local y privado</div></div>
   </div>
-  <!-- Quien se convence lo hace viendo las áreas, y aquí tiene que tener el botón. -->
-  <p class="cta-medio">¿Te suena a lo que llevas tiempo queriendo? <a href="contacto.html">Pídeme una demo ▸</a></p>
 </section>
 
 <section>

@@ -47,11 +47,11 @@
   }
   .hero h1 {
     font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
     margin-top: 1.2rem; max-width: 40rem;
-    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec);
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
   }
   .kicker {
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
@@ -67,6 +67,7 @@
 
   /* Puente al acceso al producto. Sobrio a propósito: es una invitación, no un
      reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  /* dos líneas cortas con un enlace nowrap: justificado quedaba con la primera línea suelta; se deja a la izquierda */
   .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
   .cta-medio a {
     color: var(--acento); text-decoration: none; font-weight: 600;
@@ -137,6 +138,7 @@
     <a class="item" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
     <a class="item" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="blog.html">Blog</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
     <a class="item" aria-current="page" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/" hreflang="en" lang="en" aria-label="View this page in English">EN</a>

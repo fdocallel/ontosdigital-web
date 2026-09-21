@@ -31,7 +31,7 @@ a:focus-visible { outline: 3px solid var(--acento); outline-offset: 5px; }
 .wrap { max-width: 64rem; margin: auto; padding: 0 1.5rem; }
 .hero { padding: 5rem 0 3.5rem; }
 .etiqueta { color: var(--acento); font-size: .85rem; letter-spacing: .15em; text-transform: uppercase; }
-h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 19ch; margin: 1rem 0 1.5rem; }
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600; line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; margin: 1rem 0 1.5rem; }
 .hero .intro { max-width: 43rem; color: var(--sec); font-size: 1.15rem; }
 .acciones { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: 1.7rem; }
 .acciones > a { display: inline-flex; align-items: center; min-height: 46px; }
@@ -39,12 +39,13 @@ h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 19ch; margin: 1rem 0 1.5r
 section { padding: 3rem 0; border-top: 1px solid var(--borde); }
 h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .bajada { max-width: 42rem; color: var(--sec); }
-.nota-armario { margin-top: 1.6rem; }
 .catalogo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
 .servicio { border: 1px solid var(--borde); border-radius: 16px; background: var(--panel); overflow: hidden; }
 .servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--borde); }
 .servicio .texto { padding: 1.6rem; }
 .servicio h3 { font-size: 1.55rem; margin: .6rem 0 1rem; }
+.servicio .cabecera { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.servicio .tipo { display: inline-block; border: 1px solid var(--acento); color: var(--acento); border-radius: 999px; padding: .1rem .55rem; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; line-height: 1.5; }
 .servicio p { color: var(--sec); }
 .servicio p + p { margin-top: .9rem; }
 .servicio .caso { border-top: 1px solid var(--borde); padding-top: 1rem; margin-top: 1.2rem; font-size: .95rem; }
@@ -78,6 +79,7 @@ footer a { color: inherit; }
     <a class="item" href="producto.html">Producto</a>
     <a class="item" href="consultoria.html">Consultoría</a>
     <a class="item" aria-current="page" href="aplicaciones.html">Aplicaciones</a>
+    <a class="item" href="blog.html">Blog</a>
     <a class="item" href="fernando-calle.html">Sobre mí</a>
     <a class="item" href="contacto.html">Contacto</a>
     <a class="item idioma" data-i18n-alt href="/en/aplicaciones.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
@@ -96,15 +98,15 @@ footer a { color: inherit; }
 <div class="catalogo">
 <article class="servicio" id="herramientas">
 <img src="brand/servicios/editor-pdf.png" alt="Editor PDF con un documento de ejemplo de tres páginas" width="1280" height="720">
-<div class="texto"><p class="etiqueta">01 · Herramientas web</p>
-<h3>Menos pasos para hacer lo de siempre</h3>
+<div class="texto"><p class="cabecera"><span class="etiqueta">01 · Herramientas web</span><span class="tipo">Consultoría · Aplicaciones a medida</span></p>
+<h3>Fusión de CamScanner e iLovePDF</h3>
 <p>Aplicaciones a medida para trabajar con documentos, ordenar información y automatizar tareas repetitivas.</p>
 <p class="caso"><strong>Ya construido: editor PDF.</strong> Une, gira y reordena páginas; convierte fotos de folios en documentos. Los archivos se procesan en tu navegador.</p>
 <a href="/editor-pdf/" data-goatcounter-click="servicio-probar-editor-pdf" data-goatcounter-no-session="1">Probar el editor PDF ▸</a></div>
 </article>
 <article class="servicio" id="juegos-2d">
 <img src="brand/servicios/juego-2d.png" alt="ONTOS como personaje en su juego 2D" width="1280" height="720">
-<div class="texto"><p class="etiqueta">02 · Juegos y experiencias 2D</p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">02 · Juegos y experiencias 2D</span><span class="tipo">Consultoría · Experiencias 2D y 3D</span></p>
 <h3>Una marca con la que jugar</h3>
 <p>Personajes animados y escenas interactivas para explorar una idea, presentar una marca o aprender jugando.</p>
 <p class="caso"><strong>Ya construido: el juego 2D de ONTOS.</strong> El personaje sale de la identidad visual y se convierte en protagonista de una escena en la que puedes interactuar.</p>
@@ -112,7 +114,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="animacion-3d">
 <img src="brand/servicios/saludo-3d.png" alt="La figurita 3D de ONTOS saludando" width="1280" height="720">
-<div class="texto"><p class="etiqueta">03 · Animación 3D</p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">03 · Animación 3D</span><span class="tipo">Consultoría · Experiencias 2D y 3D</span></p>
 <h3>Un personaje que cobra vida</h3>
 <p>Volumen, poses y movimiento para dar expresión a un personaje o presentar un producto desde distintos ángulos.</p>
 <p class="caso"><strong>Ya construido: ONTOS saludando.</strong> La evolución del personaje a una figurita 3D que se puede observar, girar y acercar.</p>
@@ -120,7 +122,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="visitas-3d">
 <img src="brand/servicios/mundo-3d.png" alt="ONTOS recorriendo su pequeño planeta en 3D" width="1280" height="720">
-<div class="texto"><p class="etiqueta">04 · Visitas y mundos 3D</p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">04 · Visitas y mundos 3D</span><span class="tipo">Consultoría · Experiencias 2D y 3D</span></p>
 <h3>Un lugar al que entrar</h3>
 <p>Escenas navegables para recorrer un espacio, descubrir un entorno de marca o explorar una presentación desde dentro.</p>
 <p class="caso"><strong>Ya construido: el pequeño mundo de ONTOS.</strong> Un pequeño planeta con paseo, destellos y una semilla que descubrir.</p>
@@ -128,7 +130,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="modelado-3d">
 <img src="brand/servicios/modelado-3d.png" alt="La misma casa en dos versiones: escaneado con textura y geometría simple" width="1280" height="720">
-<div class="texto"><p class="etiqueta">05 · Modelado 3D desde dron</p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">05 · Modelado 3D desde dron</span><span class="tipo">Consultoría · Aplicaciones a medida</span></p>
 <h3>De un vuelo a un modelo</h3>
 <p>Fotogrametría con dron para tener una casa, una nave o una parcela en 3D: el escaneado con su textura y una geometría simple con la que trabajar.</p>
 <p class="caso"><strong>Ya construido: una casa de contenedores.</strong> Una vuelta de 26 segundos con el dron y, en local, el exterior reconstruido y rectificado por contenedores.</p>
@@ -136,14 +138,21 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="webs">
 <img src="brand/servicios/web-jmcasado.png" alt="Portada de la web del pintor José María Casado" width="1280" height="720">
-<div class="texto"><p class="etiqueta">06 · Webs a medida</p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">06 · Webs a medida</span><span class="tipo">Consultoría · Webs</span></p>
 <h3>Una web que el cliente puede mantener</h3>
 <p>Páginas para enseñar un trabajo o una obra, con lo que haga falta para que su dueño la actualice sin depender de nadie.</p>
 <p class="caso"><strong>Ya construido: la galería de José María Casado, pintor.</strong> Su web convertida en galería con una base de datos de obras que él mismo edita: colecciones, fichas y destacadas en portada.</p>
 <a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visitar josemariacasado.com ▸</a></div>
 </article>
+<article class="servicio" id="armario">
+<img src="brand/servicios/armario.png" alt="Ropa colgada en baldas ordenadas por color: blancos, grises, negros" width="1240" height="698">
+<div class="texto"><p class="cabecera"><span class="etiqueta">07 · Armario</span><span class="tipo">Producto personal</span></p>
+<h3>Tu ropa, fichada y colgada en baldas</h3>
+<p>Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y qué no, y propone conjuntos que puedes ver puestos. Todo en tu teléfono.</p>
+<p class="caso"><strong>En uso: mi armario, 82 prendas.</strong> Prueba a colocar diez prendas por color o por tipo y mira el armario real en vídeo.</p>
+<a href="armario.html" data-goatcounter-click="servicio-probar-armario" data-goatcounter-no-session="1">Probar con 10 prendas ▸</a></div>
+</article>
 </div>
-<p class="bajada nota-armario">Armario, la app de ropa, es parte del producto: <a href="producto.html#areas">verla en Producto › Áreas ▸</a></p>
 </section>
 <section class="contacto" id="contacto">
 <h2>¿Qué te gustaría construir?</h2>
