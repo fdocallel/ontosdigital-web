@@ -62,8 +62,9 @@ footer { border-top: 1px solid var(--borde); padding: 2rem 0; color: var(--sec);
 footer a { color: inherit; }
 @media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo,.pasos { grid-template-columns: 1fr; } .bim { display: block; } .bim a { display: inline-block; margin-top: 1rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* height:auto es obligatorio: el atributo height="1080" del <video> gana a aspect-ratio y el reproductor salía de 640×1080 (21-sep-2026, Fernando) */
 .pelicula{max-width:640px;margin:0 auto}
-.pelicula video{display:block;width:100%;aspect-ratio:1/1;background:#faf8f5;border:1px solid var(--border,#e3ddd2);border-radius:12px}
+.pelicula video{display:block;width:100%;height:auto;aspect-ratio:1/1;background:#faf8f5;border:1px solid var(--border,#e3ddd2);border-radius:12px}
 .pelicula figcaption{margin-top:.75rem;font-size:.95rem;color:var(--muted,#6b6257);text-align:center}
 .limites{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .limites div{border:1px solid var(--border,#e3ddd2);border-radius:12px;padding:1.1rem 1.25rem;background:var(--surface,#fff)}
