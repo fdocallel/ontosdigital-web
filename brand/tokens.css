@@ -77,11 +77,13 @@
 /* Móvil: cuatro enlaces no caben a tamaño completo. Se aprieta el ritmo y, si aun así
    no entran, la fila se desplaza a los lados en vez de partirse. */
 @media (max-width: 34rem) {
-  .barra nav { gap: 0.6rem; padding: 0.6rem 0.85rem; overflow-x: auto; scrollbar-width: none; }
+  /* 21-sep-2026: cinco ítems (Producto · Consultoría · Sobre mí · Contacto · EN); a 390 px
+     Contacto quedaba fuera del pliegue. Se aprieta gap y tamaño; sigue desplazable si no cabe. */
+  .barra nav { gap: 0.5rem; padding: 0.6rem 0.7rem; overflow-x: auto; scrollbar-width: none; }
   .barra nav::-webkit-scrollbar { display: none; }
-  .barra .marca { font-size: 0.95rem; letter-spacing: 0.02em; gap: 0.4rem; margin-right: 0.5rem; }
-  .barra .marca svg { width: 18px; height: 18px; }
-  .barra a.item { font-size: 0.75rem; }
+  .barra .marca { font-size: 0.9rem; letter-spacing: 0.02em; gap: 0.35rem; margin-right: 0.25rem; }
+  .barra .marca svg { width: 17px; height: 17px; }
+  .barra a.item { font-size: 0.72rem; }
   /* Si la fila llega a desplazarse, el idioma se queda pegado al borde: es el enlace
      que un visitante que no lee español tiene que poder ver siempre. */
   .barra a.item.idioma {
