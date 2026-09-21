@@ -45,7 +45,22 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .servicio .texto { padding: 1.6rem; }
 .servicio h3 { font-size: 1.55rem; margin: .6rem 0 1rem; }
 .servicio .cabecera { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
-.servicio .tipo { display: inline-block; border: 1px solid var(--acento); color: var(--acento); border-radius: 999px; padding: .1rem .55rem; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; line-height: 1.5; }
+/* Dos etiquetas por tarjeta: la vertical (consultoría o producto) y el tipo de aplicación. Contraste texto/fondo ≥ 4,5:1 en claro y oscuro. */
+.pill { display: inline-block; border-radius: 999px; padding: .15rem .55rem; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; line-height: 1.5; background: var(--pill-bg); color: var(--pill-fg); }
+.pill-consultoria { --pill-bg: rgba(212,113,59,.16); --pill-fg: #8a3f1f; }
+.pill-producto { --pill-bg: #dbe7f5; --pill-fg: #1f3b63; }
+.pill-medida { --pill-bg: #f6e7c1; --pill-fg: #6b4a00; }
+.pill-experiencias { --pill-bg: #e6def7; --pill-fg: #43307a; }
+.pill-webs { --pill-bg: #dcefe0; --pill-fg: #1f5a33; }
+.pill-personal { --pill-bg: #e9f0f8; --pill-fg: #3a5680; }
+@media (prefers-color-scheme: dark) {
+  .pill-consultoria { --pill-bg: rgba(212,113,59,.22); --pill-fg: #e8956a; }
+  .pill-producto { --pill-bg: rgba(31,59,99,.55); --pill-fg: #a9c4e8; }
+  .pill-medida { --pill-bg: rgba(107,74,0,.55); --pill-fg: #e8c96a; }
+  .pill-experiencias { --pill-bg: rgba(67,48,122,.55); --pill-fg: #c9bbef; }
+  .pill-webs { --pill-bg: rgba(31,90,51,.55); --pill-fg: #9fd8b0; }
+  .pill-personal { --pill-bg: rgba(31,59,99,.35); --pill-fg: #a9c4e8; }
+}
 .servicio p { color: var(--sec); }
 .servicio p + p { margin-top: .9rem; }
 .servicio .caso { border-top: 1px solid var(--borde); padding-top: 1rem; margin-top: 1.2rem; font-size: .95rem; }
@@ -90,7 +105,7 @@ footer a { color: inherit; }
 <p class="etiqueta">Aplicaciones</p>
 <h1>Herramientas que resuelven. Experiencias que se exploran.</h1>
 <p class="intro">Hay ideas que necesitan una herramienta. Otras, un personaje, un juego o un mundo en el que entrar. Diseño y desarrollo esas piezas para que funcionen en el navegador.</p>
-<div class="acciones"><a class="cta" href="#trabajos">Probar las experiencias</a><a href="contacto.html">Cuéntame tu idea</a></div>
+<div class="acciones"><a class="cta" href="contacto.html">Cuéntame tu idea</a></div>
 </div>
 <section id="trabajos">
 <h2>De un documento a una casa en 3D</h2>
@@ -98,7 +113,7 @@ footer a { color: inherit; }
 <div class="catalogo">
 <article class="servicio" id="herramientas">
 <img src="brand/servicios/editor-pdf.png" alt="Editor PDF con un documento de ejemplo de tres páginas" width="1280" height="720">
-<div class="texto"><p class="cabecera"><span class="etiqueta">01 · Herramientas web</span><span class="tipo">Consultoría · Aplicaciones a medida</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">01 · Herramientas web</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-medida">Aplicaciones a medida</span></p>
 <h3>Fusión de CamScanner e iLovePDF</h3>
 <p>Aplicaciones a medida para trabajar con documentos, ordenar información y automatizar tareas repetitivas.</p>
 <p class="caso"><strong>Ya construido: editor PDF.</strong> Une, gira y reordena páginas; convierte fotos de folios en documentos. Los archivos se procesan en tu navegador.</p>
@@ -106,7 +121,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="juegos-2d">
 <img src="brand/servicios/juego-2d.png" alt="ONTOS como personaje en su juego 2D" width="1280" height="720">
-<div class="texto"><p class="cabecera"><span class="etiqueta">02 · Juegos y experiencias 2D</span><span class="tipo">Consultoría · Experiencias 2D y 3D</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">02 · Juegos y experiencias 2D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-experiencias">Experiencias 2D y 3D</span></p>
 <h3>Una marca con la que jugar</h3>
 <p>Personajes animados y escenas interactivas para explorar una idea, presentar una marca o aprender jugando.</p>
 <p class="caso"><strong>Ya construido: el juego 2D de ONTOS.</strong> El personaje sale de la identidad visual y se convierte en protagonista de una escena en la que puedes interactuar.</p>
@@ -114,7 +129,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="animacion-3d">
 <img src="brand/servicios/saludo-3d.png" alt="La figurita 3D de ONTOS saludando" width="1280" height="720">
-<div class="texto"><p class="cabecera"><span class="etiqueta">03 · Animación 3D</span><span class="tipo">Consultoría · Experiencias 2D y 3D</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">03 · Animación 3D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-experiencias">Experiencias 2D y 3D</span></p>
 <h3>Un personaje que cobra vida</h3>
 <p>Volumen, poses y movimiento para dar expresión a un personaje o presentar un producto desde distintos ángulos.</p>
 <p class="caso"><strong>Ya construido: ONTOS saludando.</strong> La evolución del personaje a una figurita 3D que se puede observar, girar y acercar.</p>
@@ -122,7 +137,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="visitas-3d">
 <img src="brand/servicios/mundo-3d.png" alt="ONTOS recorriendo su pequeño planeta en 3D" width="1280" height="720">
-<div class="texto"><p class="cabecera"><span class="etiqueta">04 · Visitas y mundos 3D</span><span class="tipo">Consultoría · Experiencias 2D y 3D</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">04 · Visitas y mundos 3D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-experiencias">Experiencias 2D y 3D</span></p>
 <h3>Un lugar al que entrar</h3>
 <p>Escenas navegables para recorrer un espacio, descubrir un entorno de marca o explorar una presentación desde dentro.</p>
 <p class="caso"><strong>Ya construido: el pequeño mundo de ONTOS.</strong> Un pequeño planeta con paseo, destellos y una semilla que descubrir.</p>
@@ -130,7 +145,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="modelado-3d">
 <img src="brand/servicios/modelado-3d.png" alt="La misma casa en dos versiones: escaneado con textura y geometría simple" width="1280" height="720">
-<div class="texto"><p class="cabecera"><span class="etiqueta">05 · Modelado 3D desde dron</span><span class="tipo">Consultoría · Aplicaciones a medida</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">05 · Modelado 3D desde dron</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-medida">Aplicaciones a medida</span></p>
 <h3>De un vuelo a un modelo</h3>
 <p>Fotogrametría con dron para tener una casa, una nave o una parcela en 3D: el escaneado con su textura y una geometría simple con la que trabajar.</p>
 <p class="caso"><strong>Ya construido: una casa de contenedores.</strong> Una vuelta de 26 segundos con el dron y, en local, el exterior reconstruido y rectificado por contenedores.</p>
@@ -138,7 +153,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="webs">
 <img src="brand/servicios/web-jmcasado.png" alt="Portada de la web del pintor José María Casado" width="1280" height="720">
-<div class="texto"><p class="cabecera"><span class="etiqueta">06 · Webs a medida</span><span class="tipo">Consultoría · Webs</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">06 · Webs a medida</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-webs">Webs</span></p>
 <h3>Una web que el cliente puede mantener</h3>
 <p>Páginas para enseñar un trabajo o una obra, con lo que haga falta para que su dueño la actualice sin depender de nadie.</p>
 <p class="caso"><strong>Ya construido: la galería de José María Casado, pintor.</strong> Su web convertida en galería con una base de datos de obras que él mismo edita: colecciones, fichas y destacadas en portada.</p>
@@ -146,7 +161,7 @@ footer a { color: inherit; }
 </article>
 <article class="servicio" id="armario">
 <img src="brand/servicios/armario.png" alt="Ropa colgada en baldas ordenadas por color: blancos, grises, negros" width="1240" height="698">
-<div class="texto"><p class="cabecera"><span class="etiqueta">07 · Armario</span><span class="tipo">Producto personal</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">07 · Armario</span><span class="pill pill-producto">Producto</span><span class="pill pill-personal">ONTOS personal</span></p>
 <h3>Tu ropa, fichada y colgada en baldas</h3>
 <p>Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y qué no, y propone conjuntos que puedes ver puestos. Todo en tu teléfono.</p>
 <p class="caso"><strong>En uso: mi armario, 82 prendas.</strong> Prueba a colocar diez prendas por color o por tipo y mira el armario real en vídeo.</p>

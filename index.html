@@ -115,16 +115,18 @@
   }
   .intro strong { color: var(--realce); font-weight: 600; }
 
-  /* ---- la demo del sistema completo, a un clic, a todo el ancho ---- */
-  .demo-sistema {
-    display: block; text-decoration: none; color: var(--sec);
+  /* ---- la demo del sistema, integrada: póster de su primera escena y, al pulsar, la animación ---- */
+  .demo-sistema { display: block; color: var(--sec); }
+  .demo-sistema .marco {
+    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 14px; border: 1px solid var(--borde); background: #100f0d; overflow: hidden;
   }
-  .demo-sistema .marco { position: relative; display: block; }
-  .demo-sistema img, .demo-sistema picture {
-    display: block; width: 100%; height: auto;
-    border-radius: 14px; border: 1px solid var(--borde); background: var(--panel);
+  .demo-play {
+    display: block; width: 100%; height: 100%; padding: 0; margin: 0; border: 0;
+    background: none; cursor: pointer; font: inherit; color: inherit; text-align: inherit;
   }
-  .demo-sistema .play {
+  .demo-play picture, .demo-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .demo-play .play {
     position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
     width: 92px; height: 92px; border-radius: 50%;
     background: var(--teja); color: #fff;
@@ -132,14 +134,15 @@
     box-shadow: 0 10px 40px rgba(0,0,0,0.30);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .demo-sistema .play svg { width: 40px; height: 40px; margin-left: 6px; fill: currentColor; }
-  .demo-sistema:hover .play, .demo-sistema:focus-visible .play { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 14px 50px rgba(212,113,59,0.45); }
-  .demo-sistema:focus-visible { outline: 3px solid var(--acento); outline-offset: 6px; border-radius: 14px; }
+  .demo-play .play svg { width: 40px; height: 40px; margin-left: 6px; fill: currentColor; }
+  .demo-play:hover .play, .demo-play:focus-visible .play { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 14px 50px rgba(212,113,59,0.45); }
+  .demo-play:focus-visible { outline: 3px solid var(--acento); outline-offset: -3px; }
+  .demo-sistema iframe { display: block; width: 100%; height: 100%; border: 0; background: #100f0d; }
   .demo-sistema .pie { margin-top: 0.9rem; text-align: center; font-size: 0.95rem; }
-  .demo-sistema .pie b { color: var(--acento); font-weight: 600; }
-  .demo-sistema:hover .pie b { text-decoration: underline; }
-  @media (max-width: 34rem) { .demo-sistema .play { width: 64px; height: 64px; } .demo-sistema .play svg { width: 28px; height: 28px; margin-left: 4px; } }
-  @media (prefers-reduced-motion: reduce) { .demo-sistema .play { transition: none; } }
+  .demo-sistema .pie a { color: var(--acento); font-weight: 600; text-decoration: none; }
+  .demo-sistema .pie a:hover { text-decoration: underline; }
+  @media (max-width: 34rem) { .demo-play .play { width: 64px; height: 64px; } .demo-play .play svg { width: 28px; height: 28px; margin-left: 4px; } }
+  @media (prefers-reduced-motion: reduce) { .demo-play .play { transition: none; } }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -214,17 +217,42 @@
 </section>
 
 <section id="demo">
-  <a class="demo-sistema" href="caso-90s.html" data-goatcounter-click="inicio-demo-sistema">
-    <span class="marco">
-      <picture>
-        <source srcset="producto/01-portada-sistema.webp" type="image/webp">
-        <img src="producto/01-portada-sistema.jpg" width="1400" height="984" alt="La portada de ONTOS: las ocho áreas del sistema en una rueda, con datos de muestra" decoding="async">
-      </picture>
-      <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
-    </span>
-    <span class="pie"><b>El sistema completo, en 80 segundos ▸</b> · demo animada, sin sonido, con datos de muestra</span>
-  </a>
+  <div class="demo-sistema">
+    <div class="marco" id="demo-marco">
+      <button type="button" class="demo-play" data-goatcounter-click="inicio-demo-sistema" aria-label="Reproducir la demo del sistema ONTOS, 80 segundos">
+        <picture>
+          <source srcset="brand/servicios/sistema-poster.webp" type="image/webp">
+          <img src="brand/servicios/sistema-poster.jpg" width="1280" height="720" alt="Primera escena de la demo del sistema ONTOS" decoding="async">
+        </picture>
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
+      </button>
+    </div>
+    <p class="pie">El sistema completo, en 80 segundos · demo animada, sin sonido, con datos de muestra · <a href="caso-90s.html">abrir a pantalla completa ▸</a></p>
+  </div>
 </section>
+<script>
+(() => {
+  // La demo es caso-90s.html (animación HTML). Solo se carga al pulsar; con ?autoplay arranca sola dentro del marco.
+  const marco = document.getElementById("demo-marco");
+  const boton = marco.querySelector(".demo-play");
+  if (!marco || !boton) return;
+  boton.addEventListener("click", () => {
+    const f = document.createElement("iframe");
+    f.src = "caso-90s.html?autoplay";
+    f.title = "ONTOS · el sistema, en 80 segundos";
+    f.loading = "lazy";
+    f.setAttribute("allow", "fullscreen");
+    boton.replaceWith(f);
+    f.focus();
+  });
+  // Al terminar, la animación avisa al padre: vuelve el póster para poder verla otra vez.
+  addEventListener("message", e => {
+    if (e.data !== "ontos-intro-fin") return;
+    const f = marco.querySelector("iframe");
+    if (f) f.replaceWith(boton);
+  });
+})();
+</script>
 
 <footer>
   <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.</p>
