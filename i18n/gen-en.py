@@ -25,6 +25,7 @@ PAGINAS = [
     ("index.html", True),
     ("bim.html", True),
     ("aplicaciones.html", True),
+    ("modelado-3d.html", True),
     ("servicios.html", False),   # redirección: la URL antigua de Aplicaciones (21-sep-2026), sin índice
     ("juego-2d.html", True),
     ("animacion-3d.html", True),

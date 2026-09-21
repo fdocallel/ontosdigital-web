@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- GENERADO por i18n/gen-en.py desde ../modelado-3d.html · no editar a mano -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D modelling from a drone · From a flight to a house in 3D · ONTOS</title>
+<meta name="description" content="A 26-second drone orbit and, without the images ever leaving the computer, the exterior of a house in 3D: textured scan and simple geometry. Photogrammetry with open-source tools.">
+<meta name="theme-color" content="#faf8f5">
+<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<link rel="canonical" href="https://ontosdigital.es/en/modelado-3d.html">
+<!-- i18n:alt -->
+<link rel="alternate" hreflang="es" href="https://ontosdigital.es/modelado-3d.html">
+<link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/modelado-3d.html">
+<link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/modelado-3d.html">
+<!-- /i18n:alt -->
+<meta property="og:title" content="From a drone flight to a house in 3D">
+<meta property="og:description" content="26 seconds of video, 131 frames, a textured mesh and a simple geometry to work with. All processed locally.">
+<meta property="og:url" content="https://ontosdigital.es/en/modelado-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ontosdigital.es/brand/servicios/modelado-3d.png">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/brand/tokens.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--texto); font: 16px/1.65 var(--sans); -webkit-font-smoothing: antialiased; }
+h1,h2,h3 { font-family: var(--serif); font-weight: 600; line-height: 1.18; }
+a { color: var(--acento); text-underline-offset: .2em; }
+a:focus-visible { outline: 3px solid var(--acento); outline-offset: 5px; }
+.wrap { max-width: 64rem; margin: auto; padding: 0 1.5rem; }
+.hero { padding: 5rem 0 3.5rem; }
+.etiqueta { color: var(--acento); font-size: .85rem; letter-spacing: .15em; text-transform: uppercase; }
+h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 19ch; margin: 1rem 0 1.5rem; }
+.hero .intro { max-width: 43rem; color: var(--sec); font-size: 1.15rem; }
+.acciones { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: 1.7rem; }
+.acciones > a { display: inline-flex; align-items: center; min-height: 46px; }
+.cta { display: inline-flex; justify-content: center; align-items: center; min-height: 46px; padding: .7rem 1.35rem; border-radius: 999px; background: var(--teja); color: #14100c; text-decoration: none; font-weight: 600; }
+section { padding: 3rem 0; border-top: 1px solid var(--borde); }
+h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
+.bajada { max-width: 42rem; color: var(--sec); }
+.catalogo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
+.servicio { border: 1px solid var(--borde); border-radius: 16px; background: var(--panel); overflow: hidden; }
+.servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--borde); }
+.servicio .texto { padding: 1.6rem; }
+.servicio h3 { font-size: 1.55rem; margin: .6rem 0 1rem; }
+.servicio p { color: var(--sec); }
+.servicio p + p { margin-top: .9rem; }
+.servicio .caso { border-top: 1px solid var(--borde); padding-top: 1rem; margin-top: 1.2rem; font-size: .95rem; }
+.servicio strong { color: var(--texto); font-weight: 600; }
+.servicio a { display: inline-block; margin-top: 1rem; min-height: 44px; padding: .5rem 0; font-weight: 600; }
+.pasos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; list-style: none; margin-top: 2rem; counter-reset: paso; }
+.pasos li { counter-increment: paso; color: var(--sec); }
+.pasos li::before { content: '0' counter(paso); display: block; color: var(--acento); margin-bottom: .5rem; }
+.pasos h3 { color: var(--texto); font-size: 1.2rem; margin-bottom: .8rem; }
+.bim { display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+.bim p { max-width: 39rem; color: var(--sec); }
+.bim a { flex-shrink: 0; padding: .7rem 0; }
+.contacto { padding-bottom: 4rem; }
+.contacto p { max-width: 41rem; color: var(--sec); }
+footer { border-top: 1px solid var(--borde); padding: 2rem 0; color: var(--sec); font-size: .85rem; }
+footer a { color: inherit; }
+@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo,.pasos { grid-template-columns: 1fr; } .bim { display: block; } .bim a { display: inline-block; margin-top: 1rem; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.pelicula{max-width:640px;margin:0 auto}
+.pelicula video{display:block;width:100%;aspect-ratio:1/1;background:#faf8f5;border:1px solid var(--border,#e3ddd2);border-radius:12px}
+.pelicula figcaption{margin-top:.75rem;font-size:.95rem;color:var(--muted,#6b6257);text-align:center}
+.limites{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.limites div{border:1px solid var(--border,#e3ddd2);border-radius:12px;padding:1.1rem 1.25rem;background:var(--surface,#fff)}
+.limites h3{margin:0 0 .4rem;font-size:1.05rem}
+.limites p{margin:0}
+</style>
+</head>
+<body>
+<header class="barra">
+  <nav>
+    <a class="marca" href="/en/">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
+        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
+        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
+        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
+        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
+        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
+        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
+        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
+        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
+      </svg>
+      ONTOS
+    </a>
+    <a class="item" href="/en/#producto">The product</a>
+    <a class="item" href="/en/#casos">Cases</a>
+    <a class="item" href="/en/aplicaciones.html">Applications</a>
+    <a class="item" href="#contacto">Contact</a>
+    <a class="item idioma" data-i18n-alt href="/modelado-3d.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
+  </nav>
+</header>
+<main class="wrap">
+<div class="hero">
+<p class="etiqueta">Applications · 3D modelling from a drone</p>
+<h1>From a drone flight to a house in 3D.</h1>
+<p class="intro">A 26-second orbit with the drone. From that video, and without the images ever leaving the computer, comes the exterior of the house in 3D: the textured scan and a simple geometry you can work with.</p>
+<div class="acciones"><a class="cta" href="#pelicula">Watch the video</a><a href="/en/aplicaciones.html">Back to Applications</a></div>
+</div>
+<section id="pelicula">
+<h2>The process and the result, in 34 seconds</h2>
+<p class="bajada">It is a house built from shipping containers. The video shows the flight, the intermediate steps and the viewer with both versions of the model.</p>
+<figure class="pelicula">
+<video controls playsinline preload="metadata" poster="/brand/servicios/casa-3d-poster.jpg" width="1080" height="1080" data-goatcounter-click="modelado-3d-play" data-goatcounter-no-session="1">
+<source src="/brand/servicios/casa-3d.mp4" type="video/mp4">
+Your browser cannot play this video. <a href="/brand/servicios/casa-3d.mp4">Download it</a>.
+</video>
+<figcaption>Flight → 131 frames → cameras → mesh and boundary → sections → viewer: exterior and geometry.</figcaption>
+</figure>
+</section>
+<section>
+<h2>How it is done</h2>
+<p class="bajada">Five steps, all on a home computer, with open-source tools.</p>
+<ol class="pasos">
+<li><h3>Frames come out of the video</h3><p>One frame every 0.2 seconds: 131 images of the house from every angle of the orbit.</p></li>
+<li><h3>Every camera goes back to its place</h3><p>The software matches the images against each other, places the 131 cameras back in space and builds a point cloud.</p></li>
+<li><h3>From the cloud, a textured mesh</h3><p>Eight million points become a continuous surface with the real photographs on top.</p></li>
+<li><h3>The boundary is drawn</h3><p>By hand, on the model: what matters stays and the rest is discarded.</p></li>
+<li><h3>A simple geometry</h3><p>Sections at several heights give the real outline. From there come the volumes and the roof, free of noise: the version you can compare with a plan, use to think about an extension or to count containers.</p></li>
+</ol>
+</section>
+<section>
+<h2>What it is and what it is not</h2>
+<div class="limites">
+<div><h3>Exterior, not interior</h3><p>Only what the camera sees from outside gets modelled. Porches and shaded areas come out worse.</p></div>
+<div><h3>No construction-grade scale</h3><p>This model is not calibrated with field measurements. To measure, you need two or three passes at different heights and a tape measure.</p></div>
+<div><h3>Nothing leaves home</h3><p>The images are processed locally with OpenDroneMap. Photos of a home do not travel to someone else's server.</p></div>
+</div>
+</section>
+<section class="contacto" id="contacto">
+<h2>A warehouse, a house, a plot?</h2>
+<p>Tell me what you want to see in 3D and what for. If construction-grade scale is needed, we plan for it from the flight itself.</p>
+<div class="acciones"><a class="cta" href="mailto:hola@ontosdigital.es">Write to me at hola@ontosdigital.es</a><a href="/en/#contacto">Use the contact form</a></div>
+</section>
+</main>
+<footer><div class="wrap"><p>© 2026 ONTOS · Fernando Calle · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a></p></div></footer>
+<script src="/brand/analytics-preferences.js?v=2"></script>
+<script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>
