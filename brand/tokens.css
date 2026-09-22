@@ -74,27 +74,24 @@
   padding: 0.1rem 0.45rem; font-size: 0.78rem; letter-spacing: 0.06em;
 }
 .barra a.item.idioma:hover { color: var(--acento); border-color: var(--acento); }
-/* Móvil: cuatro enlaces no caben a tamaño completo. Se aprieta el ritmo y, si aun así
-   no entran, la fila se desplaza a los lados en vez de partirse. */
+/* Móvil: seis enlaces + idioma no caben en una fila legible; la barra se parte en dos
+   (marca e idioma arriba, enlaces debajo). Hasta el 21-sep la fila se deslizaba a los lados. */
 @media (max-width: 34rem) {
-  /* 21-sep-2026: seis ítems (Producto · Consultoría · Aplicaciones · Sobre mí · Contacto · EN).
-     A 390 px no caben todos (medido en WebKit: 462 px con el wordmark); se aprieta gap y
-     tamaño para que «Sobre mí» quede entero a la vista, y «Contacto» aparece deslizando la
-     fila, con EN siempre pegado al borde. */
-  .barra nav { gap: 0.4rem; padding: 0.6rem 0.6rem; overflow-x: auto; scrollbar-width: none; }
-  .barra nav::-webkit-scrollbar { display: none; }
-  /* Solo el logo: el wordmark «ONTOS» del enlace se oculta (font-size 0 conserva el nombre
-     accesible del enlace) y así entran los seis ítems en 390 px sin bajar de 11 px. */
-  .barra .marca { font-size: 0; gap: 0; margin-right: 0; }
-  .barra .marca svg { width: 20px; height: 20px; }
-  .barra a.item { font-size: 0.7rem; }
-  /* Si la fila llega a desplazarse, el idioma se queda pegado al borde: es el enlace
-     que un visitante que no lee español tiene que poder ver siempre. */
-  .barra a.item.idioma {
-    padding: 0.08rem 0.38rem; font-size: 0.7rem;
-    position: sticky; right: 0; background: var(--bg);
-    box-shadow: -10px 0 10px -6px var(--bg);
+  /* 22-sep-2026: dos filas. Con seis ítems + EN la fila única desbordaba (medido en WebKit:
+     411 px de contenido; 21 px de más a 390, 51 a 360) y «Contacto» quedaba escondido bajo
+     la pastilla EN pegajosa, que se leía «Contac». En vez de encoger la letra por debajo
+     de 11 px o esconder un ítem, la barra se parte: arriba logo + wordmark y el idioma;
+     debajo los seis enlaces, que caben en 360 px a 11,2 px (355 px medidos). El salto lo
+     fuerza el ::after de ancho completo (order 1, entre el idioma y los ítems). */
+  .barra nav {
+    flex-wrap: wrap; justify-content: space-between; gap: 0 0.45rem;
+    padding: 0.45rem 0.7rem 0.3rem;
   }
+  .barra nav::after { content: ''; order: 1; flex-basis: 100%; height: 0; }
+  .barra .marca { order: 0; font-size: 1rem; gap: 0.5rem; margin-right: auto; }
+  .barra .marca svg { width: 20px; height: 20px; }
+  .barra a.item { order: 2; font-size: 0.7rem; }
+  .barra a.item.idioma { order: 1; padding: 0.08rem 0.38rem; font-size: 0.7rem; }
   /* Área táctil de 44 px (25-ago-2026, medido en WebKit a 390/360/320: los enlaces de la
      barra caían en 22-29 px de alto y fallar el toque en una barra pegajosa es de las cosas
      que más barata parecen y más caro salen). Se agranda con un pseudo-elemento y NO con

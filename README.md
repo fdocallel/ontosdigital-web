@@ -8,7 +8,7 @@ Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a
 - `producto.html` — Qué es ONTOS, Dos ediciones, Áreas (= los antiguos casos + Armario), Dónde está hoy, entrada a `solicitud.html` y `entrar.html`.
 - `consultoria.html` — tres familias, oferta BIM, así empieza un encargo, `aplicaciones.html` como galería.
 - `fernando-calle.html` — en la barra como «Sobre mí».
-- Barra única de 5 ítems en todas las páginas con `<header class="barra">`: Producto · Consultoría · Sobre mí · Contacto (`/#contacto`) · EN.
+- Barra única en todas las páginas con `<header class="barra">`: Producto · Consultoría · Aplicaciones · Blog · Sobre mí · Contacto · EN. En móvil (≤34rem) va en dos filas: marca e idioma arriba, los seis enlaces debajo (`brand/tokens.css`, 22-sep-2026).
 - `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
 
 **Inglés PARADO hasta OK de Fernando: `/en/` sigue en v2.1; gen-en no se ha ejecutado en esta rama; los commits van con `--no-verify`.**
