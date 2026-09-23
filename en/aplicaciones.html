@@ -40,14 +40,15 @@ h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600; line-height: 1.2; ma
 section { padding: 3rem 0; border-top: 1px solid var(--borde); }
 h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .bajada { max-width: 42rem; color: var(--sec); }
-.catalogo { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
-.servicio { border: 1px solid var(--borde); border-radius: 16px; background: var(--panel); overflow: hidden; }
-.servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; border-bottom: 1px solid var(--borde); }
-.servicio .texto { padding: 1.6rem; }
-.servicio h3 { font-size: 1.55rem; margin: .6rem 0 1rem; }
-.servicio .cabecera { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
+.catalogo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 1.6rem; }
+.servicio { border: 1px solid var(--borde); border-radius: 14px; background: var(--panel); overflow: hidden; display: flex; flex-direction: column; }
+.servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; border-bottom: 1px solid var(--borde); }
+.servicio .texto { padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; flex: 1; }
+.servicio h3 { font-size: 1.2rem; margin: .5rem 0 .5rem; }
+.servicio .cabecera { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+.servicio .cabecera .etiqueta { font-size: .72rem; }
 /* Dos etiquetas por tarjeta: la vertical (consultoría o producto) y el tipo de aplicación. Contraste texto/fondo ≥ 4,5:1 en claro y oscuro. */
-.pill { display: inline-block; border-radius: 999px; padding: .15rem .55rem; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; line-height: 1.5; background: var(--pill-bg); color: var(--pill-fg); }
+.pill { display: inline-block; border-radius: 999px; padding: .1rem .5rem; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; line-height: 1.5; background: var(--pill-bg); color: var(--pill-fg); }
 .pill-consultoria { --pill-bg: rgba(212,113,59,.16); --pill-fg: #8a3f1f; }
 .pill-producto { --pill-bg: #dbe7f5; --pill-fg: #1f3b63; }
 .pill-medida { --pill-bg: #f6e7c1; --pill-fg: #6b4a00; }
@@ -62,16 +63,23 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
   .pill-webs { --pill-bg: rgba(31,90,51,.55); --pill-fg: #9fd8b0; }
   .pill-personal { --pill-bg: rgba(31,59,99,.35); --pill-fg: #a9c4e8; }
 }
-.servicio p { color: var(--sec); }
-.servicio p + p { margin-top: .9rem; }
-.servicio .caso { border-top: 1px solid var(--borde); padding-top: 1rem; margin-top: 1.2rem; font-size: .95rem; }
+.servicio p { color: var(--sec); font-size: .92rem; line-height: 1.5; }
+.servicio .caso { border-top: 1px solid var(--borde); padding-top: .7rem; margin-top: .8rem; font-size: .88rem; }
 .servicio strong { color: var(--texto); font-weight: 600; }
-.servicio a { display: inline-block; margin-top: 1rem; min-height: 44px; padding: .5rem 0; font-weight: 600; }
+.servicio .enlaces { margin-top: auto; padding-top: .6rem; }
+.servicio a { display: inline-block; min-height: 40px; padding: .45rem 0; font-weight: 600; font-size: .92rem; }
 .contacto { padding-bottom: 4rem; }
 .contacto p { max-width: 41rem; color: var(--sec); }
 footer { border-top: 1px solid var(--borde); padding: 2rem 0; color: var(--sec); font-size: .85rem; }
 footer a { color: inherit; }
-@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo { grid-template-columns: 1fr; } }
+/* La tarjeta que queda sola al final de una fila de tres se tumba: imagen a la izquierda, texto a la derecha. */
+@media (min-width: 58.01rem) {
+  .servicio:last-child:nth-child(3n+1) { grid-column: 1 / -1; flex-direction: row; }
+  .servicio:last-child:nth-child(3n+1) img { width: 42%; aspect-ratio: auto; height: auto; align-self: stretch; border-bottom: 0; border-right: 1px solid var(--borde); }
+  .servicio:last-child:nth-child(3n+1) .texto { padding: 1.2rem 1.4rem; justify-content: center; }
+}
+@media (max-width: 58rem) { .catalogo { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo { grid-template-columns: 1fr; gap: 1rem; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
@@ -116,57 +124,57 @@ footer a { color: inherit; }
 <img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720">
 <div class="texto"><p class="cabecera"><span class="etiqueta">01 · Web tools</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-medida">Custom applications</span></p>
 <h3>CamScanner meets iLovePDF</h3>
-<p>Custom applications for working with documents, organising information and automating repetitive tasks.</p>
-<p class="caso"><strong>Already built: PDF editor.</strong> Merge, rotate and reorder pages; turn photos of paper sheets into documents. Files are processed in your browser.</p>
-<a href="/editor-pdf/" data-goatcounter-click="servicio-probar-editor-pdf" data-goatcounter-no-session="1">Try the PDF editor ▸</a></div>
+<p>Custom applications for documents, information and repetitive tasks.</p>
+<p class="caso"><strong>PDF editor.</strong> Merge, rotate and reorder pages; turn photos into documents. All in your browser.</p>
+<p class="enlaces"><a href="/editor-pdf/" data-goatcounter-click="servicio-probar-editor-pdf" data-goatcounter-no-session="1">Try the PDF editor ▸</a></p></div>
 </article>
 <article class="servicio" id="juegos-2d">
 <img src="/brand/servicios/juego-2d.png" alt="ONTOS as a character in its 2D game" width="1280" height="720">
 <div class="texto"><p class="cabecera"><span class="etiqueta">02 · 2D games and experiences</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-experiencias">2D and 3D experiences</span></p>
 <h3>A brand you can play with</h3>
-<p>Animated characters and interactive scenes to explore an idea, introduce a brand or learn through play.</p>
-<p class="caso"><strong>Already built: the ONTOS 2D game.</strong> The character steps out of the visual identity to become the protagonist of a scene you can interact with.</p>
-<a href="/en/juego-2d.html" data-goatcounter-click="servicio-probar-juego-2d" data-goatcounter-no-session="1">Try the 2D game ▸</a></div>
+<p>Characters and interactive scenes to present a brand or learn by playing.</p>
+<p class="caso"><strong>The ONTOS 2D game.</strong> The brand character, starring in a scene you can interact with.</p>
+<p class="enlaces"><a href="/en/juego-2d.html" data-goatcounter-click="servicio-probar-juego-2d" data-goatcounter-no-session="1">Try the 2D game ▸</a></p></div>
 </article>
 <article class="servicio" id="animacion-3d">
 <img src="/brand/servicios/saludo-3d.png" alt="The ONTOS 3D figurine waving" width="1280" height="720">
 <div class="texto"><p class="cabecera"><span class="etiqueta">03 · 3D animation</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-experiencias">2D and 3D experiences</span></p>
 <h3>A character that comes to life</h3>
-<p>Volume, poses and movement to give a character expression or present a product from different angles.</p>
-<p class="caso"><strong>Already built: ONTOS waving.</strong> The character evolves into a 3D figurine you can inspect, rotate and zoom in on.</p>
-<a href="/en/animacion-3d.html" data-goatcounter-click="servicio-probar-animacion-3d" data-goatcounter-no-session="1">Try the 3D animation ▸</a></div>
+<p>Volume, poses and motion for a character or a product.</p>
+<p class="caso"><strong>ONTOS waving.</strong> The character's 3D figurine: spin it and zoom in.</p>
+<p class="enlaces"><a href="/en/animacion-3d.html" data-goatcounter-click="servicio-probar-animacion-3d" data-goatcounter-no-session="1">Try the 3D animation ▸</a></p></div>
 </article>
 <article class="servicio" id="visitas-3d">
 <img src="/brand/servicios/mundo-3d.png" alt="ONTOS exploring its small 3D planet" width="1280" height="720">
 <div class="texto"><p class="cabecera"><span class="etiqueta">04 · 3D tours and worlds</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-experiencias">2D and 3D experiences</span></p>
 <h3>A place to step into</h3>
-<p>Navigable scenes to walk through a space, discover a brand environment or explore a presentation from within.</p>
-<p class="caso"><strong>Already built: the small world of ONTOS.</strong> A small planet with walking, sparkles and a seed to discover.</p>
-<a href="/en/visita-3d.html" data-goatcounter-click="servicio-probar-mundo-normal" data-goatcounter-no-session="1">Try the ONTOS world ▸</a><br><a href="/en/visita-3d.html?mundo=segovia" data-goatcounter-click="servicio-probar-segovia" data-goatcounter-no-session="1">Try the Segovia tour ▸</a></div>
+<p>Navigable scenes to walk through a space or a presentation from the inside.</p>
+<p class="caso"><strong>ONTOS's little world.</strong> A planet with a stroll, sparkles and a seed to discover.</p>
+<p class="enlaces"><a href="/en/visita-3d.html" data-goatcounter-click="servicio-probar-mundo-normal" data-goatcounter-no-session="1">Try the ONTOS world ▸</a><br><a href="/en/visita-3d.html?mundo=segovia" data-goatcounter-click="servicio-probar-segovia" data-goatcounter-no-session="1">Try the Segovia tour ▸</a></p></div>
 </article>
 <article class="servicio" id="modelado-3d">
 <img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720">
 <div class="texto"><p class="cabecera"><span class="etiqueta">05 · 3D modelling from a drone</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-medida">Custom applications</span></p>
 <h3>From a flight to a model</h3>
-<p>Drone photogrammetry to get a house, a warehouse or a plot in 3D: the textured scan and a simple geometry you can work with.</p>
-<p class="caso"><strong>Already built: a shipping-container house.</strong> A 26-second drone orbit and, processed locally, the exterior reconstructed and rectified container by container.</p>
-<a href="/en/modelado-3d.html" data-goatcounter-click="servicio-probar-modelado-3d" data-goatcounter-no-session="1">See the process and the result ▸</a></div>
+<p>Drone photogrammetry: the textured scan plus a simple geometry to work with.</p>
+<p class="caso"><strong>A container house.</strong> A 26-second flight and the exterior rebuilt locally.</p>
+<p class="enlaces"><a href="/en/modelado-3d.html" data-goatcounter-click="servicio-probar-modelado-3d" data-goatcounter-no-session="1">See the process and the result ▸</a></p></div>
 </article>
 <article class="servicio" id="webs">
 <img src="/brand/servicios/web-jmcasado.png" alt="Home page of painter José María Casado's website" width="1280" height="720">
 <div class="texto"><p class="cabecera"><span class="etiqueta">06 · Custom websites</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-webs">Websites</span></p>
 <h3>A website the client can maintain</h3>
-<p>Pages to show a body of work, with whatever it takes for the owner to update them without depending on anyone.</p>
-<p class="caso"><strong>Already built: the gallery of painter José María Casado.</strong> His website turned into a gallery with a database of works he edits himself: collections, artwork sheets and featured pieces on the home page.</p>
-<a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visit josemariacasado.com ▸</a></div>
+<p>Websites their owner can update without depending on anyone.</p>
+<p class="caso"><strong>José María Casado, painter.</strong> A gallery with a database of works he edits himself.</p>
+<p class="enlaces"><a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visit josemariacasado.com ▸</a></p></div>
 </article>
 <article class="servicio" id="armario">
 <img src="/brand/servicios/armario.png" alt="Clothes hung on shelves sorted by colour: whites, greys, blacks" width="1240" height="698">
 <div class="texto"><p class="cabecera"><span class="etiqueta">07 · Wardrobe</span><span class="pill pill-producto">Product</span><span class="pill pill-personal">ONTOS personal</span></p>
 <h3>Your clothes, catalogued and hung on shelves</h3>
-<p>One photo per garment and a record. The wardrobe sorts itself by colour or by type, tells you what you wear and what you don't, and suggests outfits you can see on yourself. All on your phone.</p>
-<p class="caso"><strong>In use: my wardrobe, 82 garments.</strong> Try arranging ten garments by colour or by type and watch the real wardrobe on video.</p>
-<a href="/en/armario.html" data-goatcounter-click="servicio-probar-armario" data-goatcounter-no-session="1">Try it with 10 garments ▸</a></div>
+<p>One photo per garment and a record: the wardrobe sorts by colour or type and suggests outfits. On your phone.</p>
+<p class="caso"><strong>In use: my wardrobe, 82 garments.</strong> Place ten garments and watch the real wardrobe on video.</p>
+<p class="enlaces"><a href="/en/armario.html" data-goatcounter-click="servicio-probar-armario" data-goatcounter-no-session="1">Try it with 10 garments ▸</a></p></div>
 </article>
 </div>
 </section>

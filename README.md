@@ -11,7 +11,7 @@ Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a
 - Barra única en todas las páginas con `<header class="barra">`: Producto · Consultoría · Aplicaciones · Blog · Sobre mí · Contacto · EN. En móvil (≤34rem) va en dos filas: marca e idioma arriba, los seis enlaces debajo (`brand/tokens.css`, 22-sep-2026).
 - `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
 
-**Inglés PARADO hasta OK de Fernando: `/en/` sigue en v2.1; gen-en no se ha ejecutado en esta rama; los commits van con `--no-verify`.**
+El espejo inglés está al día con la v4 desde el 21-sep-2026 (commit «versión inglesa de la web v4»); los commits van con el hook activo. (La nota anterior «inglés parado, commits con --no-verify» caducó ese día y se retiró el 23-sep.)
 
 ## Español e inglés
 
