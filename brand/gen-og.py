@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""og:image 1200x630 con la marca ONTOS (marca N5 centrada + wordmark + tagline).
+"""og:image 1200x630 con la marca ONTOS (marca N5 centrada + wordmark + tagline), en claro.
 Mismo sistema que gen-banner.py: Avenir Next, alineacion optica por bbox,
 render a 4x con downscale LANCZOS. Paleta: brand/colores.md."""
 import math, runpy
@@ -16,17 +16,21 @@ RADIO_1, RADIO_2, RADIO_W = _g['RADIO_1'], _g['RADIO_2'], _g['RADIO_W']
 NUCLEO_R = float(_g['NUCLEO_R'])
 
 W, H, S = 1200, 630, 4
-NOCHE = (15, 14, 12)
+# en CLARO desde el 23-sep-2026 (Fernando: «me gusta más en blanquito»), como los banners del 21-sep.
+# Tokens de colores.md para fondo claro: hueso de fondo, la piedra del logo hereda tinta, el
+# secundario es granito y el texto en teja pasa a teja-quemada (la teja base no llega a 4,5:1 en claro)
+HUESO = (250, 248, 245)
 TEJA = (212, 113, 59)
-GRANITO_CLARO = (163, 154, 140)
-TEXTO = (236, 231, 222)
-PIEDRA = (69, 63, 53)
+TEJA_QUEMADA = (176, 83, 42)
+GRANITO = (107, 98, 87)
+TINTA = (28, 26, 23)
+PIEDRA = TINTA
 
 AVENIR = "/System/Library/Fonts/Avenir Next.ttc"
 FRAUNCES = __file__.rsplit("/", 1)[0] + "/fraunces-600.ttf"  # wordmark (decision 1-sep-2026, colores.md)
 DEMI, MEDIUM = 2, 5
 
-img = Image.new("RGB", (W * S, H * S), NOCHE)
+img = Image.new("RGB", (W * S, H * S), HUESO)
 
 def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=40):
     pts = []
@@ -40,7 +44,7 @@ def sector(cx, cy, R, r, a1, a2, dy=0.0, steps=40):
 
 # glow calido muy sutil tras el lockup, centrado
 glow = Image.radial_gradient("L").resize((1700 * S, 1700 * S))
-glow = glow.point(lambda v: int((255 - v) * 0.07))
+glow = glow.point(lambda v: int((255 - v) * 0.05))
 img.paste(Image.new("RGB", glow.size, TEJA), (int(W * S / 2 - glow.size[0] / 2), int(215 * S - glow.size[1] / 2)), glow)
 d = ImageDraw.Draw(img)
 
@@ -72,7 +76,7 @@ def draw_centered(y, text, f, fill, tracking=0.0):
         d.text((x, y * S), ch, font=f, fill=fill)
         x += d.textlength(ch, font=f) + tracking * S
 
-draw_centered(322, "ONTOS", ImageFont.truetype(FRAUNCES, 92 * S), TEXTO, tracking=1.8)
+draw_centered(322, "ONTOS", ImageFont.truetype(FRAUNCES, 92 * S), TINTA, tracking=1.8)
 # la frase NO vive aquí: es la superficie `web.og` de ONTOS/data/mensaje.json, la fuente única de lo
 # que ONTOS dice en cada sitio (23-sep-2026). Sin ella, error: nunca una og con texto viejo en silencio
 import json, sys
@@ -81,8 +85,8 @@ try:
     TAGLINE = next(x["es"] for x in json.loads(_M.read_text())["superficies"] if x["id"] == "web.og")
 except Exception as e:
     sys.exit(f"gen-og: no encuentro la superficie web.og en {_M} ({e})")
-draw_centered(468, TAGLINE, font(MEDIUM, 31), GRANITO_CLARO)
-draw_centered(541, "ontosdigital.es", font(DEMI, 22), TEJA, tracking=0.6)
+draw_centered(468, TAGLINE, font(MEDIUM, 31), GRANITO)
+draw_centered(541, "ontosdigital.es", font(DEMI, 22), TEJA_QUEMADA, tracking=0.6)
 
 img.resize((W, H), Image.LANCZOS).save("/Users/fdocallel/Dev/ontosdigital-web/brand/og.png")
 print("ok og.png")
