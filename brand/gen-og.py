@@ -73,7 +73,15 @@ def draw_centered(y, text, f, fill, tracking=0.0):
         x += d.textlength(ch, font=f) + tracking * S
 
 draw_centered(322, "ONTOS", ImageFont.truetype(FRAUNCES, 92 * S), TEXTO, tracking=1.8)
-draw_centered(468, "El modelo digital de tu negocio, operado con IA", font(MEDIUM, 31), GRANITO_CLARO)
+# la frase NO vive aquí: es la superficie `web.og` de ONTOS/data/mensaje.json, la fuente única de lo
+# que ONTOS dice en cada sitio (23-sep-2026). Sin ella, error: nunca una og con texto viejo en silencio
+import json, sys
+_M = Path.home() / "Dev" / "ONTOS" / "data" / "mensaje.json"
+try:
+    TAGLINE = next(x["es"] for x in json.loads(_M.read_text())["superficies"] if x["id"] == "web.og")
+except Exception as e:
+    sys.exit(f"gen-og: no encuentro la superficie web.og en {_M} ({e})")
+draw_centered(468, TAGLINE, font(MEDIUM, 31), GRANITO_CLARO)
 draw_centered(541, "ontosdigital.es", font(DEMI, 22), TEJA, tracking=0.6)
 
 img.resize((W, H), Image.LANCZOS).save("/Users/fdocallel/Dev/ontosdigital-web/brand/og.png")
