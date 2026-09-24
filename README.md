@@ -2,13 +2,17 @@
 
 Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a main).
 
-## Estructura v4 (21-sep-2026, rama web-v4-empresa)
+## Estructura v5 (24-sep-2026, rama web-v5-consultoria)
 
-- `/` — portada de **empresa**: dos maneras de trabajar, lo último, quién, contacto.
-- `producto.html` — Qué es ONTOS, Dos ediciones, Áreas (= los antiguos casos + Armario), Dónde está hoy, entrada a `solicitud.html` y `entrar.html`.
-- `consultoria.html` — tres familias, oferta BIM, así empieza un encargo, `aplicaciones.html` como galería.
-- `fernando-calle.html` — en la barra como «Sobre mí».
-- Barra única en todas las páginas con `<header class="barra">`: Producto · Consultoría · Aplicaciones · Blog · Sobre mí · Contacto · EN. En móvil (≤34rem) va en dos filas: marca e idioma arriba, los seis enlaces debajo (`brand/tokens.css`, 22-sep-2026).
+Decisión: `ONTOS/docs/estudios/2026-09-24-web-consultoria-primero.md`. Estilo: referente anthropic.com (spec del crítico, 24-sep).
+
+- `/` — la **consultoría** es la portada: gancho, entrada, Qué es ONTOS, cinco familias, así empieza un encargo, tres trabajos, quién, contacto.
+- `aplicaciones.html` — galería + bloque «Próximamente» (ONTOS personal · ONTOS empresarial) con enlaces a `producto.html` y a los vídeos.
+- `fernando-calle.html` — «Sobre mí»: bio + `#escritos` (antes `blog.html`).
+- `consultoria.html` → `/` y `blog.html` → `fernando-calle.html#escritos`: redirecciones (meta refresh + JS, canonical al destino, noindex), fuera del sitemap.
+- `producto.html`, casos, demos, `contacto.html`, `solicitud.html`, `entrar.html`: se quedan; producto fuera de la barra.
+- Barra única en todas las páginas con `<header class="barra">`: ONTOS · Consultoría (= inicio) · Aplicaciones · Sobre mí · icono de contacto · EN. En móvil (≤34rem) dos filas: marca, icono e idioma arriba; los tres enlaces debajo (en una fila no cabe: 472 px, 400 px con el logo plegado).
+- `brand/barra.js`: (1) el wordmark se pliega al símbolo al pasar la cabecera de la página (centinela + IntersectionObserver, `html.is-condensado`); (2) el icono de contacto y los enlaces con `data-contacto` abren un `<dialog>` con el formulario de `contacto.html`, que se trae por fetch (el formulario vive una vez; en /en/ trae el inglés). Sin JS son enlaces a `contacto.html`. Abrir el diálogo cuenta el evento GoatCounter `contacto-popup`.
 - `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
 
 El espejo inglés está al día con la v4 desde el 21-sep-2026 (commit «versión inglesa de la web v4»); los commits van con el hook activo. (La nota anterior «inglés parado, commits con --no-verify» caducó ese día y se retiró el 23-sep.)

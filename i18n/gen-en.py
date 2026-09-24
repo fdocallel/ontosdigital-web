@@ -24,7 +24,7 @@ DOMINIO = "https://ontosdigital.es"
 PAGINAS = [
     ("index.html", True),
     ("producto.html", True),
-    ("consultoria.html", True),
+    ("consultoria.html", False),  # redirección a / (web v5, 24-sep-2026), sin índice
     ("contacto.html", True),
     ("bim.html", True),
     ("aplicaciones.html", True),
@@ -35,7 +35,7 @@ PAGINAS = [
     ("animacion-3d.html", True),
     ("visita-3d.html", True),
     ("escrito-plan-bim-ingenieria.html", True),
-    ("blog.html", True),
+    ("blog.html", False),         # redirección a fernando-calle.html#escritos (web v5, 24-sep-2026), sin índice
     ("fernando-calle.html", True),
     ("caso-sistema.html", True),
     ("caso-finanzas.html", True),
@@ -218,7 +218,10 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
             pon("srcset", nueva)
 
     if nombre == "link" and atrs.get("rel", "").lower() == "canonical":
-        pon("href", url_en(pagina))
+        # una redirección declara como canónico su DESTINO (consultoria.html → /): el espejo
+        # apunta al destino inglés, no a sí mismo (web v5, 24-sep-2026)
+        propio = atrs.get("href", "") in ("", url_es(pagina))
+        pon("href", url_en(pagina) if propio else DOMINIO + ruta_en(atrs["href"]))
 
     if nombre == "meta":
         clave_meta = (atrs.get("name") or atrs.get("property") or "").lower()
@@ -283,8 +286,28 @@ def traduce_json_ld(bloque, tr, pagina):
     return re.sub(r'"(\w+)":\s*"([^"]*)"', campo, bloque)
 
 
+def reescribe_src_script(bloque):
+    """Reescribe el src de la etiqueta <script> de apertura (activo local relativo,
+    p. ej. brand/barra.js), igual que traduce_etiqueta hace con el resto de etiquetas.
+    Sin esto, un <script src="brand/x.js"> entero se trata como un bloque y su ruta
+    nunca pasa por ruta_en(): en /en/ queda relativa y apunta a /en/brand/x.js (404;
+    detectado el 24-sep-2026 con brand/barra.js)."""
+    def apertura(m):
+        tag = m.group(0)
+        atrs = {mm.group(1).lower(): mm.group(2)[1:-1] for mm in ATRIB.finditer(tag)}
+        if "src" in atrs:
+            nueva = ruta_en(atrs["src"])
+            if nueva != atrs["src"]:
+                patron = re.compile(r"(\bsrc\s*=\s*)(\"[^\"]*\"|'[^']*')", re.I)
+                tag = patron.sub(lambda mm: mm.group(1) + '"' + nueva.replace('"', "&quot;") + '"', tag, count=1)
+        return tag
+    return re.sub(r"^<script\b[^>]*>", apertura, bloque, count=1)
+
+
 def traduce_script(bloque, tr):
     """Sustituye literales de cadena que estén en el diccionario (rótulos de las demos)."""
+    bloque = reescribe_src_script(bloque)
+
     def literal(m):
         comilla, cuerpo = m.group(1), m.group(2)
         k = clave(cuerpo)

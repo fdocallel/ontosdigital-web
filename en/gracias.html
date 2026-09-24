@@ -10,6 +10,7 @@
 <meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
 <link rel="stylesheet" href="/brand/tokens.css">
+<script src="/brand/barra.js" defer></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -67,7 +68,7 @@
 <header class="barra">
   <nav>
     <a class="marca" href="/en/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
         <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
         <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
         <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
@@ -77,15 +78,12 @@
         <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
         <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
         <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
-      </svg>
-      ONTOS
+      </svg><span class="marca__word">ONTOS</span>
     </a>
-    <a class="item" href="/en/producto.html">Product</a>
-    <a class="item" href="/en/consultoria.html">Consulting</a>
+    <a class="item" href="/en/">Consulting</a>
     <a class="item" href="/en/aplicaciones.html">Applications</a>
-    <a class="item" href="/en/blog.html">Blog</a>
     <a class="item" href="/en/fernando-calle.html">About me</a>
-    <a class="item" href="/en/contacto.html">Contact</a>
+    <a class="item icono-contacto" href="/en/contacto.html" data-contacto aria-label="Contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.8 7l8.2 6.2L20.2 7"/></svg></a>
     <a class="item idioma" data-i18n-alt href="/gracias.html" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
   </nav>
 </header>
