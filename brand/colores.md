@@ -2,6 +2,8 @@
 
 Definido 21-jul-2026 (análisis en sesión; contrastes WCAG medidos, no estimados).
 
+> **Paleta validada · 25-sep-2026.** Fernando, en revisión con Laura, aprueba colores corporativos y desarrollo, variantes funcionales, gama cálida, degradado y dirección. Fuente única vigente: `ONTOS/data/mensaje.json#fundamentos.color`; aprobación literal: `ONTOS/raw/marca/2026-09-25-paleta-validada-hogar-opacidades.md`. Capítulo de color cerrado: justificaciones individuales y conjunta, escala de arena y aplicación editorial al 20 % validadas (fuente: `ONTOS/raw/marca/2026-09-25-cierre-color-fernando-laura.md`). Manual vigente en `ONTOS/docs/ontos/manual-marca.html#color`. Reglas de uso retiradas por ahora del manual. Esta decisión **supersede** las restricciones históricas incompatibles sobre segundos colores y degradados. Lo que sigue es el inventario y criterio de implementación anterior, conservado como antecedente; los SVG y tokens de producción no se modifican por este apunte.
+
 ## El color: TEJA `#d4713b`
 
 **Por qué este y no azul.** El sector AEC en España viste de azul corporativo (ingenierías clásicas)
