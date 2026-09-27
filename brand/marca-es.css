@@ -1,30 +1,23 @@
 /* Aplicación española de la identidad ONTOS. Se carga después de los estilos de página.
-   Fondo verde corporativo y roles de lectura clara en ambos esquemas del sistema.
+   Fondo editorial claro del manual en ambos esquemas del sistema.
    Las piezas de cine con #stage conservan su dirección de arte y su escala temporal. */
 
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
   --bg: var(--web-page-surface);
-  --panel: var(--web-dark-panel);
-  --borde: var(--ds-brand-arena);
-  --texto: var(--ds-support-hueso);
-  --sec: var(--web-green-muted);
-  --acento: var(--web-green-muted);
-  --realce: var(--ds-support-hueso);
+  --panel: var(--ds-surface-panel);
+  --borde: var(--ds-border);
+  --texto: var(--ds-ink);
+  --sec: var(--ds-ink-muted);
+  --acento: var(--ds-action);
+  --realce: var(--ds-action);
   --teja: var(--ds-brand-teja);
-  --piedra-logo: var(--ds-brand-logo-on-dark);
+  --piedra-logo: var(--ds-brand-verde);
   --serif: var(--ds-font-corporativa);
   --sans: var(--ds-font-corporativa);
   --sp-sec: var(--ds-space-8);
   --nav-h: 4rem;
-  color-scheme: dark;
+  color-scheme: light;
   scroll-padding-top: calc(var(--nav-h) + var(--ds-space-2));
-}
-
-/* Prueba solicitada el 27-sep-2026: verde profundo solo en la portada de
-   Consultoría. Color propuesto, pendiente de valoración e incorporación al
-   manual; no sustituye el verde corporativo ni los tokens compartidos. */
-html[lang="es"][data-ontos-web][data-web-page="index"] {
-  --bg: #183D33;
 }
 
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body {
@@ -161,12 +154,12 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .fa
   color: var(--texto);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta):is(:hover, :focus-within) {
-  border-color: var(--ds-support-hueso);
+  border-color: var(--ds-control-border);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
-  background: var(--ds-support-hueso);
-  border: 1px solid var(--ds-support-hueso);
-  color: var(--ds-brand-verde);
+  background: var(--ds-action);
+  border: 1px solid var(--ds-action);
+  color: var(--ds-on-action);
   border-radius: var(--ds-radius-s);
   font-family: var(--ds-font-corporativa);
   font-weight: 600;
@@ -174,15 +167,15 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-cont
   transition-duration: var(--web-motion-fast);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
-  background: var(--ds-brand-arena);
-  border-color: var(--ds-brand-arena);
-  color: var(--ds-brand-verde);
+  background: var(--ds-action);
+  border-color: var(--ds-action);
+  color: var(--ds-on-action);
   box-shadow: 0 7px 18px color-mix(in srgb, var(--web-technical-black) 24%, transparent);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .cta.secundario {
   background: transparent;
   color: var(--acento);
-  border: 1px solid var(--borde);
+  border: 1px solid var(--ds-control-border);
   border-radius: var(--ds-radius-s);
   box-shadow: none;
 }
@@ -219,12 +212,12 @@ html[lang="es"][data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] art
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea) {
   background: var(--panel);
   color: var(--texto);
-  border: 1px solid var(--borde);
+  border: 1px solid var(--ds-control-border);
   border-radius: var(--ds-radius-s);
   font-family: var(--ds-font-corporativa);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(a, button, input, select, textarea, summary):focus-visible {
-  outline: 3px solid var(--ds-support-hueso);
+  outline: 3px solid var(--ds-action);
   outline-offset: 3px;
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto {

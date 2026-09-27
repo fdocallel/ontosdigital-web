@@ -13,7 +13,7 @@ const protectedFile=f=>f.startsWith('en/')||f.startsWith('i18n/en/')||f.startsWi
 assert.deepEqual(changed.filter(protectedFile),[],'EN y sus recursos conservan su versión');
 for(const file of pages){const html=fs.readFileSync(path.join(WEB,file),'utf8');assert(html.includes('data-ontos-web'),file+' activa marca');assert(html.includes('/canon/tokens.css'),file+' carga tokens');assert(html.includes('/marca-es.css'),file+' carga CSS común');assert(!/<circle[^>]+r="16\.5"/.test(html),file+' no conserva símbolo anterior');}
 require('./import-marca.cjs').run(ONTOS,{check:true});
-function signature({html,baseline=false}){
+function signature({html,baseline=false,file}){
  const d=new DOMParser().parseFromString(html,'text/html');
  const clean=s=>s.replace(/\s+/g,' ').trim();
  // Cambio explícito de Fernando (27-sep): Consultoría es inicio y sale del menú.
@@ -21,6 +21,15 @@ function signature({html,baseline=false}){
  const homeLinks=[...d.querySelectorAll('header.barra nav a.item')].filter(e=>clean(e.textContent)==='Consultoría');
  if(baseline){for(const e of homeLinks){if(e.getAttribute('href')!=='/')throw Error('Destino de Consultoría inesperado');e.remove();}}
  else if(homeLinks.length)throw Error('Consultoría sigue en la cabecera');
+ // Segunda petición explícita: lema antes del panel y resto de la apertura dentro.
+ // Transformar solo la base permite seguir detectando pérdidas en el resto de la home.
+ if(baseline&&file==='index.html'){
+  const hero=d.querySelector('body > .hero'),lema=hero?.querySelector('.lema');
+  if(!hero||!lema)throw Error('Falta la apertura de referencia');
+  const intro=d.createElement('div'),inner=d.createElement('div');
+  intro.append(lema);hero.before(intro);
+  inner.append(...hero.childNodes);hero.append(inner);
+ }
  for(const e of d.querySelectorAll('script,style,svg,template,noscript'))e.remove();
  for(const e of d.querySelectorAll('a.marca'))e.textContent='ONTOS';
  return {title:d.title,description:d.querySelector('meta[name=description]')?.content||'',canonical:d.querySelector('link[rel=canonical]')?.getAttribute('href')||'',
@@ -35,7 +44,7 @@ function signature({html,baseline=false}){
  const browser=await webkit.launch();
  try{
   const page=await browser.newPage();
-  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8')});assert.deepEqual(after,before,file+': contenido conservado salvo retirada autorizada de Consultoría del menú');}
-  console.log(`PASS marca ES: ${pages.length} páginas conservan contenido salvo Consultoría en el menú; EN y recursos compartidos intactos; canon reproducible.`);
+  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado salvo menú y apertura reorganizados por encargo');}
+  console.log(`PASS marca ES: ${pages.length} páginas conservan contenido con menú y apertura autorizados; EN y recursos compartidos intactos; canon reproducible.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.message);process.exitCode=1;});

@@ -110,3 +110,11 @@ La corrección de Fernando aplica verde corporativo en ambos modos de color y su
 Por petición de Fernando se prueba `#183D33` solo como fondo de la home española (Consultoría), incluida su cabecera. El valor provisional vive en `brand/marca-es.css`, limitado a `data-web-page="index"`; las páginas interiores y los paneles conservan sus colores. No se incorpora al manual ni se modifica la paleta aprobada hasta valorar la prueba.
 
 Se retira «Consultoría» de las 17 cabeceras españolas que lo incluían. El logotipo sigue enlazando a `/` y `consultoria.html` conserva su redirección. La prueba de conservación admite exclusivamente esta retirada del menú; sigue comparando el resto del contenido y protegiendo inglés y los recursos compartidos. Vista previa: http://mac-mini:8795/. Publicación pendiente de la valoración de esta prueba.
+
+### Dirección vigente: fondo claro y bloque expansivo · 27-sep-2026
+
+La nueva petición sustituye el fondo verde general de las entregas anteriores. Las páginas corporativas españolas y el resto de la home usan la base editorial del manual: arena al 20 % sobre hueso (`--web-page-surface`, alias de `--ds-surface-page`), paneles hueso y tinta verde. El importador adapta firmas y color del navegador a esa base. Las escenas de cine mantienen su dirección de arte; inglés conserva su versión.
+
+La frase introductoria abre la home, alineada a la izquierda y con tamaño medio. Debajo, el bloque verde oscuro reúne el rótulo, el titular y Cuéntame tu caso. Empieza con márgenes y alcanza el ancho completo al hacer scroll, con textura y degradado sutiles. Se inspira en la composición y expansión medidas en anthropic.com el 27-sep-2026, sin importar sus activos ni scripts.
+
+`brand/home-es.css` compone esta pieza y contiene el color local en prueba; `brand/home-es.js` vincula la expansión y el parallax al desplazamiento, sin capturar la rueda. Sin JavaScript y con movimiento reducido se conserva una tarjeta estática legible. El enlace de contacto mantiene su formulario. La prueba de conservación contempla únicamente el menú retirado y la nueva disposición de la apertura; el resto del contenido sigue protegido. Continúa en vista previa.

@@ -50,7 +50,7 @@ function artifacts(root){
   const home=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
   const headline=home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g,'').trim();
   if(!headline)throw Error('Portada sin titular para imagen social');
-  const social=`<!doctype html><html lang="es"><meta charset="utf-8"><style>@font-face{font-family:Jost;src:url(data:font/ttf;base64,${read(model.familias.corporativa.archivo).toString('base64')})}*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:${tokens['web-page-surface'].valor};color:${tokens['brand-logo-on-dark'].valor};font-family:Jost,sans-serif;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px}.firma{width:570px;margin-bottom:68px}p{font-size:34px;line-height:1.3;text-align:center;margin:0;max-width:1080px}small{font-size:24px;margin-top:42px}i{display:block;width:44px;height:4px;background:${tokens['brand-teja'].valor};margin-top:24px}</style><div class="firma">${marks.logo('horizontal','color-dark')}</div><p>${esc(headline)}</p><small>ontosdigital.es</small><i></i></html>`;
+  const social=`<!doctype html><html lang="es"><meta charset="utf-8"><style>@font-face{font-family:Jost;src:url(data:font/ttf;base64,${read(model.familias.corporativa.archivo).toString('base64')})}*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:${tokens['brand-verde'].valor};color:${tokens['brand-logo-on-dark'].valor};font-family:Jost,sans-serif;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px}.firma{width:570px;margin-bottom:68px}p{font-size:34px;line-height:1.3;text-align:center;margin:0;max-width:1080px}small{font-size:24px;margin-top:42px}i{display:block;width:44px;height:4px;background:${tokens['brand-teja'].valor};margin-top:24px}</style><div class="firma">${marks.logo('horizontal','color-dark')}</div><p>${esc(headline)}</p><small>ontosdigital.es</small><i></i></html>`;
   out['brand/canon/og.png']=socialCard(social,root);
   out['brand/canon/provenance.json']=JSON.stringify({_doc:'GENERADO por scripts/import-marca.cjs. Copias de entrega, no fuentes editables.',source:'ONTOS · manual de marca 1–3 y Design System',scope:'es',sources:Object.fromEntries(sources.map(p=>[p,hash(read(p))])),outputs:Object.fromEntries(Object.entries(out).map(([p,b])=>[p,hash(b)]))},null,2)+'\n';
   const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
@@ -66,7 +66,8 @@ function artifacts(root){
     html=html.replace(/(<link\b[^>]*rel="icon"[^>]*href=")[^"]*(")/g,'$1'+rel+'/canon/favicon.svg$2');
     html=html.replace(/(<meta\b[^>]*(?:property="og:image"|name="twitter:image")[^>]*content=")https:\/\/ontosdigital\.es\/brand\/og\.png("[^>]*>)/g,'$1https://ontosdigital.es/brand/canon/og.png$2');
     html=html.replace(/<a\b([^>]*class="marca"[^>]*)>[\s\S]*?<\/a>/g,(_,attrs)=>{
-      return `<a${attrs}><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-dark" src="${rel}/canon/wordmark-color-dark.svg" alt=""></span><span class="marca__word marca__label">ONTOS</span></a>`;
+      const dark=/<[^>]+\bid="stage"/.test(html);
+      return `<a${attrs}><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-${dark?'dark':'light'}" src="${rel}/canon/wordmark-${dark?'color-dark':'color'}.svg" alt=""></span><span class="marca__word marca__label">ONTOS</span></a>`;
     });
     // Restantes sellos/escenas: conservar atributos, identidad de DOM y animaciones.
     html=html.replace(/<svg\b([^>]*)>([\s\S]*?)<\/svg>/g,(all,attrs,body)=>{
