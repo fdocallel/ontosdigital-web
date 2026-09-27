@@ -1,0 +1,387 @@
+/* Aplicación española de la identidad ONTOS. Se carga después de los estilos de página.
+   Los valores proceden de brand/canon/tokens.css; los roles web oscuros son propuestas.
+   Las piezas de cine con #stage conservan su dirección de arte y su escala temporal. */
+
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
+  --bg: var(--ds-surface-page);
+  --panel: var(--ds-surface-panel);
+  --borde: var(--ds-border);
+  --texto: var(--ds-ink);
+  --sec: var(--ds-ink-muted);
+  --acento: var(--ds-action);
+  --realce: var(--ds-action);
+  --teja: var(--ds-brand-teja);
+  --piedra-logo: var(--ds-brand-granito);
+  --serif: var(--ds-font-corporativa);
+  --sans: var(--ds-font-corporativa);
+  --sp-sec: var(--ds-space-8);
+  --nav-h: 8.625rem;
+  color-scheme: light;
+  scroll-padding-top: calc(var(--nav-h) + var(--ds-space-2));
+}
+
+@media (prefers-color-scheme: dark) {
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
+    --bg: var(--web-dark-surface);
+    --panel: var(--web-dark-panel);
+    --borde: var(--web-dark-line);
+    --texto: var(--web-dark-ink);
+    --sec: var(--web-dark-muted);
+    --acento: var(--ds-brand-arena);
+    --realce: var(--ds-brand-arena);
+    --piedra-logo: var(--ds-brand-logo-on-dark);
+    color-scheme: dark;
+  }
+}
+
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body {
+  color: var(--texto);
+  background: var(--bg);
+  font-family: var(--ds-font-corporativa);
+  font-size: var(--ds-type-body);
+  line-height: var(--ds-type-body-leading);
+}
+
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(h1, h2, h3, h4, button, input, select, textarea) {
+  font-family: var(--ds-font-corporativa);
+}
+
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(h1, h2, h3) {
+  color: var(--texto);
+  font-weight: 600;
+  text-wrap: balance;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body h1 {
+  font-size: clamp(var(--ds-type-h1), 3.8vw, var(--ds-type-display));
+  line-height: var(--ds-type-h1-leading);
+  letter-spacing: -.025em;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .hero h1,
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
+  font-size: var(--ds-type-display);
+  line-height: var(--ds-type-display-leading);
+  max-width: 18ch;
+  margin-inline: auto;
+}
+html[lang="es"][data-ontos-web][data-web-page="bim"] body .titular h1 {
+  margin-inline: 0;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body h2 {
+  font-size: var(--ds-type-h2);
+  line-height: var(--ds-type-h2-leading);
+  letter-spacing: -.015em;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body h3 {
+  font-size: var(--ds-type-h3);
+  line-height: var(--ds-type-h3-leading);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.kicker, .etiqueta, .meta, .stat .l, .hito .fecha) {
+  color: var(--acento);
+  font-family: var(--ds-font-corporativa);
+  font-weight: 600;
+  letter-spacing: .08em;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.stat .n, .hito .cifra, .cifra .n) {
+  font-family: var(--ds-font-corporativa);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Cabecera con la firma aprobada, más grande al inicio y compacta al desplazarse.
+   El tramo intermedio usa el wordmark para dejar espacio a los destinos. */
+html[lang="es"][data-ontos-web] .barra {
+  background: var(--bg);
+  border-bottom-color: var(--borde);
+}
+html[lang="es"][data-ontos-web] .barra nav {
+  max-width: 86rem;
+  min-height: var(--nav-h);
+  gap: clamp(var(--ds-space-3), 1.6vw, var(--ds-space-5));
+  padding-inline: clamp(var(--ds-space-4), 3vw, var(--ds-space-8));
+}
+html[lang="es"][data-ontos-web] .barra .marca {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex: none;
+  min-width: var(--web-logo-horizontal-min);
+  min-height: var(--web-logo-icon-min);
+  margin-right: auto;
+  color: var(--texto);
+}
+html[lang="es"][data-ontos-web] .barra .marca__full,
+html[lang="es"][data-ontos-web] .barra .marca__compact {
+  align-items: center;
+  justify-content: flex-start;
+}
+html[lang="es"][data-ontos-web] .barra .marca__full { display: flex; }
+html[lang="es"][data-ontos-web] .barra .marca__compact { display: none; }
+html[lang="es"][data-ontos-web] .barra .marca__full img {
+  display: block;
+  width: var(--web-logo-horizontal-min);
+  height: auto;
+  max-width: none;
+}
+html[lang="es"][data-ontos-web] .barra .marca__compact img {
+  display: block;
+  width: var(--web-logo-wordmark-min);
+  height: auto;
+  max-width: none;
+}
+html[lang="es"][data-ontos-web] .barra .marca__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+html[lang="es"][data-ontos-web] .barra .marca-dark { display: none !important; }
+@media (prefers-color-scheme: dark) {
+  html[lang="es"][data-ontos-web] .barra .marca-light { display: none !important; }
+  html[lang="es"][data-ontos-web] .barra .marca-dark { display: block !important; }
+}
+html[lang="es"][data-ontos-web].is-condensado { --nav-h: 5.25rem; }
+html[lang="es"][data-ontos-web].is-condensado .barra .marca {
+  min-width: var(--web-logo-wordmark-min);
+  min-height: 0;
+}
+html[lang="es"][data-ontos-web].is-condensado .barra .marca__full { display: none; }
+html[lang="es"][data-ontos-web].is-condensado .barra .marca__compact { display: flex; }
+html[lang="es"][data-ontos-web] .barra a.item {
+  color: var(--texto);
+  font-family: var(--ds-font-corporativa);
+  font-weight: 500;
+  font-size: var(--ds-type-body);
+  border-bottom-color: transparent;
+}
+html[lang="es"][data-ontos-web] .barra a.item:hover,
+html[lang="es"][data-ontos-web] .barra a.item[aria-current="page"] {
+  color: var(--acento);
+  border-bottom-color: var(--ds-brand-teja);
+}
+html[lang="es"][data-ontos-web] .barra a.icono-contacto {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--ds-radius-s);
+}
+html[lang="es"][data-ontos-web] .barra a.item.idioma {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  border-color: var(--ds-control-border);
+  border-radius: var(--ds-radius-s);
+}
+
+/* Superficies de lectura y de colección. Se conserva su anatomía y sus enlaces. */
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta, .nota) {
+  border-color: var(--borde);
+  border-radius: var(--ds-radius);
+  background-color: var(--panel);
+  color: var(--texto);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta):is(:hover, :focus-within) {
+  border-color: var(--ds-brand-teja);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
+  background: var(--ds-action);
+  border-color: var(--ds-action);
+  color: var(--ds-on-action);
+  border-radius: var(--ds-radius-s);
+  font-family: var(--ds-font-corporativa);
+  font-weight: 600;
+  box-shadow: none;
+  transition-duration: var(--web-motion-fast);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
+  background: color-mix(in oklab, var(--ds-action) 88%, var(--ds-brand-teja));
+  border-color: var(--ds-action);
+  color: var(--ds-on-action);
+  box-shadow: 0 7px 18px color-mix(in srgb, var(--ds-action) 15%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
+    border: 1px solid var(--ds-brand-arena);
+  }
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
+    border-color: var(--ds-brand-arena);
+  }
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .cta.secundario {
+  background: transparent;
+  color: var(--acento);
+  border: 1px solid var(--ds-control-border);
+  border-radius: var(--ds-radius-s);
+  box-shadow: none;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.pill, .tag, .badge) {
+  font-family: var(--ds-font-corporativa);
+  border-radius: var(--ds-radius-s);
+}
+html[lang="es"][data-ontos-web][data-web-page="aplicaciones"] .pill {
+  color: var(--texto);
+  background: color-mix(in srgb, var(--ds-brand-arena) 24%, var(--panel));
+  border: 1px solid var(--borde);
+}
+
+/* Lectura larga: Newsreader está aprobada para comunicación editorial. Los controles,
+   metadatos, tablas y navegación mantienen Jost. */
+html[lang="es"][data-ontos-web][data-web-page="fernando-calle"] :where(article > section > p, .presentacion p, .escrito p),
+html[lang="es"][data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] :where(article section > p, article section > ul, article section > ol, blockquote),
+html[lang="es"][data-ontos-web][data-web-page="privacidad"] :where(body > p, body > ul),
+html[lang="es"][data-ontos-web][data-web-page="aviso-legal"] body > p {
+  font-family: var(--ds-font-editorial);
+  font-size: var(--ds-type-editorial);
+  line-height: var(--ds-type-editorial-leading);
+  font-weight: 400;
+  text-align: left;
+  hyphens: auto;
+}
+html[lang="es"][data-ontos-web][data-web-page="fernando-calle"] :where(.escrito h3, article section h2),
+html[lang="es"][data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] article section h2 {
+  font-family: var(--ds-font-editorial);
+  font-weight: 600;
+}
+
+/* Formularios y modal comparten contraste, foco y espacio táctil. */
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea) {
+  background: var(--panel);
+  color: var(--texto);
+  border: 1px solid var(--ds-control-border);
+  border-radius: var(--ds-radius-s);
+  font-family: var(--ds-font-corporativa);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 3px solid var(--ds-brand-teja);
+  outline-offset: 3px;
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto {
+  border-color: var(--ds-control-border);
+  border-radius: var(--ds-radius);
+  background: var(--panel);
+  color: var(--texto);
+  font-family: var(--ds-font-corporativa);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(h2, label, .dlg-lema) {
+  color: var(--texto);
+  font-family: var(--ds-font-corporativa);
+}
+html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(input, select, textarea) {
+  background: var(--bg);
+}
+
+/* Herramientas y demos interactivas: solo la envolvente y los mandos. */
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] {
+  --border: var(--ds-control-border);
+  --text: var(--texto);
+  --muted: var(--sec);
+  --accent: var(--acento);
+  --accent-soft: color-mix(in srgb, var(--ds-action) 15%, var(--panel));
+}
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
+  min-height: 4.75rem;
+  max-width: none;
+}
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .marca {
+  min-width: var(--web-logo-wordmark-min);
+  min-height: 0;
+}
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .marca__full { display: none; }
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .marca__compact { display: flex; }
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar, #dropzone, #signPanel) {
+  background: var(--panel);
+  color: var(--texto);
+}
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar button, #signPanel button) {
+  font-family: var(--ds-font-corporativa);
+  border-radius: var(--ds-radius-s);
+}
+html[lang="es"][data-ontos-web] :where(.demo-nav, .ov-wrap, .of-wrap, .ot-wrap) {
+  font-family: var(--ds-font-corporativa);
+}
+/* El lienzo cinematográfico mantiene escala, color y tiempos. Su voz de marca
+   (rótulos, apertura, cierre y controles) hereda la familia corporativa. */
+html[lang="es"][data-ontos-web]:has(#stage) body {
+  font-family: var(--ds-font-corporativa);
+}
+@media (prefers-color-scheme: dark) {
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea),
+  html[lang="es"][data-ontos-web] .barra a.item.idioma {
+    border-color: var(--ds-brand-arena);
+  }
+}
+html[lang="es"][data-ontos-web] :where(.ov-controls button, .of-wrap .btn, .ot-wrap .btn) {
+  min-height: 44px;
+  border-radius: var(--ds-radius-s);
+  border-color: var(--ds-control-border);
+  font-family: var(--ds-font-corporativa);
+}
+html[lang="es"][data-ontos-web]:has(#stage) :where(.play, .pill a):focus-visible {
+  outline: 3px solid var(--ds-brand-teja);
+  outline-offset: var(--ds-space-2);
+}
+
+@media (max-width: 73.75rem) {
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) { --nav-h: 5.25rem; }
+  html[lang="es"][data-ontos-web] .barra .marca {
+    min-width: var(--web-logo-wordmark-min);
+    min-height: 0;
+  }
+  html[lang="es"][data-ontos-web] .barra .marca__full { display: none; }
+  html[lang="es"][data-ontos-web] .barra .marca__compact { display: flex; }
+}
+@media (max-width: 34rem) {
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
+    --nav-h: 6.875rem;
+    --sp-sec: var(--ds-space-7);
+  }
+  html[lang="es"][data-ontos-web] .barra nav {
+    min-height: var(--nav-h);
+    padding: var(--ds-space-2) var(--ds-space-4);
+    gap: 0 var(--ds-space-3);
+  }
+  html[lang="es"][data-ontos-web] .barra .marca {
+    min-width: var(--web-logo-wordmark-min);
+    min-height: 44px;
+  }
+  html[lang="es"][data-ontos-web] .barra a.item {
+    font-size: max(var(--ds-type-note), .85rem);
+  }
+  html[lang="es"][data-ontos-web] .barra a.item.idioma {
+    min-height: 44px;
+  }
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .hero h1,
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
+    max-width: 22ch;
+  }
+  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) footer {
+    font-size: max(var(--ds-type-note), .85rem);
+  }
+  html[lang="es"][data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien p) {
+    text-align: start;
+    hyphens: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[lang="es"][data-ontos-web] :where(.cta, .card, .trabajo, .servicio, .edicion, .escrito, .barra .marca) {
+    transition-duration: 0s;
+  }
+}
+
+/* El símbolo del área de entrada conserva diámetro visible y variante de fondo. */
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #dropzone > span[aria-hidden="true"] {
+  width: var(--web-logo-icon-min) !important;
+  height: var(--web-logo-icon-min) !important;
+}
+html[lang="es"][data-ontos-web][data-web-page="entrar"] .sello {
+  width: var(--web-logo-icon-min);
+  height: var(--web-logo-icon-min);
+}
+@media (prefers-color-scheme: dark) {
+  html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] {
+    --border: var(--ds-brand-arena);
+  }
+}

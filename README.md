@@ -83,3 +83,18 @@ Prueba sin contaminar analítica: descargar `https://gc.zgo.at/count.js` a un fi
 Control Web puede confirmar la exclusión **en el navegador que pulsa el botón**, sin guardar una confirmación ficticia en el origen local. Abre una ventana por gesto del usuario con `aplicaciones.html?sinestadisticas=1&ontos_request=<nonce>` (nonce aleatorio de 16–128 caracteres alfanuméricos, `_` o `-`). Conserva la referencia a esa ventana y envía `{type:'ontos-analytics-status-request', nonce}` a `https://ontosdigital.es`. La página pública responde únicamente a su `opener`, con `{type:'ontos-analytics-status', nonce, disabled}`; lee `skipgc` en ese momento (`null` si no puede acceder al almacenamiento) y usa como `targetOrigin` el origen HTTP(S) exacto del mensaje recibido. No acepta navegación ni comandos desde mensajes.
 
 La consola debe validar **origin, source y nonce**, mostrar estado desconocido hasta la respuesta y aplicar timeout si el navegador bloquea la ventana o separa el opener. La confirmación vive solo en memoria: no certifica otros dispositivos/perfiles ni sustituye la lectura real. `node scripts/test-analytics-popup.cjs` comprueba origen cruzado, mensajes falsificados, lectura actualizada y almacenamiento inaccesible con red interceptada. Cabeceras públicas comprobadas el 11-sep: sin `Cross-Origin-Opener-Policy` que corte el opener; si eso cambia, el timeout debe conservar «no confirmado».
+
+
+## Aplicación de marca · español · 27-sep-2026
+
+La v5 conserva contenido, estructura, rutas y medios. La marca española usa el manual de ONTOS: Jost corporativa, Newsreader editorial, firma vectorial Jost/N5, paleta y roles de interfaz. El diseño específico vive en `brand/marca-es.css`; `brand/canon/` contiene copias de entrega generadas y su procedencia. La imagen social conserva el titular de la portada y el dominio. Los patrones web nuevos siguen en revisión en el Design System §5.4.
+
+```sh
+node scripts/import-marca.cjs /ruta/al/repositorio/ONTOS
+node scripts/import-marca.cjs /ruta/al/repositorio/ONTOS --check
+node scripts/test-marca-es.cjs
+```
+
+El importador necesita Node y el Playwright/WebKit ya instalado en ONTOS para rasterizar localmente la imagen social. La web servida sigue siendo HTML/CSS/JS estático, sin compilación en producción. Se exporta únicamente la selección pública de marca, nunca los JSON privados completos. Los logotipos no se redibujan ni se componen con texto HTML.
+
+Esta fase tiene alcance **solo español**. Inglés, traducciones y sus CSS/JS anteriores conservan la versión de partida; la página española añade la capa de marca al final del head. Para guardar un cambio de esta fase se usa `ONTOS_WEB_SCOPE=es git commit … -- <rutas>`. El hook conserva las comprobaciones de contenido y activos y omite únicamente la regeneración EN/sitemap. El modo normal sigue el flujo bilingüe anterior; no debe ejecutarse para esta entrega española. La publicación permanece pendiente en la rama `web-v5-consultoria`; no hacer push a main sin la decisión de publicación.

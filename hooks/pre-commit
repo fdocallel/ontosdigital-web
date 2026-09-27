@@ -7,14 +7,20 @@ set -e
 raiz=$(git rev-parse --show-toplevel)
 cd "$raiz"
 staged=$(git diff --cached --name-only --diff-filter=ACM)
-./i18n/gen-en.py
-./gen-sitemap.sh
-git add sitemap.xml
+# Fase explícita ES: no regenerar ni añadir el espejo inglés.
+# La comprobación conserva texto, rutas, medios y los recursos que EN utiliza.
+if [ "${ONTOS_WEB_SCOPE:-all}" = "es" ]; then
+  node scripts/test-marca-es.cjs
+else
+  ./i18n/gen-en.py
+  ./gen-sitemap.sh
+  git add sitemap.xml
+fi
 for f in $staged; do
   if [ -f "$f" ]; then git add "$f"; fi           # la página staged, con el hreflang que inyecta el generador
   case "$f" in
     i18n/en/experiencias-runtime.json|i18n/gen-en.py)
       if [ -f "experiencias/i18n.js" ]; then git add experiencias/i18n.js; fi ;;
-    *.html) if [ -f "en/$f" ]; then git add "en/$f"; fi ;;   # y su espejo inglés recién regenerado
+    *.html) if [ "${ONTOS_WEB_SCOPE:-all}" != "es" ] && [ -f "en/$f" ]; then git add "en/$f"; fi ;;   # y su espejo inglés recién regenerado
   esac
 done
