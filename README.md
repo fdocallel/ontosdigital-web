@@ -11,7 +11,7 @@ Decisión: `ONTOS/docs/estudios/2026-09-24-web-consultoria-primero.md`. Estilo: 
 - `fernando-calle.html` — «Sobre mí»: bio + `#escritos` (antes `blog.html`).
 - `consultoria.html` → `/` y `blog.html` → `fernando-calle.html#escritos`: redirecciones (meta refresh + JS, canonical al destino, noindex), fuera del sitemap.
 - `producto.html`, casos, demos, `contacto.html`, `solicitud.html`, `entrar.html`: se quedan; producto fuera de la barra.
-- Barra única en todas las páginas con `<header class="barra">`: ONTOS · Consultoría (= inicio) · Aplicaciones · Sobre mí · icono de contacto · EN. En móvil (≤34rem) dos filas: marca, icono e idioma arriba; los tres enlaces debajo (en una fila no cabe: 472 px, 400 px con el logo plegado).
+- Barra española en todas las páginas con `<header class="barra">`: ONTOS (= inicio) · Aplicaciones · Sobre mí · icono de contacto · EN. Consultoría se retira del menú el 27-sep; continúa siendo la portada. En móvil (≤34rem) dos filas: marca, icono e idioma arriba; Aplicaciones y Sobre mí debajo. La cabecera inglesa conserva la versión anterior.
 - `brand/barra.js`: (1) el wordmark se pliega al símbolo al pasar la cabecera de la página (centinela + IntersectionObserver, `html.is-condensado`); (2) el icono de contacto y los enlaces con `data-contacto` abren un `<dialog>` con el formulario de `contacto.html`, que se trae por fetch (el formulario vive una vez; en /en/ trae el inglés). Sin JS son enlaces a `contacto.html`. Abrir el diálogo cuenta el evento GoatCounter `contacto-popup`.
 - `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
 
@@ -104,3 +104,9 @@ Instalación del hook: `git config core.hooksPath hooks`. Git utiliza así el ar
 ### Cabecera Arcilla y fondo verde · 27-sep-2026
 
 La corrección de Fernando aplica verde corporativo en ambos modos de color y sustituye la firma grande por Arcilla compacto (150 × 50 px reservados). El importador incluye el motor canónico y solo su geometría/configuración pública en `brand/canon/movimiento*.js`; el enlace sigue volviendo al inicio. Se transforma con scroll 80–600 px, recupera el nombre al dar foco o posar el cursor y respeta movimiento reducido. Sin JavaScript permanece el wordmark SVG. Tamaños y color se consumen desde tokens; los detalles de aplicación se documentan en Design System 5.4.
+
+### Prueba de verde profundo en portada · 27-sep-2026
+
+Por petición de Fernando se prueba `#183D33` solo como fondo de la home española (Consultoría), incluida su cabecera. El valor provisional vive en `brand/marca-es.css`, limitado a `data-web-page="index"`; las páginas interiores y los paneles conservan sus colores. No se incorpora al manual ni se modifica la paleta aprobada hasta valorar la prueba.
+
+Se retira «Consultoría» de las 17 cabeceras españolas que lo incluían. El logotipo sigue enlazando a `/` y `consultoria.html` conserva su redirección. La prueba de conservación admite exclusivamente esta retirada del menú; sigue comparando el resto del contenido y protegiendo inglés y los recursos compartidos. Vista previa: http://mac-mini:8795/. Publicación pendiente de la valoración de esta prueba.

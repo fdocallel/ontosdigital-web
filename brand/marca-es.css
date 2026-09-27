@@ -20,6 +20,13 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
   scroll-padding-top: calc(var(--nav-h) + var(--ds-space-2));
 }
 
+/* Prueba solicitada el 27-sep-2026: verde profundo solo en la portada de
+   Consultoría. Color propuesto, pendiente de valoración e incorporación al
+   manual; no sustituye el verde corporativo ni los tokens compartidos. */
+html[lang="es"][data-ontos-web][data-web-page="index"] {
+  --bg: #183D33;
+}
+
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body {
   color: var(--texto);
   background: var(--bg);
