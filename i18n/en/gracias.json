@@ -1,8 +1,8 @@
 {
   "_doc": "Traducción al inglés de gracias.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "Gracias · ONTOS": "Thank you · ONTOS",
+  "Saltar al contenido": "Skip to content",
   "ONTOS": "ONTOS",
-  "Consultoría": "Consulting",
   "Aplicaciones": "Applications",
   "Sobre mí": "About me",
   "Contacto": "Contact",

@@ -44,7 +44,7 @@ function artifacts(root){
   const iconBody=svg.match(/<svg\b[^>]*>([\s\S]*?)<\/svg>/)[1].trim().replace(/(<circle\b[^>]*fill=)"#[0-9a-f]{6}"/i,'$1"'+tokens['brand-teja'].valor+'"');
   out['brand/canon/favicon.svg']=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><style>svg{color:${tokens['brand-granito'].valor}}@media(prefers-color-scheme:dark){svg{color:${tokens['brand-logo-on-dark'].valor}}}</style>${iconBody}</svg>\n`;
   // El atributo marca las páginas de esta entrega. El editor puede cambiar de
-  // idioma sin perder su interfaz; los espejos EN no llevan este atributo.
+  // idioma sin perder su interfaz; los espejos EN heredan el mismo atributo.
   let css=model.css.replaceAll('[data-ontos-ds]','html[data-ontos-web]').replace(/url\("([^"]+)"\)/g,(_,url)=>`url("fonts/${path.posix.basename(url)}")`);
   css+='\n/* Alias de aplicación web. Propuestas y origen en tokens.json. */\nhtml[data-ontos-web]{\n';
   for(const token of model.tokens.filter(t=>t.id.startsWith('web-')&&t.valor!==undefined))css+=`--${token.id}:var(--ds-${token.id});\n`;
@@ -62,9 +62,12 @@ function artifacts(root){
   const home=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
   const headline=home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g,'').trim();
   if(!headline)throw Error('Portada sin titular para imagen social');
-  const social=`<!doctype html><html lang="es"><meta charset="utf-8"><style>@font-face{font-family:Jost;src:url(data:font/ttf;base64,${read(model.familias.corporativa.archivo).toString('base64')})}*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:${tokens['brand-verde'].valor};color:${tokens['brand-logo-on-dark'].valor};font-family:Jost,sans-serif;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px}.firma{width:570px;margin-bottom:68px}p{font-size:34px;line-height:1.3;text-align:center;margin:0;max-width:1080px}small{font-size:24px;margin-top:42px}i{display:block;width:44px;height:4px;background:${tokens['brand-teja'].valor};margin-top:24px}</style><div class="firma">${marks.logo('horizontal','color-dark')}</div><p>${esc(headline)}</p><small>ontosdigital.es</small><i></i></html>`;
-  out['brand/canon/og.png']=socialCard(social,root);
-  out['brand/canon/provenance.json']=JSON.stringify({_doc:'GENERADO por scripts/import-marca.cjs. Copias de entrega, no fuentes editables.',source:'ONTOS · manual de marca 1–3 y Design System',scope:'es',sources:Object.fromEntries(sources.map(p=>[p,hash(read(p))])),outputs:Object.fromEntries(Object.entries(out).map(([p,b])=>[p,hash(b)]))},null,2)+'\n';
+  const social=(text,lang)=>`<!doctype html><html lang="${lang}"><meta charset="utf-8"><style>@font-face{font-family:Jost;src:url(data:font/ttf;base64,${read(model.familias.corporativa.archivo).toString('base64')})}*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:${tokens['brand-verde'].valor};color:${tokens['brand-logo-on-dark'].valor};font-family:Jost,sans-serif;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px}.firma{width:570px;margin-bottom:68px}p{font-size:34px;line-height:1.3;text-align:center;margin:0;max-width:1080px}small{font-size:24px;margin-top:42px}i{display:block;width:44px;height:4px;background:${tokens['brand-teja'].valor};margin-top:24px}</style><div class="firma">${marks.logo('horizontal','color-dark')}</div><p>${esc(text)}</p><small>ontosdigital.es</small><i></i></html>`;
+  out['brand/canon/og.png']=socialCard(social(headline,'es'),root);
+  const englishHeadline=message.superficies.find(s=>s.id==='web.og')?.en;
+  if(!englishHeadline)throw Error('Falta el titular social inglés canónico');
+  out['brand/canon/og-en.png']=socialCard(social(englishHeadline,'en'),root);
+  out['brand/canon/provenance.json']=JSON.stringify({_doc:'GENERADO por scripts/import-marca.cjs. Copias de entrega, no fuentes editables.',source:'ONTOS · manual de marca 1–3 y Design System',scope:'es-en',sources:Object.fromEntries(sources.map(p=>[p,hash(read(p))])),outputs:Object.fromEntries(Object.entries(out).map(([p,b])=>[p,hash(b)]))},null,2)+'\n';
   const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
   for(const file of pages){
     let html=fs.readFileSync(path.join(WEB,file),'utf8');
@@ -77,7 +80,7 @@ function artifacts(root){
     }
     html=html.replace(/<html\b([^>]*)>/,(_,attrs)=>'<html'+attrs.replace(/\sdata-ontos-web(?:="[^"]*")?/g,'').replace(/\sdata-web-page="[^"]*"/g,'')+` data-ontos-web data-web-page="${route}">`);
     const motionScripts=/<header\b[^>]*class="barra"/.test(html)?`\n<script defer src="${rel}/canon/movimiento-data.js"></script>\n<script defer src="${rel}/canon/movimiento.js"></script>`:'';
-    const links=`<!-- MARCA:estilos · generado desde el canon; diseño español -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">${motionScripts}\n<!-- /MARCA:estilos -->`;
+    const links=`<!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">${motionScripts}\n<!-- /MARCA:estilos -->`;
     if(html.includes('<!-- MARCA:estilos'))html=html.replace(/<!-- MARCA:estilos[\s\S]*?<!-- \/MARCA:estilos -->/,links);
     else html=html.replace('</head>',links+'\n</head>');
     html=html.replace(/(<link\b[^>]*rel="icon"[^>]*href=")[^"]*(")/g,'$1'+rel+'/canon/favicon.svg$2');
@@ -97,5 +100,5 @@ function artifacts(root){
   return out;
 }
 function run(root,{check=false}={}){const generated=artifacts(path.resolve(root)),changed=[];for(const [p,b]of Object.entries(generated))put(path.join(WEB,p),b,check,changed);if(check&&changed.length)throw Error('Marca desactualizada: '+changed.join(', '));return changed;}
-if(require.main===module){try{const args=process.argv.slice(2),root=args.find(a=>!a.startsWith('--'));if(!root)throw Error('Uso: node scripts/import-marca.cjs /ruta/ONTOS [--check]');console.log('Marca española:',run(root,{check:args.includes('--check')}).length,'cambios');}catch(e){console.error(e.message);process.exitCode=1;}}
+if(require.main===module){try{const args=process.argv.slice(2),root=args.find(a=>!a.startsWith('--'));if(!root)throw Error('Uso: node scripts/import-marca.cjs /ruta/ONTOS [--check]');console.log('Marca web ES/EN:',run(root,{check:args.includes('--check')}).length,'cambios');}catch(e){console.error(e.message);process.exitCode=1;}}
 module.exports={artifacts,run};

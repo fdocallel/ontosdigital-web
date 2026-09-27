@@ -1,11 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-ontos-web data-web-page="animacion-3d">
 <head>
 <!-- GENERADO por i18n/gen-en.py desde ../animacion-3d.html · no editar a mano -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ONTOS · 3D figurine</title>
-<link rel="icon" href="/brand/favicon.svg">
+<meta property="og:title" content="ONTOS · 3D figurine">
+<meta property="og:description" content="Explore the ONTOS 3D figure in your browser: turn it, resize it and try its gestures, poses and animations.">
+<meta property="og:url" content="https://ontosdigital.es/en/animacion-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://ontosdigital.es/brand/canon/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Explore the ONTOS 3D figure in your browser: turn it, resize it and try its gestures, poses and animations.">
+<link rel="icon" href="/brand/canon/favicon.svg">
 <link rel="stylesheet" href="/experiencias/demo.css">
 <style>
 :root{--wrap:var(--wrap-datos)}
@@ -27,12 +37,17 @@ body.of-solo .of-wrap{position:fixed;inset:0;padding:0;margin:0;max-width:none;w
 <link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/animacion-3d.html">
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/animacion-3d.html">
 <!-- /i18n:alt -->
+<!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
+<link rel="stylesheet" href="/brand/canon/tokens.css">
+<link rel="stylesheet" href="/brand/marca-es.css">
+<!-- /MARCA:estilos -->
 </head>
 <body>
 <nav class="demo-nav" aria-label="Navigation"><a href="/en/aplicaciones.html">← Applications</a><a class="idioma" data-i18n-alt href="/animacion-3d.html" aria-label="Ver esta página en español">ES</a></nav>
 <main class="wrap ot-wrap of-wrap">
 <header class="of-top"><div><span class="of-kicker">ONTOS alive · in your hands</span><h1>ONTOS in your hands.</h1></div><nav class="of-links" aria-label="Other ONTOS worlds"><a class="btn" href="/en/visita-3d.html">Little planet</a><a class="btn" href="/en/juego-2d.html">2D playground</a></nav></header>
 <section class="of-stage" aria-label="ONTOS figurine, without scenery">
+<noscript><style>.of-stage > :not(noscript), main button, .of-bar,.of-help {display:none!important}</style><p style="padding:24px">This interactive experience requires JavaScript. Enable it to use the experience, or <a href="/en/aplicaciones.html">return to Applications</a> to explore the other work.</p></noscript>
 <canvas id="ot-world" class="of-canvas" data-mode="figure" tabindex="0" aria-label="3D ONTOS figurine. Drag to rotate in any direction; pinch or use the wheel to change its size. Keyboard: arrows to rotate, plus and minus to zoom, Home to centre and H to wave.">The figure needs WebGL. You can visit the <a href="/en/juego-2d.html">2D playground</a>.</canvas>
 <button class="btn of-exit" id="of-exit" hidden>Back to controls</button>
 <div class="of-overlay" id="ot-overlay" hidden role="alert"><strong id="ot-overlay-title">The figure is resting.</strong><p id="ot-overlay-text"></p><a class="btn" href="/en/juego-2d.html">Open the 2D playground</a></div>

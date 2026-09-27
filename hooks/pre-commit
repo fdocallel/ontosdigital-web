@@ -18,6 +18,7 @@ else
   ./i18n/gen-en.py
   ./gen-sitemap.sh
   git add sitemap.xml
+  node scripts/test-marca-es.cjs --bilingue
 fi
 for f in $staged; do
   if [ -f "$f" ]; then git add "$f"; fi           # la página staged, con el hreflang que inyecta el generador

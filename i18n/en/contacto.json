@@ -2,8 +2,8 @@
   "_doc": "Traducción al inglés de contacto.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "Contacto · ONTOS": "Contact · ONTOS",
   "Cuéntame qué te come horas o pide ver ONTOS por dentro. Formulario, correo hola@ontosdigital.es y acceso por invitación.": "Tell me what eats your hours, or ask to see ONTOS from the inside. Form, email hola@ontosdigital.es and invitation-only access.",
+  "Saltar al contenido": "Skip to content",
   "ONTOS": "ONTOS",
-  "Consultoría": "Consulting",
   "Aplicaciones": "Applications",
   "Sobre mí": "About me",
   "Contacto": "Contact",
@@ -24,5 +24,6 @@
   "O directamente: <a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a>": "Or directly: <a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a>",
   "copiar": "copy",
   "¿Lo que quieres es usar ONTOS tú, no encargarme un trabajo? Se entra por invitación: <a href=\"solicitud.html\">solicita el acceso ▸</a>": "Do you want to use ONTOS yourself, rather than hire me for a job? It is invitation-only: <a href=\"solicitud.html\">request access ▸</a>",
-  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
+  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count.",
+  "copiado ✓": "copied ✓"
 }

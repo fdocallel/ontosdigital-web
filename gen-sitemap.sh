@@ -39,6 +39,7 @@ PY
 fi
 [ "$#" -eq 0 ] || { echo 'Uso: gen-sitemap.sh [--es]' >&2; exit 1; }
 fecha_de() {
+  if [ -n "$(git status --porcelain -- "$1")" ]; then date +%F; return; fi
   f=$(git log -1 --format=%cs -- "$1" 2>/dev/null)
   [ -n "$f" ] || f=$(date +%F)
   echo "$f"

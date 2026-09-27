@@ -111,6 +111,13 @@ def ruta_en(destino):
         return ruta_en(destino[len(DOMINIO):] or "/")
     if destino.startswith(("#", "mailto:", "tel:", "http://", "https://", "//", "data:")):
         return destino
+    # El editor PDF es una única aplicación bilingüe, fuera del espejo /en/.
+    ruta, almohadilla, fragmento = destino.partition("#")
+    ruta, interrogacion, consulta = ruta.partition("?")
+    if ruta == "/editor-pdf/":
+        parametros = [p for p in consulta.split("&") if p and not p.startswith("lang=")]
+        parametros.append("lang=en")
+        return ruta + "?" + "&".join(parametros) + (almohadilla + fragmento if almohadilla else "")
     if destino == "/":
         return "/en/"
     base, sep, ancla = destino.partition("#")
@@ -229,6 +236,8 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
             pon("content", tr(clave(atrs.get("content", ""))))
         elif clave_meta == "og:url":
             pon("content", url_en(pagina))
+        elif clave_meta in ("og:image", "twitter:image") and atrs.get("content") == DOMINIO + "/brand/canon/og.png":
+            pon("content", DOMINIO + "/brand/canon/og-en.png")
         # redirecciones (servicios.html → aplicaciones.html): el destino del refresh también va a /en/
         if atrs.get("http-equiv", "").lower() == "refresh":
             m_url = re.match(r"(\s*\d+\s*;\s*url=)(.+)$", atrs.get("content", ""), re.I)
@@ -268,22 +277,26 @@ def traduce_json_ld(bloque, tr, pagina):
     def campo(m):
         llave, valor = m.group(1), m.group(2)
         if llave in ("description", "headline", "name", "jobTitle", "alternateName",
-                     "articleSection", "addressCountry", "areaServed"):
+                     "articleSection", "addressCountry", "areaServed", "award"):
             k = clave(json.loads('"%s"' % valor))
             nuevo = tr(k)
             return '"%s": %s' % (llave, json.dumps(nuevo, ensure_ascii=False))
         if llave == "inLanguage":
-            return '"inLanguage": "en"'
+            return '"inLanguage": "en"' if valor.startswith("es") else m.group(0)
+        if llave in ("image", "url") and valor == DOMINIO + "/brand/canon/og.png":
+            return '"%s": "%s/brand/canon/og-en.png"' % (llave, DOMINIO)
         if llave in ("url", "@id", "mainEntityOfPage") and valor.startswith(DOMINIO):
             resto = valor[len(DOMINIO):]
-            if resto in ("/", ""):
-                return '"%s": "%s/en/"' % (llave, DOMINIO)
-            hoja = resto.lstrip("/")
-            if hoja in ESPEJO:
-                return '"%s": "%s/en/%s"' % (llave, DOMINIO, hoja)
+            nueva = ruta_en(resto or "/")
+            if nueva != resto:
+                return '"%s": "%s%s"' % (llave, DOMINIO, nueva)
         return m.group(0)
 
-    return re.sub(r'"(\w+)":\s*"([^"]*)"', campo, bloque)
+    bloque = re.sub(r'"([\w@]+)":\s*"([^"]*)"', campo, bloque)
+    def temas(m):
+        valores = json.loads(m.group(1))
+        return '"knowsAbout": ' + json.dumps([tr(clave(v)) for v in valores], ensure_ascii=False)
+    return re.sub(r'"knowsAbout":\s*(\[[^\]]*\])', temas, bloque)
 
 
 def reescribe_src_script(bloque):
@@ -311,7 +324,7 @@ def traduce_script(bloque, tr):
     def literal(m):
         comilla, cuerpo = m.group(1), m.group(2)
         k = clave(cuerpo)
-        if traducible(k) and k in tr.mapa and tr.mapa[k]:
+        if traducible(k) and (k in tr.mapa or k == "copiado ✓"):
             return comilla + tr(k).replace(comilla, "\\" + comilla) + comilla
         return m.group(0)
 

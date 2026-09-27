@@ -1,11 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-ontos-web data-web-page="juego-2d">
 <head>
 <!-- GENERADO por i18n/gen-en.py desde ../juego-2d.html · no editar a mano -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ONTOS alive · Playground</title>
-<link rel="icon" href="/brand/favicon.svg">
+<meta property="og:title" content="ONTOS alive · Playground">
+<meta property="og:description" content="Control ONTOS in a 2D playground: roll, jump, collect sparks and carry the seed where it belongs. Play with a keyboard or touch controls.">
+<meta property="og:url" content="https://ontosdigital.es/en/juego-2d.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://ontosdigital.es/brand/canon/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Control ONTOS in a 2D playground: roll, jump, collect sparks and carry the seed where it belongs. Play with a keyboard or touch controls.">
+<link rel="icon" href="/brand/canon/favicon.svg">
 <link rel="stylesheet" href="/experiencias/demo.css">
 <style>
 /* The play controls own the lower corners; keep shared chrome above them. */
@@ -36,6 +46,10 @@ body #ontos-demo{top:var(--sp-2);bottom:auto}
 <link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/juego-2d.html">
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/juego-2d.html">
 <!-- /i18n:alt -->
+<!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
+<link rel="stylesheet" href="/brand/canon/tokens.css">
+<link rel="stylesheet" href="/brand/marca-es.css">
+<!-- /MARCA:estilos -->
 </head>
 <body>
 <nav class="demo-nav" aria-label="Navigation"><a href="/en/aplicaciones.html">← Applications</a><a class="idioma" data-i18n-alt href="/juego-2d.html" aria-label="Ver esta página en español">ES</a></nav>
@@ -43,6 +57,7 @@ body #ontos-demo{top:var(--sp-2);bottom:auto}
 <header class="ov-top"><div><span class="ov-label">Playground · matter and motion</span><h1>ONTOS is alive.</h1></div><div class="ov-tools"><a class="btn" href="/en/visita-3d.html">3D world</a><button class="btn" id="pause" aria-pressed="false">Pause</button><button class="btn" id="reset">Restart</button></div></header>
 <div class="ov-intro"><p>A core that thinks and connects. Eyes to discover. Hands to act.</p><span class="ov-state" id="state">● Exploring</span></div>
 <section class="ov-stage" aria-label="ONTOS playground">
+<noscript><style>.ov-stage > :not(noscript), main button, .ov-controls,.ov-help,.ov-intro {display:none!important}</style><p style="padding:24px">This interactive experience requires JavaScript. Enable it to use the experience, or <a href="/en/aplicaciones.html">return to Applications</a> to explore the other work.</p></noscript>
 <canvas id="world" tabindex="0" aria-label="Control ONTOS with A and D or arrow keys; Space jumps, Shift speeds up, E picks up or drops the seed, H waves, P pauses.">Your browser needs Canvas to display the game.</canvas>
 <div class="ov-hud"><span id="score">Sparkles 0 / 8</span><button class="btn" id="zoom" aria-pressed="false">Look closer</button></div>
 <div class="ov-overlay" id="overlay" hidden><strong>A little breather.</strong><p>Press Pause or P to continue.</p></div>

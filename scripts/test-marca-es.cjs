@@ -7,18 +7,33 @@ const WEB=path.resolve(__dirname,'..');
 const ONTOS=process.env.ONTOS_BRAND_ROOT||path.resolve(WEB,'../ONTOS');
 const subtitle=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.subtitulo')?.es;
 assert(subtitle,'Subtítulo de portada declarado en su fuente');
+const bilingual=process.argv.includes('--bilingue');
 const BASE='a7bc996e35f64e7ef74e5d811c74755af6895312';
 const revision=require('./fixtures/revision-prepublicacion.json');
 const git=(...args)=>execFileSync('git',args,{cwd:WEB,encoding:'utf8',maxBuffer:20*1024*1024});
 const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
 const changed=git('diff',BASE,'--name-only').trim().split('\n');
-const protectedFile=f=>f.startsWith('en/')||f.startsWith('i18n/en/')||f.startsWith('experiencias/')||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
+const protectedFile=f=>(!bilingual&&(f.startsWith('en/')||f.startsWith('i18n/en/')))||f.startsWith('experiencias/')||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
 assert.deepEqual(changed.filter(protectedFile),[],'EN y sus recursos conservan su versión');
 const sitemap=fs.readFileSync(path.join(WEB,'sitemap.xml'),'utf8'),oldSitemap=git('show',BASE+':sitemap.xml');
 const englishBlocks=xml=>(xml.match(/  <url>[\s\S]*?<\/url>\n/g)||[]).filter(block=>block.includes('<loc>https://ontosdigital.es/en/'));
-assert.deepEqual(englishBlocks(sitemap),englishBlocks(oldSitemap),'Sitemap: las entradas inglesas no cambian');
+if(!bilingual)assert.deepEqual(englishBlocks(sitemap),englishBlocks(oldSitemap),'Sitemap: las entradas inglesas no cambian');
 const urls=xml=>[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]).sort();
-assert.deepEqual(urls(sitemap),urls(oldSitemap),'Sitemap: las mismas rutas, solo se actualizan fechas ES');
+if(!bilingual)assert.deepEqual(urls(sitemap),urls(oldSitemap),'Sitemap: las mismas rutas, solo se actualizan fechas ES');
+else {
+ const spanish=urls(sitemap).filter(url=>!url.includes('/en/'));
+ assert.deepEqual(spanish,urls(oldSitemap).filter(url=>!url.includes('/en/')),'Sitemap: conservar todas las rutas ES');
+ assert.deepEqual(urls(sitemap).filter(url=>url.includes('/en/')),spanish.filter(url=>!url.endsWith('/editor-pdf/')).map(url=>url.replace('https://ontosdigital.es/','https://ontosdigital.es/en/')).sort(),'Sitemap: espejo EN de todas las páginas indexables salvo editor bilingüe');
+ for(const file of pages.filter(file=>file!=='editor-pdf/index.html')){
+  const english=fs.readFileSync(path.join(WEB,'en',file),'utf8');
+  assert(/<html[^>]*lang="en"/.test(english),file+': idioma inglés');
+  assert(english.includes('data-ontos-web'),file+': marca inglesa');
+  assert(english.includes('/canon/tokens.css')&&english.includes('/marca-es.css'),file+': recursos compartidos de marca');
+ }
+ const englishHome=fs.readFileSync(path.join(WEB,'en/index.html'),'utf8');
+ const englishSubtitle=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.subtitulo')?.en;
+ assert(englishSubtitle&&englishHome.includes(englishSubtitle),'Subtítulo inglés canónico');
+}
 for(const file of pages){const html=fs.readFileSync(path.join(WEB,file),'utf8');assert(html.includes('data-ontos-web'),file+' activa marca');assert(html.includes('/canon/tokens.css'),file+' carga tokens');assert(html.includes('/marca-es.css'),file+' carga CSS común');assert(!/<circle[^>]+r="16\.5"/.test(html),file+' no conserva símbolo anterior');}
 require('./import-marca.cjs').run(ONTOS,{check:true});
 // Mozilla GHSA-wgrm-67xf-hhpq: toda apertura de PDF desactiva la evaluación.
@@ -54,6 +69,7 @@ function signature({html,baseline=false,file,subtitle,revision}){
  }
  // La auditoría autoriza cambios editoriales concretos; se congelan por fragmento.
  if(baseline){
+  if(file==='servicios.html'){const canonical=d.createElement('link');canonical.rel='canonical';canonical.href='https://ontosdigital.es/aplicaciones.html';d.head.append(canonical);}
   if(file==='404.html')for(const a of d.querySelectorAll('a[href]'))if(['bim.html','contacto.html','aviso-legal.html','privacidad.html'].includes(a.getAttribute('href')))a.setAttribute('href','/'+a.getAttribute('href'));
   if(d.querySelector('#stage'))d.querySelector('#stage').setAttribute('role','main');
   for(const op of revision.pages[file]||[]){
@@ -84,6 +100,6 @@ function signature({html,baseline=false,file,subtitle,revision}){
  try{
   const page=await browser.newPage();
   for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file,subtitle,revision});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado con correcciones explícitas de la auditoría');}
-  console.log(`PASS marca ES: ${pages.length} páginas conservan contenido con menú y apertura autorizados; EN y recursos compartidos intactos; canon reproducible.`);
+  console.log(`PASS marca ES: ${pages.length} páginas conservan contenido con menú y apertura autorizados; ${bilingual?'espejo EN completo':'EN intacto'}; recursos compartidos protegidos y canon reproducible.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.message);process.exitCode=1;});

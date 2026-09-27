@@ -1,6 +1,7 @@
 {
   "_doc": "Traducción al inglés de visita-3d.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "Visita 3D · ONTOS": "3D tour · ONTOS",
+  "Recorre el pequeño planeta de ONTOS o pasea por una miniatura de Segovia. Una experiencia 3D con teclado, ratón y controles táctiles.": "Explore ONTOS’s little planet or stroll through a miniature Segovia. A 3D experience with keyboard, mouse and touch controls.",
   "Navegación": "Navigation",
   "← Aplicaciones": "← Applications",
   "ONTOS vivo · un mundo para explorar": "ONTOS alive · a world to explore",
@@ -13,6 +14,7 @@
   "Centrar": "Centre",
   "Reiniciar": "Restart",
   "El jardín tridimensional de ONTOS": "The three-dimensional ONTOS garden",
+  "Esta experiencia interactiva necesita JavaScript. Actívalo para usarla o <a href=\"aplicaciones.html\">vuelve a Aplicaciones</a> para consultar el resto de trabajos.": "This interactive experience requires JavaScript. Enable it to use the experience, or <a href=\"aplicaciones.html\">return to Applications</a> to explore the other work.",
   "Jardín 3D. WASD o flechas para caminar; espacio saltar; Mayús turbo; E coger o plantar; H saludar. Arrastra para mirar alrededor.": "3D garden. WASD or arrows to walk; Space to jump; Shift for turbo; E to pick up or plant; H to wave. Drag to look around.",
   "El jardín necesita WebGL. Puedes volver al <a href=\"juego-2d.html\">patio 2D</a>.": "The garden needs WebGL. You can return to the <a href=\"juego-2d.html\">2D playground</a>.",
   "I · Encuentra la semilla": "I · Find the seed",

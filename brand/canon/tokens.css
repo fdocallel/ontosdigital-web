@@ -64,6 +64,7 @@ html[data-ontos-web]{
   --ds-web-logo-height: 50px;
   --ds-web-mix-muted: 24%;
   --ds-web-green-muted: #E0D0B7;
+  --ds-web-home-surface: #183D33;
 }
 @media(max-width:640px){html[data-ontos-web]{
   --ds-type-display: 44px;
@@ -86,6 +87,7 @@ html[data-ontos-web]{
 --web-logo-height:var(--ds-web-logo-height);
 --web-mix-muted:var(--ds-web-mix-muted);
 --web-green-muted:var(--ds-web-green-muted);
+--web-home-surface:var(--ds-web-home-surface);
 --web-logo-horizontal-min:411px;
 --web-logo-icon-min:115px;
 --web-logo-wordmark-min:120px;

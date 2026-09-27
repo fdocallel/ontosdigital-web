@@ -156,7 +156,7 @@
   .pie-marca a { color: var(--accent); text-decoration: none; }
   .pie-marca a:hover { text-decoration: underline; }
 </style>
-<!-- MARCA:estilos · generado desde el canon; diseño español -->
+<!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
 <link rel="stylesheet" href="../brand/canon/tokens.css">
 <link rel="stylesheet" href="../brand/marca-es.css">
 <script defer src="../brand/canon/movimiento-data.js"></script>
@@ -362,7 +362,7 @@ const I18N = {
     docTitle: 'PDF page editor',
     skipContent: 'Skip to content', toolbar: 'Document tools',
     h1: '<span>PDF</span> page editor',
-    pieMarca: 'A tool by <a href="https://ontosdigital.es">ONTOS · ontosdigital.es</a>',
+    pieMarca: 'A tool by <a href="https://ontosdigital.es/en/">ONTOS · ontosdigital.es</a>',
     open: '📂 Open PDF', add: '➕ Add another PDF',
     rotL: '⟲ Rotate left', rotLT: 'Rotate 90° counter-clockwise (key L)',
     rotR: '⟳ Rotate right', rotRT: 'Rotate 90° clockwise (key R)',
@@ -417,13 +417,17 @@ const I18N = {
   }
 };
 
-// por defecto español; la elección se recuerda en este navegador
-let lang = localStorage.getItem('pdfeditor-lang') === 'en' ? 'en' : 'es';
+// El enlace de idioma tiene prioridad; la preferencia local es el respaldo.
+const requestedLang = new URLSearchParams(location.search).get('lang');
+let savedLang = null;
+try { savedLang = localStorage.getItem('pdfeditor-lang'); } catch {}
+let lang = ['es', 'en'].includes(requestedLang) ? requestedLang : savedLang === 'en' ? 'en' : 'es';
 let T = I18N[lang];
 
 function aplicarIdioma() {
   T = I18N[lang];
   document.documentElement.lang = lang;
+  document.querySelector('.barra .marca').href = 'https://ontosdigital.es/' + (lang === 'en' ? 'en/' : '');
   document.title = T.docTitle;
   const poner = (sel, attr, prop) => document.querySelectorAll('[' + sel + ']').forEach(e => {
     const v = T[e.dataset[attr]];
@@ -443,7 +447,10 @@ function aplicarIdioma() {
 
 function cambiarIdioma() {
   lang = lang === 'es' ? 'en' : 'es';
-  localStorage.setItem('pdfeditor-lang', lang);
+  try { localStorage.setItem('pdfeditor-lang', lang); } catch {}
+  const url = new URL(location.href);
+  url.searchParams.set('lang', lang);
+  try { history.replaceState(null, '', url); } catch {}
   aplicarIdioma();
 }
 
