@@ -16,6 +16,11 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
   --sans: var(--ds-font-corporativa);
   --sp-sec: var(--ds-space-8);
   --nav-h: 4rem;
+  --web-shell-max: 86rem;
+  --web-shell-pad: clamp(var(--ds-space-4), 3vw, var(--ds-space-8));
+  --web-shell-outside: max(0px, calc((100% - var(--web-shell-max)) / 2));
+  --web-content-left: calc(var(--web-shell-outside) + var(--web-shell-pad) + var(--web-logo-leading-space));
+  --web-content-right: calc(var(--web-shell-outside) + var(--web-shell-pad));
   color-scheme: light;
   scroll-padding-top: calc(var(--nav-h) + var(--ds-space-2));
 }
@@ -81,10 +86,10 @@ html[lang="es"][data-ontos-web] .barra {
   -webkit-backdrop-filter: none;
 }
 html[lang="es"][data-ontos-web] .barra nav {
-  max-width: 86rem;
+  max-width: var(--web-shell-max);
   min-height: var(--nav-h);
   gap: clamp(var(--ds-space-3), 1.6vw, var(--ds-space-5));
-  padding-inline: clamp(var(--ds-space-4), 3vw, var(--ds-space-8));
+  padding-inline: var(--web-shell-pad);
 }
 html[lang="es"][data-ontos-web] .barra .marca {
   display: inline-flex;
@@ -110,6 +115,9 @@ html[lang="es"][data-ontos-web] .barra .marca__arcilla :where(svg, img, canvas) 
   height: 100%;
   max-width: none;
   object-fit: contain;
+}
+html[lang="es"][data-ontos-web] .barra .marca__arcilla img {
+  transform: translateX(var(--web-logo-fallback-offset));
 }
 html[lang="es"][data-ontos-web] .barra .marca__label {
   position: absolute;
@@ -144,6 +152,45 @@ html[lang="es"][data-ontos-web] .barra a.item.idioma {
   align-items: center;
   border-color: var(--borde);
   border-radius: var(--ds-radius-s);
+}
+
+/* Una guía exterior: desde la o visible de Arcilla hasta el borde de idioma.
+   Los bloques de lectura/formularios conservan sus columnas interiores. */
+html[lang="es"][data-ontos-web] body:has(.barra) :where(.wrap),
+html[lang="es"][data-ontos-web] body:has(.barra) > main:not(.wrap),
+html[lang="es"][data-ontos-web] body:has(.barra) > .hero:not(.home-feature) {
+  width: auto;
+  max-width: none;
+  margin-left: var(--web-content-left);
+  margin-right: var(--web-content-right);
+  padding-inline: 0;
+}
+html[lang="es"][data-ontos-web] body:has(.barra) .wrap .wrap {
+  margin-inline: 0;
+}
+html[lang="es"][data-ontos-web] body:has(.barra) > footer:not(:has(.wrap)) {
+  padding-left: var(--web-content-left);
+  padding-right: var(--web-content-right);
+}
+html[lang="es"][data-ontos-web]:is([data-web-page="aviso-legal"], [data-web-page="privacidad"]) body {
+  max-width: none;
+  margin-left: var(--web-content-left);
+  margin-right: var(--web-content-right);
+  padding-inline: 0;
+}
+html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #toolbar {
+  padding-left: var(--web-content-left);
+  padding-right: var(--web-content-right);
+}
+html[lang="es"][data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien .fila) {
+  margin-inline: 0;
+}
+html[lang="es"][data-ontos-web][data-web-page="index"] .intro h2 {
+  text-align: left;
+}
+html[lang="es"][data-ontos-web][data-web-page="contacto"] .contacto {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 /* Superficies de lectura y de colección. Se conserva su anatomía y sus enlaces. */
@@ -245,7 +292,8 @@ html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] {
 }
 html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
   min-height: var(--nav-h);
-  max-width: none;
+  max-width: var(--web-shell-max);
+  padding-inline: var(--web-shell-pad);
   padding-block: 7px;
 }
 html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar, #dropzone, #signPanel) {
@@ -279,6 +327,7 @@ html[lang="es"][data-ontos-web]:has(#stage) :where(.play, .pill a):focus-visible
   html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
     --nav-h: 6rem;
     --sp-sec: var(--ds-space-7);
+    --web-shell-pad: var(--ds-space-4);
   }
   html[lang="es"][data-ontos-web] .barra nav {
     min-height: var(--nav-h);

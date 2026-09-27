@@ -25,7 +25,10 @@ function artifacts(root){
   const min=layout=>layout==='wordmark'?cfg.minimos.digital.wordmark_ancho_px:Math.ceil(marks.dimensions(layout).width/marks.model.D*cfg.minimos.digital.simbolo_diametro_px);
   const out={};
   const sources=[svgPath,'data/mensaje.json','data/manual-marca.json','data/marca-construccion.json','data/marca-wordmark-geometria.json','data/marca-aplicaciones.json','data/design-system.json','data/design-system-tokens.json'];
-  const motion=JSON.parse(read('data/mensaje.json')).fundamentos.movimiento;
+  const message=JSON.parse(read('data/mensaje.json'));
+  const motion=message.fundamentos.movimiento;
+  const subtitle=message.superficies.find(s=>s.id==='web.subtitulo')?.es;
+  if(!subtitle)throw Error('Falta el subtítulo español de la portada en mensaje.json');
   const glyph=JSON.parse(read('data/marca-movimiento-geometria.json'));
   if(hash(read(model.familias.corporativa.archivo))!==glyph.font.sha256)throw Error('Arcilla: la geometría no corresponde a la fuente Jost');
   sources.push('scripts/lib/marca-movimiento.js','data/marca-movimiento-geometria.json','app/img/brand/logo-esqueleto.svg');
@@ -44,6 +47,13 @@ function artifacts(root){
   css+='\n/* Alias de aplicación web. Propuestas y origen en tokens.json. */\nhtml[lang="es"][data-ontos-web]{\n';
   for(const token of model.tokens.filter(t=>t.id.startsWith('web-')&&t.valor!==undefined))css+=`--${token.id}:var(--ds-${token.id});\n`;
   for(const layout of ['horizontal','icon','wordmark'])css+=`--web-logo-${layout}-min:${min(layout)}px;\n`;
+  // Origen visible de la primera o en el marco compacto de Arcilla (36 × 92
+  // unidades de margen/alto, como el motor canónico), sin editar los contornos.
+  const navWidth=tokens['web-logo-width'].valor,navHeight=tokens['web-logo-height'].valor;
+  const frameWidth=36+glyph.wordmark.width,scale=Math.min(navWidth/frameWidth,navHeight/92);
+  const leading=(navWidth-frameWidth*scale)/2+(18+glyph.glyphs.o.bounds.x)*scale;
+  const fallbackLeading=navWidth*glyph.glyphs.o.bounds.x/glyph.wordmark.width;
+  css+=`--web-logo-leading-space:${leading.toFixed(4)}px;\n--web-logo-fallback-offset:${(leading-fallbackLeading).toFixed(4)}px;\n`;
   css+='}\n';
   out['brand/canon/tokens.css']=css;
   out['brand/canon/tokens.json']=JSON.stringify({_doc:'GENERADO por scripts/import-marca.cjs. Selección pública de identidad, sin datos de producto.',version:1,tokens:model.tokens.map(t=>({id:t.id,tipo:t.tipo,valor:t.valor,unidad:t.unidad,movil:t.movil,estado:t.estado})),minimos:Object.fromEntries(['horizontal','vertical','wordmark','icon'].map(k=>[k,min(k)]))},null,2)+'\n';
@@ -59,6 +69,10 @@ function artifacts(root){
     if(!/<html\b[^>]*lang="es"/.test(html))throw Error('Página fuera de español: '+file);
     const rel=path.posix.relative(path.posix.dirname(file),'brand')||'brand';
     const route=file==='editor-pdf/index.html'?'editor-pdf':path.basename(file,'.html');
+    if(route==='index'){
+      if(!/<p class="home-intro__subtitle">/.test(html))throw Error('Portada sin espacio para el subtítulo');
+      html=html.replace(/(<p class="home-intro__subtitle">)[\s\S]*?(<\/p>)/,(_,a,b)=>a+esc(subtitle)+b);
+    }
     html=html.replace(/<html\b([^>]*)>/,(_,attrs)=>'<html'+attrs.replace(/\sdata-ontos-web(?:="[^"]*")?/g,'').replace(/\sdata-web-page="[^"]*"/g,'')+` data-ontos-web data-web-page="${route}">`);
     const links=`<!-- MARCA:estilos · generado desde el canon; diseño español -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">\n<script defer src="${rel}/canon/movimiento-data.js"></script>\n<script defer src="${rel}/canon/movimiento.js"></script>\n<!-- /MARCA:estilos -->`;
     if(html.includes('<!-- MARCA:estilos'))html=html.replace(/<!-- MARCA:estilos[\s\S]*?<!-- \/MARCA:estilos -->/,links);

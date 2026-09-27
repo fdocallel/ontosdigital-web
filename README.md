@@ -118,3 +118,9 @@ La nueva petición sustituye el fondo verde general de las entregas anteriores. 
 La frase introductoria abre la home, alineada a la izquierda y con tamaño medio. Debajo, el bloque verde oscuro reúne el rótulo, el titular y Cuéntame tu caso. Empieza con márgenes y alcanza el ancho completo al hacer scroll, con textura y degradado sutiles. Se inspira en la composición y expansión medidas en anthropic.com el 27-sep-2026, sin importar sus activos ni scripts.
 
 `brand/home-es.css` compone esta pieza y contiene el color local en prueba; `brand/home-es.js` vincula la expansión y el parallax al desplazamiento, sin capturar la rueda. Sin JavaScript y con movimiento reducido se conserva una tarjeta estática legible. El enlace de contacto mantiene su formulario. La prueba de conservación contempla únicamente el menú retirado y la nueva disposición de la apertura; el resto del contenido sigue protegido. Continúa en vista previa.
+
+### Alineación común y subtítulo de portada · 27-sep-2026
+
+El marco exterior de las páginas corporativas sigue dos guías: la primera «o» visible de la marca inicial y el borde exterior del botón de idioma. Los márgenes se comparten con la introducción y el rectángulo verde de la home; las columnas de lectura y los formularios pueden ser más estrechos dentro de ese marco. El importador deriva la posición de la «o» de la geometría canónica y corrige la posición del SVG estático sin cambiar sus contornos.
+
+La introducción aumenta 2 px y usa peso 700. A su derecha aparece un subtítulo nuevo, menor y en peso 300, gobernado por `mensaje.json` (`web.subtitulo`) y exportado por `import-marca.cjs`. En móvil se apilan. El rectángulo tiene más textura y degradado, con rótulo, titular y acción centrados. La expansión reduce cada margen desde su posición inicial hasta el ancho completo. Estos ajustes permanecen en [vista previa](http://mac-mini:8795/).

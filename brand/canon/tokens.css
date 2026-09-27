@@ -89,4 +89,6 @@ html[lang="es"][data-ontos-web]{
 --web-logo-horizontal-min:411px;
 --web-logo-icon-min:115px;
 --web-logo-wordmark-min:120px;
+--web-logo-leading-space:14.8492px;
+--web-logo-fallback-offset:12.8458px;
 }
