@@ -1,5 +1,6 @@
 #!/bin/sh
-# Hook del repo web. Instalar con:  ln -sf ../../hooks/pre-commit .git/hooks/pre-commit
+# Hook del repo web. Instalar con: git config core.hooksPath hooks
+# La ruta relativa usa el hook del worktree activo, también en ramas separadas.
 # 1) regenera el espejo inglés  2) regenera el sitemap  3) re-añade SOLO lo que ya estaba staged
 # OJO (1-sep-2026): antes hacía `git add en ./*.html` y coló en un commit la portada v3 que
 # estaba a propósito sin publicar. Lo generado solo entra si su fuente entraba en este commit.

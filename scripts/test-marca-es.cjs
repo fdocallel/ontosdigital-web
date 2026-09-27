@@ -9,7 +9,7 @@ const BASE='a7bc996e35f64e7ef74e5d811c74755af6895312';
 const git=(...args)=>execFileSync('git',args,{cwd:WEB,encoding:'utf8',maxBuffer:20*1024*1024});
 const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
 const changed=git('diff',BASE,'--name-only').trim().split('\n');
-const protectedFile=f=>f.startsWith('en/')||f.startsWith('i18n/en/')||f.startsWith('experiencias/')||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
+const protectedFile=f=>f.startsWith('en/')||f.startsWith('i18n/en/')||f.startsWith('experiencias/')||f==='sitemap.xml'||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
 assert.deepEqual(changed.filter(protectedFile),[],'EN y sus recursos conservan su versión');
 for(const file of pages){const html=fs.readFileSync(path.join(WEB,file),'utf8');assert(html.includes('data-ontos-web'),file+' activa marca');assert(html.includes('/canon/tokens.css'),file+' carga tokens');assert(html.includes('/marca-es.css'),file+' carga CSS común');assert(!/<circle[^>]+r="16\.5"/.test(html),file+' no conserva símbolo anterior');}
 require('./import-marca.cjs').run(ONTOS,{check:true});
