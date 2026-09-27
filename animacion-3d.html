@@ -4,6 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ONTOS · Figurita 3D</title>
+<meta property="og:title" content="ONTOS · Figurita 3D">
+<meta property="og:description" content="Explora la figurita 3D de ONTOS: gírala, cambia el tamaño y prueba sus gestos, poses y animaciones desde el navegador.">
+<meta property="og:url" content="https://ontosdigital.es/animacion-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="https://ontosdigital.es/brand/canon/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Explora la figurita 3D de ONTOS: gírala, cambia el tamaño y prueba sus gestos, poses y animaciones desde el navegador.">
 <link rel="icon" href="brand/canon/favicon.svg">
 <link rel="stylesheet" href="/experiencias/demo.css">
 <style>
@@ -29,8 +39,6 @@ body.of-solo .of-wrap{position:fixed;inset:0;padding:0;margin:0;max-width:none;w
 <!-- MARCA:estilos · generado desde el canon; diseño español -->
 <link rel="stylesheet" href="brand/canon/tokens.css">
 <link rel="stylesheet" href="brand/marca-es.css">
-<script defer src="brand/canon/movimiento-data.js"></script>
-<script defer src="brand/canon/movimiento.js"></script>
 <!-- /MARCA:estilos -->
 </head>
 <body>
@@ -38,6 +46,7 @@ body.of-solo .of-wrap{position:fixed;inset:0;padding:0;margin:0;max-width:none;w
 <main class="wrap ot-wrap of-wrap">
 <header class="of-top"><div><span class="of-kicker">ONTOS vivo · en tus manos</span><h1>ONTOS en tus manos.</h1></div><nav class="of-links" aria-label="Otros mundos de ONTOS"><a class="btn" href="visita-3d.html">Planetita</a><a class="btn" href="juego-2d.html">Patio 2D</a></nav></header>
 <section class="of-stage" aria-label="Figurita de ONTOS, sin escenario">
+<noscript><style>.of-stage > :not(noscript), main button, .of-bar,.of-help {display:none!important}</style><p style="padding:24px">Esta experiencia interactiva necesita JavaScript. Actívalo para usarla o <a href="aplicaciones.html">vuelve a Aplicaciones</a> para consultar el resto de trabajos.</p></noscript>
 <canvas id="ot-world" class="of-canvas" data-mode="figure" tabindex="0" aria-label="Figurita 3D de ONTOS. Arrastra para girarla en cualquier dirección; pellizca o usa la rueda para cambiar el tamaño. Con teclado: flechas para girar, más y menos para zoom, Inicio para centrar y H para saludar.">La figura necesita WebGL. Puedes visitar el <a href="juego-2d.html">patio 2D</a>.</canvas>
 <button class="btn of-exit" id="of-exit" hidden>Volver a los controles</button>
 <div class="of-overlay" id="ot-overlay" hidden role="alert"><strong id="ot-overlay-title">La figura está en reposo.</strong><p id="ot-overlay-text"></p><a class="btn" href="juego-2d.html">Abrir el patio 2D</a></div>

@@ -14,9 +14,6 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-User-agent: GPTBot
-Allow: /
-
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -26,9 +23,6 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: ClaudeBot
-Allow: /
-
 User-agent: Claude-SearchBot
 Allow: /
 
@@ -36,6 +30,12 @@ User-agent: Applebot
 Allow: /
 
 # --- Recolección para entrenar modelos: BLOQUEADOS ---
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
 User-agent: CCBot
 Disallow: /
 

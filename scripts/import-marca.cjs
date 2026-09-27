@@ -43,8 +43,10 @@ function artifacts(root){
     out[`brand/canon/${layout}-${tone}.svg`]='<!-- GENERADO por scripts/import-marca.cjs desde el manual ONTOS. -->\n'+marks.logo(layout,tone);
   const iconBody=svg.match(/<svg\b[^>]*>([\s\S]*?)<\/svg>/)[1].trim().replace(/(<circle\b[^>]*fill=)"#[0-9a-f]{6}"/i,'$1"'+tokens['brand-teja'].valor+'"');
   out['brand/canon/favicon.svg']=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><style>svg{color:${tokens['brand-granito'].valor}}@media(prefers-color-scheme:dark){svg{color:${tokens['brand-logo-on-dark'].valor}}}</style>${iconBody}</svg>\n`;
-  let css=model.css.replaceAll('[data-ontos-ds]','html[lang="es"][data-ontos-web]').replace(/url\("([^"]+)"\)/g,(_,url)=>`url("fonts/${path.posix.basename(url)}")`);
-  css+='\n/* Alias de aplicación web. Propuestas y origen en tokens.json. */\nhtml[lang="es"][data-ontos-web]{\n';
+  // El atributo marca las páginas de esta entrega. El editor puede cambiar de
+  // idioma sin perder su interfaz; los espejos EN no llevan este atributo.
+  let css=model.css.replaceAll('[data-ontos-ds]','html[data-ontos-web]').replace(/url\("([^"]+)"\)/g,(_,url)=>`url("fonts/${path.posix.basename(url)}")`);
+  css+='\n/* Alias de aplicación web. Propuestas y origen en tokens.json. */\nhtml[data-ontos-web]{\n';
   for(const token of model.tokens.filter(t=>t.id.startsWith('web-')&&t.valor!==undefined))css+=`--${token.id}:var(--ds-${token.id});\n`;
   for(const layout of ['horizontal','icon','wordmark'])css+=`--web-logo-${layout}-min:${min(layout)}px;\n`;
   // Origen visible de la primera o en el marco compacto de Arcilla (36 × 92
@@ -67,14 +69,15 @@ function artifacts(root){
   for(const file of pages){
     let html=fs.readFileSync(path.join(WEB,file),'utf8');
     if(!/<html\b[^>]*lang="es"/.test(html))throw Error('Página fuera de español: '+file);
-    const rel=path.posix.relative(path.posix.dirname(file),'brand')||'brand';
+    const rel=file==='404.html'?'/brand':path.posix.relative(path.posix.dirname(file),'brand')||'brand';
     const route=file==='editor-pdf/index.html'?'editor-pdf':path.basename(file,'.html');
     if(route==='index'){
       if(!/<p class="home-intro__subtitle">/.test(html))throw Error('Portada sin espacio para el subtítulo');
       html=html.replace(/(<p class="home-intro__subtitle">)[\s\S]*?(<\/p>)/,(_,a,b)=>a+esc(subtitle)+b);
     }
     html=html.replace(/<html\b([^>]*)>/,(_,attrs)=>'<html'+attrs.replace(/\sdata-ontos-web(?:="[^"]*")?/g,'').replace(/\sdata-web-page="[^"]*"/g,'')+` data-ontos-web data-web-page="${route}">`);
-    const links=`<!-- MARCA:estilos · generado desde el canon; diseño español -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">\n<script defer src="${rel}/canon/movimiento-data.js"></script>\n<script defer src="${rel}/canon/movimiento.js"></script>\n<!-- /MARCA:estilos -->`;
+    const motionScripts=/<header\b[^>]*class="barra"/.test(html)?`\n<script defer src="${rel}/canon/movimiento-data.js"></script>\n<script defer src="${rel}/canon/movimiento.js"></script>`:'';
+    const links=`<!-- MARCA:estilos · generado desde el canon; diseño español -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">${motionScripts}\n<!-- /MARCA:estilos -->`;
     if(html.includes('<!-- MARCA:estilos'))html=html.replace(/<!-- MARCA:estilos[\s\S]*?<!-- \/MARCA:estilos -->/,links);
     else html=html.replace('</head>',links+'\n</head>');
     html=html.replace(/(<link\b[^>]*rel="icon"[^>]*href=")[^"]*(")/g,'$1'+rel+'/canon/favicon.svg$2');

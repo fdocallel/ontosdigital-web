@@ -206,6 +206,7 @@
 <!-- /MARCA:estilos -->
 </head>
 <body>
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
 
 <header class="barra">
   <nav>
@@ -216,6 +217,7 @@
     <a class="item idioma" data-i18n-alt href="/en/bim.html" hreflang="en" lang="en" aria-label="View this page in English">EN</a>
   </nav>
 </header>
+<main class="web-main" id="contenido" tabindex="-1">
 
 <div class="titular">
   <div class="wrap">
@@ -233,14 +235,14 @@
   <div class="calendario">
     <div class="hito">
       <div class="fecha">Desde el 1 de octubre de 2025</div>
-      <div class="cifra">5.404.000 €<small>de presupuesto en adelante</small></div>
+      <div class="cifra">5.404.000 €<small>de valor estimado en adelante</small></div>
       <p class="nota">Los contratos de obra a partir de esa cifra se licitan con <strong>nivel BIM
       medio</strong>.</p>
     </div>
     <div class="hito">
       <div class="fecha">Desde el 1 de octubre de 2025</div>
-      <div class="cifra">2.000.000 €<small>de presupuesto en adelante</small></div>
-      <p class="nota">A partir de esa cifra, <strong>nivel BIM inicial</strong>.</p>
+      <div class="cifra">2.000.000 €<small>hasta menos de 5.404.000 € de valor estimado</small></div>
+      <p class="nota">En este tramo, <strong>nivel BIM inicial</strong>.</p>
     </div>
     <div class="hito">
       <div class="fecha">1 de octubre de 2027</div>
@@ -250,8 +252,13 @@
   </div>
   <p class="aplica">Aplica a <b>las obras</b>, a <b>las concesiones</b>, a <b>la dirección
   facultativa</b>, a <b>la asistencia técnica</b> y a <b>la redacción de proyectos</b>.</p>
-  <p class="pie-dato">Lo dice el Plan BIM en la contratación pública, aprobado en Consejo de
-  Ministros. Umbrales vigentes según la actualización del 1 de enero de 2026.</p>
+  <p class="pie-dato">El Plan se aplica a la Administración General del Estado y sus organismos
+  y entidades de derecho público vinculados o dependientes, con las excepciones justificadas
+  que contempla. Los requisitos concretos se consultan en cada pliego.</p>
+  <p class="pie-dato">Fuentes: <a href="https://www.boe.es/buscar/doc.php?id=BOE-A-2023-16784">Plan BIM, apartado 4</a>
+  y <a href="https://www.boe.es/buscar/doc.php?id=BOE-A-2025-26605">umbrales desde el 1 de enero de 2026</a>.
+  Revisión: 27 de septiembre de 2026. El calendario comenzó en octubre de 2025; las cifras
+  mostradas son las vigentes en 2026.</p>
 </section>
 
 <section>
@@ -363,6 +370,7 @@
 
 </div>
 
+</main>
 <script>
 // Copiar la dirección: el mailto falla mudo en escritorios sin cliente de correo
 document.querySelectorAll("[data-copiar]").forEach(function (b) {

@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Editor PDF — une, escanea y ordena PDFs sin que salgan de tu ordenador | ONTOS</title>
+<meta property="og:title" content="Editor PDF — une, escanea y ordena PDFs sin que salgan de tu ordenador | ONTOS">
+<meta property="og:description" content="Une, gira y reordena páginas de PDF, y convierte fotos de folios en páginas A4 limpias. Gratis, sin registro, sin marca de agua: todo ocurre en tu navegador y ningún archivo sale de tu ordenador.">
+<meta property="og:url" content="https://ontosdigital.es/editor-pdf/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:image" content="https://ontosdigital.es/brand/canon/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="Une, gira y reordena páginas de PDF, y convierte fotos de folios en páginas A4 limpias. Gratis, sin registro, sin marca de agua: todo ocurre en tu navegador y ningún archivo sale de tu ordenador.">
 <link rel="canonical" href="https://ontosdigital.es/editor-pdf/">
 <link rel="icon" type="image/svg+xml" href="../brand/canon/favicon.svg">
@@ -80,8 +89,11 @@
   .card .mini {
     position: absolute; top: 6px; right: 6px; display: none; gap: 4px;
   }
-  .card:hover .mini { display: flex; }
+  .card:hover .mini, .card:focus-within .mini { display: flex; }
+  .card .mini { max-width: calc(100% - 12px); flex-wrap: wrap; justify-content: flex-end; }
   .mini button { padding: 4px 7px; font-size: 12px; border-radius: 6px; background: color-mix(in srgb, var(--panel) 95%, transparent); }
+  .thumb-box[role="button"] { cursor: pointer; border-radius: 6px; }
+  .thumb-box[role="button"]:focus-visible, .mini button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
   footer { padding: 8px 16px; font-size: 12px; color: var(--muted); text-align: center; }
   input[type=file] { display: none; }
@@ -152,6 +164,7 @@
 <!-- /MARCA:estilos -->
 </head>
 <body>
+<a class="skip-link" href="#contenido" data-i18n="skipContent">Saltar al contenido</a>
 <div id="top">
 <header class="barra">
   <nav>
@@ -160,7 +173,7 @@
     <button id="btnLang" title="Change language / Cambiar idioma">🌐 English</button>
   </nav>
 </header>
-<div id="toolbar">
+<div id="toolbar" role="region" aria-label="Herramientas del documento" data-i18n-aria="toolbar">
   <button id="btnOpen" class="primary" data-i18n="open">📂 Abrir PDF</button>
   <button id="btnAdd" disabled data-i18n="add">➕ Añadir otro PDF</button>
   <div class="sep"></div>
@@ -177,11 +190,22 @@
   <label style="display:inline-flex;align-items:center;gap:5px;font-size:13px;cursor:pointer" data-i18n-title="scanT">
     <input type="checkbox" id="chkScan" checked> <span data-i18n="scan">🖨 Efecto escáner en fotos</span>
   </label>
-  <span id="status"></span>
+  <span id="status" role="status" aria-live="polite"></span>
 </div>
 </div>
 
-<main>
+<main id="contenido" tabindex="-1">
+  <noscript>
+    <style>
+      #toolbar, #dropzone, #grid, #btnLang { display: none !important; }
+      .nojs-notice { max-width: 42rem; margin: 2rem auto; padding: 1.5rem; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); color: var(--text); }
+      .nojs-notice p + p { margin-top: 1rem; }
+    </style>
+    <div class="nojs-notice">
+      <p lang="es">El Editor PDF necesita JavaScript para abrir y procesar archivos. Actívalo para usar la herramienta o <a href="../aplicaciones.html">vuelve a Aplicaciones</a>.</p>
+      <p lang="en">The PDF editor needs JavaScript to open and process files. Enable it to use the tool or <a href="../en/aplicaciones.html">return to Applications</a>.</p>
+    </div>
+  </noscript>
   <div id="dropzone">
     <span style="width:84px;height:84px;display:block;color:var(--piedra-logo)" aria-hidden="true"><svg style="width:100%;height:100%" viewBox="0 0 100 100" aria-hidden="true"><path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
 <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
@@ -279,6 +303,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/pdf.worker.min.js';
 const I18N = {
   es: {
     docTitle: 'Editor de páginas PDF',
+    skipContent: 'Saltar al contenido', toolbar: 'Herramientas del documento',
     h1: 'Editor de páginas <span>PDF</span>',
     pieMarca: 'Una herramienta de <a href="https://ontosdigital.es">ONTOS · ontosdigital.es</a>',
     open: '📂 Abrir PDF', add: '➕ Añadir otro PDF',
@@ -307,6 +332,9 @@ const I18N = {
     signOn: 'Firma el documento con tu certificado digital (FNMT, DNIe…)',
     signOff: 'La firma con certificado digital va en la versión completa, la de escritorio. Si te interesa, escríbeme',
     miniCorners: 'Ajustar esquinas del recorte', miniRot: 'Girar esta página', miniDel: 'Quitar esta página',
+    selectPage: i => 'Seleccionar página ' + i,
+    movePrev: i => 'Mover página ' + i + ' antes', moveNext: i => 'Mover página ' + i + ' después',
+    movedPage: (from, to) => 'Página ' + from + ' movida a la posición ' + to,
     sufEdit: '-editado.pdf', sufOcr: '-editado OCR.pdf', sufSign: '-firmado.pdf',
     pages: n => n + (n === 1 ? ' página' : ' páginas'),
     selCount: n => ' · ' + n + (n === 1 ? ' seleccionada' : ' seleccionadas'),
@@ -332,6 +360,7 @@ const I18N = {
   },
   en: {
     docTitle: 'PDF page editor',
+    skipContent: 'Skip to content', toolbar: 'Document tools',
     h1: '<span>PDF</span> page editor',
     pieMarca: 'A tool by <a href="https://ontosdigital.es">ONTOS · ontosdigital.es</a>',
     open: '📂 Open PDF', add: '➕ Add another PDF',
@@ -360,6 +389,9 @@ const I18N = {
     signOn: 'Sign the document with your digital certificate (FNMT, DNIe…)',
     signOff: 'Certificate signing ships in the full desktop version. Message me if you want it',
     miniCorners: 'Adjust the crop corners', miniRot: 'Rotate this page', miniDel: 'Remove this page',
+    selectPage: i => 'Select page ' + i,
+    movePrev: i => 'Move page ' + i + ' earlier', moveNext: i => 'Move page ' + i + ' later',
+    movedPage: (from, to) => 'Page ' + from + ' moved to position ' + to,
     sufEdit: '-edited.pdf', sufOcr: '-edited OCR.pdf', sufSign: '-signed.pdf',
     pages: n => n + (n === 1 ? ' page' : ' pages'),
     selCount: n => ' · ' + n + ' selected',
@@ -401,6 +433,7 @@ function aplicarIdioma() {
   poner('data-i18n-html', 'i18nHtml', 'innerHTML');
   poner('data-i18n-title', 'i18nTitle', 'title');
   poner('data-i18n-ph', 'i18nPh', 'placeholder');
+  document.querySelectorAll('[data-i18n-aria]').forEach(e => e.setAttribute('aria-label', T[e.dataset.i18nAria]));
   $('btnLang').textContent = T.langBtn;
   $('signBox').dataset.lbl = T.sgBox;
   $('sgPageLbl').textContent = T.pageOf(fm.page + 1, fm.n);
@@ -796,7 +829,7 @@ async function loadPdf(file, append) {
   setStatus(T.loading(file.name));
   try {
     const bytes = new Uint8Array(await file.arrayBuffer());
-    const pdf = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
+    const pdf = await pdfjsLib.getDocument({ data: bytes.slice(), isEvalSupported: false }).promise;
     const docIdx = docs.length;
     docs.push({ bytes });
     if (!append) { pages = []; selected.clear(); baseName = file.name.replace(/\.pdf$/i, ''); }
@@ -822,6 +855,16 @@ async function loadPdf(file, append) {
   }
 }
 
+function movePage(i, delta) {
+  const to = i + delta;
+  if (to < 0 || to >= pages.length) return;
+  [pages[i], pages[to]] = [pages[to], pages[i]];
+  selected = new Set([...selected].map(s => s === i ? to : s === to ? i : s));
+  render();
+  grid.querySelector('.card[data-i="' + to + '"] .thumb-box[role="button"]')?.focus();
+  setStatus(T.movedPage(i + 1, to + 1));
+}
+
 function render() {
   const has = pages.length > 0;
   dropzone.style.display = has ? 'none' : 'flex';
@@ -840,9 +883,15 @@ function render() {
     card.className = 'card' + (selected.has(i) ? ' selected' : '');
     card.draggable = true;
     card.dataset.i = i;
+    card.setAttribute('role', 'group');
+    card.setAttribute('aria-label', T.pageOf(i + 1, pages.length));
 
     const box = document.createElement('div');
     box.className = 'thumb-box';
+    box.setAttribute('role', 'button');
+    box.tabIndex = 0;
+    box.setAttribute('aria-label', T.selectPage(i + 1));
+    box.setAttribute('aria-pressed', selected.has(i) ? 'true' : 'false');
     let t = 'rotate(' + p.rot + 'deg)';
     if (p.rot % 180 !== 0) {
       const s = Math.min(p.canvas.width / p.canvas.height, p.canvas.height / p.canvas.width);
@@ -858,15 +907,33 @@ function render() {
 
     const mini = document.createElement('div');
     mini.className = 'mini';
-    mini.innerHTML = (p.type === 'img' ? '<button title="' + T.miniCorners + '">📐</button>' : '')
-      + '<button title="' + T.miniRot + '">⟳</button><button title="' + T.miniDel + '">🗑</button>';
-    const miniBtns = mini.querySelectorAll('button');
+    const addMini = (action, label, glyph, fn, disabled = false) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.action = action;
+      button.textContent = glyph;
+      button.title = label;
+      button.setAttribute('aria-label', label);
+      button.disabled = disabled;
+      button.onclick = e => { e.stopPropagation(); fn(); };
+      mini.append(button);
+    };
     if (p.type === 'img') {
-      miniBtns[0].onclick = e => { e.stopPropagation(); openCornerEditor(i); };
+      addMini('corners', T.miniCorners, '📐', () => openCornerEditor(i));
     }
-    const mRot = miniBtns[miniBtns.length - 2], mDel = miniBtns[miniBtns.length - 1];
-    mRot.onclick = e => { e.stopPropagation(); p.rot = (p.rot + 90) % 360; render(); };
-    mDel.onclick = e => { e.stopPropagation(); pages.splice(i, 1); remapSelection(i); render(); };
+    addMini('rotate', T.miniRot, '⟳', () => {
+      p.rot = (p.rot + 90) % 360;
+      render();
+      grid.querySelector('.card[data-i="' + i + '"] .mini [data-action="rotate"]')?.focus();
+    });
+    addMini('prev', T.movePrev(i + 1), '←', () => movePage(i, -1), i === 0);
+    addMini('next', T.moveNext(i + 1), '→', () => movePage(i, 1), i === pages.length - 1);
+    addMini('delete', T.miniDel, '🗑', () => {
+      pages.splice(i, 1);
+      remapSelection(i);
+      render();
+      grid.querySelector('.card[data-i="' + Math.min(i, pages.length - 1) + '"] .thumb-box[role="button"]')?.focus();
+    });
     card.appendChild(mini);
 
     const label = document.createElement('div');
@@ -874,7 +941,18 @@ function render() {
     label.textContent = T.cardPage(i + 1, p.rot);
     card.appendChild(label);
 
-    card.onclick = () => { selected.has(i) ? selected.delete(i) : selected.add(i); render(); };
+    const toggleSelection = (restoreFocus = false) => {
+      selected.has(i) ? selected.delete(i) : selected.add(i);
+      render();
+      if (restoreFocus) grid.querySelector('.card[data-i="' + i + '"] .thumb-box[role="button"]')?.focus();
+    };
+    card.onclick = () => toggleSelection();
+    box.onkeydown = e => {
+      if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+      e.preventDefault();
+      e.stopPropagation();
+      toggleSelection(true);
+    };
 
     card.ondragstart = e => { dragIndex = i; e.dataTransfer.effectAllowed = 'move'; setTimeout(() => card.classList.add('ghost'), 0); };
     card.ondragend = () => { dragIndex = null; render(); };
@@ -1193,7 +1271,7 @@ $('btnSign').onclick = async () => {
   if (!bytes) return;
   setStatus(T.preparing);
   fm.bytes = bytes;
-  fm.pdf = await pdfjsLib.getDocument({ data: bytes.slice() }).promise;
+  fm.pdf = await pdfjsLib.getDocument({ data: bytes.slice(), isEvalSupported: false }).promise;
   fm.n = fm.pdf.numPages;
   fm.page = fm.n - 1;             // lo normal es firmar en la última página
   $('signMsg').textContent = '';

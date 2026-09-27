@@ -11,6 +11,8 @@ staged=$(git diff --cached --name-only --diff-filter=ACM)
 # Fase explícita ES: no regenerar ni añadir el espejo inglés.
 # La comprobación conserva texto, rutas, medios y los recursos que EN utiliza.
 if [ "${ONTOS_WEB_SCOPE:-all}" = "es" ]; then
+  ./gen-sitemap.sh --es
+  git add sitemap.xml
   node scripts/test-marca-es.cjs
 else
   ./i18n/gen-en.py

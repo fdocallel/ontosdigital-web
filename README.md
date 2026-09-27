@@ -39,8 +39,8 @@ y su versión inglesa vive en `i18n/en/<pagina>.json`.
 ```
 
 El hook de pre-commit (`hooks/pre-commit`, instalar con
-`ln -sf ../../hooks/pre-commit .git/hooks/pre-commit`) hace las dos cosas y el sitemap
-en cada commit, así que en la práctica basta con editar la página española y su JSON.
+`git config core.hooksPath hooks`) hace las dos cosas y el sitemap en el flujo bilingüe.
+La fase española utiliza el modo específico descrito abajo.
 
 ### Reglas
 
@@ -97,7 +97,7 @@ node scripts/test-marca-es.cjs
 
 El importador necesita Node y el Playwright/WebKit ya instalado en ONTOS para rasterizar localmente la imagen social. La web servida sigue siendo HTML/CSS/JS estático, sin compilación en producción. Se exporta únicamente la selección pública de marca, nunca los JSON privados completos. Los logotipos no se redibujan ni se componen con texto HTML.
 
-Esta fase tiene alcance **solo español**. Inglés, traducciones y sus CSS/JS anteriores conservan la versión de partida; la página española añade la capa de marca al final del head. Para guardar un cambio de esta fase se usa `ONTOS_WEB_SCOPE=es git commit … -- <rutas>`. El hook conserva las comprobaciones de contenido y activos y omite únicamente la regeneración EN/sitemap. El modo normal sigue el flujo bilingüe anterior; no debe ejecutarse para esta entrega española. La publicación permanece pendiente en la rama `web-v5-consultoria`; no hacer push a main sin la decisión de publicación.
+Esta fase tiene alcance **solo español**. Inglés, traducciones y sus CSS/JS anteriores conservan la versión de partida; la página española añade la capa de marca al final del head. Para guardar un cambio de esta fase se usa `ONTOS_WEB_SCOPE=es git commit … -- <rutas>`. El hook conserva las comprobaciones de contenido y activos, omite la regeneración EN y actualiza el sitemap con `--es`, preservando literalmente sus entradas inglesas. El modo normal sigue el flujo bilingüe anterior; no debe ejecutarse para esta entrega española. La publicación permanece pendiente en la rama `web-v5-consultoria`; no hacer push a main sin la decisión de publicación.
 
 Instalación del hook: `git config core.hooksPath hooks`. Git utiliza así el archivo de la rama activa incluso en un worktree. El antiguo enlace simbólico desde `.git/hooks` resolvía el hook de main y podía saltarse el modo español. Verificar el hook instalado con `ONTOS_WEB_SCOPE=es git hook run pre-commit` antes de guardar esta fase.
 
@@ -124,3 +124,13 @@ La frase introductoria abre la home, alineada a la izquierda y con tamaño medio
 El marco exterior de las páginas corporativas sigue dos guías: la primera «o» visible de la marca inicial y el borde exterior del botón de idioma. Los márgenes se comparten con la introducción y el rectángulo verde de la home; las columnas de lectura y los formularios pueden ser más estrechos dentro de ese marco. El importador deriva la posición de la «o» de la geometría canónica y corrige la posición del SVG estático sin cambiar sus contornos.
 
 La introducción aumenta 2 px y usa peso 700. A su derecha aparece un subtítulo nuevo, menor y en peso 300, gobernado por `mensaje.json` (`web.subtitulo`) y exportado por `import-marca.cjs`. En móvil se apilan. El rectángulo tiene más textura y degradado, con rótulo, titular y acción centrados. La expansión reduce cada margen desde su posición inicial hasta el ancho completo. Estos ajustes permanecen en [vista previa](http://mac-mini:8795/).
+
+### Auditoría previa a publicación · 27-sep-2026
+
+Se revisan las 30 páginas españolas y el editor bilingüe. Se corrigen lectura demasiado ancha, regiones principales/salto de teclado, controles de PDF y cine, 404 en rutas anidadas, metadatos de demos/editor, fechas ES del sitemap, reglas de rastreo y precisiones operativas de BIM/privacidad. Las imágenes inferiores cargan al acercarse y Arcilla solo se exporta a páginas con cabecera. Las demos y el editor explican su dependencia de JavaScript cuando está desactivado.
+
+El atributo `data-ontos-web` delimita la marca, para que el editor mantenga su diseño al alternar ES/EN. El espejo inglés no lleva ese atributo y conserva sus archivos. `scripts/fixtures/revision-prepublicacion.json` recoge únicamente los fragmentos editoriales corregidos: permite que el contrato siga detectando pérdidas de contenido fuera de esta revisión.
+
+El editor desactiva `isEvalSupported` en cada llamada a PDF.js, siguiendo la [mitigación de Mozilla para CVE-2024-4367](https://github.com/mozilla/pdf.js/security/advisories/GHSA-wgrm-67xf-hhpq). El guard existente comprueba esa configuración y su caso rojo; no se ha migrado la biblioteca. La prueba funcional con PDF sintético verifica selección, giro, inserción, eliminación, orden por teclado y exportación.
+
+Revisión visual WebKit, navegación Chromium/WebKit, axe inicial de 27 destinos sin redirecciones y editor con PDF cargado; contrato de contenido, importación reproducible y handshake de analítica pasan. Las solicitudes de formulario se interceptan para las pruebas: su resultado no certifica recepción real de correo. Informe y fuentes en el expediente privado de ONTOS, `docs/diseno/ontos/web/marca/AUDITORIA-FINAL.md`. La publicación sigue pendiente.

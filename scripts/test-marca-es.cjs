@@ -8,16 +8,35 @@ const ONTOS=process.env.ONTOS_BRAND_ROOT||path.resolve(WEB,'../ONTOS');
 const subtitle=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.subtitulo')?.es;
 assert(subtitle,'Subtítulo de portada declarado en su fuente');
 const BASE='a7bc996e35f64e7ef74e5d811c74755af6895312';
+const revision=require('./fixtures/revision-prepublicacion.json');
 const git=(...args)=>execFileSync('git',args,{cwd:WEB,encoding:'utf8',maxBuffer:20*1024*1024});
 const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
 const changed=git('diff',BASE,'--name-only').trim().split('\n');
-const protectedFile=f=>f.startsWith('en/')||f.startsWith('i18n/en/')||f.startsWith('experiencias/')||f==='sitemap.xml'||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
+const protectedFile=f=>f.startsWith('en/')||f.startsWith('i18n/en/')||f.startsWith('experiencias/')||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
 assert.deepEqual(changed.filter(protectedFile),[],'EN y sus recursos conservan su versión');
+const sitemap=fs.readFileSync(path.join(WEB,'sitemap.xml'),'utf8'),oldSitemap=git('show',BASE+':sitemap.xml');
+const englishBlocks=xml=>(xml.match(/  <url>[\s\S]*?<\/url>\n/g)||[]).filter(block=>block.includes('<loc>https://ontosdigital.es/en/'));
+assert.deepEqual(englishBlocks(sitemap),englishBlocks(oldSitemap),'Sitemap: las entradas inglesas no cambian');
+const urls=xml=>[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]).sort();
+assert.deepEqual(urls(sitemap),urls(oldSitemap),'Sitemap: las mismas rutas, solo se actualizan fechas ES');
 for(const file of pages){const html=fs.readFileSync(path.join(WEB,file),'utf8');assert(html.includes('data-ontos-web'),file+' activa marca');assert(html.includes('/canon/tokens.css'),file+' carga tokens');assert(html.includes('/marca-es.css'),file+' carga CSS común');assert(!/<circle[^>]+r="16\.5"/.test(html),file+' no conserva símbolo anterior');}
 require('./import-marca.cjs').run(ONTOS,{check:true});
-function signature({html,baseline=false,file,subtitle}){
+// Mozilla GHSA-wgrm-67xf-hhpq: toda apertura de PDF desactiva la evaluación.
+function checkPdfSecurity(html){
+ const calls=[...html.matchAll(/pdfjsLib\.getDocument\s*\(\s*(\{[^}]*\})\s*\)/g)];
+ assert(calls.length>0,'El editor debe tener aperturas de PDF verificables');
+ assert.equal(calls.length,(html.match(/pdfjsLib\.getDocument\s*\(/g)||[]).length,'Revisar nueva forma de abrir PDF');
+ for(const call of calls)assert(/\bisEvalSupported\s*:\s*false\b/.test(call[1]),'PDF.js: isEvalSupported debe ser false');
+}
+const editorHtml=fs.readFileSync(path.join(WEB,'editor-pdf/index.html'),'utf8');
+checkPdfSecurity(editorHtml);
+assert.throws(()=>checkPdfSecurity(editorHtml.replace(/isEvalSupported\s*:\s*false/g,'isEvalSupported: true')),/isEvalSupported/,'Caso rojo: la configuración vulnerable debe bloquear el guard');
+function signature({html,baseline=false,file,subtitle,revision}){
  const d=new DOMParser().parseFromString(html,'text/html');
  const clean=s=>s.replace(/\s+/g,' ').trim();
+ if(!baseline&&d.querySelector('header.barra')){
+  if(d.querySelectorAll('main').length!==1||!d.querySelector('main#contenido[tabindex="-1"]')||d.querySelector('.skip-link')?.getAttribute('href')!=='#contenido')throw Error(file+': falta main y salto de teclado operativo');
+ }
  // Cambio explícito de Fernando (27-sep): Consultoría es inicio y sale del menú.
  // Solo se descuenta ese enlace de la base; se conserva todo el contenido restante.
  const homeLinks=[...d.querySelectorAll('header.barra nav a.item')].filter(e=>clean(e.textContent)==='Consultoría');
@@ -33,6 +52,23 @@ function signature({html,baseline=false,file,subtitle}){
   const aside=d.createElement('p');aside.textContent=subtitle;intro.append('\n',aside);
   inner.append(...hero.childNodes);hero.append(inner);
  }
+ // La auditoría autoriza cambios editoriales concretos; se congelan por fragmento.
+ if(baseline){
+  if(file==='404.html')for(const a of d.querySelectorAll('a[href]'))if(['bim.html','contacto.html','aviso-legal.html','privacidad.html'].includes(a.getAttribute('href')))a.setAttribute('href','/'+a.getAttribute('href'));
+  if(d.querySelector('#stage'))d.querySelector('#stage').setAttribute('role','main');
+  for(const op of revision.pages[file]||[]){
+   let node=d.querySelectorAll(op.selector)[op.index||0];
+   if(op.previous)node=node?.previousElementSibling;
+   if(!node)throw Error(file+': no existe el fragmento de revisión '+op.selector);
+   if(op.remove)node.remove();else node.outerHTML=op.html;
+  }
+  if(revision.descriptions[file]){const m=d.createElement('meta');m.name='description';m.content=revision.descriptions[file];d.head.append(m);}
+ }
+ // Los landmarks y el salto de teclado no alteran el contenido del encargo.
+ for(const e of d.querySelectorAll('.skip-link'))e.remove();
+ for(const e of d.querySelectorAll('main.web-main, nav[aria-label="Volver al inicio"]'))e.replaceWith(...e.childNodes);
+ for(const e of d.querySelectorAll('main#contenido'))e.removeAttribute('id');
+ for(const e of d.querySelectorAll('#toolbar, #status'))e.removeAttribute('role');
  for(const e of d.querySelectorAll('script,style,svg,template,noscript'))e.remove();
  for(const e of d.querySelectorAll('a.marca'))e.textContent='ONTOS';
  return {title:d.title,description:d.querySelector('meta[name=description]')?.content||'',canonical:d.querySelector('link[rel=canonical]')?.getAttribute('href')||'',
@@ -47,7 +83,7 @@ function signature({html,baseline=false,file,subtitle}){
  const browser=await webkit.launch();
  try{
   const page=await browser.newPage();
-  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file,subtitle});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado salvo menú y apertura reorganizados por encargo');}
+  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file,subtitle,revision});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado con correcciones explícitas de la auditoría');}
   console.log(`PASS marca ES: ${pages.length} páginas conservan contenido con menú y apertura autorizados; EN y recursos compartidos intactos; canon reproducible.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.message);process.exitCode=1;});

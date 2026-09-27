@@ -2,7 +2,7 @@
    Fondo editorial claro del manual en ambos esquemas del sistema.
    Las piezas de cine con #stage conservan su dirección de arte y su escala temporal. */
 
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
+html[data-ontos-web]:not(:has(:where(#stage))) {
   --bg: var(--web-page-surface);
   --panel: var(--ds-surface-panel);
   --borde: var(--ds-border);
@@ -25,7 +25,7 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
   scroll-padding-top: calc(var(--nav-h) + var(--ds-space-2));
 }
 
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body {
+html[data-ontos-web]:not(:has(:where(#stage))) body {
   color: var(--texto);
   background: var(--bg);
   font-family: var(--ds-font-corporativa);
@@ -33,65 +33,65 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body {
   line-height: var(--ds-type-body-leading);
 }
 
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(h1, h2, h3, h4, button, input, select, textarea) {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(h1, h2, h3, h4, button, input, select, textarea) {
   font-family: var(--ds-font-corporativa);
 }
 
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(h1, h2, h3) {
+html[data-ontos-web]:not(:has(:where(#stage))) body :where(h1, h2, h3) {
   color: var(--texto);
   font-weight: 600;
   text-wrap: balance;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body h1 {
+html[data-ontos-web]:not(:has(:where(#stage))) body h1 {
   font-size: clamp(var(--ds-type-h1), 3.8vw, var(--ds-type-display));
   line-height: var(--ds-type-h1-leading);
   letter-spacing: -.025em;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .hero h1,
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
+html[data-ontos-web]:not(:has(:where(#stage))) body .hero h1,
+html[data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
   font-size: var(--ds-type-display);
   line-height: var(--ds-type-display-leading);
   max-width: 18ch;
   margin-inline: auto;
 }
-html[lang="es"][data-ontos-web][data-web-page="bim"] body .titular h1 {
+html[data-ontos-web][data-web-page="bim"] body .titular h1 {
   margin-inline: 0;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body h2 {
+html[data-ontos-web]:not(:has(:where(#stage))) body h2 {
   font-size: var(--ds-type-h2);
   line-height: var(--ds-type-h2-leading);
   letter-spacing: -.015em;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body h3 {
+html[data-ontos-web]:not(:has(:where(#stage))) body h3 {
   font-size: var(--ds-type-h3);
   line-height: var(--ds-type-h3-leading);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.kicker, .etiqueta, .meta, .stat .l, .hito .fecha) {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(.kicker, .etiqueta, .meta, .stat .l, .hito .fecha) {
   color: var(--acento);
   font-family: var(--ds-font-corporativa);
   font-weight: 600;
   letter-spacing: .08em;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.stat .n, .hito .cifra, .cifra .n) {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(.stat .n, .hito .cifra, .cifra .n) {
   font-family: var(--ds-font-corporativa);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
 }
 
 /* La firma Arcilla conserva su caja mientras el SVG anima nombre y símbolo al scroll. */
-html[lang="es"][data-ontos-web] .barra {
+html[data-ontos-web] .barra {
   background: var(--bg);
   border-bottom-color: var(--borde);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
-html[lang="es"][data-ontos-web] .barra nav {
+html[data-ontos-web] .barra nav {
   max-width: var(--web-shell-max);
   min-height: var(--nav-h);
   gap: clamp(var(--ds-space-3), 1.6vw, var(--ds-space-5));
   padding-inline: var(--web-shell-pad);
 }
-html[lang="es"][data-ontos-web] .barra .marca {
+html[data-ontos-web] .barra .marca {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -102,24 +102,24 @@ html[lang="es"][data-ontos-web] .barra .marca {
   margin-right: auto;
   color: var(--texto);
 }
-html[lang="es"][data-ontos-web] .barra .marca__arcilla {
+html[data-ontos-web] .barra .marca__arcilla {
   display: block;
   position: relative;
   width: var(--web-logo-width);
   height: var(--web-logo-height);
   flex: none;
 }
-html[lang="es"][data-ontos-web] .barra .marca__arcilla :where(svg, img, canvas) {
+html[data-ontos-web] .barra .marca__arcilla :where(svg, img, canvas) {
   display: block;
   width: 100%;
   height: 100%;
   max-width: none;
   object-fit: contain;
 }
-html[lang="es"][data-ontos-web] .barra .marca__arcilla img {
+html[data-ontos-web] .barra .marca__arcilla img {
   transform: translateX(var(--web-logo-fallback-offset));
 }
-html[lang="es"][data-ontos-web] .barra .marca__label {
+html[data-ontos-web] .barra .marca__label {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -129,24 +129,24 @@ html[lang="es"][data-ontos-web] .barra .marca__label {
   clip-path: inset(50%);
   white-space: nowrap;
 }
-html[lang="es"][data-ontos-web] .barra a.item {
+html[data-ontos-web] .barra a.item {
   color: var(--texto);
   font-family: var(--ds-font-corporativa);
   font-weight: 500;
   font-size: var(--ds-type-body);
   border-bottom-color: transparent;
 }
-html[lang="es"][data-ontos-web] .barra a.item:hover,
-html[lang="es"][data-ontos-web] .barra a.item[aria-current="page"] {
+html[data-ontos-web] .barra a.item:hover,
+html[data-ontos-web] .barra a.item[aria-current="page"] {
   color: var(--acento);
   border-bottom-color: var(--acento);
 }
-html[lang="es"][data-ontos-web] .barra a.icono-contacto {
+html[data-ontos-web] .barra a.icono-contacto {
   width: 44px;
   height: 44px;
   border-radius: var(--ds-radius-s);
 }
-html[lang="es"][data-ontos-web] .barra a.item.idioma {
+html[data-ontos-web] .barra a.item.idioma {
   min-height: 36px;
   display: inline-flex;
   align-items: center;
@@ -156,54 +156,97 @@ html[lang="es"][data-ontos-web] .barra a.item.idioma {
 
 /* Una guía exterior: desde la o visible de Arcilla hasta el borde de idioma.
    Los bloques de lectura/formularios conservan sus columnas interiores. */
-html[lang="es"][data-ontos-web] body:has(.barra) :where(.wrap),
-html[lang="es"][data-ontos-web] body:has(.barra) > main:not(.wrap),
-html[lang="es"][data-ontos-web] body:has(.barra) > .hero:not(.home-feature) {
+html[data-ontos-web] body:has(.barra) :where(.wrap),
+html[data-ontos-web] body:has(.barra) > main:not(.wrap, .web-main),
+html[data-ontos-web] body:has(.barra) > .hero:not(.home-feature),
+html[data-ontos-web] body:has(.barra) > .web-main > .hero:not(.home-feature) {
   width: auto;
   max-width: none;
   margin-left: var(--web-content-left);
   margin-right: var(--web-content-right);
   padding-inline: 0;
 }
-html[lang="es"][data-ontos-web] body:has(.barra) .wrap .wrap {
+/* El landmark agrupa secciones; son sus hijos quienes siguen las guías. */
+html[data-ontos-web] body > main.web-main {
+  width: auto;
+  max-width: none;
+  margin: 0;
+}
+html[data-ontos-web] body:has(.barra) .wrap .wrap {
   margin-inline: 0;
 }
-html[lang="es"][data-ontos-web] body:has(.barra) > footer:not(:has(.wrap)) {
+html[data-ontos-web] body:has(.barra) > footer:not(:has(.wrap)) {
   padding-left: var(--web-content-left);
   padding-right: var(--web-content-right);
 }
-html[lang="es"][data-ontos-web]:is([data-web-page="aviso-legal"], [data-web-page="privacidad"]) body {
+html[data-ontos-web]:is([data-web-page="aviso-legal"], [data-web-page="privacidad"]) body {
   max-width: none;
   margin-left: var(--web-content-left);
   margin-right: var(--web-content-right);
   padding-inline: 0;
 }
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #toolbar {
+html[data-ontos-web][data-web-page="editor-pdf"] #toolbar {
   padding-left: var(--web-content-left);
   padding-right: var(--web-content-right);
 }
-html[lang="es"][data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien .fila) {
+html[data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien .fila) {
   margin-inline: 0;
 }
-html[lang="es"][data-ontos-web][data-web-page="index"] .intro h2 {
+html[data-ontos-web][data-web-page="index"] .intro h2 {
   text-align: left;
 }
-html[lang="es"][data-ontos-web][data-web-page="contacto"] .contacto {
+html[data-ontos-web][data-web-page="contacto"] .contacto {
   margin-left: 0;
   margin-right: auto;
 }
 
+/* La guía exterior no debe convertir la prosa en líneas de pantalla entera. */
+html[data-ontos-web]:is(
+  [data-web-page="animacion-3d"], [data-web-page="armario"],
+  [data-web-page="aviso-legal"], [data-web-page="caso-salud"],
+  [data-web-page="caso-sistema"], [data-web-page="escrito-plan-bim-ingenieria"],
+  [data-web-page="fernando-calle"], [data-web-page="privacidad"],
+  [data-web-page="solicitud"], [data-web-page="visita-3d"]
+) body :where(p, li, blockquote):not(:where(footer *, .barra *, .dlg-contacto *)) {
+  max-width: 42rem;
+}
+
+/* Primer destino al tabular: visible y táctil sin quedar debajo de la barra fija. */
+html[data-ontos-web] .skip-link {
+  position: fixed;
+  top: 0;
+  left: var(--web-content-left, 16px);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px solid var(--ds-brand-verde);
+  border-radius: var(--ds-radius-s);
+  background: var(--ds-support-hueso);
+  color: var(--ds-brand-verde);
+  font-family: var(--ds-font-corporativa);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 4px));
+}
+html[data-ontos-web] .skip-link:focus-visible {
+  transform: translateY(8px);
+  outline: 3px solid var(--ds-brand-verde);
+  outline-offset: 2px;
+}
+
 /* Superficies de lectura y de colección. Se conserva su anatomía y sus enlaces. */
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta, .nota) {
+html[data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta, .nota) {
   border-color: var(--borde);
   border-radius: var(--ds-radius);
   background-color: var(--panel);
   color: var(--texto);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta):is(:hover, :focus-within) {
+html[data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta):is(:hover, :focus-within) {
   border-color: var(--ds-control-border);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
   background: var(--ds-action);
   border: 1px solid var(--ds-action);
   color: var(--ds-on-action);
@@ -213,24 +256,24 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-cont
   box-shadow: none;
   transition-duration: var(--web-motion-fast);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
   background: var(--ds-action);
   border-color: var(--ds-action);
   color: var(--ds-on-action);
   box-shadow: 0 7px 18px color-mix(in srgb, var(--web-technical-black) 24%, transparent);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .cta.secundario {
+html[data-ontos-web]:not(:has(:where(#stage))) .cta.secundario {
   background: transparent;
   color: var(--acento);
   border: 1px solid var(--ds-control-border);
   border-radius: var(--ds-radius-s);
   box-shadow: none;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.pill, .tag, .badge) {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(.pill, .tag, .badge) {
   font-family: var(--ds-font-corporativa);
   border-radius: var(--ds-radius-s);
 }
-html[lang="es"][data-ontos-web][data-web-page="aplicaciones"] .pill {
+html[data-ontos-web][data-web-page="aplicaciones"] .pill {
   color: var(--texto);
   background: var(--panel);
   border: 1px solid var(--borde);
@@ -238,10 +281,10 @@ html[lang="es"][data-ontos-web][data-web-page="aplicaciones"] .pill {
 
 /* Lectura larga: Newsreader está aprobada para comunicación editorial. Los controles,
    metadatos, tablas y navegación mantienen Jost. */
-html[lang="es"][data-ontos-web][data-web-page="fernando-calle"] :where(article > section > p, .presentacion p, .escrito p),
-html[lang="es"][data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] :where(article section > p, article section > ul, article section > ol, blockquote),
-html[lang="es"][data-ontos-web][data-web-page="privacidad"] :where(body > p, body > ul),
-html[lang="es"][data-ontos-web][data-web-page="aviso-legal"] body > p {
+html[data-ontos-web][data-web-page="fernando-calle"] :where(article > section > p, .presentacion p, .escrito p),
+html[data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] :where(article section > p, article section > ul, article section > ol, blockquote),
+html[data-ontos-web][data-web-page="privacidad"] :where(body > p, body > ul),
+html[data-ontos-web][data-web-page="aviso-legal"] body > p {
   font-family: var(--ds-font-editorial);
   font-size: var(--ds-type-editorial);
   line-height: var(--ds-type-editorial-leading);
@@ -249,130 +292,144 @@ html[lang="es"][data-ontos-web][data-web-page="aviso-legal"] body > p {
   text-align: left;
   hyphens: auto;
 }
-html[lang="es"][data-ontos-web][data-web-page="fernando-calle"] :where(.escrito h3, article section h2),
-html[lang="es"][data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] article section h2 {
+html[data-ontos-web][data-web-page="fernando-calle"] :where(.escrito h3, article section h2),
+html[data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] article section h2 {
   font-family: var(--ds-font-editorial);
   font-weight: 600;
 }
 
 /* Formularios y modal comparten contraste, foco y espacio táctil. */
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea) {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea) {
   background: var(--panel);
   color: var(--texto);
   border: 1px solid var(--ds-control-border);
   border-radius: var(--ds-radius-s);
   font-family: var(--ds-font-corporativa);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(a, button, input, select, textarea, summary):focus-visible {
+html[data-ontos-web]:not(:has(:where(#stage))) :where(a, button, input, select, textarea, summary):focus-visible {
   outline: 3px solid var(--ds-action);
   outline-offset: 3px;
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto {
+html[data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto {
   border-color: var(--borde);
   border-radius: var(--ds-radius);
   background: var(--panel);
   color: var(--texto);
   font-family: var(--ds-font-corporativa);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(h2, label, .dlg-lema) {
+html[data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(h2, label, .dlg-lema) {
   color: var(--texto);
   font-family: var(--ds-font-corporativa);
 }
-html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(input, select, textarea) {
+html[data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(input, select, textarea) {
   background: var(--bg);
 }
 
 /* Herramientas y demos interactivas: solo la envolvente y los mandos. */
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] {
+html[data-ontos-web][data-web-page="editor-pdf"] {
   --border: var(--borde);
   --text: var(--texto);
   --muted: var(--sec);
   --accent: var(--acento);
   --accent-soft: color-mix(in srgb, var(--acento) 22%, var(--panel));
 }
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
+html[data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
   min-height: var(--nav-h);
   max-width: var(--web-shell-max);
   padding-inline: var(--web-shell-pad);
   padding-block: 7px;
 }
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar, #dropzone, #signPanel) {
+html[data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar, #dropzone, #signPanel) {
   background: var(--panel);
   color: var(--texto);
 }
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar button, #signPanel button) {
+html[data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar button, #signPanel button) {
   font-family: var(--ds-font-corporativa);
   border-radius: var(--ds-radius-s);
 }
-html[lang="es"][data-ontos-web] :where(.demo-nav, .ov-wrap, .of-wrap, .ot-wrap) {
+html[data-ontos-web] :where(.demo-nav, .ov-wrap, .of-wrap, .ot-wrap) {
   font-family: var(--ds-font-corporativa);
 }
 /* El lienzo cinematográfico mantiene escala, color y tiempos. Su voz de marca
    (rótulos, apertura, cierre y controles) hereda la familia corporativa. */
-html[lang="es"][data-ontos-web]:has(#stage) body {
+html[data-ontos-web]:has(#stage) body {
   font-family: var(--ds-font-corporativa);
 }
-html[lang="es"][data-ontos-web] :where(.ov-controls button, .of-wrap .btn, .ot-wrap .btn) {
+html[data-ontos-web] :where(.ov-controls button, .of-wrap .btn, .ot-wrap .btn) {
   min-height: 44px;
   border-radius: var(--ds-radius-s);
   border-color: var(--borde);
   font-family: var(--ds-font-corporativa);
 }
-html[lang="es"][data-ontos-web]:has(#stage) :where(.play, .pill a):focus-visible {
+html[data-ontos-web]:has(#stage) :where(.play, .pill a):focus-visible {
   outline: 3px solid var(--ds-brand-teja);
   outline-offset: var(--ds-space-2);
 }
+/* Misma huella visible; el enlace de vuelta alcanza un área táctil de 44 px. */
+html[data-ontos-web]:has(#stage) #volver {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 12px;
+  left: calc(1.4rem - 12px);
+  bottom: calc(1.1rem - 12px);
+}
+html[data-ontos-web]:has(#stage) #volver:focus-visible {
+  outline: 3px solid var(--ds-brand-teja);
+  outline-offset: 2px;
+  border-radius: var(--ds-radius-s);
+}
 
 @media (max-width: 34rem) {
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
+  html[data-ontos-web]:not(:has(:where(#stage))) {
     --nav-h: 6rem;
     --sp-sec: var(--ds-space-7);
     --web-shell-pad: var(--ds-space-4);
   }
-  html[lang="es"][data-ontos-web] .barra nav {
+  html[data-ontos-web] .barra nav {
     min-height: var(--nav-h);
     padding: var(--ds-space-1) var(--ds-space-4);
     gap: 0 var(--ds-space-3);
   }
-  html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
+  html[data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
     padding-block: var(--ds-space-1);
     gap: 0 var(--ds-space-3);
   }
-  html[lang="es"][data-ontos-web] .barra .marca {
+  html[data-ontos-web] .barra .marca {
     min-width: var(--web-logo-width);
     min-height: var(--web-logo-height);
   }
-  html[lang="es"][data-ontos-web] .barra a.item {
+  html[data-ontos-web] .barra a.item {
     font-size: max(var(--ds-type-note), .85rem);
   }
-  html[lang="es"][data-ontos-web] .barra a.item.idioma {
+  html[data-ontos-web] .barra a.item.idioma {
     min-height: 44px;
   }
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .hero h1,
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
+  html[data-ontos-web]:not(:has(:where(#stage))) body .hero h1,
+  html[data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
     max-width: 22ch;
   }
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) footer {
+  html[data-ontos-web]:not(:has(:where(#stage))) footer {
     font-size: max(var(--ds-type-note), .85rem);
   }
-  html[lang="es"][data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien p) {
+  html[data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien p) {
     text-align: start;
     hyphens: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html[lang="es"][data-ontos-web] :where(.cta, .card, .trabajo, .servicio, .edicion, .escrito, .barra .marca) {
+  html[data-ontos-web] :where(.cta, .card, .trabajo, .servicio, .edicion, .escrito, .barra .marca) {
     transition-duration: 0s;
   }
 }
 
 /* El símbolo del área de entrada conserva diámetro visible y variante de fondo. */
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #dropzone > span[aria-hidden="true"] {
+html[data-ontos-web][data-web-page="editor-pdf"] #dropzone > span[aria-hidden="true"] {
   width: var(--web-logo-icon-min) !important;
   height: var(--web-logo-icon-min) !important;
 }
-html[lang="es"][data-ontos-web][data-web-page="entrar"] .sello {
+html[data-ontos-web][data-web-page="entrar"] .sello {
   width: var(--web-logo-icon-min);
   height: var(--web-logo-icon-min);
 }

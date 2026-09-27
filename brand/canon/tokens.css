@@ -2,7 +2,7 @@
 @font-face{font-family:"ONTOS DS Jost";src:url("fonts/jost.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:"ONTOS DS Newsreader";src:url("fonts/newsreader.ttf") format("truetype");font-weight:200 800;font-style:normal;font-display:swap}
 @font-face{font-family:"ONTOS DS Newsreader";src:url("fonts/newsreader-italic.ttf") format("truetype");font-weight:200 800;font-style:italic;font-display:swap}
-html[lang="es"][data-ontos-web]{
+html[data-ontos-web]{
   --ds-brand-teja: #D4713B;
   --ds-brand-granito: #8A8177;
   --ds-brand-arena: #D8C3A3;
@@ -65,13 +65,13 @@ html[lang="es"][data-ontos-web]{
   --ds-web-mix-muted: 24%;
   --ds-web-green-muted: #E0D0B7;
 }
-@media(max-width:640px){html[lang="es"][data-ontos-web]{
+@media(max-width:640px){html[data-ontos-web]{
   --ds-type-display: 44px;
 }}
-@media(prefers-reduced-motion:reduce){html[lang="es"][data-ontos-web]{--ds-motion-arcilla:0ms}}
+@media(prefers-reduced-motion:reduce){html[data-ontos-web]{--ds-motion-arcilla:0ms}}
 
 /* Alias de aplicación web. Propuestas y origen en tokens.json. */
-html[lang="es"][data-ontos-web]{
+html[data-ontos-web]{
 --web-mix-surface:var(--ds-web-mix-surface);
 --web-mix-panel:var(--ds-web-mix-panel);
 --web-technical-black:var(--ds-web-technical-black);
