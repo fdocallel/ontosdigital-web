@@ -1,37 +1,23 @@
 /* Aplicación española de la identidad ONTOS. Se carga después de los estilos de página.
-   Los valores proceden de brand/canon/tokens.css; los roles web oscuros son propuestas.
+   Fondo verde corporativo y roles de lectura clara en ambos esquemas del sistema.
    Las piezas de cine con #stage conservan su dirección de arte y su escala temporal. */
 
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
-  --bg: var(--ds-surface-page);
-  --panel: var(--ds-surface-panel);
-  --borde: var(--ds-border);
-  --texto: var(--ds-ink);
-  --sec: var(--ds-ink-muted);
-  --acento: var(--ds-action);
-  --realce: var(--ds-action);
+  --bg: var(--web-page-surface);
+  --panel: var(--web-dark-panel);
+  --borde: var(--ds-brand-arena);
+  --texto: var(--ds-support-hueso);
+  --sec: var(--web-green-muted);
+  --acento: var(--web-green-muted);
+  --realce: var(--ds-support-hueso);
   --teja: var(--ds-brand-teja);
-  --piedra-logo: var(--ds-brand-granito);
+  --piedra-logo: var(--ds-brand-logo-on-dark);
   --serif: var(--ds-font-corporativa);
   --sans: var(--ds-font-corporativa);
   --sp-sec: var(--ds-space-8);
-  --nav-h: 8.625rem;
-  color-scheme: light;
+  --nav-h: 4rem;
+  color-scheme: dark;
   scroll-padding-top: calc(var(--nav-h) + var(--ds-space-2));
-}
-
-@media (prefers-color-scheme: dark) {
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
-    --bg: var(--web-dark-surface);
-    --panel: var(--web-dark-panel);
-    --borde: var(--web-dark-line);
-    --texto: var(--web-dark-ink);
-    --sec: var(--web-dark-muted);
-    --acento: var(--ds-brand-arena);
-    --realce: var(--ds-brand-arena);
-    --piedra-logo: var(--ds-brand-logo-on-dark);
-    color-scheme: dark;
-  }
 }
 
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body {
@@ -87,11 +73,12 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.stat .n, .hito
   font-variant-numeric: tabular-nums;
 }
 
-/* Cabecera con la firma aprobada, más grande al inicio y compacta al desplazarse.
-   El tramo intermedio usa el wordmark para dejar espacio a los destinos. */
+/* La firma Arcilla conserva su caja mientras el SVG anima nombre y símbolo al scroll. */
 html[lang="es"][data-ontos-web] .barra {
   background: var(--bg);
   border-bottom-color: var(--borde);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 html[lang="es"][data-ontos-web] .barra nav {
   max-width: 86rem;
@@ -104,29 +91,25 @@ html[lang="es"][data-ontos-web] .barra .marca {
   align-items: center;
   justify-content: flex-start;
   flex: none;
-  min-width: var(--web-logo-horizontal-min);
-  min-height: var(--web-logo-icon-min);
+  width: var(--web-logo-width);
+  min-width: var(--web-logo-width);
+  min-height: var(--web-logo-height);
   margin-right: auto;
   color: var(--texto);
 }
-html[lang="es"][data-ontos-web] .barra .marca__full,
-html[lang="es"][data-ontos-web] .barra .marca__compact {
-  align-items: center;
-  justify-content: flex-start;
-}
-html[lang="es"][data-ontos-web] .barra .marca__full { display: flex; }
-html[lang="es"][data-ontos-web] .barra .marca__compact { display: none; }
-html[lang="es"][data-ontos-web] .barra .marca__full img {
+html[lang="es"][data-ontos-web] .barra .marca__arcilla {
   display: block;
-  width: var(--web-logo-horizontal-min);
-  height: auto;
-  max-width: none;
+  position: relative;
+  width: var(--web-logo-width);
+  height: var(--web-logo-height);
+  flex: none;
 }
-html[lang="es"][data-ontos-web] .barra .marca__compact img {
+html[lang="es"][data-ontos-web] .barra .marca__arcilla :where(svg, img, canvas) {
   display: block;
-  width: var(--web-logo-wordmark-min);
-  height: auto;
+  width: 100%;
+  height: 100%;
   max-width: none;
+  object-fit: contain;
 }
 html[lang="es"][data-ontos-web] .barra .marca__label {
   position: absolute;
@@ -138,18 +121,6 @@ html[lang="es"][data-ontos-web] .barra .marca__label {
   clip-path: inset(50%);
   white-space: nowrap;
 }
-html[lang="es"][data-ontos-web] .barra .marca-dark { display: none !important; }
-@media (prefers-color-scheme: dark) {
-  html[lang="es"][data-ontos-web] .barra .marca-light { display: none !important; }
-  html[lang="es"][data-ontos-web] .barra .marca-dark { display: block !important; }
-}
-html[lang="es"][data-ontos-web].is-condensado { --nav-h: 5.25rem; }
-html[lang="es"][data-ontos-web].is-condensado .barra .marca {
-  min-width: var(--web-logo-wordmark-min);
-  min-height: 0;
-}
-html[lang="es"][data-ontos-web].is-condensado .barra .marca__full { display: none; }
-html[lang="es"][data-ontos-web].is-condensado .barra .marca__compact { display: flex; }
 html[lang="es"][data-ontos-web] .barra a.item {
   color: var(--texto);
   font-family: var(--ds-font-corporativa);
@@ -160,7 +131,7 @@ html[lang="es"][data-ontos-web] .barra a.item {
 html[lang="es"][data-ontos-web] .barra a.item:hover,
 html[lang="es"][data-ontos-web] .barra a.item[aria-current="page"] {
   color: var(--acento);
-  border-bottom-color: var(--ds-brand-teja);
+  border-bottom-color: var(--acento);
 }
 html[lang="es"][data-ontos-web] .barra a.icono-contacto {
   width: 44px;
@@ -171,7 +142,7 @@ html[lang="es"][data-ontos-web] .barra a.item.idioma {
   min-height: 36px;
   display: inline-flex;
   align-items: center;
-  border-color: var(--ds-control-border);
+  border-color: var(--borde);
   border-radius: var(--ds-radius-s);
 }
 
@@ -183,12 +154,12 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .fa
   color: var(--texto);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) body :where(.card, .familia, .trabajo, .servicio, .edicion, .caja, .escrito, .hito, .demo-bloque, .demo-cta):is(:hover, :focus-within) {
-  border-color: var(--ds-brand-teja);
+  border-color: var(--ds-support-hueso);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
-  background: var(--ds-action);
-  border-color: var(--ds-action);
-  color: var(--ds-on-action);
+  background: var(--ds-support-hueso);
+  border: 1px solid var(--ds-support-hueso);
+  color: var(--ds-brand-verde);
   border-radius: var(--ds-radius-s);
   font-family: var(--ds-font-corporativa);
   font-weight: 600;
@@ -196,23 +167,15 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-cont
   transition-duration: var(--web-motion-fast);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
-  background: color-mix(in oklab, var(--ds-action) 88%, var(--ds-brand-teja));
-  border-color: var(--ds-action);
-  color: var(--ds-on-action);
-  box-shadow: 0 7px 18px color-mix(in srgb, var(--ds-action) 15%, transparent);
-}
-@media (prefers-color-scheme: dark) {
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario) {
-    border: 1px solid var(--ds-brand-arena);
-  }
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.cta, .dlg-contacto .cta, button.primary):not(.secundario):hover {
-    border-color: var(--ds-brand-arena);
-  }
+  background: var(--ds-brand-arena);
+  border-color: var(--ds-brand-arena);
+  color: var(--ds-brand-verde);
+  box-shadow: 0 7px 18px color-mix(in srgb, var(--web-technical-black) 24%, transparent);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .cta.secundario {
   background: transparent;
   color: var(--acento);
-  border: 1px solid var(--ds-control-border);
+  border: 1px solid var(--borde);
   border-radius: var(--ds-radius-s);
   box-shadow: none;
 }
@@ -222,7 +185,7 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(.pill, .tag, .b
 }
 html[lang="es"][data-ontos-web][data-web-page="aplicaciones"] .pill {
   color: var(--texto);
-  background: color-mix(in srgb, var(--ds-brand-arena) 24%, var(--panel));
+  background: var(--panel);
   border: 1px solid var(--borde);
 }
 
@@ -249,16 +212,16 @@ html[lang="es"][data-ontos-web][data-web-page="escrito-plan-bim-ingenieria"] art
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea) {
   background: var(--panel);
   color: var(--texto);
-  border: 1px solid var(--ds-control-border);
+  border: 1px solid var(--borde);
   border-radius: var(--ds-radius-s);
   font-family: var(--ds-font-corporativa);
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(a, button, input, select, textarea, summary):focus-visible {
-  outline: 3px solid var(--ds-brand-teja);
+  outline: 3px solid var(--ds-support-hueso);
   outline-offset: 3px;
 }
 html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto {
-  border-color: var(--ds-control-border);
+  border-color: var(--borde);
   border-radius: var(--ds-radius);
   background: var(--panel);
   color: var(--texto);
@@ -274,22 +237,17 @@ html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) .dlg-contacto :where(i
 
 /* Herramientas y demos interactivas: solo la envolvente y los mandos. */
 html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] {
-  --border: var(--ds-control-border);
+  --border: var(--borde);
   --text: var(--texto);
   --muted: var(--sec);
   --accent: var(--acento);
-  --accent-soft: color-mix(in srgb, var(--ds-action) 15%, var(--panel));
+  --accent-soft: color-mix(in srgb, var(--acento) 22%, var(--panel));
 }
 html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
-  min-height: 4.75rem;
+  min-height: var(--nav-h);
   max-width: none;
+  padding-block: 7px;
 }
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .marca {
-  min-width: var(--web-logo-wordmark-min);
-  min-height: 0;
-}
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .marca__full { display: none; }
-html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .marca__compact { display: flex; }
 html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] :where(#toolbar, #dropzone, #signPanel) {
   background: var(--panel);
   color: var(--texto);
@@ -306,16 +264,10 @@ html[lang="es"][data-ontos-web] :where(.demo-nav, .ov-wrap, .of-wrap, .ot-wrap) 
 html[lang="es"][data-ontos-web]:has(#stage) body {
   font-family: var(--ds-font-corporativa);
 }
-@media (prefers-color-scheme: dark) {
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) :where(input[type="text"], input[type="email"], input[type="search"], select, textarea),
-  html[lang="es"][data-ontos-web] .barra a.item.idioma {
-    border-color: var(--ds-brand-arena);
-  }
-}
 html[lang="es"][data-ontos-web] :where(.ov-controls button, .of-wrap .btn, .ot-wrap .btn) {
   min-height: 44px;
   border-radius: var(--ds-radius-s);
-  border-color: var(--ds-control-border);
+  border-color: var(--borde);
   font-family: var(--ds-font-corporativa);
 }
 html[lang="es"][data-ontos-web]:has(#stage) :where(.play, .pill a):focus-visible {
@@ -323,28 +275,23 @@ html[lang="es"][data-ontos-web]:has(#stage) :where(.play, .pill a):focus-visible
   outline-offset: var(--ds-space-2);
 }
 
-@media (max-width: 73.75rem) {
-  html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) { --nav-h: 5.25rem; }
-  html[lang="es"][data-ontos-web] .barra .marca {
-    min-width: var(--web-logo-wordmark-min);
-    min-height: 0;
-  }
-  html[lang="es"][data-ontos-web] .barra .marca__full { display: none; }
-  html[lang="es"][data-ontos-web] .barra .marca__compact { display: flex; }
-}
 @media (max-width: 34rem) {
   html[lang="es"][data-ontos-web]:not(:has(:where(#stage))) {
-    --nav-h: 6.875rem;
+    --nav-h: 6rem;
     --sp-sec: var(--ds-space-7);
   }
   html[lang="es"][data-ontos-web] .barra nav {
     min-height: var(--nav-h);
-    padding: var(--ds-space-2) var(--ds-space-4);
+    padding: var(--ds-space-1) var(--ds-space-4);
+    gap: 0 var(--ds-space-3);
+  }
+  html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #top .barra nav {
+    padding-block: var(--ds-space-1);
     gap: 0 var(--ds-space-3);
   }
   html[lang="es"][data-ontos-web] .barra .marca {
-    min-width: var(--web-logo-wordmark-min);
-    min-height: 44px;
+    min-width: var(--web-logo-width);
+    min-height: var(--web-logo-height);
   }
   html[lang="es"][data-ontos-web] .barra a.item {
     font-size: max(var(--ds-type-note), .85rem);
@@ -379,9 +326,4 @@ html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] #dropzone > span[ari
 html[lang="es"][data-ontos-web][data-web-page="entrar"] .sello {
   width: var(--web-logo-icon-min);
   height: var(--web-logo-icon-min);
-}
-@media (prefers-color-scheme: dark) {
-  html[lang="es"][data-ontos-web][data-web-page="editor-pdf"] {
-    --border: var(--ds-brand-arena);
-  }
 }

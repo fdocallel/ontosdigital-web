@@ -59,6 +59,11 @@ html[lang="es"][data-ontos-web]{
   --ds-web-dark-muted: #D8C3A3;
   --ds-web-dark-line: #8A8177;
   --ds-web-motion-fast: 180ms;
+  --ds-web-page-surface: #315B4E;
+  --ds-web-logo-width: 150px;
+  --ds-web-logo-height: 50px;
+  --ds-web-mix-muted: 24%;
+  --ds-web-green-muted: #E0D0B7;
 }
 @media(max-width:640px){html[lang="es"][data-ontos-web]{
   --ds-type-display: 44px;
@@ -76,6 +81,11 @@ html[lang="es"][data-ontos-web]{
 --web-dark-muted:var(--ds-web-dark-muted);
 --web-dark-line:var(--ds-web-dark-line);
 --web-motion-fast:var(--ds-web-motion-fast);
+--web-page-surface:var(--ds-web-page-surface);
+--web-logo-width:var(--ds-web-logo-width);
+--web-logo-height:var(--ds-web-logo-height);
+--web-mix-muted:var(--ds-web-mix-muted);
+--web-green-muted:var(--ds-web-green-muted);
 --web-logo-horizontal-min:411px;
 --web-logo-icon-min:115px;
 --web-logo-wordmark-min:120px;

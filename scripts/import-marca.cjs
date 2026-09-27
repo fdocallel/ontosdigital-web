@@ -25,6 +25,15 @@ function artifacts(root){
   const min=layout=>layout==='wordmark'?cfg.minimos.digital.wordmark_ancho_px:Math.ceil(marks.dimensions(layout).width/marks.model.D*cfg.minimos.digital.simbolo_diametro_px);
   const out={};
   const sources=[svgPath,'data/mensaje.json','data/manual-marca.json','data/marca-construccion.json','data/marca-wordmark-geometria.json','data/marca-aplicaciones.json','data/design-system.json','data/design-system-tokens.json'];
+  const motion=JSON.parse(read('data/mensaje.json')).fundamentos.movimiento;
+  const glyph=JSON.parse(read('data/marca-movimiento-geometria.json'));
+  if(hash(read(model.familias.corporativa.archivo))!==glyph.font.sha256)throw Error('Arcilla: la geometría no corresponde a la fuente Jost');
+  sources.push('scripts/lib/marca-movimiento.js','data/marca-movimiento-geometria.json','app/img/brand/logo-esqueleto.svg');
+  out['brand/canon/movimiento.js']=read('scripts/lib/marca-movimiento.js');
+  out['brand/canon/movimiento-data.js']='// GENERADO: geometría pública y configuración del movimiento Arcilla.\n'+
+    'window.ontosBrandAssets='+JSON.stringify({'logo.svg':svg,'logo-esqueleto.svg':read('app/img/brand/logo-esqueleto.svg').toString()})+';\n'+
+    'window.ontosGlyphGeometry='+JSON.stringify({O:glyph.O,glyphs:glyph.glyphs,wordmark:glyph.wordmark})+';\n'+
+    'window.ontosMotionConfig='+JSON.stringify({duracion_ms:motion.duracion_ms,scroll:motion.scroll,nav_selector:'.barra .marca',host_selector:'[data-arcilla-host]',compact_frame:true})+';\n';
   const fonts=[model.familias.corporativa.archivo,model.familias.editorial.archivo,model.familias.editorial.cursiva,'docs/diseno/ontos/marca/wordmark/fuentes/jost-OFL.txt','docs/ontos/assets/tipografia/newsreader-OFL.txt'];
   for(const source of fonts){sources.push(source);out['brand/canon/fonts/'+path.basename(source)]=read(source);}
   for(const layout of ['horizontal','vertical','wordmark','icon'])for(const tone of ['color','color-dark','positive','negative'])
@@ -41,7 +50,7 @@ function artifacts(root){
   const home=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
   const headline=home.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g,'').trim();
   if(!headline)throw Error('Portada sin titular para imagen social');
-  const social=`<!doctype html><html lang="es"><meta charset="utf-8"><style>@font-face{font-family:Jost;src:url(data:font/ttf;base64,${read(model.familias.corporativa.archivo).toString('base64')})}*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:${tokens['surface-page'].valor};color:${tokens['brand-verde'].valor};font-family:Jost,sans-serif;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px}.firma{width:570px;margin-bottom:68px}p{font-size:34px;line-height:1.3;text-align:center;margin:0;max-width:1080px}small{font-size:24px;margin-top:42px}i{display:block;width:44px;height:4px;background:${tokens['brand-teja'].valor};margin-top:24px}</style><div class="firma">${marks.logo('horizontal','color')}</div><p>${esc(headline)}</p><small>ontosdigital.es</small><i></i></html>`;
+  const social=`<!doctype html><html lang="es"><meta charset="utf-8"><style>@font-face{font-family:Jost;src:url(data:font/ttf;base64,${read(model.familias.corporativa.archivo).toString('base64')})}*{box-sizing:border-box}body{margin:0;width:1200px;height:630px;background:${tokens['web-page-surface'].valor};color:${tokens['brand-logo-on-dark'].valor};font-family:Jost,sans-serif;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:60px}.firma{width:570px;margin-bottom:68px}p{font-size:34px;line-height:1.3;text-align:center;margin:0;max-width:1080px}small{font-size:24px;margin-top:42px}i{display:block;width:44px;height:4px;background:${tokens['brand-teja'].valor};margin-top:24px}</style><div class="firma">${marks.logo('horizontal','color-dark')}</div><p>${esc(headline)}</p><small>ontosdigital.es</small><i></i></html>`;
   out['brand/canon/og.png']=socialCard(social,root);
   out['brand/canon/provenance.json']=JSON.stringify({_doc:'GENERADO por scripts/import-marca.cjs. Copias de entrega, no fuentes editables.',source:'ONTOS · manual de marca 1–3 y Design System',scope:'es',sources:Object.fromEntries(sources.map(p=>[p,hash(read(p))])),outputs:Object.fromEntries(Object.entries(out).map(([p,b])=>[p,hash(b)]))},null,2)+'\n';
   const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
@@ -51,21 +60,20 @@ function artifacts(root){
     const rel=path.posix.relative(path.posix.dirname(file),'brand')||'brand';
     const route=file==='editor-pdf/index.html'?'editor-pdf':path.basename(file,'.html');
     html=html.replace(/<html\b([^>]*)>/,(_,attrs)=>'<html'+attrs.replace(/\sdata-ontos-web(?:="[^"]*")?/g,'').replace(/\sdata-web-page="[^"]*"/g,'')+` data-ontos-web data-web-page="${route}">`);
-    const links=`<!-- MARCA:estilos · generado desde el canon; diseño español -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">\n<!-- /MARCA:estilos -->`;
+    const links=`<!-- MARCA:estilos · generado desde el canon; diseño español -->\n<link rel="stylesheet" href="${rel}/canon/tokens.css">\n<link rel="stylesheet" href="${rel}/marca-es.css">\n<script defer src="${rel}/canon/movimiento-data.js"></script>\n<script defer src="${rel}/canon/movimiento.js"></script>\n<!-- /MARCA:estilos -->`;
     if(html.includes('<!-- MARCA:estilos'))html=html.replace(/<!-- MARCA:estilos[\s\S]*?<!-- \/MARCA:estilos -->/,links);
     else html=html.replace('</head>',links+'\n</head>');
     html=html.replace(/(<link\b[^>]*rel="icon"[^>]*href=")[^"]*(")/g,'$1'+rel+'/canon/favicon.svg$2');
     html=html.replace(/(<meta\b[^>]*(?:property="og:image"|name="twitter:image")[^>]*content=")https:\/\/ontosdigital\.es\/brand\/og\.png("[^>]*>)/g,'$1https://ontosdigital.es/brand/canon/og.png$2');
     html=html.replace(/<a\b([^>]*class="marca"[^>]*)>[\s\S]*?<\/a>/g,(_,attrs)=>{
-      const images=(layout,cls)=>`<span class="${cls}" aria-hidden="true"><img class="marca-light" src="${rel}/canon/${layout}-color.svg" alt=""><img class="marca-dark" src="${rel}/canon/${layout}-color-dark.svg" alt=""></span>`;
-      return `<a${attrs}>${images('horizontal','marca__full')}${images('wordmark','marca__compact')}<span class="marca__word marca__label">ONTOS</span></a>`;
+      return `<a${attrs}><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-dark" src="${rel}/canon/wordmark-color-dark.svg" alt=""></span><span class="marca__word marca__label">ONTOS</span></a>`;
     });
     // Restantes sellos/escenas: conservar atributos, identidad de DOM y animaciones.
     html=html.replace(/<svg\b([^>]*)>([\s\S]*?)<\/svg>/g,(all,attrs,body)=>{
       if(!/viewBox="0 0 100 100"/.test(attrs)||!/<circle\b[^>]*r="16\.5"/.test(body)||(body.match(/<path\b/g)||[]).length!==8)return all;
       return '<svg'+attrs+'>'+iconBody+'</svg>';
     });
-    html=html.replace(/(<meta\s+name="theme-color"\s+content=")[^"]*("[^>]*>)/g,(_,a,b)=>a+tokens[b.includes('dark')?'web-dark-surface':'surface-page'].valor+b);
+    html=html.replace(/(<meta\s+name="theme-color"\s+content=")[^"]*("[^>]*>)/g,(_,a,b)=>a+tokens['web-page-surface'].valor+b);
     out[file]=html;
   }
   return out;
