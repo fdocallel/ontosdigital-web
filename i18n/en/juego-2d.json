@@ -1,6 +1,7 @@
 {
   "_doc": "Traducción al inglés de juego-2d.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "ONTOS vivo · Patio de juegos": "ONTOS alive · Playground",
+  "Controla a ONTOS en un patio de juegos 2D: rueda, salta, recoge destellos y lleva la semilla a su sitio. Juega con teclado o controles táctiles.": "Control ONTOS in a 2D playground: roll, jump, collect sparks and carry the seed where it belongs. Play with a keyboard or touch controls.",
   "Navegación": "Navigation",
   "← Aplicaciones": "← Applications",
   "Patio de juegos · materia y movimiento": "Playground · matter and motion",
@@ -11,6 +12,7 @@
   "Un núcleo que piensa y conecta. Ojos para descubrir. Manos para actuar.": "A core that thinks and connects. Eyes to discover. Hands to act.",
   "● Curioseando": "● Exploring",
   "Patio de juegos de ONTOS": "ONTOS playground",
+  "Esta experiencia interactiva necesita JavaScript. Actívalo para usarla o <a href=\"aplicaciones.html\">vuelve a Aplicaciones</a> para consultar el resto de trabajos.": "This interactive experience requires JavaScript. Enable it to use the experience, or <a href=\"aplicaciones.html\">return to Applications</a> to explore the other work.",
   "Controla a ONTOS con A y D o flechas; espacio salta, Mayús acelera, E coge o deja la semilla, H saluda, P pausa.": "Control ONTOS with A and D or arrow keys; Space jumps, Shift speeds up, E picks up or drops the seed, H waves, P pauses.",
   "Tu navegador necesita Canvas para mostrar el juego.": "Your browser needs Canvas to display the game.",
   "Destellos 0 / 8": "Sparkles 0 / 8",

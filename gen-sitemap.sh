@@ -1,11 +1,45 @@
 #!/bin/sh
 # Regenera sitemap.xml con el lastmod real de cada página (fecha del último commit que la tocó).
 # Incluye el espejo inglés de /en/, que se genera con ./i18n/gen-en.py.
-# Uso: ./gen-sitemap.sh   ·   se llama solo desde el pre-commit.
+# Uso: ./gen-sitemap.sh [--es] · --es conserva literalmente las entradas inglesas.
 set -e
 cd "$(dirname "$0")"
-PAGINAS="index.html producto.html consultoria.html contacto.html aplicaciones.html armario.html modelado-3d.html juego-2d.html animacion-3d.html visita-3d.html bim.html blog.html escrito-plan-bim-ingenieria.html fernando-calle.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html editor-pdf/index.html"
+PAGINAS="index.html producto.html contacto.html aplicaciones.html armario.html modelado-3d.html juego-2d.html animacion-3d.html visita-3d.html bim.html escrito-plan-bim-ingenieria.html fernando-calle.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html editor-pdf/index.html"
+if [ "${1:-}" = "--es" ]; then
+  python3 - "$PAGINAS" <<'PY'
+from pathlib import Path
+from datetime import date
+import re, subprocess, sys
+source = Path('sitemap.xml').read_text()
+blocks = re.findall(r'  <url>.*?</url>\n', source, re.S)
+english = {re.search(r'<loc>(.*?)</loc>', b)[1]: b for b in blocks if '<loc>https://ontosdigital.es/en/' in b}
+if not english:
+    raise SystemExit('Sitemap ES: faltan las entradas inglesas que deben conservarse')
+out = ['<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n']
+for file in sys.argv[1].split():
+    page = Path(file)
+    if not page.exists() or '<meta name="robots" content="noindex"' in page.read_text():
+        continue
+    changed = subprocess.check_output(['git', 'status', '--porcelain', '--', file], text=True).strip()
+    last = subprocess.check_output(['git', 'log', '-1', '--format=%cs', '--', file], text=True).strip()
+    stamp = date.today().isoformat() if changed or not last else last
+    route = '' if file == 'index.html' else 'editor-pdf/' if file == 'editor-pdf/index.html' else file
+    loc = 'https://ontosdigital.es/' + route
+    out.append(f'  <url>\n    <loc>{loc}</loc>\n    <lastmod>{stamp}</lastmod>\n  </url>\n')
+    translated = 'https://ontosdigital.es/en/' + route
+    if translated in english:
+        out.append(english.pop(translated))
+if english:
+    raise SystemExit('Sitemap ES: hay entradas inglesas fuera del inventario; revisar antes de regenerar')
+out.append('</urlset>\n')
+Path('sitemap.xml').write_text(''.join(out))
+print('Sitemap: fechas ES actualizadas; entradas EN conservadas')
+PY
+  exit 0
+fi
+[ "$#" -eq 0 ] || { echo 'Uso: gen-sitemap.sh [--es]' >&2; exit 1; }
 fecha_de() {
+  if [ -n "$(git status --porcelain -- "$1")" ]; then date +%F; return; fi
   f=$(git log -1 --format=%cs -- "$1" 2>/dev/null)
   [ -n "$f" ] || f=$(date +%F)
   echo "$f"

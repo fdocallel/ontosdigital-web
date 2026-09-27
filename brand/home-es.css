@@ -1,0 +1,188 @@
+/* Portada española: el verde profundo se concentra en una sola pieza.
+   Se carga después de marca-es.css y no altera las páginas interiores. */
+html[data-ontos-web][data-web-page="index"] .home-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 4vw, 72px);
+  margin-left: var(--web-content-left, clamp(16px, 4vw, 52px));
+  margin-right: var(--web-content-right, clamp(16px, 4vw, 52px));
+  padding-block: clamp(42px, 5.5vw, 76px) clamp(24px, 3vw, 48px);
+}
+
+html[data-ontos-web][data-web-page="index"] .home-intro__statement {
+  color: var(--ds-ink);
+  font-family: var(--ds-font-corporativa);
+  font-size: clamp(34px, calc(3.05vw + 2px), 42px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  text-wrap: pretty;
+}
+
+html[data-ontos-web][data-web-page="index"] .home-intro__subtitle {
+  max-width: 36ch;
+  justify-self: end;
+  color: var(--ds-ink);
+  font-family: var(--ds-font-corporativa);
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 300;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature {
+  --home-surface: var(--web-home-surface);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(480px, 62vh, 700px);
+  margin-left: var(--home-left, var(--web-content-left, clamp(16px, 4vw, 52px)));
+  margin-right: var(--home-right, var(--web-content-right, clamp(16px, 4vw, 52px)));
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--home-radius, 12px);
+  color: var(--ds-support-hueso);
+  text-align: center;
+  background: radial-gradient(ellipse 85% 100% at 100% 5%, color-mix(in srgb, var(--ds-brand-verde) 65%, transparent), transparent 70%),
+              radial-gradient(ellipse 85% 110% at 0% 110%, color-mix(in srgb, var(--ds-web-technical-black) 26%, transparent), transparent 76%),
+              linear-gradient(125deg, var(--home-surface) 5%, color-mix(in srgb, var(--home-surface) 70%, var(--ds-brand-verde)) 62%, var(--home-surface) 100%);
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' seed='6' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .25 .25 .25 0 -.25'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: .36;
+  transform: translate3d(0, var(--home-drift, 0px), 0);
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature__inner {
+  width: min(100%, 1160px);
+  margin-inline: auto;
+  padding: clamp(52px, 6vw, 96px) clamp(30px, 6.7vw, 106px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature .kicker {
+  max-width: 46rem;
+  margin-inline: auto;
+  margin-bottom: clamp(22px, 3vw, 38px);
+  color: var(--web-green-muted);
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 600;
+  letter-spacing: .15em;
+  line-height: 1.5;
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature h1 {
+  max-width: 18ch;
+  margin: 0 auto;
+  color: var(--ds-support-hueso);
+  font-size: clamp(48px, 5.3vw, 68px);
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature .ctas {
+  justify-content: center;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature .cta {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ds-support-hueso);
+  color: var(--home-surface);
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature .cta:hover {
+  background: var(--ds-brand-arena);
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--ds-web-technical-black) 24%, transparent);
+}
+
+html[data-ontos-web][data-web-page="index"] body .home-feature .cta:focus-visible {
+  outline: 3px solid var(--ds-support-hueso);
+  outline-offset: 4px;
+}
+
+html[data-ontos-web][data-web-page="index"] .home-feature ~ .wrap .entrada {
+  padding-top: clamp(64px, 7.5vw, 104px);
+}
+
+@media (max-width: 48rem) {
+  html[data-ontos-web][data-web-page="index"] .home-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-block: 34px 30px;
+  }
+  html[data-ontos-web][data-web-page="index"] .home-intro__statement {
+    font-size: clamp(26px, calc(6.2vw + 2px), 30px);
+    line-height: 1.28;
+  }
+  html[data-ontos-web][data-web-page="index"] .home-intro__subtitle {
+    max-width: 42ch;
+    justify-self: start;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 40rem) {
+  html[data-ontos-web][data-web-page="index"] body .home-feature {
+    min-height: 460px;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature__inner {
+    padding: 52px clamp(24px, 7vw, 34px);
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature h1 {
+    font-size: clamp(40px, 10.5vw, 44px);
+    max-width: 18ch;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature .kicker {
+    font-size: 12px;
+    letter-spacing: .12em;
+  }
+}
+
+@media (max-width: 340px) {
+  html[data-ontos-web][data-web-page="index"] .home-intro {
+    gap: 12px;
+    padding-block: 20px 18px;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature {
+    min-height: 428px;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature__inner {
+    padding-inline: 22px;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature .kicker {
+    margin-bottom: 16px;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature .ctas {
+    margin-top: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-ontos-web][data-web-page="index"] body .home-feature {
+    margin-left: var(--web-content-left, clamp(16px, 4vw, 52px));
+    margin-right: var(--web-content-right, clamp(16px, 4vw, 52px));
+    border-radius: 12px;
+  }
+  html[data-ontos-web][data-web-page="index"] body .home-feature::before {
+    transform: none;
+  }
+}

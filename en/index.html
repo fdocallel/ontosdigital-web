@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ontos-web data-web-page="index">
 <head>
 <!-- GENERADO por i18n/gen-en.py desde ../index.html · no editar a mano -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ONTOS · everything that's yours, in order and up to date</title>
-<meta name="theme-color" content="#faf8f5">
-<meta name="theme-color" content="#0f0e0c" media="(prefers-color-scheme: dark)">
-<link rel="icon" type="image/svg+xml" href="/brand/favicon.svg">
+<title>ONTOS · information engineering, on demand</title>
+<meta name="theme-color" content="#F3EDE5">
+<meta name="theme-color" content="#F3EDE5" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/svg+xml" href="/brand/canon/favicon.svg">
 <link rel="canonical" href="https://ontosdigital.es/en/">
 <!-- i18n:alt -->
 <link rel="alternate" hreflang="es" href="https://ontosdigital.es/">
@@ -15,27 +15,30 @@
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/">
 <!-- /i18n:alt -->
 <meta name="msvalidate.01" content="515812BC9718626E8FC3D1D0174B09DB">
-<meta name="description" content="ONTOS: a digital twin of your life and business that an AI keeps up to date, and consulting on demand: automation, BIM, apps, websites and 3D.">
-<meta property="og:title" content="ONTOS · everything that's yours, in order and up to date">
-<meta property="og:description" content="ONTOS: a digital twin of your life and business that an AI keeps up to date, and consulting on demand: automation, BIM, apps, websites and 3D.">
-<meta property="og:image" content="https://ontosdigital.es/brand/og.png">
+<!-- web.title, web.description: data/mensaje.json en el repo ONTOS (v5, 24-sep-2026) -->
+<meta name="description" content="On-demand consulting: automation and AI, BIM in public tenders, custom apps and websites, 2D and 3D experiences. Fernando Calle · ONTOS.">
+<meta property="og:title" content="ONTOS · information engineering, on demand">
+<meta property="og:description" content="On-demand consulting: automation and AI, BIM in public tenders, custom apps and websites, 2D and 3D experiences. Fernando Calle · ONTOS.">
+<meta property="og:image" content="https://ontosdigital.es/brand/canon/og-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://ontosdigital.es/en/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="/brand/tokens.css">
+<script src="/brand/barra.js" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "ONTOS",
+  "description": "On-demand consulting: automation and AI, BIM in public tenders, custom apps and websites, 2D and 3D experiences. Fernando Calle · ONTOS.",
   "url": "https://ontosdigital.es/en/",
   "email": "hola@ontosdigital.es",
   "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
   "areaServed": "ES",
   "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
-  "founder": { "@type": "Person", "@id": "https://ontosdigital.es/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Civil Engineer", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/en/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
+  "founder": { "@type": "Person", "@id": "https://ontosdigital.es/en/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Civil Engineer", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/en/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
 }
 </script>
 <style>
@@ -50,100 +53,136 @@
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
   h1, h3, .serif { font-family: var(--serif); }
 
-  /* ---- hero ---- */
+  /* ---- hero: kicker + titular grande + lema + un botón (v5: la portada es la consultoría) ---- */
   .hero {
-    min-height: 78vh;
+    min-height: min(72vh, 42rem);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; position: relative; overflow: hidden;
-    padding: 4rem 1.5rem 3.5rem;
+    padding: 5rem 1.5rem 4.5rem;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 45% at 50% 28%, rgba(212,113,59,0.10), transparent 70%);
+    background: radial-gradient(ellipse 60% 45% at 50% 32%, rgba(212,113,59,0.10), transparent 70%);
     pointer-events: none;
   }
-  .arco-svg { width: 104px; color: var(--piedra-logo); margin-bottom: 1.6rem; }
-  /* el sistema se monta: las áreas aparecen de abajo arriba, el núcleo llega, los radios conectan */
-  .arco-svg .dovela { opacity: 0; animation: dovela 0.4s ease forwards; animation-delay: 0.4s; }
-  .arco-svg .dovela:nth-child(4), .arco-svg .dovela:nth-child(6) { animation-delay: 0.3s; }
-  .arco-svg .dovela:nth-child(3), .arco-svg .dovela:nth-child(7) { animation-delay: 0.2s; }
-  .arco-svg .dovela:nth-child(2), .arco-svg .dovela:nth-child(8) { animation-delay: 0.1s; }
-  .arco-svg .dovela:nth-child(5) { animation-delay: 0s; }
-  .arco-svg .nucleo { opacity: 0; transform-box: fill-box; transform-origin: center; animation: nucleo 0.5s cubic-bezier(0.34, 1.3, 0.5, 1) forwards; animation-delay: 0.75s; }
-  .arco-svg .radio { stroke-dasharray: 14; stroke-dashoffset: 14; animation: radio 0.4s ease forwards; animation-delay: 1.15s; }
-  @keyframes dovela { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  @keyframes nucleo { from { opacity: 0; transform: scale(0.4); } to { opacity: 1; transform: scale(1); } }
-  @keyframes radio  { to { stroke-dashoffset: 0; } }
-  @media (prefers-reduced-motion: reduce) {
-    .arco-svg .dovela, .arco-svg .nucleo { animation: none; opacity: 1; }
-    .arco-svg .radio { animation: none; stroke-dashoffset: 0; }
-  }
-  .wordmark {
-    font-family: var(--sans); font-size: 1.1rem; font-weight: 650;
-    letter-spacing: 0.3em; text-indent: 0.3em; color: var(--sec);
-    margin-bottom: 1.8rem;
+  .kicker {
+    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.6rem; font-weight: 600;
   }
   .hero h1 {
-    font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
-    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
+    font-size: clamp(2.3rem, 6.4vw, 4.4rem); font-weight: 600;
+    line-height: 1.08; max-width: 52rem; letter-spacing: -0.02em; text-wrap: balance;
   }
   .hero .lema {
-    margin-top: 1.2rem; max-width: 40rem;
-    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
+    margin-top: 1.6rem; max-width: 40rem;
+    font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--sec); text-wrap: balance;
   }
-  .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .hero .ctas { margin-top: 2.6rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
     display: inline-block;
-    padding: 0.8rem 1.8rem; border-radius: 999px;
+    padding: 0.85rem 1.9rem; border-radius: 999px;
     background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
-  .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
-  .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
 
-  /* ---- Qué es ONTOS: un párrafo, centrado en la página y justificado ---- */
-  section { padding: 3rem 0 4.2rem; }
+  /* ---- secciones: ritmo amplio (--sp-sec en brand/tokens.css) ---- */
+  section { padding: var(--sp-sec) 0; }
+  section + section { border-top: 1px solid var(--borde); }
   h2 {
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
-    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
   }
-  .intro { padding-top: 1rem; padding-bottom: 1.5rem; }
+  /* prosa justificada (Fernando, 21-sep-2026); las tarjetas se quedan a la izquierda */
+  .entrada p, .intro p, .bajada, .quien p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .entrada { padding-top: 0; }
+  .entrada p {
+    max-width: 46rem; margin: 0 auto;
+    font-size: clamp(1.15rem, 2.3vw, 1.4rem); line-height: 1.55;
+  }
   .intro h2 { text-align: center; }
-  .intro p {
-    max-width: 44rem; margin: 0 auto; font-size: 1.12rem;
-    text-align: justify; hyphens: auto; -webkit-hyphens: auto;
-  }
+  .intro p { max-width: 44rem; margin: 0 auto; font-size: 1.12rem; }
   .intro strong { color: var(--realce); font-weight: 600; }
 
-  /* ---- la demo del sistema, integrada: póster de su primera escena y, al pulsar, la animación ---- */
-  .demo-sistema { display: block; color: var(--sec); }
-  .demo-sistema .marco {
-    position: relative; display: block; width: 100%; aspect-ratio: 16 / 9;
-    border-radius: 14px; border: 1px solid var(--borde); background: #100f0d; overflow: hidden;
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
+  .card {
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    padding: 1.8rem 1.6rem;
   }
-  .demo-play {
-    display: block; width: 100%; height: 100%; padding: 0; margin: 0; border: 0;
-    background: none; cursor: pointer; font: inherit; color: inherit; text-align: inherit;
+  .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .card p { font-size: 0.95rem; color: var(--sec); }
+
+  /* las cinco familias, numeradas (patrón editorial: número teja + título + párrafo) */
+  .familia { display: flex; flex-direction: column; }
+  .familia .num, .pasos .num { display: block; font-size: 0.8rem; color: var(--acento); letter-spacing: 0.15em; margin-bottom: 0.8rem; font-weight: 600; }
+  .familia p { flex: 1; }
+  .familia .enlaces { list-style: none; margin-top: 1.2rem; border-top: 1px solid var(--borde); padding-top: 0.6rem; }
+  .familia .enlaces li a { display: inline-block; padding: 0.45rem 0; font-size: 0.9rem; font-weight: 600; color: var(--acento); text-decoration: none; }
+  .familia .enlaces li a:hover { text-decoration: underline; }
+
+  /* así empieza un encargo: tres tarjetas en fila con una flecha entre cada dos */
+  .bajada { max-width: 42rem; color: var(--sec); }
+  .pasos {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0.8rem;
+    list-style: none; margin-top: 2rem;
   }
-  .demo-play picture, .demo-play img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .demo-play .play {
-    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-    width: 92px; height: 92px; border-radius: 50%;
-    background: var(--teja); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.30);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .pasos .paso { align-self: stretch; }
+  .pasos h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .pasos .flecha { color: var(--teja); display: flex; align-items: center; justify-content: center; }
+  .pasos .flecha svg { width: 2.4rem; height: auto; display: block; animation: desliza 1.6s ease-in-out infinite; }
+  @keyframes desliza { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+  @media (max-width: 48rem) {
+    .pasos { grid-template-columns: 1fr; }
+    .pasos .flecha svg { transform: rotate(90deg); animation-name: desliza-abajo; }
+    @keyframes desliza-abajo { 0%, 100% { transform: rotate(90deg) translateX(0); } 50% { transform: rotate(90deg) translateX(6px); } }
   }
-  .demo-play .play svg { width: 40px; height: 40px; margin-left: 6px; fill: currentColor; }
-  .demo-play:hover .play, .demo-play:focus-visible .play { transform: translate(-50%, -50%) scale(1.12); box-shadow: 0 14px 50px rgba(212,113,59,0.45); }
-  .demo-play:focus-visible { outline: 3px solid var(--acento); outline-offset: -3px; }
-  .demo-sistema iframe { display: block; width: 100%; height: 100%; border: 0; background: #100f0d; }
-  .demo-sistema .pie { margin-top: 0.9rem; text-align: center; font-size: 0.95rem; }
-  .demo-sistema .pie a { color: var(--acento); font-weight: 600; text-decoration: none; }
-  .demo-sistema .pie a:hover { text-decoration: underline; }
-  @media (max-width: 34rem) { .demo-play .play { width: 64px; height: 64px; } .demo-play .play svg { width: 28px; height: 28px; margin-left: 4px; } }
-  @media (prefers-reduced-motion: reduce) { .demo-play .play { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .pasos .flecha svg { animation: none; } }
+
+  /* trabajos: tres tarjetas de aplicaciones.html (misma imagen, mismo texto) */
+  .trabajos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2rem; }
+  .trabajo {
+    display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: var(--texto);
+    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .trabajo:hover { transform: translateY(-4px); border-color: var(--teja); }
+  .trabajo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--borde); }
+  .trabajo .texto { padding: 1.1rem 1.2rem 1.3rem; }
+  .trabajo .etiqueta { font-size: 0.72rem; color: var(--acento); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+  .trabajo h3 { font-size: 1.15rem; margin: 0.4rem 0 0.4rem; line-height: 1.25; }
+  .trabajo p { font-size: 0.92rem; color: var(--sec); line-height: 1.5; }
+  .mas { margin-top: 1.6rem; }
+  .mas a, .quien .enlaces a { color: var(--acento); font-weight: 600; text-decoration: none; display: inline-block; padding: 0.5rem 0; }
+  .mas a:hover, .quien .enlaces a:hover { text-decoration: underline; }
+  @media (max-width: 52rem) { .trabajos { grid-template-columns: 1fr; } .trabajo { flex-direction: row; } .trabajo img { width: 40%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--borde); } }
+  @media (max-width: 34rem) { .trabajo { flex-direction: column; } .trabajo img { width: 100%; aspect-ratio: 16 / 10; border-right: 0; border-bottom: 1px solid var(--borde); } }
+  @media (prefers-reduced-motion: reduce) { .trabajo, .cta { transition: none; } }
+
+  /* quién: retrato + dos frases de fernando-calle.html */
+  .quien .fila { display: grid; grid-template-columns: 11rem 1fr; gap: 2.2rem; align-items: start; max-width: 50rem; }
+  .quien img {
+    width: 11rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
+    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
+  }
+  @media (prefers-color-scheme: dark) { .quien img { border-color: rgba(255,255,255,0.12); } }
+  .quien p { font-size: 1.08rem; }
+  .quien strong { color: var(--realce); font-weight: 600; }
+  .quien .enlaces { margin-top: 1rem; text-align: left; }
+  @media (max-width: 40rem) { .quien .fila { grid-template-columns: 1fr; gap: 1.4rem; } .quien img { width: 9rem; } }
+
+  /* cierre */
+  .cierre { text-align: center; }
+  .cierre h2 { margin-bottom: 1.2rem; }
+  .cierre .titular { font-family: var(--serif); font-size: clamp(1.8rem, 4.4vw, 2.8rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
+  .cierre .ctas { margin-top: 2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center; align-items: center; }
+  .cierre .ctas .mail { color: var(--acento); font-weight: 600; text-decoration: none; padding: 0.6rem 0; }
+  .cierre .ctas .mail:hover { text-decoration: underline; }
+
+  @media (max-width: 34rem) {
+    .hero { min-height: 0; padding: 3.5rem 1.2rem 3.2rem; }
+    .kicker { letter-spacing: 0.16em; font-size: 0.8rem; }
+    .entrada p { font-size: 1.1rem; }
+  }
 
   footer {
     border-top: 1px solid var(--borde);
@@ -151,109 +190,178 @@
   }
   footer a { color: inherit; }
 </style>
+<!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
+<link rel="stylesheet" href="/brand/canon/tokens.css">
+<link rel="stylesheet" href="/brand/marca-es.css">
+<script defer src="/brand/canon/movimiento-data.js"></script>
+<script defer src="/brand/canon/movimiento.js"></script>
+<!-- /MARCA:estilos -->
+<link rel="stylesheet" href="/brand/home-es.css">
+<script defer src="/brand/home-es.js"></script>
 </head>
 <body>
+<a class="skip-link" href="#contenido">Skip to content</a>
 
 <header class="barra">
   <nav>
-    <a class="marca" href="/en/" aria-current="page">
-      <svg viewBox="0 0 100 100" aria-hidden="true">
-        <path d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
-        <path d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
-        <path d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
-        <path d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
-        <path d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
-        <path d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
-        <path d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
-        <path d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
-        <circle cx="50" cy="50" r="16.5" fill="#d4713b"/>
-      </svg>
-      ONTOS
-    </a>
-    <a class="item" href="/en/producto.html">Product</a>
-    <a class="item" href="/en/consultoria.html">Consulting</a>
+    <a class="marca" href="/en/"><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-light" src="/brand/canon/wordmark-color.svg" alt=""></span><span class="marca__word marca__label">ONTOS</span></a>
     <a class="item" href="/en/aplicaciones.html">Applications</a>
-    <a class="item" href="/en/blog.html">Blog</a>
     <a class="item" href="/en/fernando-calle.html">About me</a>
-    <a class="item" href="/en/contacto.html">Contact</a>
+    <a class="item icono-contacto" href="/en/contacto.html" data-contacto aria-label="Contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.8 7l8.2 6.2L20.2 7"/></svg></a>
     <a class="item idioma" data-i18n-alt href="/" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
   </nav>
 </header>
+<main class="web-main" id="contenido" tabindex="-1">
 
-<div class="hero">
-  <!-- Logo ONTOS: la O de dovelas, el núcleo conecta las áreas (brand/logo.svg) -->
-  <svg class="arco-svg" viewBox="0 0 100 100" aria-hidden="true">
-  <path class="dovela" d="M35.29,10.66 A42,42 0 0 1 64.71,10.66 L60.3,22.46 A29.4,29.4 0 0 0 39.7,22.46 Z" fill="currentColor"/>
-  <path class="dovela" d="M67.42,11.78 A42,42 0 0 1 88.22,32.58 L76.75,37.81 A29.4,29.4 0 0 0 62.19,23.25 Z" fill="currentColor"/>
-  <path class="dovela" d="M89.34,35.29 A42,42 0 0 1 89.34,64.71 L77.54,60.3 A29.4,29.4 0 0 0 77.54,39.7 Z" fill="currentColor"/>
-  <path class="dovela" d="M88.22,67.42 A42,42 0 0 1 67.42,88.22 L62.19,76.75 A29.4,29.4 0 0 0 76.75,62.19 Z" fill="currentColor"/>
-  <path class="dovela" d="M64.71,89.34 A42,42 0 0 1 35.29,89.34 L39.7,77.54 A29.4,29.4 0 0 0 60.3,77.54 Z" fill="currentColor"/>
-  <path class="dovela" d="M32.58,88.22 A42,42 0 0 1 11.78,67.42 L23.25,62.19 A29.4,29.4 0 0 0 37.81,76.75 Z" fill="currentColor"/>
-  <path class="dovela" d="M10.66,64.71 A42,42 0 0 1 10.66,35.29 L22.46,39.7 A29.4,29.4 0 0 0 22.46,60.3 Z" fill="currentColor"/>
-  <path class="dovela" d="M11.78,32.58 A42,42 0 0 1 32.58,11.78 L37.81,23.25 A29.4,29.4 0 0 0 23.25,37.81 Z" fill="currentColor"/>
-  <line class="radio" x1="50.00" y1="34.50" x2="50.00" y2="20.60" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="60.96" y1="39.04" x2="70.79" y2="29.21" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="65.50" y1="50.00" x2="79.40" y2="50.00" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="60.96" y1="60.96" x2="70.79" y2="70.79" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="50.00" y1="65.50" x2="50.00" y2="79.40" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="39.04" y1="60.96" x2="29.21" y2="70.79" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="34.50" y1="50.00" x2="20.60" y2="50.00" stroke="currentColor" stroke-width="3.2"/>
-  <line class="radio" x1="39.04" y1="39.04" x2="29.21" y2="29.21" stroke="currentColor" stroke-width="3.2"/>
-  <circle class="nucleo" cx="50" cy="50" r="14" fill="#d4713b"/>
-  </svg>
-  <div class="wordmark">ONTOS</div>
-  <h1>Everything that's yours, in order and up to date.</h1>
-  <p class="lema">From experience and the application of artificial intelligence, what used to be science fiction is now a reality.</p>
-  <div class="ctas">
-    <a class="cta" href="/en/producto.html">The product</a>
-    <a class="cta secundario" href="/en/consultoria.html">Consulting</a>
+<div class="home-intro">
+  <p class="home-intro__statement">From experience and the application of artificial intelligence, what used to be science fiction is now a reality.</p>
+  <p class="home-intro__subtitle">I design custom applications and automations to organise information, simplify work and bring new ideas to life.</p>
+</div>
+
+<div class="hero home-feature" data-home-feature>
+  <div class="home-feature__inner">
+    <p class="kicker">Information engineering, on demand</p>
+    <h1>Data, processes and knowledge, in order.</h1>
+    <div class="ctas">
+      <a class="cta" href="/en/contacto.html" data-contacto>Tell me about your case</a>
+    </div>
   </div>
 </div>
 
 <div class="wrap">
+
+<section class="entrada" id="encargos">
+  <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
+       No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
+  <p>The product was born from putting real problems in order, and I keep doing that on demand: you tell me what eats your hours and I build the solution. Custom automation and AI, physical-world data with drone and photogrammetry, contract reading, websites.</p>
+</section>
 
 <section class="intro" id="que-es">
   <h2>What ONTOS is</h2>
   <p><em>Ontos</em>, from the Greek ὄντος: <span class="serif">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head, knowledge lives in each person's experience, and putting the whole picture together costs more than the decision you had to make.</p>
 </section>
 
-<section id="demo">
-  <div class="demo-sistema">
-    <div class="marco" id="demo-marco">
-      <button type="button" class="demo-play" data-goatcounter-click="inicio-demo-sistema" aria-label="Play the ONTOS system demo, 80 seconds">
-        <picture>
-          <source srcset="/brand/servicios/sistema-poster-en.webp" type="image/webp">
-          <img src="/brand/servicios/sistema-poster-en.jpg" width="1280" height="720" alt="First scene of the ONTOS system demo" decoding="async">
-        </picture>
-        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 3.5v17l14-8.5z"/></svg></span>
-      </button>
+<section id="familias">
+  <h2>Five families</h2>
+  <div class="cards familias">
+    <div class="card familia">
+      <span class="num">01</span>
+      <h3>Automation</h3>
+      <p>For teams that repeat the same operations or check documents by hand. Automated flows, checks and tools that connect your data sources, with AI where it earns its place.</p>
+      <ul class="enlaces">
+        <li><a href="/en/contacto.html" data-contacto>Tell me about your case ▸</a></li>
+      </ul>
     </div>
-    <p class="pie">The whole system, in 80 seconds · animated demo, no sound, sample data · <a href="/en/caso-90s.html">open full screen ▸</a></p>
+    <div class="card familia">
+      <span class="num">02</span>
+      <h3>BIM</h3>
+      <p>Information requirements, coordination and control of deliverables for engineering firms and public procurement. It starts with a free BIM readiness check.</p>
+      <ul class="enlaces">
+        <li><a href="/en/bim.html">BIM requirements in public tenders ▸</a></li>
+        <li><a href="/en/escrito-plan-bim-ingenieria.html">What Spain's BIM Plan demands of a mid-sized firm ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">03</span>
+      <h3>Custom applications</h3>
+      <p>To turn a set of documents, a collection or a process into a tool that gets used: a PDF editor, a wardrobe app, a house in 3D from a drone flight.</p>
+      <ul class="enlaces">
+        <li><a href="/en/aplicaciones.html">Explore the applications ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">04</span>
+      <h3>Websites</h3>
+      <p>Sites to show your work, with whatever it takes for the owner to update them without depending on anyone. The gallery of the painter José María Casado is one of them.</p>
+      <ul class="enlaces">
+        <li><a href="https://josemariacasado.com" rel="noopener" target="_blank">Visit josemariacasado.com ▸</a></li>
+        <li><a href="/en/aplicaciones.html#webs">How it was made ▸</a></li>
+      </ul>
+    </div>
+    <div class="card familia">
+      <span class="num">05</span>
+      <h3>Interactive 2D and 3D experiences</h3>
+      <p>To explore a brand, a character or a place from the browser. A game, a figure that waves, a world to step into.</p>
+      <ul class="enlaces">
+        <li><a href="/en/aplicaciones.html#juegos-2d">Try the experiences ▸</a></li>
+      </ul>
+    </div>
   </div>
 </section>
-<script>
-(() => {
-  // La demo es caso-90s.html (animación HTML). Solo se carga al pulsar; con ?autoplay arranca sola dentro del marco.
-  const marco = document.getElementById("demo-marco");
-  const boton = marco.querySelector(".demo-play");
-  if (!marco || !boton) return;
-  boton.addEventListener("click", () => {
-    const f = document.createElement("iframe");
-    f.src = "caso-90s.html?autoplay";
-    f.title = "ONTOS · el sistema, en 80 segundos";
-    f.loading = "lazy";
-    f.setAttribute("allow", "fullscreen");
-    boton.replaceWith(f);
-    f.focus();
-  });
-  // Al terminar, la animación avisa al padre: vuelve el póster para poder verla otra vez.
-  addEventListener("message", e => {
-    if (e.data !== "ontos-intro-fin") return;
-    const f = marco.querySelector("iframe");
-    if (f) f.replaceWith(boton);
-  });
-})();
-</script>
+<section id="encargo">
+  <h2>How a commission starts</h2>
+  <p class="bajada">We start with what you want someone to be able to do or feel. From there, we agree on what to build.</p>
+  <ol class="pasos">
+    <li class="card paso">
+      <span class="num">01</span>
+      <h3>The idea and its purpose</h3>
+      <p>We define the audience, content, interactions and devices it needs to work on.</p>
+    </li>
+    <li class="flecha" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M2 12h34M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+    <li class="card paso">
+      <span class="num">02</span>
+      <h3>A first version</h3>
+      <p>We try out the visual direction and interaction with something concrete for you to review.</p>
+    </li>
+    <li class="flecha" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M2 12h34M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+    <li class="card paso">
+      <span class="num">03</span>
+      <h3>The agreed delivery</h3>
+      <p>Files, instructions and checks. Scope, budget, timeline and maintenance are agreed for each project.</p>
+    </li>
+  </ol>
+</section>
+
+<section id="trabajos">
+  <h2>From a document to a 3D house</h2>
+  <div class="trabajos">
+    <a class="trabajo" href="/en/aplicaciones.html#herramientas">
+      <img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Web tools</span>
+        <h3>A blend of CamScanner and iLovePDF</h3>
+        <p>Merge, rotate and reorder pages; turn photos into documents. All in your browser.</p>
+      </div>
+    </a>
+    <a class="trabajo" href="/en/aplicaciones.html#modelado-3d">
+      <img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">3D modelling from a drone</span>
+        <h3>From a flight to a model</h3>
+        <p>26 seconds of flight and the exterior rebuilt locally.</p>
+      </div>
+    </a>
+    <a class="trabajo" href="/en/aplicaciones.html#webs">
+      <img src="/brand/servicios/web-jmcasado.png" alt="Homepage of painter José María Casado's website" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Custom websites</span>
+        <h3>A website the client can maintain</h3>
+        <p>A gallery with a database of works that he edits himself.</p>
+      </div>
+    </a>
+  </div>
+  <p class="mas"><a href="/en/aplicaciones.html">Explore the applications ▸</a></p>
+</section>
+
+<section class="quien" id="quien">
+  <h2>Who</h2>
+  <div class="fila">
+    <img src="/brand/fernando.jpg" alt="Portrait of Fernando Calle, civil engineer and founder of ONTOS" width="600" height="800" decoding="async" loading="lazy">
+    <div>
+      <p>I am a civil engineer, and my work is <strong>putting information in order with code and artificial intelligence</strong>. I come from the projects where you learn that the hard way: six years leading models, data and automation on major international works, where the order of the information sets the deadlines and the costs.</p>
+      <p class="enlaces"><a href="/en/fernando-calle.html">Who I am and where I come from ▸</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="cierre" id="contacto">
+  <h2>Let’s talk</h2>
+  <p class="titular">Tell me what eats your hours.</p>
+  <div class="ctas">
+    <a class="cta" href="/en/contacto.html" data-contacto>Tell me about your case</a>
+    <a class="mail" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+  </div>
+</section>
 
 <footer>
   <p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a> · Cookie-free website · anonymous visit count.</p>
@@ -262,6 +370,7 @@
 </div>
 
 <!-- GoatCounter: recuento anónimo, sin cookies -->
+</main>
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>

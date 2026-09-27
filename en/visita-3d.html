@@ -1,11 +1,21 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-ontos-web data-web-page="visita-3d">
 <head>
 <!-- GENERADO por i18n/gen-en.py desde ../visita-3d.html · no editar a mano -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3D tour · ONTOS</title>
-<link rel="icon" href="/brand/favicon.svg">
+<meta property="og:title" content="3D tour · ONTOS">
+<meta property="og:description" content="Explore ONTOS’s little planet or stroll through a miniature Segovia. A 3D experience with keyboard, mouse and touch controls.">
+<meta property="og:url" content="https://ontosdigital.es/en/visita-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_GB">
+<meta property="og:image" content="https://ontosdigital.es/brand/canon/og-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Explore ONTOS’s little planet or stroll through a miniature Segovia. A 3D experience with keyboard, mouse and touch controls.">
+<link rel="icon" href="/brand/canon/favicon.svg">
 <link rel="stylesheet" href="/experiencias/demo.css">
 <style>
 :root{--wrap:var(--wrap-datos)}
@@ -30,12 +40,17 @@ body #ontos-demo{top:var(--sp-2);bottom:auto}
 <link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/visita-3d.html">
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/visita-3d.html">
 <!-- /i18n:alt -->
+<!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
+<link rel="stylesheet" href="/brand/canon/tokens.css">
+<link rel="stylesheet" href="/brand/marca-es.css">
+<!-- /MARCA:estilos -->
 </head>
 <body>
 <nav class="demo-nav" aria-label="Navigation"><a href="/en/aplicaciones.html">← Applications</a><a class="idioma" data-i18n-alt href="/visita-3d.html" aria-label="Ver esta página en español">ES</a></nav>
 <main class="wrap ot-wrap">
 <header class="ot-top"><div><span class="ot-label">ONTOS alive · a world to explore</span><h1>Our little world.</h1></div><div class="ot-tools"><a class="btn" href="/en/visita-3d.html?mundo=normal">Normal world</a><a class="btn" href="/en/visita-3d.html?mundo=segovia">Segovia world</a><a class="btn" href="/en/juego-2d.html">2D</a><a class="btn" href="/en/animacion-3d.html">3D figurine</a><button class="btn" id="ot-pause" aria-pressed="false">Pause</button><button class="btn" id="ot-center">Centre</button><button class="btn" id="ot-reset">Restart</button></div></header>
 <section class="ot-stage" aria-label="The three-dimensional ONTOS garden">
+<noscript><style>.ot-stage > :not(noscript), main button, .ot-controls,.ot-zoom,.ot-help:not(#ot-segovia-credit) {display:none!important}</style><p style="padding:24px">This interactive experience requires JavaScript. Enable it to use the experience, or <a href="/en/aplicaciones.html">return to Applications</a> to explore the other work.</p></noscript>
 <canvas class="ot-canvas" id="ot-world" tabindex="0" aria-label="3D garden. WASD or arrows to walk; Space to jump; Shift for turbo; E to pick up or plant; H to wave. Drag to look around.">The garden needs WebGL. You can return to the <a href="/en/juego-2d.html">2D playground</a>.</canvas>
 <div class="ot-hud"><span id="ot-objective">I · Find the seed</span><span id="ot-score">Sparkles 0 / 8</span></div>
 <div class="ot-overlay" id="ot-overlay" hidden><strong id="ot-overlay-title">A little breather.</strong><p id="ot-overlay-text">Press Continue or P to return to the garden.</p><a class="btn" href="/en/juego-2d.html">Open the 2D playground</a></div>

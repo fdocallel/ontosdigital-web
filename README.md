@@ -2,16 +2,20 @@
 
 Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a main).
 
-## Estructura v4 (21-sep-2026, rama web-v4-empresa)
+## Estructura v5 (24-sep-2026, rama web-v5-consultoria)
 
-- `/` — portada de **empresa**: dos maneras de trabajar, lo último, quién, contacto.
-- `producto.html` — Qué es ONTOS, Dos ediciones, Áreas (= los antiguos casos + Armario), Dónde está hoy, entrada a `solicitud.html` y `entrar.html`.
-- `consultoria.html` — tres familias, oferta BIM, así empieza un encargo, `aplicaciones.html` como galería.
-- `fernando-calle.html` — en la barra como «Sobre mí».
-- Barra única en todas las páginas con `<header class="barra">`: Producto · Consultoría · Aplicaciones · Blog · Sobre mí · Contacto · EN. En móvil (≤34rem) va en dos filas: marca e idioma arriba, los seis enlaces debajo (`brand/tokens.css`, 22-sep-2026).
+Decisión: `ONTOS/docs/estudios/2026-09-24-web-consultoria-primero.md`. Estilo: referente anthropic.com (spec del crítico, 24-sep).
+
+- `/` — la **consultoría** es la portada: gancho, entrada, Qué es ONTOS, cinco familias, así empieza un encargo, tres trabajos, quién, contacto.
+- `aplicaciones.html` — galería + bloque «Próximamente» (ONTOS personal · ONTOS empresarial) con enlaces a `producto.html` y a los vídeos.
+- `fernando-calle.html` — «Sobre mí»: bio + `#escritos` (antes `blog.html`).
+- `consultoria.html` → `/` y `blog.html` → `fernando-calle.html#escritos`: redirecciones (meta refresh + JS, canonical al destino, noindex), fuera del sitemap.
+- `producto.html`, casos, demos, `contacto.html`, `solicitud.html`, `entrar.html`: se quedan; producto fuera de la barra.
+- Barra española en todas las páginas con `<header class="barra">`: ONTOS (= inicio) · Aplicaciones · Sobre mí · icono de contacto · EN. Consultoría se retira del menú el 27-sep; continúa siendo la portada. En móvil (≤34rem) dos filas: marca, icono e idioma arriba; Aplicaciones y Sobre mí debajo. La versión inglesa comparte la misma cabecera y cambia el conmutador a ES.
+- `brand/barra.js`: (1) el wordmark se pliega al símbolo al pasar la cabecera de la página (centinela + IntersectionObserver, `html.is-condensado`); (2) el icono de contacto y los enlaces con `data-contacto` abren un `<dialog>` con el formulario de `contacto.html`, que se trae por fetch (el formulario vive una vez; en /en/ trae el inglés). Sin JS son enlaces a `contacto.html`. Abrir el diálogo cuenta el evento GoatCounter `contacto-popup`.
 - `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
 
-El espejo inglés está al día con la v4 desde el 21-sep-2026 (commit «versión inglesa de la web v4»); los commits van con el hook activo. (La nota anterior «inglés parado, commits con --no-verify» caducó ese día y se retiró el 23-sep.)
+El espejo inglés se actualiza a la v5 el 28-sep-2026 por orden de Fernando. La estructura y la marca se comparten; los textos se traducen desde sus diccionarios. Los commits utilizan el hook bilingüe y el contrato de conservación.
 
 ## Español e inglés
 
@@ -35,8 +39,8 @@ y su versión inglesa vive en `i18n/en/<pagina>.json`.
 ```
 
 El hook de pre-commit (`hooks/pre-commit`, instalar con
-`ln -sf ../../hooks/pre-commit .git/hooks/pre-commit`) hace las dos cosas y el sitemap
-en cada commit, así que en la práctica basta con editar la página española y su JSON.
+`git config core.hooksPath hooks`) hace las dos cosas y el sitemap en el flujo bilingüe.
+El modo `ONTOS_WEB_SCOPE=es` queda como referencia de la fase española anterior; esta entrega usa el flujo bilingüe normal.
 
 ### Reglas
 
@@ -79,3 +83,63 @@ Prueba sin contaminar analítica: descargar `https://gc.zgo.at/count.js` a un fi
 Control Web puede confirmar la exclusión **en el navegador que pulsa el botón**, sin guardar una confirmación ficticia en el origen local. Abre una ventana por gesto del usuario con `aplicaciones.html?sinestadisticas=1&ontos_request=<nonce>` (nonce aleatorio de 16–128 caracteres alfanuméricos, `_` o `-`). Conserva la referencia a esa ventana y envía `{type:'ontos-analytics-status-request', nonce}` a `https://ontosdigital.es`. La página pública responde únicamente a su `opener`, con `{type:'ontos-analytics-status', nonce, disabled}`; lee `skipgc` en ese momento (`null` si no puede acceder al almacenamiento) y usa como `targetOrigin` el origen HTTP(S) exacto del mensaje recibido. No acepta navegación ni comandos desde mensajes.
 
 La consola debe validar **origin, source y nonce**, mostrar estado desconocido hasta la respuesta y aplicar timeout si el navegador bloquea la ventana o separa el opener. La confirmación vive solo en memoria: no certifica otros dispositivos/perfiles ni sustituye la lectura real. `node scripts/test-analytics-popup.cjs` comprueba origen cruzado, mensajes falsificados, lectura actualizada y almacenamiento inaccesible con red interceptada. Cabeceras públicas comprobadas el 11-sep: sin `Cross-Origin-Opener-Policy` que corte el opener; si eso cambia, el timeout debe conservar «no confirmado».
+
+
+## Aplicación de marca · ES/EN · 27-sep-2026
+
+La v5 conserva contenido, estructura, rutas y medios. La marca española usa el manual de ONTOS: Jost corporativa, Newsreader editorial, firma vectorial Jost/N5, paleta y roles de interfaz. El diseño específico vive en `brand/marca-es.css`; `brand/canon/` contiene copias de entrega generadas y su procedencia. La imagen social conserva el titular de la portada y el dominio. Los patrones web nuevos siguen en revisión en el Design System §5.4.
+
+```sh
+node scripts/import-marca.cjs /ruta/al/repositorio/ONTOS
+node scripts/import-marca.cjs /ruta/al/repositorio/ONTOS --check
+node scripts/test-marca-es.cjs --bilingue
+```
+
+El importador necesita Node y el Playwright/WebKit ya instalado en ONTOS para rasterizar localmente la imagen social. La web servida sigue siendo HTML/CSS/JS estático, sin compilación en producción. Se exporta únicamente la selección pública de marca, nunca los JSON privados completos. Los logotipos no se redibujan ni se componen con texto HTML.
+
+La orden de publicación del 27-sep amplía el alcance a **español e inglés**. El generador conserva el atributo `data-ontos-web` y ambos idiomas consumen la misma capa de marca y composición de home. El hook normal regenera EN y sitemap, valida conservación ES y comprueba la cobertura del espejo. Los apartados de pruebas que siguen son el historial de la composición; el estado vigente se resume al final.
+
+Instalación del hook: `git config core.hooksPath hooks`. Git utiliza así el archivo de la rama activa incluso en un worktree. El antiguo enlace simbólico desde `.git/hooks` resolvía el hook de main y podía saltarse el modo español. Verificar el hook instalado con `git hook run pre-commit` antes de guardar la entrega bilingüe.
+
+### Cabecera Arcilla y fondo verde · 27-sep-2026
+
+La corrección de Fernando aplica verde corporativo en ambos modos de color y sustituye la firma grande por Arcilla compacto (150 × 50 px reservados). El importador incluye el motor canónico y solo su geometría/configuración pública en `brand/canon/movimiento*.js`; el enlace sigue volviendo al inicio. Se transforma con scroll 80–600 px, recupera el nombre al dar foco o posar el cursor y respeta movimiento reducido. Sin JavaScript permanece el wordmark SVG. Tamaños y color se consumen desde tokens; los detalles de aplicación se documentan en Design System 5.4.
+
+### Prueba de verde profundo en portada · 27-sep-2026
+
+Por petición de Fernando se prueba `#183D33` solo como fondo de la home española (Consultoría), incluida su cabecera. El valor provisional vive en `brand/marca-es.css`, limitado a `data-web-page="index"`; las páginas interiores y los paneles conservan sus colores. No se incorpora al manual ni se modifica la paleta aprobada hasta valorar la prueba.
+
+Se retira «Consultoría» de las 17 cabeceras españolas que lo incluían. El logotipo sigue enlazando a `/` y `consultoria.html` conserva su redirección. La prueba de conservación admite exclusivamente esta retirada del menú; sigue comparando el resto del contenido y protegiendo inglés y los recursos compartidos. Vista previa: http://mac-mini:8795/. Publicación pendiente de la valoración de esta prueba.
+
+### Dirección vigente: fondo claro y bloque expansivo · 27-sep-2026
+
+La nueva petición sustituye el fondo verde general de las entregas anteriores. Las páginas corporativas españolas y el resto de la home usan la base editorial del manual: arena al 20 % sobre hueso (`--web-page-surface`, alias de `--ds-surface-page`), paneles hueso y tinta verde. El importador adapta firmas y color del navegador a esa base. Las escenas de cine mantienen su dirección de arte; inglés conserva su versión.
+
+La frase introductoria abre la home, alineada a la izquierda y con tamaño medio. Debajo, el bloque verde oscuro reúne el rótulo, el titular y Cuéntame tu caso. Empieza con márgenes y alcanza el ancho completo al hacer scroll, con textura y degradado sutiles. Se inspira en la composición y expansión medidas en anthropic.com el 27-sep-2026, sin importar sus activos ni scripts.
+
+`brand/home-es.css` compone esta pieza y contiene el color local en prueba; `brand/home-es.js` vincula la expansión y el parallax al desplazamiento, sin capturar la rueda. Sin JavaScript y con movimiento reducido se conserva una tarjeta estática legible. El enlace de contacto mantiene su formulario. La prueba de conservación contempla únicamente el menú retirado y la nueva disposición de la apertura; el resto del contenido sigue protegido. Continúa en vista previa.
+
+### Alineación común y subtítulo de portada · 27-sep-2026
+
+El marco exterior de las páginas corporativas sigue dos guías: la primera «o» visible de la marca inicial y el borde exterior del botón de idioma. Los márgenes se comparten con la introducción y el rectángulo verde de la home; las columnas de lectura y los formularios pueden ser más estrechos dentro de ese marco. El importador deriva la posición de la «o» de la geometría canónica y corrige la posición del SVG estático sin cambiar sus contornos.
+
+La introducción aumenta 2 px y usa peso 700. A su derecha aparece un subtítulo nuevo, menor y en peso 300, gobernado por `mensaje.json` (`web.subtitulo`) y exportado por `import-marca.cjs`. En móvil se apilan. El rectángulo tiene más textura y degradado, con rótulo, titular y acción centrados. La expansión reduce cada margen desde su posición inicial hasta el ancho completo. Estos ajustes permanecen en [vista previa](http://mac-mini:8795/).
+
+### Auditoría previa a publicación · 27-sep-2026
+
+Se revisan las 30 páginas españolas y el editor bilingüe. Se corrigen lectura demasiado ancha, regiones principales/salto de teclado, controles de PDF y cine, 404 en rutas anidadas, metadatos de demos/editor, fechas ES del sitemap, reglas de rastreo y precisiones operativas de BIM/privacidad. Las imágenes inferiores cargan al acercarse y Arcilla solo se exporta a páginas con cabecera. Las demos y el editor explican su dependencia de JavaScript cuando está desactivado.
+
+El atributo `data-ontos-web` delimita la marca, para que el editor mantenga su diseño al alternar ES/EN. El espejo inglés no lleva ese atributo y conserva sus archivos. `scripts/fixtures/revision-prepublicacion.json` recoge únicamente los fragmentos editoriales corregidos: permite que el contrato siga detectando pérdidas de contenido fuera de esta revisión.
+
+El editor desactiva `isEvalSupported` en cada llamada a PDF.js, siguiendo la [mitigación de Mozilla para CVE-2024-4367](https://github.com/mozilla/pdf.js/security/advisories/GHSA-wgrm-67xf-hhpq). El guard existente comprueba esa configuración y su caso rojo; no se ha migrado la biblioteca. La prueba funcional con PDF sintético verifica selección, giro, inserción, eliminación, orden por teclado y exportación.
+
+Revisión visual WebKit, navegación Chromium/WebKit, axe inicial de 27 destinos sin redirecciones y editor con PDF cargado; contrato de contenido, importación reproducible y handshake de analítica pasan. Las solicitudes de formulario se interceptan para las pruebas: su resultado no certifica recepción real de correo. Informe y fuentes en el expediente privado de ONTOS, `docs/diseno/ontos/web/marca/AUDITORIA-FINAL.md`. La publicación sigue pendiente.
+
+
+### Publicación bilingüe v5 · 28-sep-2026
+
+Fernando autoriza la versión inglesa, la publicación y el cierre. Se generan 29 espejos EN desde la fuente ES; el editor PDF sigue siendo una sola app bilingüe, enlazada con `?lang=en`. Se localizan metadatos, JSON-LD, accesibilidad, navegación y redirecciones. Las tarjetas sociales de ambos idiomas se generan desde sus textos canónicos. El verde profundo del panel de home se registra como `web-home-surface` con alcance exclusivamente web; el resto conserva el fondo claro.
+
+Flujo vigente: importar el canon, regenerar EN y sitemap, ejecutar `node scripts/test-marca-es.cjs --bilingue`, revisar escritorio/móvil y desplegar `main`. El contrato conserva las 30 fuentes ES, sus correcciones auditadas, la cobertura EN y los recursos compartidos. `servicios.html` añade canonical a Aplicaciones; los redirects no entran en el sitemap. Las fechas de páginas o traducciones modificadas se actualizan antes del commit.
+
+La prueba real de recepción del formulario continúa pendiente de autorización específica; las pruebas funcionales interceptan las solicitudes externas.

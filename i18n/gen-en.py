@@ -24,7 +24,7 @@ DOMINIO = "https://ontosdigital.es"
 PAGINAS = [
     ("index.html", True),
     ("producto.html", True),
-    ("consultoria.html", True),
+    ("consultoria.html", False),  # redirección a / (web v5, 24-sep-2026), sin índice
     ("contacto.html", True),
     ("bim.html", True),
     ("aplicaciones.html", True),
@@ -35,7 +35,7 @@ PAGINAS = [
     ("animacion-3d.html", True),
     ("visita-3d.html", True),
     ("escrito-plan-bim-ingenieria.html", True),
-    ("blog.html", True),
+    ("blog.html", False),         # redirección a fernando-calle.html#escritos (web v5, 24-sep-2026), sin índice
     ("fernando-calle.html", True),
     ("caso-sistema.html", True),
     ("caso-finanzas.html", True),
@@ -111,6 +111,13 @@ def ruta_en(destino):
         return ruta_en(destino[len(DOMINIO):] or "/")
     if destino.startswith(("#", "mailto:", "tel:", "http://", "https://", "//", "data:")):
         return destino
+    # El editor PDF es una única aplicación bilingüe, fuera del espejo /en/.
+    ruta, almohadilla, fragmento = destino.partition("#")
+    ruta, interrogacion, consulta = ruta.partition("?")
+    if ruta == "/editor-pdf/":
+        parametros = [p for p in consulta.split("&") if p and not p.startswith("lang=")]
+        parametros.append("lang=en")
+        return ruta + "?" + "&".join(parametros) + (almohadilla + fragmento if almohadilla else "")
     if destino == "/":
         return "/en/"
     base, sep, ancla = destino.partition("#")
@@ -218,7 +225,10 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
             pon("srcset", nueva)
 
     if nombre == "link" and atrs.get("rel", "").lower() == "canonical":
-        pon("href", url_en(pagina))
+        # una redirección declara como canónico su DESTINO (consultoria.html → /): el espejo
+        # apunta al destino inglés, no a sí mismo (web v5, 24-sep-2026)
+        propio = atrs.get("href", "") in ("", url_es(pagina))
+        pon("href", url_en(pagina) if propio else DOMINIO + ruta_en(atrs["href"]))
 
     if nombre == "meta":
         clave_meta = (atrs.get("name") or atrs.get("property") or "").lower()
@@ -226,6 +236,8 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
             pon("content", tr(clave(atrs.get("content", ""))))
         elif clave_meta == "og:url":
             pon("content", url_en(pagina))
+        elif clave_meta in ("og:image", "twitter:image") and atrs.get("content") == DOMINIO + "/brand/canon/og.png":
+            pon("content", DOMINIO + "/brand/canon/og-en.png")
         # redirecciones (servicios.html → aplicaciones.html): el destino del refresh también va a /en/
         if atrs.get("http-equiv", "").lower() == "refresh":
             m_url = re.match(r"(\s*\d+\s*;\s*url=)(.+)$", atrs.get("content", ""), re.I)
@@ -265,30 +277,54 @@ def traduce_json_ld(bloque, tr, pagina):
     def campo(m):
         llave, valor = m.group(1), m.group(2)
         if llave in ("description", "headline", "name", "jobTitle", "alternateName",
-                     "articleSection", "addressCountry", "areaServed"):
+                     "articleSection", "addressCountry", "areaServed", "award"):
             k = clave(json.loads('"%s"' % valor))
             nuevo = tr(k)
             return '"%s": %s' % (llave, json.dumps(nuevo, ensure_ascii=False))
         if llave == "inLanguage":
-            return '"inLanguage": "en"'
+            return '"inLanguage": "en"' if valor.startswith("es") else m.group(0)
+        if llave in ("image", "url") and valor == DOMINIO + "/brand/canon/og.png":
+            return '"%s": "%s/brand/canon/og-en.png"' % (llave, DOMINIO)
         if llave in ("url", "@id", "mainEntityOfPage") and valor.startswith(DOMINIO):
             resto = valor[len(DOMINIO):]
-            if resto in ("/", ""):
-                return '"%s": "%s/en/"' % (llave, DOMINIO)
-            hoja = resto.lstrip("/")
-            if hoja in ESPEJO:
-                return '"%s": "%s/en/%s"' % (llave, DOMINIO, hoja)
+            nueva = ruta_en(resto or "/")
+            if nueva != resto:
+                return '"%s": "%s%s"' % (llave, DOMINIO, nueva)
         return m.group(0)
 
-    return re.sub(r'"(\w+)":\s*"([^"]*)"', campo, bloque)
+    bloque = re.sub(r'"([\w@]+)":\s*"([^"]*)"', campo, bloque)
+    def temas(m):
+        valores = json.loads(m.group(1))
+        return '"knowsAbout": ' + json.dumps([tr(clave(v)) for v in valores], ensure_ascii=False)
+    return re.sub(r'"knowsAbout":\s*(\[[^\]]*\])', temas, bloque)
+
+
+def reescribe_src_script(bloque):
+    """Reescribe el src de la etiqueta <script> de apertura (activo local relativo,
+    p. ej. brand/barra.js), igual que traduce_etiqueta hace con el resto de etiquetas.
+    Sin esto, un <script src="brand/x.js"> entero se trata como un bloque y su ruta
+    nunca pasa por ruta_en(): en /en/ queda relativa y apunta a /en/brand/x.js (404;
+    detectado el 24-sep-2026 con brand/barra.js)."""
+    def apertura(m):
+        tag = m.group(0)
+        atrs = {mm.group(1).lower(): mm.group(2)[1:-1] for mm in ATRIB.finditer(tag)}
+        if "src" in atrs:
+            nueva = ruta_en(atrs["src"])
+            if nueva != atrs["src"]:
+                patron = re.compile(r"(\bsrc\s*=\s*)(\"[^\"]*\"|'[^']*')", re.I)
+                tag = patron.sub(lambda mm: mm.group(1) + '"' + nueva.replace('"', "&quot;") + '"', tag, count=1)
+        return tag
+    return re.sub(r"^<script\b[^>]*>", apertura, bloque, count=1)
 
 
 def traduce_script(bloque, tr):
     """Sustituye literales de cadena que estén en el diccionario (rótulos de las demos)."""
+    bloque = reescribe_src_script(bloque)
+
     def literal(m):
         comilla, cuerpo = m.group(1), m.group(2)
         k = clave(cuerpo)
-        if traducible(k) and k in tr.mapa and tr.mapa[k]:
+        if traducible(k) and (k in tr.mapa or k == "copiado ✓"):
             return comilla + tr(k).replace(comilla, "\\" + comilla) + comilla
         return m.group(0)
 
