@@ -1,4 +1,4 @@
-/* ONTOS · barra compartida (web v5, 24-sep-2026). Dos cosas, sin dependencias:
+/* ONTOS · barra compartida (web v5, 24-sep-2026). Tres cosas, sin dependencias:
 
    1 · El logo se contrae al hacer scroll: «ONTOS» se pliega y queda el símbolo; al volver
        arriba se despliega. Patrón de anthropic.com (spec data/_cache/web-estilo-anthropic-
@@ -12,7 +12,9 @@
        contacto.html y copia SU formulario al diálogo: el formulario vive una sola vez
        (DATO ÚNICO) y el espejo inglés trae el suyo, ya traducido, porque el enlace apunta a
        /en/contacto.html. Si la carga falla, se sigue el enlace. Abrir el diálogo cuenta el
-       evento GoatCounter «contacto-popup» (respeta skipgc, como el resto de contadores). */
+       evento GoatCounter «contacto-popup» (respeta skipgc, como el resto de contadores).
+
+   3 · Dock móvil con contacto y compartir (28-sep-2026), descrito en su bloque. */
 (() => {
   const d = document, raiz = d.documentElement;
   const barra = d.querySelector('header.barra');
@@ -42,6 +44,52 @@
     addEventListener('scroll', pronto, { passive: true });
     addEventListener('load', pronto);
     addEventListener('resize', pronto);
+  }
+
+  /* ---------- 3 · dock móvil (28-sep-2026) ----------
+     En móvil la llamada a la acción se queda arriba o al final. El dock es una fila fija
+     abajo con «Cuéntame tu caso» (abre el mismo diálogo: se crea antes de recoger los
+     disparadores) y «Compartir» (Web Share; sin soporte, no aparece). Solo en páginas
+     indexables con barra, nunca en contacto. Aparece con el logo plegado y se retira
+     mientras hay a la vista otra llamada a contacto, un formulario o el pie: nunca dos
+     botones iguales en pantalla. El CSS (brand/tokens.css) lo limita a ≤ 34rem. */
+  const iconoContacto = barra.querySelector('a.icono-contacto[data-contacto]');
+  const indexable = !/noindex/i.test(d.querySelector('meta[name="robots"]')?.content || '');
+  if (iconoContacto && indexable && !d.querySelector('#formulario form')) {
+    const dock = d.createElement('div');
+    dock.className = 'dock-movil';
+    const cta = d.createElement('a');
+    cta.className = 'cta dock-cta';
+    cta.href = iconoContacto.href;
+    cta.dataset.contacto = '';
+    cta.textContent = en ? 'Tell me about your case' : 'Cuéntame tu caso';
+    dock.append(cta);
+    if (navigator.share) {
+      const comp = d.createElement('button');
+      comp.type = 'button';
+      comp.className = 'dock-compartir';
+      comp.setAttribute('aria-label', en ? 'Share this page' : 'Compartir esta página');
+      comp.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7.5 7.5L12 3l4.5 4.5M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>';
+      comp.addEventListener('click', () => {
+        const canon = d.querySelector('link[rel="canonical"]')?.href || location.href;
+        navigator.share({ title: d.title, url: canon }).then(() => {
+          try { window.goatcounter?.count?.({ path: 'compartir', title: 'Compartir (dock móvil)', event: true }); } catch (e) {}
+        }, () => {});
+      });
+      dock.append(comp);
+    }
+    d.body.append(dock);
+    const tapan = new Set();
+    const pinta = () => raiz.classList.toggle('dock-activo', raiz.classList.contains('is-condensado') && !tapan.size);
+    if ('IntersectionObserver' in window) {
+      const vigia = new IntersectionObserver(es => {
+        es.forEach(e => e.isIntersecting ? tapan.add(e.target) : tapan.delete(e.target));
+        pinta();
+      });
+      d.querySelectorAll('main a[data-contacto], a.cta[data-contacto], form, footer')
+        .forEach(el => { if (!dock.contains(el) && !barra.contains(el)) vigia.observe(el); });
+      new MutationObserver(pinta).observe(raiz, { attributes: true, attributeFilter: ['class'] });
+    }
   }
 
   /* ---------- 2 · contacto en diálogo ---------- */

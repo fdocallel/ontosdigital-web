@@ -136,6 +136,10 @@
   /* El pie se quedaba en 12,8 px y ahí van los enlaces legales. En móvil, mínimo 13,6.
      Va con `body footer` a propósito: cada página redefine `footer` en su <style> propio. */
   body footer { font-size: 0.85rem; }
+  /* Pie (Aviso legal, Privacidad) a 20 px de alto; píldora de idioma a 36 de ancho
+     (auditoría móvil 28-sep-2026). Área de toque ampliada sin mover la maqueta. */
+  body footer a { display: inline-block; padding: 0.35rem 0; }
+  .barra a.item.idioma::after { left: -4px; right: -4px; }
 }
 
 /* ---- Diálogo de contacto (brand/barra.js copia aquí el formulario de contacto.html) ---- */
@@ -196,3 +200,34 @@ html:has(dialog.dlg-contacto[open]) { overflow: hidden; }
   .dlg-contacto h2 { font-size: 1.6rem; }
 }
 @media (prefers-reduced-motion: reduce) { .dlg-contacto[open] { animation: none; } }
+
+/* ---- Dock móvil (brand/barra.js §3, 28-sep-2026): contacto + compartir abajo ----
+   Solo ≤ 34rem. Oculto con visibility (fuera del orden de tabulación) hasta que barra.js
+   pone html.dock-activo. Respeta la zona segura del iPhone. */
+.dock-movil { display: none; }
+@media (max-width: 34rem) {
+  .dock-movil {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+    display: flex; gap: 0.6rem; align-items: center;
+    padding: 0.6rem 1rem calc(0.6rem + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    -webkit-backdrop-filter: saturate(1.4) blur(10px); backdrop-filter: saturate(1.4) blur(10px);
+    border-top: 1px solid var(--borde);
+    transform: translateY(110%); visibility: hidden;
+    transition: transform 0.25s ease, visibility 0s linear 0.25s;
+  }
+  .dock-activo .dock-movil { transform: none; visibility: visible; transition: transform 0.25s ease; }
+  .dock-movil .dock-cta {
+    flex: 1; min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    background: var(--ds-action, var(--teja)); color: var(--ds-on-action, #fff); border-radius: var(--ds-radius-s, 6px); font-weight: 600; text-decoration: none;
+  }
+  .dock-movil .dock-compartir {
+    flex: none; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--borde); border-radius: 999px; background: transparent; color: var(--sec); padding: 0;
+  }
+  .dock-movil .dock-compartir svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+  .dock-movil :focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+  /* Que el final de la página no quede bajo el dock. */
+  .dock-activo body { padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { .dock-movil, .dock-activo .dock-movil { transition: none; } }

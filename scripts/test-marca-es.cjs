@@ -14,7 +14,13 @@ const git=(...args)=>execFileSync('git',args,{cwd:WEB,encoding:'utf8',maxBuffer:
 const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
 const changed=git('diff',BASE,'--name-only').trim().split('\n');
 const protectedFile=f=>(!bilingual&&(f.startsWith('en/')||f.startsWith('i18n/en/')))||f.startsWith('experiencias/')||f==='brand/tokens.css'||f==='brand/barra.js'||f==='brand/favicon.svg'||f==='brand/logo.svg';
-assert.deepEqual(changed.filter(protectedFile),[],'EN y sus recursos conservan su versión');
+// Recursos compartidos: desde la publicación de la v5 (28-sep-2026, main 477ca94) la base es lo
+// publicado, no la rama previa. Fernando autoriza el 28-sep-2026 tocar barra.js y tokens.css para
+// el dock móvil y la auditoría móvil; cambios posteriores se comparan con lo publicado.
+const PUBLICADA='477ca9424fddeaae71de45dcc508175e22bacca5';
+const permitidos=new Set(['brand/barra.js','brand/tokens.css']);
+const cambiadosDesdePublicada=new Set(git('diff',PUBLICADA,'--name-only').trim().split('\n'));
+assert.deepEqual(changed.filter(protectedFile).filter(f=>!(permitidos.has(f)&&cambiadosDesdePublicada.has(f)&&!git('diff',BASE,PUBLICADA,'--name-only').split('\n').includes(f))),[],'EN y sus recursos conservan su versión');
 const sitemap=fs.readFileSync(path.join(WEB,'sitemap.xml'),'utf8'),oldSitemap=git('show',BASE+':sitemap.xml');
 const englishBlocks=xml=>(xml.match(/  <url>[\s\S]*?<\/url>\n/g)||[]).filter(block=>block.includes('<loc>https://ontosdigital.es/en/'));
 if(!bilingual)assert.deepEqual(englishBlocks(sitemap),englishBlocks(oldSitemap),'Sitemap: las entradas inglesas no cambian');
