@@ -79,6 +79,13 @@ function signature({html,baseline=false,file,subtitle,revision}){
   d.querySelector('section#quien')?.remove();
   for(const p of d.querySelectorAll('#trabajos .trabajo .texto > p'))p.remove();
  }
+ // Cuarta petición (Fernando, 28-sep-2026): «El sistema completo» y «Leer el caso» son de ONTOS
+ // personal, no de empresarial. Se mueven en la base; lo demás sigue congelado.
+ if(baseline&&file==='aplicaciones.html'){
+  const emp=d.querySelector('#ontos-empresarial ul.videos'),per=d.querySelector('#ontos-personal ul.videos');
+  if(!emp||!per)throw Error('Próximamente: faltan las listas de referencia');
+  per.append(...emp.childNodes);emp.remove();
+ }
  // La auditoría autoriza cambios editoriales concretos; se congelan por fragmento.
  if(baseline){
   if(file==='servicios.html'){const canonical=d.createElement('link');canonical.rel='canonical';canonical.href='https://ontosdigital.es/aplicaciones.html';d.head.append(canonical);}
