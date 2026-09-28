@@ -28,7 +28,9 @@ const urls=xml=>[...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map(m=>m[1]).sort();
 if(!bilingual)assert.deepEqual(urls(sitemap),urls(oldSitemap),'Sitemap: las mismas rutas, solo se actualizan fechas ES');
 else {
  const spanish=urls(sitemap).filter(url=>!url.includes('/en/'));
- assert.deepEqual(spanish,urls(oldSitemap).filter(url=>!url.includes('/en/')),'Sitemap: conservar todas las rutas ES');
+ // Producto oculto (Fernando, 28-sep-2026): noindex, sin enlaces y fuera del sitemap.
+ const ocultas=['https://ontosdigital.es/producto.html'];
+ assert.deepEqual(spanish,urls(oldSitemap).filter(url=>!url.includes('/en/')&&!ocultas.includes(url)),'Sitemap: conservar todas las rutas ES');
  assert.deepEqual(urls(sitemap).filter(url=>url.includes('/en/')),spanish.filter(url=>!url.endsWith('/editor-pdf/')).map(url=>url.replace('https://ontosdigital.es/','https://ontosdigital.es/en/')).sort(),'Sitemap: espejo EN de todas las páginas indexables salvo editor bilingüe');
  for(const file of pages.filter(file=>file!=='editor-pdf/index.html')){
   const english=fs.readFileSync(path.join(WEB,'en',file),'utf8');
@@ -86,6 +88,10 @@ function signature({html,baseline=false,file,subtitle,revision}){
   if(!emp||!per)throw Error('Próximamente: faltan las listas de referencia');
   per.append(...emp.childNodes);emp.remove();
  }
+ // Quinta petición (Fernando, 28-sep-2026): producto oculto. Se quitan en la base solo sus enlaces
+ // de entrada (Aplicaciones y Sobre mí); producto.html añade noindex y conserva su contenido.
+ if(baseline&&file==='aplicaciones.html')d.querySelector('.proximo-pie')?.remove();
+ if(baseline&&file==='fernando-calle.html')for(const a of d.querySelectorAll('a[href="producto.html"]'))a.replaceWith(...a.childNodes);
  // La auditoría autoriza cambios editoriales concretos; se congelan por fragmento.
  if(baseline){
   if(file==='servicios.html'){const canonical=d.createElement('link');canonical.rel='canonical';canonical.href='https://ontosdigital.es/aplicaciones.html';d.head.append(canonical);}

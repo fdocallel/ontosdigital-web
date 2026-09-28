@@ -23,7 +23,7 @@ DOMINIO = "https://ontosdigital.es"
 # Páginas del espejo. `indexable` decide si lleva hreflang y entra en el sitemap.
 PAGINAS = [
     ("index.html", True),
-    ("producto.html", True),
+    ("producto.html", False),  # oculto desde el 28-sep-2026 (Fernando): sin enlaces ni sitemap
     ("consultoria.html", False),  # redirección a / (web v5, 24-sep-2026), sin índice
     ("contacto.html", True),
     ("bim.html", True),
