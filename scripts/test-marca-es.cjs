@@ -73,6 +73,12 @@ function signature({html,baseline=false,file,subtitle,revision}){
   const aside=d.createElement('p');aside.textContent=subtitle;intro.append('\n',aside);
   inner.append(...hero.childNodes);hero.append(inner);
  }
+ // Tercera petición explícita (Fernando, 28-sep-2026): la home sin «Quién» y con los trabajos
+ // más cortos (sin su párrafo). Solo esos fragmentos salen de la base.
+ if(baseline&&file==='index.html'){
+  d.querySelector('section#quien')?.remove();
+  for(const p of d.querySelectorAll('#trabajos .trabajo .texto > p'))p.remove();
+ }
  // La auditoría autoriza cambios editoriales concretos; se congelan por fragmento.
  if(baseline){
   if(file==='servicios.html'){const canonical=d.createElement('link');canonical.rel='canonical';canonical.href='https://ontosdigital.es/aplicaciones.html';d.head.append(canonical);}

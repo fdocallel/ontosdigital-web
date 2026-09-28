@@ -95,7 +95,21 @@ footer a { color: inherit; }
   .servicio:last-child:nth-child(3n+1) .texto { padding: 1.2rem 1.4rem; justify-content: center; }
 }
 @media (max-width: 58rem) { .catalogo { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 40rem) { .hero { padding: 3rem 0; } .catalogo { grid-template-columns: 1fr; gap: 1rem; } }
+/* Móvil (28-sep-2026, Fernando: «ver más, en vez de uno solo»): dos por fila y tarjeta corta.
+   Imagen, número, título y enlace; la descripción y las etiquetas siguen en escritorio. */
+@media (max-width: 40rem) {
+  .hero { padding: 3rem 0; }
+  .catalogo { grid-template-columns: 1fr 1fr; gap: .7rem; }
+  .servicio .texto { padding: .7rem .75rem .5rem; }
+  .servicio .cabecera .pill, .servicio .texto > p:not(.cabecera):not(.enlaces) { display: none; }
+  .servicio .cabecera .etiqueta { font-size: .66rem; letter-spacing: .08em; }
+  .servicio h3 { font-size: .98rem; line-height: 1.25; margin: .35rem 0 .2rem; }
+  .servicio a { font-size: .84rem; min-height: 44px; display: inline-flex; align-items: center; }
+  .servicio .enlaces br { display: none; }
+  .servicio .enlaces a + a { margin-top: -.4rem; }
+  .servicio .enlaces { display: flex; flex-direction: column; }
+  .servicio:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 <!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->

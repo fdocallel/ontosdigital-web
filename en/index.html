@@ -94,7 +94,7 @@
     letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
   }
   /* prosa justificada (Fernando, 21-sep-2026); las tarjetas se quedan a la izquierda */
-  .entrada p, .intro p, .bajada, .quien p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .entrada p, .intro p, .bajada { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
   .entrada { padding-top: 0; }
   .entrada p {
     max-width: 46rem; margin: 0 auto;
@@ -147,28 +147,25 @@
   }
   .trabajo:hover { transform: translateY(-4px); border-color: var(--teja); }
   .trabajo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--borde); }
-  .trabajo .texto { padding: 1.1rem 1.2rem 1.3rem; }
+  .trabajo .texto { padding: 0.9rem 1.1rem 1.1rem; }
   .trabajo .etiqueta { font-size: 0.72rem; color: var(--acento); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
   .trabajo h3 { font-size: 1.15rem; margin: 0.4rem 0 0.4rem; line-height: 1.25; }
   .trabajo p { font-size: 0.92rem; color: var(--sec); line-height: 1.5; }
   .mas { margin-top: 1.6rem; }
-  .mas a, .quien .enlaces a { color: var(--acento); font-weight: 600; text-decoration: none; display: inline-block; padding: 0.5rem 0; }
-  .mas a:hover, .quien .enlaces a:hover { text-decoration: underline; }
-  @media (max-width: 52rem) { .trabajos { grid-template-columns: 1fr; } .trabajo { flex-direction: row; } .trabajo img { width: 40%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--borde); } }
-  @media (max-width: 34rem) { .trabajo { flex-direction: column; } .trabajo img { width: 100%; aspect-ratio: 16 / 10; border-right: 0; border-bottom: 1px solid var(--borde); } }
+  .mas a { color: var(--acento); font-weight: 600; text-decoration: none; display: inline-block; padding: 0.5rem 0; }
+  .mas a:hover { text-decoration: underline; }
+  /* Menos de tres columnas (28-sep-2026, Fernando: «más corto»): una fila que se desliza,
+     con la siguiente tarjeta asomando, en vez de tres tarjetas apiladas. */
+  @media (max-width: 52rem) {
+    .trabajos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.9rem;
+      margin-inline: -1.5rem; padding: 0 1.5rem 0.6rem; scroll-padding-inline: 1.5rem; }
+    .trabajo { flex: 0 0 min(78%, 20rem); scroll-snap-align: start; }
+    .trabajo .texto { padding: 0.85rem 1rem 1rem; }
+    .trabajo h3 { font-size: 1.05rem; }
+  }
   @media (prefers-reduced-motion: reduce) { .trabajo, .cta { transition: none; } }
 
   /* quién: retrato + dos frases de fernando-calle.html */
-  .quien .fila { display: grid; grid-template-columns: 11rem 1fr; gap: 2.2rem; align-items: start; max-width: 50rem; }
-  .quien img {
-    width: 11rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
-    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
-  }
-  @media (prefers-color-scheme: dark) { .quien img { border-color: rgba(255,255,255,0.12); } }
-  .quien p { font-size: 1.08rem; }
-  .quien strong { color: var(--realce); font-weight: 600; }
-  .quien .enlaces { margin-top: 1rem; text-align: left; }
-  @media (max-width: 40rem) { .quien .fila { grid-template-columns: 1fr; gap: 1.4rem; } .quien img { width: 9rem; } }
 
   /* cierre */
   .cierre { text-align: center; }
@@ -320,7 +317,6 @@
       <div class="texto">
         <span class="etiqueta">Web tools</span>
         <h3>A blend of CamScanner and iLovePDF</h3>
-        <p>Merge, rotate and reorder pages; turn photos into documents. All in your browser.</p>
       </div>
     </a>
     <a class="trabajo" href="/en/aplicaciones.html#modelado-3d">
@@ -328,7 +324,6 @@
       <div class="texto">
         <span class="etiqueta">3D modelling from a drone</span>
         <h3>From a flight to a model</h3>
-        <p>26 seconds of flight and the exterior rebuilt locally.</p>
       </div>
     </a>
     <a class="trabajo" href="/en/aplicaciones.html#webs">
@@ -336,22 +331,10 @@
       <div class="texto">
         <span class="etiqueta">Custom websites</span>
         <h3>A website the client can maintain</h3>
-        <p>A gallery with a database of works that he edits himself.</p>
       </div>
     </a>
   </div>
   <p class="mas"><a href="/en/aplicaciones.html">Explore the applications ▸</a></p>
-</section>
-
-<section class="quien" id="quien">
-  <h2>Who</h2>
-  <div class="fila">
-    <img src="/brand/fernando.jpg" alt="Portrait of Fernando Calle, civil engineer and founder of ONTOS" width="600" height="800" decoding="async" loading="lazy">
-    <div>
-      <p>I am a civil engineer, and my work is <strong>putting information in order with code and artificial intelligence</strong>. I come from the projects where you learn that the hard way: six years leading models, data and automation on major international works, where the order of the information sets the deadlines and the costs.</p>
-      <p class="enlaces"><a href="/en/fernando-calle.html">Who I am and where I come from ▸</a></p>
-    </div>
-  </div>
 </section>
 
 <section class="cierre" id="contacto">
