@@ -8,7 +8,7 @@ const WEB=path.resolve(__dirname,'..');
 const ONTOS=process.env.ONTOS_BRAND_ROOT||path.resolve(WEB,'../ONTOS');
 const catalogo=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/web-elementos.json'),'utf8'));
 const {webkit}=require(process.env.PLAYWRIGHT_MODULE||path.join(ONTOS,'scripts/verify/node_modules/playwright'));
-const TODAS=['index.html','aplicaciones.html','fernando-calle.html','contacto.html'];
+const {textoDe,TODAS}=require(path.join(ONTOS,'scripts/capturas-web-elementos.js'));
 
 function paginas(el){
   const base=el.pagina==='todas'?TODAS:el.pagina.split(' · ');
@@ -26,6 +26,11 @@ async function comprobar(page,elementos){
       const src=fs.readFileSync(path.join(WEB,el.js),'utf8');
       if(!src.includes(clase))fallos.push(`${el.id}: ${el.js} ya no crea «${clase}»`);
       continue;
+    }
+    // Lo que dice: la tabla del manual (columna «Dice») tiene que coincidir con la página ES.
+    if(el.con_texto){
+      const t=await textoDe(page,WEB,el);
+      if(t!==el.texto)fallos.push(`${el.id}: la página dice «${t}» y la tabla «${el.texto}» → en ONTOS: node scripts/capturas-web-elementos.js --textos`);
     }
     for(const f of paginas(el)){
       const html=fs.readFileSync(path.join(WEB,f),'utf8');
@@ -45,9 +50,10 @@ async function comprobar(page,elementos){
     // Caso rojo sembrado: un selector inexistente y un id repetido deben fallar.
     const rojo=await comprobar(page,[
       {id:'rojo.a',pagina:'index.html',selector:'.no-existe-jamas'},
-      {id:'rojo.a',pagina:'index.html',selector:'header.barra'}
+      {id:'rojo.a',pagina:'index.html',selector:'header.barra'},
+      {id:'rojo.b',pagina:'index.html',selector:'.home-feature h1',con_texto:true,texto:'Otro titular'}
     ]);
-    assert(rojo.some(f=>f.includes('.no-existe-jamas'))&&rojo.some(f=>f.includes('id repetido')),'Caso rojo: el guardián debe detectar selector roto e id repetido');
-    console.log(`PASS elementos web: ${catalogo.elementos.length} ids con selector vivo en su página (ES/EN); caso rojo detectado.`);
+    assert(rojo.some(f=>f.includes('.no-existe-jamas'))&&rojo.some(f=>f.includes('id repetido'))&&rojo.some(f=>f.startsWith('rojo.b: la página dice')),'Caso rojo: el guardián debe detectar selector roto, id repetido y texto distinto');
+    console.log(`PASS elementos web: ${catalogo.elementos.length} ids con selector vivo en su página (ES/EN) y textos iguales a la tabla; caso rojo detectado.`);
   }finally{await browser.close();}
 })().catch(e=>{console.error(e.message);process.exit(1);});
