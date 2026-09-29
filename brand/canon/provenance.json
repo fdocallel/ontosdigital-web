@@ -4,8 +4,8 @@
   "scope": "es-en",
   "sources": {
     "docs/ontos/propuesta-web-2026-09-12/assets/logo.svg": "7c15febb133cf351ac6e9405e2d28241a09bb5e47bf7ecb1a3c7ffa79f41f264",
-    "data/mensaje.json": "ac69608e0944bfb183be2df7afe71d7340186ff26ced9b41682fcd2b3045c0ff",
-    "data/manual-marca.json": "fc4327e44ad960d2163bddedf67dceffe2351e805f4a3a60b0bbc640e11a5756",
+    "data/mensaje.json": "a2956852725373fd8de37d57a24a770b92b2e72a2945a6d2d2934ea5aee3e365",
+    "data/manual-marca.json": "36698fc122c3829eb0e4d92ac452b384381d04f8c2fe5dddf770070d71e610da",
     "data/marca-construccion.json": "9a7102fbd085cbc51de2e32b35e6da6e2b893d2aca39d6235fba70335886ce93",
     "data/marca-wordmark-geometria.json": "ab5810b579c9085733a2daa4d9bae5a6369d5ad164f928f2e82db280ba7abecc",
     "data/marca-aplicaciones.json": "2293edd967399efd4ef728e4b8df89c24d7a02c0244e91f4628ff03325c7235e",
@@ -47,7 +47,7 @@
     "brand/canon/favicon.svg": "c940ade6bd660695d8b8b7948cd5688523e7116fd3185064129736ea5ff07b7e",
     "brand/canon/tokens.css": "a0772b690e5dd2ce6490fc1ed88a40b8ee73d06b2ec6ee0fa31e21337e130a12",
     "brand/canon/tokens.json": "0abc1a782c1b410f529e7a2f391fc9c8c44852ccd3c3b9a4917ebe2049e476c3",
-    "brand/canon/og.png": "11fd0de25af572c03881f7ae1451191e754aa6b1b2dfdc8ef295356d642cbe7b",
-    "brand/canon/og-en.png": "834d1cba8a9ecfd67600c561dea5bb091fce74c29d03364d97f16beb01a68538"
+    "brand/canon/og.png": "2d39c72529d029173a650267fd09f5516c2e8cedd7b7151867de63d2e2b1f9a3",
+    "brand/canon/og-en.png": "e5cba7d960d5f3a3c88d49c28f6a673e43e7f0b5c538220066d7e15c6e9ef412"
   }
 }
