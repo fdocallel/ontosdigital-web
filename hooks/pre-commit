@@ -20,6 +20,8 @@ else
   git add sitemap.xml
   node scripts/test-marca-es.cjs --bilingue
 fi
+# Catálogo de elementos (manual 4.3, ONTOS data/web-elementos.json): selectores vivos.
+node scripts/test-elementos.cjs
 for f in $staged; do
   if [ -f "$f" ]; then git add "$f"; fi           # la página staged, con el hreflang que inyecta el generador
   case "$f" in
