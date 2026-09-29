@@ -36,7 +36,7 @@ function artifacts(root){
   out['brand/canon/movimiento-data.js']='// GENERADO: geometría pública y configuración del movimiento Arcilla.\n'+
     'window.ontosBrandAssets='+JSON.stringify({'logo.svg':svg,'logo-esqueleto.svg':read('app/img/brand/logo-esqueleto.svg').toString()})+';\n'+
     'window.ontosGlyphGeometry='+JSON.stringify({O:glyph.O,glyphs:glyph.glyphs,wordmark:glyph.wordmark})+';\n'+
-    'window.ontosMotionConfig='+JSON.stringify({duracion_ms:motion.duracion_ms,scroll:motion.scroll,nav_selector:'.barra .marca',host_selector:'[data-arcilla-host]',compact_frame:true})+';\n';
+    'window.ontosMotionConfig='+JSON.stringify({duracion_ms:motion.duracion_ms,scroll:motion.scroll,destino:motion.destino,nav_selector:'.barra .marca',host_selector:'[data-arcilla-host]',compact_frame:true})+';\n';
   const fonts=[model.familias.corporativa.archivo,model.familias.editorial.archivo,model.familias.editorial.cursiva,'docs/diseno/ontos/marca/wordmark/fuentes/jost-OFL.txt','docs/ontos/assets/tipografia/newsreader-OFL.txt'];
   for(const source of fonts){sources.push(source);out['brand/canon/fonts/'+path.basename(source)]=read(source);}
   for(const layout of ['horizontal','vertical','wordmark','icon'])for(const tone of ['color','color-dark','positive','negative'])
