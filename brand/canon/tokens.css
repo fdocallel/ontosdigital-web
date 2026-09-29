@@ -9,6 +9,8 @@ html[data-ontos-web]{
   --ds-brand-verde: #315B4E;
   --ds-brand-rojo: #A63F35;
   --ds-brand-logo-on-dark: #FDFBF7;
+  --ds-brand-teja-quemada: #B0532A;
+  --ds-brand-granito-sombra: #6B6257;
   --ds-support-hueso: #FAF8F5;
   --ds-surface-page: #F3EDE5;
   --ds-surface-panel: #FAF8F5;
@@ -53,6 +55,7 @@ html[data-ontos-web]{
   --ds-web-mix-surface: 55%;
   --ds-web-mix-panel: 75%;
   --ds-web-technical-black: #000000;
+  --ds-portada-tinta-oscura: #000000;
   --ds-web-dark-surface: #1B322B;
   --ds-web-dark-panel: #25443B;
   --ds-web-dark-ink: #FAF8F5;

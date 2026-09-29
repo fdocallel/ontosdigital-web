@@ -52,10 +52,20 @@ html[data-ontos-web]:not(:has(:where(#stage))) body .titular h1 {
   font-size: var(--ds-type-display);
   line-height: var(--ds-type-display-leading);
   max-width: 18ch;
-  margin-inline: auto;
-}
-html[data-ontos-web][data-web-page="bim"] body .titular h1 {
   margin-inline: 0;
+}
+/* 29-sep-2026 (Fernando): los titulares interiores se alinean a la izquierda,
+   en la misma guía que el resto de elementos. Solo el panel verde de portada se centra. */
+html[data-ontos-web] body .hero:not(.home-feature) {
+  align-items: flex-start;
+  text-align: start;
+}
+html[data-ontos-web] body .hero:not(.home-feature) :where(h1, .kicker, .lema, .intro, .plazo) {
+  margin-inline: 0;
+  text-align: start;
+}
+html[data-ontos-web] body .hero:not(.home-feature) :where(.ctas, .acciones) {
+  justify-content: flex-start;
 }
 html[data-ontos-web]:not(:has(:where(#stage))) body h2 {
   font-size: var(--ds-type-h2);

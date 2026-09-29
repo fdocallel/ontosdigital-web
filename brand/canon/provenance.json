@@ -4,14 +4,14 @@
   "scope": "es-en",
   "sources": {
     "docs/ontos/propuesta-web-2026-09-12/assets/logo.svg": "7c15febb133cf351ac6e9405e2d28241a09bb5e47bf7ecb1a3c7ffa79f41f264",
-    "data/mensaje.json": "27030cc9058f3044c3c1c6b05d8f38290387f7d38b7af2416cfa3d7cc7256650",
-    "data/manual-marca.json": "1907817f4d3d924b1ae318b476c251b8acc0722273713dfe0ade690fc1f5c9f7",
+    "data/mensaje.json": "ac69608e0944bfb183be2df7afe71d7340186ff26ced9b41682fcd2b3045c0ff",
+    "data/manual-marca.json": "c6cb5bbeddfb7311c6b54d7fe5978da2194cfed12cb2530bfd09fa0c2ff2c1c0",
     "data/marca-construccion.json": "9a7102fbd085cbc51de2e32b35e6da6e2b893d2aca39d6235fba70335886ce93",
     "data/marca-wordmark-geometria.json": "ab5810b579c9085733a2daa4d9bae5a6369d5ad164f928f2e82db280ba7abecc",
     "data/marca-aplicaciones.json": "2293edd967399efd4ef728e4b8df89c24d7a02c0244e91f4628ff03325c7235e",
-    "data/design-system.json": "e6072492ae11745c92976307afce36502a9f39d96fbce8c98c8416999e2308ef",
-    "data/design-system-tokens.json": "3d7534d70a1a968c19756e595f24a55e3f0e4d0952ec6dd0ef00cdd1e3f0a624",
-    "scripts/lib/marca-movimiento.js": "4d0e3ada06da27b633c705913dfdfa35ea0f2baa55e8c6d4abe40c48817d2d48",
+    "data/design-system.json": "3398d2a984e51f7d4f9133a62c48d724b44b4bba3939d77bdf106a58606de95d",
+    "data/design-system-tokens.json": "d3acb7698236da079ed4cf9663d05b66476163517901ff78221576d649398845",
+    "scripts/lib/marca-movimiento.js": "5ea431368508ac3f122ffb2f901182907803f6e41219dfd4748f9cf3db849962",
     "data/marca-movimiento-geometria.json": "fe939b62a72202449f76530e22009e9db1b1b0a8576b0dd89e40d53314208608",
     "app/img/brand/logo-esqueleto.svg": "9b33d97cff6f3fd37c0c2afed82a1aa1f34a088757f877df399d3f4d648954d5",
     "docs/diseno/ontos/marca/wordmark/fuentes/jost.ttf": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
@@ -21,7 +21,7 @@
     "docs/ontos/assets/tipografia/newsreader-OFL.txt": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
   },
   "outputs": {
-    "brand/canon/movimiento.js": "4d0e3ada06da27b633c705913dfdfa35ea0f2baa55e8c6d4abe40c48817d2d48",
+    "brand/canon/movimiento.js": "5ea431368508ac3f122ffb2f901182907803f6e41219dfd4748f9cf3db849962",
     "brand/canon/movimiento-data.js": "b4c9a60d0adc49dc0370af7c198d61f29385f50b67d163a4c3f101df9b8558d5",
     "brand/canon/fonts/jost.ttf": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
     "brand/canon/fonts/newsreader.ttf": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
@@ -45,8 +45,8 @@
     "brand/canon/icon-positive.svg": "f21d39b7a65d22d3bc369085f76ea19955081c69f9cc1f74184d69d30dab24a8",
     "brand/canon/icon-negative.svg": "ad2e8b6c1b20167734671546de21ec019a049832f18dbd9d9df27e46fe6f2001",
     "brand/canon/favicon.svg": "c940ade6bd660695d8b8b7948cd5688523e7116fd3185064129736ea5ff07b7e",
-    "brand/canon/tokens.css": "b8b5ec145c7030e7bae59a14f8289a3d24fd08a76c7da27271d3b6a949892382",
-    "brand/canon/tokens.json": "96859f391283c2ba92bc1493436cb62ed94ff5dc44105086e2a19a836823123e",
+    "brand/canon/tokens.css": "a0772b690e5dd2ce6490fc1ed88a40b8ee73d06b2ec6ee0fa31e21337e130a12",
+    "brand/canon/tokens.json": "0abc1a782c1b410f529e7a2f391fc9c8c44852ccd3c3b9a4917ebe2049e476c3",
     "brand/canon/og.png": "11fd0de25af572c03881f7ae1451191e754aa6b1b2dfdc8ef295356d642cbe7b",
     "brand/canon/og-en.png": "834d1cba8a9ecfd67600c561dea5bb091fce74c29d03364d97f16beb01a68538"
   }

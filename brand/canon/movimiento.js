@@ -32,12 +32,14 @@ const ontosMorphGeometry = (() => {
     const a0 = spec.sourceStart - .8 * (1 - joint);
     const a1 = spec.sourceStart + 90 + .8 * (1 - joint);
     const b0 = spec.targetStart, b1 = b0 + 41;
+    // Destino N5: radio exterior 42 y núcleo interior 0,7·R (29,4 en el canon de 100).
+    const R = end.r ?? 42;
     const cx = lerp(first.x, end.x, travel), cy = lerp(first.y, end.y, travel);
     function vertex(which, u) {
       const initialAngle = lerp(a0, a1, u);
       const finalAngle = lerp(b0, b1, u);
       const angle = lerp(initialAngle, finalAngle, clay);
-      const r = lerp(radial(O[which], initialAngle), which === 'outer' ? 42 : 29.4, clay);
+      const r = lerp(radial(O[which], initialAngle), which === 'outer' ? R : R * .7, clay);
       return point(cx, cy, angle, r);
     }
     let d = '';
@@ -62,7 +64,16 @@ const ontosMorphGeometry = (() => {
       left: {x: -78, y: 0}, right: {x: 78, y: 0}, target: {x: 0, y: 0},
     });
   }
-  return {topology, paths, localPaths, clamp, smooth, lerp};
+  // Destino del símbolo (fundamentos.movimiento.destino). Sin configuración: canon
+  // validado el 26-sep (centro del nombre, R 42). ancla 'primera-o' centra sobre la
+  // primera o; tamano 'glifo-o' fija el diámetro al lado menor de la caja de la o.
+  function target(destino, {os, width, baselineY, glyph}) {
+    const o = glyph.glyphs?.o?.bounds;
+    const r = destino?.tamano === 'glifo-o' ? Math.min(o.width, o.height) / 2 : 42;
+    if (destino?.ancla === 'primera-o') return {x: os[0].x, y: os[0].y, r};
+    return {x: width / 2, y: baselineY + glyph.O.cy, r};
+  }
+  return {topology, paths, localPaths, target, clamp, smooth, lerp};
 })();
 globalThis.ontosMorphGeometry = ontosMorphGeometry;
 if (typeof module !== 'undefined') module.exports = ontosMorphGeometry;
@@ -75,7 +86,7 @@ async function bootOntosMotion() {
   if (!navButton) return;
   const navIsLink = navButton.tagName.toLowerCase() === 'a';
   const NS = 'http://www.w3.org/2000/svg';
-  const {clamp, smooth, lerp, paths} = ontosMorphGeometry;
+  const {clamp, smooth, lerp, paths, target: destinoDe} = ontosMorphGeometry;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const duration = window.ontosMotionConfig?.duracion_ms || 1200;
   const scrollRange = window.ontosMotionConfig?.scroll || {inicio_px: 80, fin_px: 600};
@@ -135,7 +146,8 @@ async function bootOntosMotion() {
     const dotY = 120 + point.y + point.height / 2;
     const dotRadius = (point.width + point.height) / 4;
     const width = 18 + glyph.wordmark.width + 18;
-    const target = {x: width / 2, y: 120 + glyph.O.cy};
+    const target = destinoDe(window.ontosMotionConfig?.destino, {os, width, baselineY: 120, glyph});
+    const scale = target.r / 42;
     const layout = {left: os[0], right: os[1], target};
     // La cabecera recorta solo el margen vacío del escenario; conserva geometría y recorrido.
     svg.setAttribute('viewBox', window.ontosMotionConfig?.compact_frame
@@ -147,7 +159,7 @@ async function bootOntosMotion() {
     });
     const spokes = [...source.querySelectorAll('line')].map(line => {
       const copy = line.cloneNode(true);
-      copy.setAttribute('transform', `translate(${target.x - 50} ${target.y - 50})`);
+      copy.setAttribute('transform', `translate(${target.x} ${target.y}) scale(${scale}) translate(-50 -50)`);
       svg.append(copy);
       return copy;
     });
@@ -155,7 +167,7 @@ async function bootOntosMotion() {
     svg.append(dot);
     return {render(p) {
       const compact = button.hasAttribute('data-small') ||
-        svg.getBoundingClientRect().width / width * 84 < 96;
+        svg.getBoundingClientRect().width / width * target.r * 2 < 96;
       const d = paths(p, compact, glyph, layout);
       pieces.forEach((path, i) => path.setAttribute('d', d[i]));
       const fade = 1 - smooth(p / .37);
@@ -163,7 +175,7 @@ async function bootOntosMotion() {
       const move = smooth(p / .88);
       dot.setAttribute('cx', lerp(dotX, target.x, move));
       dot.setAttribute('cy', lerp(dotY, target.y, move));
-      dot.setAttribute('r', lerp(dotRadius, compact ? 16.5 : 14, smooth((p - .25) / .72)));
+      dot.setAttribute('r', lerp(dotRadius, (compact ? 16.5 : 14) * scale, smooth((p - .25) / .72)));
       spokes.forEach((line, i) => {
         line.style.opacity = compact ? 0 : smooth((p - .53 - i * .015) / .28);
       });
