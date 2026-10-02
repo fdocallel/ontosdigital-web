@@ -1,0 +1,72 @@
+/* Composiciones de esta revisión web. Identidad y escala desde el kit canónico. */
+html[data-web-page="index"] #familias { padding-bottom: var(--ds-space-8); }
+html[data-web-page="index"] .familias { border-top: 1px solid var(--borde); }
+html[data-web-page="index"] .familia { padding: 0; margin: 0; background: transparent; border: 0; border-bottom: 1px solid var(--borde); border-radius: 0; }
+html[data-web-page="index"] .familia summary {
+  display: grid; grid-template-columns: 3rem 1fr 2.5rem; align-items: center;
+  gap: var(--ds-space-4); min-height: 88px; padding-block: var(--ds-space-5);
+  cursor: pointer; list-style: none;
+}
+html[data-web-page="index"] .familia summary::-webkit-details-marker { display: none; }
+html[data-web-page="index"] .familia summary::marker { content: ''; }
+html[data-web-page="index"] .familia summary .num { margin: 0; font-size: var(--ds-type-note); color: var(--acento); font-variant-numeric: tabular-nums; }
+html[data-web-page="index"] .familia summary h3 { font-size: clamp(var(--ds-type-h2), 2.4vw, 32px); line-height: 1.2; margin: 0; }
+html[data-web-page="index"] .familia summary:hover h3 { color: var(--acento); }
+html[data-web-page="index"] .familia summary:focus-visible { outline: 3px solid var(--acento); outline-offset: 4px; border-radius: var(--ds-radius-s); }
+html[data-web-page="index"] .familia__toggle { position: relative; width: 40px; height: 40px; border: 1px solid var(--borde); border-radius: 50%; justify-self: end; }
+html[data-web-page="index"] .familia__toggle::before,
+html[data-web-page="index"] .familia__toggle::after { content: ''; position: absolute; background: currentColor; left: 12px; right: 12px; top: 19px; height: 1px; }
+html[data-web-page="index"] .familia__toggle::after { transform: rotate(90deg); transition: transform 180ms ease; }
+html[data-web-page="index"] .familia[open] .familia__toggle::after { transform: rotate(0); }
+html[data-web-page="index"] .familia[open] summary h3 { text-decoration: underline; text-decoration-color: var(--ds-brand-teja); text-decoration-thickness: 2px; text-underline-offset: .2em; }
+html[data-web-page="index"] .familia__detalle {
+  display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center;
+  gap: var(--ds-space-7); padding: 0 3.5rem var(--ds-space-6) 4rem;
+}
+html[data-web-page="index"] .familia__texto p { max-width: 52ch; font-size: var(--ds-type-editorial); line-height: var(--ds-type-editorial-leading); }
+html[data-web-page="index"] .familia .enlaces { list-style: none; margin-top: var(--ds-space-4); border: 0; padding: 0; }
+html[data-web-page="index"] .familia .enlaces a { min-height: 44px; display: inline-flex; align-items: center; color: var(--acento); font-weight: 600; text-decoration: none; padding-block: var(--ds-space-2); }
+html[data-web-page="index"] .familia .enlaces a:hover { text-decoration: underline; }
+html[data-web-page="index"] .familia__figura { display: block; width: min(100%, 300px); max-height: 160px; justify-self: center; fill: none; stroke: var(--ds-brand-verde); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; background: var(--panel); border-radius: var(--ds-radius); }
+html[data-web-page="index"] .familia[open] .familia__detalle { animation: familia-aparece 220ms ease-out; }
+@keyframes familia-aparece { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+html[data-web-page="index"] .encargo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: var(--ds-space-8); }
+html[data-web-page="index"] .encargo h2 { grid-column: 1; margin-bottom: var(--ds-space-5); }
+html[data-web-page="index"] .encargo .bajada { grid-column: 1; font-size: var(--ds-type-editorial); text-align: start; max-width: 30ch; }
+html[data-web-page="index"] .encargo .pasos { grid-column: 2; grid-row: 1; display: block; margin: 0; padding: 0; list-style: none; }
+html[data-web-page="index"] .paso { position: relative; padding: 0 0 var(--ds-space-7) 5rem; min-height: 136px; }
+html[data-web-page="index"] .paso:last-child { padding-bottom: 0; }
+html[data-web-page="index"] .paso:not(:last-child)::before { content: ''; position: absolute; left: 23px; top: 48px; bottom: 0; width: 1px; background: var(--borde); }
+html[data-web-page="index"] .paso .num { position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 48px; height: 48px; margin: 0; border: 1px solid var(--borde); border-radius: 50%; background: var(--panel); color: var(--acento); font-size: var(--ds-type-note); font-weight: 600; }
+html[data-web-page="index"] .paso h3 { font-size: var(--ds-type-h2); margin: 0 0 var(--ds-space-3); }
+html[data-web-page="index"] .paso p { max-width: 52ch; font-size: var(--ds-type-editorial); }
+/* Las tres aplicaciones en portada comparten altura y una imagen generosa. */
+html[data-web-page="index"] .trabajos { gap: var(--ds-space-5); }
+html[data-web-page="index"] .trabajo { background: transparent; border: 0; border-radius: 0; }
+html[data-web-page="index"] .trabajo img { border: 0; border-radius: var(--ds-radius); aspect-ratio: 16 / 10; object-fit: contain; background: var(--panel); transition: transform 220ms ease; }
+html[data-web-page="index"] .trabajo .texto { padding: var(--ds-space-4) 0 0; }
+html[data-web-page="index"] .trabajo:hover { transform: none; }
+html[data-web-page="index"] .trabajo:hover img { transform: translateY(-4px); }
+html[data-web-page="index"] .trabajo:hover h3 { text-decoration: underline; text-underline-offset: .2em; }
+@media (max-width: 48rem) {
+  html[data-web-page="index"] .encargo { display: block; }
+  html[data-web-page="index"] .encargo .bajada { max-width: 42ch; margin-bottom: var(--ds-space-6); }
+  html[data-web-page="index"] .familia__detalle { gap: var(--ds-space-5); padding-right: 0; }
+}
+@media (max-width: 34rem) {
+  html[data-web-page="index"] .familia summary { grid-template-columns: 1.8rem 1fr 2.5rem; gap: var(--ds-space-3); min-height: 80px; padding-block: var(--ds-space-4); }
+  html[data-web-page="index"] .familia summary h3 { font-size: var(--ds-type-h2); }
+  html[data-web-page="index"] .familia__detalle { display: block; padding: 0 0 var(--ds-space-5) 2.55rem; }
+  html[data-web-page="index"] .familia__figura { display: none; }
+  html[data-web-page="index"] .paso { padding-left: 4rem; padding-bottom: var(--ds-space-6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-web-page="index"] { scroll-behavior: auto; }
+  html[data-web-page="index"] .familia[open] .familia__detalle { animation: none; }
+  html[data-web-page="index"] .familia__toggle::after,
+  html[data-web-page="index"] .trabajo img { transition: none; }
+}
+
+@media (max-width: 52rem) {
+  html[data-web-page="index"] .trabajos { margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
+}

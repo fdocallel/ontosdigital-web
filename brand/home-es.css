@@ -123,7 +123,7 @@ html[data-ontos-web][data-web-page="index"] body .home-feature .cta:focus-visibl
   outline-offset: 4px;
 }
 
-html[data-ontos-web][data-web-page="index"] .home-feature ~ .wrap .entrada {
+html[data-ontos-web][data-web-page="index"] .home-feature ~ .wrap > .intro {
   padding-top: clamp(64px, 7.5vw, 104px);
 }
 

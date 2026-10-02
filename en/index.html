@@ -112,32 +112,6 @@
   .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   .card p { font-size: 0.95rem; color: var(--sec); }
 
-  /* las cinco familias, numeradas (patrón editorial: número teja + título + párrafo) */
-  .familia { display: flex; flex-direction: column; }
-  .familia .num, .pasos .num { display: block; font-size: 0.8rem; color: var(--acento); letter-spacing: 0.15em; margin-bottom: 0.8rem; font-weight: 600; }
-  .familia p { flex: 1; }
-  .familia .enlaces { list-style: none; margin-top: 1.2rem; border-top: 1px solid var(--borde); padding-top: 0.6rem; }
-  .familia .enlaces li a { display: inline-block; padding: 0.45rem 0; font-size: 0.9rem; font-weight: 600; color: var(--acento); text-decoration: none; }
-  .familia .enlaces li a:hover { text-decoration: underline; }
-
-  /* así empieza un encargo: tres tarjetas en fila con una flecha entre cada dos */
-  .bajada { max-width: 42rem; color: var(--sec); }
-  .pasos {
-    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 0.8rem;
-    list-style: none; margin-top: 2rem;
-  }
-  .pasos .paso { align-self: stretch; }
-  .pasos h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
-  .pasos .flecha { color: var(--teja); display: flex; align-items: center; justify-content: center; }
-  .pasos .flecha svg { width: 2.4rem; height: auto; display: block; animation: desliza 1.6s ease-in-out infinite; }
-  @keyframes desliza { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
-  @media (max-width: 48rem) {
-    .pasos { grid-template-columns: 1fr; }
-    .pasos .flecha svg { transform: rotate(90deg); animation-name: desliza-abajo; }
-    @keyframes desliza-abajo { 0%, 100% { transform: rotate(90deg) translateX(0); } 50% { transform: rotate(90deg) translateX(6px); } }
-  }
-  @media (prefers-reduced-motion: reduce) { .pasos .flecha svg { animation: none; } }
-
   /* trabajos: tres tarjetas de aplicaciones.html (misma imagen, mismo texto) */
   .trabajos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2rem; }
   .trabajo {
@@ -194,6 +168,8 @@
 <script defer src="/brand/canon/movimiento.js"></script>
 <!-- /MARCA:estilos -->
 <link rel="stylesheet" href="/brand/home-es.css">
+<link rel="stylesheet" href="/brand/encargos-es.css">
+<script defer src="/brand/encargos-es.js"></script>
 <script defer src="/brand/home-es.js"></script>
 </head>
 <body>
@@ -227,12 +203,6 @@
 
 <div class="wrap">
 
-<section class="entrada" id="encargos">
-  <!-- mensaje:web.consultoria — texto gobernado por data/mensaje.json en el repo ONTOS.
-       No se edita aquí: se edita allí y scripts/build-mensaje.js avisa si divergen. -->
-  <p>The product was born from putting real problems in order, and I keep doing that on demand: you tell me what eats your hours and I build the solution. Custom automation and AI, physical-world data with drone and photogrammetry, contract reading, websites.</p>
-</section>
-
 <section class="intro" id="que-es">
   <h2>What ONTOS is</h2>
   <p><em>Ontos</em>, from the Greek ὄντος: <span class="serif">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head, knowledge lives in each person's experience, and putting the whole picture together costs more than the decision you had to make.</p>
@@ -240,68 +210,78 @@
 
 <section id="familias">
   <h2>Five families</h2>
-  <div class="cards familias">
-    <div class="card familia">
-      <span class="num">01</span>
-      <h3>Automation</h3>
-      <p>For teams that repeat the same operations or check documents by hand. Automated flows, checks and tools that connect your data sources, with AI where it earns its place.</p>
+  <div class="familias" data-familias>
+    <details class="familia" name="familias" open>
+      <summary><span class="num">01</span> <h3>Automation</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
+      <div class="familia__detalle">
+        <div class="familia__texto"><p>For teams that repeat the same operations or check documents by hand. Automated flows, checks and tools that connect your data sources, with AI where it earns its place.</p>
       <ul class="enlaces">
         <li><a href="/en/contacto.html" data-contacto>Tell me about your case ▸</a></li>
-      </ul>
-    </div>
-    <div class="card familia">
-      <span class="num">02</span>
-      <h3>BIM</h3>
-      <p>Information requirements, coordination and control of deliverables for engineering firms and public procurement. It starts with a free BIM readiness check.</p>
+      </ul></div>
+        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="20" y="54" width="65" height="52" rx="8"/><rect x="118" y="54" width="65" height="52" rx="8"/><rect x="216" y="54" width="65" height="52" rx="8"/><path d="M85 80h33m65 0h33M45 75h15m-15 12h28M144 70v20m-10-10h20M239 80l8 8 15-18"/></svg>
+      </div>
+    </details>
+    <details class="familia" name="familias">
+      <summary><span class="num">02</span> <h3>BIM</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
+      <div class="familia__detalle">
+        <div class="familia__texto"><p>Information requirements, coordination and control of deliverables for engineering firms and public procurement. It starts with a free BIM readiness check.</p>
       <ul class="enlaces">
         <li><a href="/en/bim.html">BIM requirements in public tenders ▸</a></li>
         <li><a href="/en/escrito-plan-bim-ingenieria.html">What Spain's BIM Plan demands of a mid-sized firm ▸</a></li>
-      </ul>
-    </div>
-    <div class="card familia">
-      <span class="num">03</span>
-      <h3>Custom applications</h3>
-      <p>To turn a set of documents, a collection or a process into a tool that gets used: a PDF editor, a wardrobe app, a house in 3D from a drone flight.</p>
+      </ul></div>
+        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M150 20l80 44v74l-80 44-80-44V64zM70 64l80 44 80-44m-80 44v74M108 43l81 44v74M190 42l-80 44v74"/><path d="M37 37v24m-12-12h24M253 132v24m-12-12h24"/></svg>
+      </div>
+    </details>
+    <details class="familia" name="familias">
+      <summary><span class="num">03</span> <h3>Custom applications</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
+      <div class="familia__detalle">
+        <div class="familia__texto"><p>To turn a set of documents, a collection or a process into a tool that gets used: a PDF editor, a wardrobe app, a house in 3D from a drone flight.</p>
       <ul class="enlaces">
         <li><a href="/en/aplicaciones.html">Explore the applications ▸</a></li>
-      </ul>
-    </div>
-    <div class="card familia">
-      <span class="num">04</span>
-      <h3>Websites</h3>
-      <p>Sites to show your work, with whatever it takes for the owner to update them without depending on anyone. The gallery of the painter José María Casado is one of them.</p>
+      </ul></div>
+        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="60" y="26" width="181" height="142" rx="10"/><path d="M60 54h181m-157-14h2m10 0h2m10 0h2"/><rect x="82" y="76" width="49" height="66" rx="4"/><path d="M149 82h66m-66 20h52m-52 20h66m-66 20h38"/></svg>
+      </div>
+    </details>
+    <details class="familia" name="familias">
+      <summary><span class="num">04</span> <h3>Websites</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
+      <div class="familia__detalle">
+        <div class="familia__texto"><p>Sites to show your work, with whatever it takes for the owner to update them without depending on anyone. The gallery of the painter José María Casado is one of them.</p>
       <ul class="enlaces">
         <li><a href="https://josemariacasado.com" rel="noopener" target="_blank">Visit josemariacasado.com ▸</a></li>
         <li><a href="/en/aplicaciones.html#webs">How it was made ▸</a></li>
-      </ul>
-    </div>
-    <div class="card familia">
-      <span class="num">05</span>
-      <h3>Interactive 2D and 3D experiences</h3>
-      <p>To explore a brand, a character or a place from the browser. A game, a figure that waves, a world to step into.</p>
+      </ul></div>
+        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="36" y="30" width="228" height="136" rx="10"/><path d="M36 60h228m-208-14h3m9 0h3m9 0h3"/><rect x="58" y="82" width="82" height="62" rx="4"/><path d="M163 88h76m-76 20h76m-76 20h47"/></svg>
+      </div>
+    </details>
+    <details class="familia" name="familias">
+      <summary><span class="num">05</span> <h3>Interactive 2D and 3D experiences</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
+      <div class="familia__detalle">
+        <div class="familia__texto"><p>To explore a brand, a character or a place from the browser. A game, a figure that waves, a world to step into.</p>
       <ul class="enlaces">
         <li><a href="/en/aplicaciones.html#juegos-2d">Try the experiences ▸</a></li>
-      </ul>
-    </div>
+      </ul></div>
+        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(-25 150 102)"/><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(25 150 102)"/><circle cx="150" cy="102" r="32"/><circle cx="60" cy="77" r="8"/><circle cx="235" cy="130" r="8"/></svg>
+      </div>
+    </details>
   </div>
 </section>
-<section id="encargo">
+<section id="encargo" class="encargo">
+  <div class="encargo__intro">
   <h2>How a commission starts</h2>
   <p class="bajada">We start with what you want someone to be able to do or feel. From there, we agree on what to build.</p>
+  </div>
   <ol class="pasos">
-    <li class="card paso">
+    <li class="paso">
       <span class="num">01</span>
       <h3>The idea and its purpose</h3>
       <p>We define the audience, content, interactions and devices it needs to work on.</p>
     </li>
-    <li class="flecha" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M2 12h34M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
-    <li class="card paso">
+    <li class="paso">
       <span class="num">02</span>
       <h3>A first version</h3>
       <p>We try out the visual direction and interaction with something concrete for you to review.</p>
     </li>
-    <li class="flecha" aria-hidden="true"><svg viewBox="0 0 40 24" width="40" height="24"><path d="M2 12h34M28 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
-    <li class="card paso">
+    <li class="paso">
       <span class="num">03</span>
       <h3>The agreed delivery</h3>
       <p>Files, instructions and checks. Scope, budget, timeline and maintenance are agreed for each project.</p>

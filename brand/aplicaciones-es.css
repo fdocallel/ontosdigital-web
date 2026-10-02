@@ -1,0 +1,214 @@
+/* Escaparate de Aplicaciones. Los colores, tipos y superficies vienen del canon. */
+html[data-web-page="aplicaciones"] .hero {
+  padding-block: var(--ds-space-8);
+}
+
+html[data-web-page="aplicaciones"] .hero .intro {
+  max-width: 52rem;
+}
+
+html[data-web-page="aplicaciones"] #trabajos {
+  padding-top: var(--ds-space-7);
+}
+
+html[data-web-page="aplicaciones"] #trabajos > .bajada {
+  max-width: 54rem;
+}
+
+html[data-web-page="aplicaciones"] .filtros:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-space-2);
+  margin-top: var(--ds-space-6);
+}
+
+html[data-web-page="aplicaciones"] .filtros button {
+  min-height: 44px;
+  padding: var(--ds-space-2) var(--ds-space-4);
+  border: 1px solid var(--ds-control-border);
+  border-radius: var(--ds-radius-s);
+  background: var(--panel);
+  color: var(--texto);
+  font: 600 var(--ds-type-body)/1.2 var(--ds-font-corporativa);
+  cursor: pointer;
+}
+
+html[data-web-page="aplicaciones"] .filtros button[aria-pressed="true"] {
+  background: var(--ds-action);
+  color: var(--ds-on-action);
+}
+
+html[data-web-page="aplicaciones"] .filtros button:hover:not([aria-pressed="true"]) {
+  background: var(--bg);
+}
+
+html[data-web-page="aplicaciones"] .catalogo {
+  gap: var(--ds-space-5);
+  margin-top: var(--ds-space-6);
+}
+
+html[data-web-page="aplicaciones"] .catalogo > [hidden] {
+  display: none !important;
+}
+
+html[data-web-page="aplicaciones"] .servicio {
+  border-radius: var(--ds-radius);
+}
+
+html[data-web-page="aplicaciones"] .servicio img {
+  aspect-ratio: 16 / 10;
+  object-position: center;
+  object-fit: contain;
+  background: var(--bg);
+}
+
+html[data-web-page="aplicaciones"] .servicio .texto {
+  padding: var(--ds-space-5);
+}
+
+html[data-web-page="aplicaciones"] .servicio h3 {
+  font-size: clamp(var(--ds-type-h3), 1.7vw, var(--ds-type-h2));
+  margin-block: var(--ds-space-3);
+}
+
+html[data-web-page="aplicaciones"] .servicio .caso {
+  margin-top: var(--ds-space-4);
+  padding-top: var(--ds-space-3);
+}
+
+html[data-web-page="aplicaciones"] .servicio .enlaces {
+  padding-top: var(--ds-space-3);
+}
+
+html[data-web-page="aplicaciones"] .servicio--destacado {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+
+html[data-web-page="aplicaciones"] .servicio--destacado img {
+  height: 100%;
+  min-height: 22rem;
+  aspect-ratio: auto;
+  border-right: 1px solid var(--borde);
+  border-bottom: 0;
+}
+
+html[data-web-page="aplicaciones"] .servicio--destacado .texto {
+  padding: clamp(var(--ds-space-5), 3vw, var(--ds-space-8));
+  justify-content: center;
+}
+
+html[data-web-page="aplicaciones"] .servicio--destacado h3 {
+  font-size: clamp(var(--ds-type-h2), 2.6vw, var(--ds-type-h1));
+}
+
+html[data-web-page="aplicaciones"] .servicio--destacado .caso {
+  border-top: 0;
+  padding-top: 0;
+}
+
+html[data-web-page="aplicaciones"] .servicio:last-child:nth-child(3n+1):not(.servicio--destacado) {
+  grid-column: auto;
+  flex-direction: column;
+}
+
+html[data-web-page="aplicaciones"] .servicio:last-child:nth-child(3n+1):not(.servicio--destacado) img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  border-right: 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+html[data-web-page="aplicaciones"] #proximamente {
+  margin-block: var(--ds-space-8);
+  padding: var(--ds-space-7);
+  border: 1px solid var(--borde);
+  border-radius: var(--ds-radius);
+  background: var(--panel);
+}
+
+html[data-web-page="aplicaciones"] #proximamente .proximo {
+  gap: var(--ds-space-5);
+  margin-top: var(--ds-space-6);
+}
+
+html[data-web-page="aplicaciones"] #proximamente .edicion {
+  background: var(--bg);
+}
+
+@media (max-width: 58rem) {
+  html[data-web-page="aplicaciones"] .catalogo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  html[data-web-page="aplicaciones"] .servicio--destacado {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 40rem) {
+  html[data-web-page="aplicaciones"] .hero {
+    padding-block: var(--ds-space-7);
+  }
+
+  html[data-web-page="aplicaciones"] .filtros:not([hidden]) {
+    gap: var(--ds-space-2);
+    margin-top: var(--ds-space-5);
+  }
+
+  html[data-web-page="aplicaciones"] .filtros button {
+    padding-inline: var(--ds-space-3);
+    font-size: var(--ds-type-note);
+  }
+
+  html[data-web-page="aplicaciones"] .catalogo {
+    gap: var(--ds-space-3);
+    margin-top: var(--ds-space-5);
+  }
+
+  html[data-web-page="aplicaciones"] .servicio:not(.servicio--destacado) img {
+    aspect-ratio: 16 / 10;
+  }
+
+  html[data-web-page="aplicaciones"] .servicio:not(.servicio--destacado) .texto {
+    padding: var(--ds-space-3);
+  }
+
+  html[data-web-page="aplicaciones"] .servicio--destacado {
+    display: flex;
+    flex-direction: column;
+  }
+
+  html[data-web-page="aplicaciones"] .servicio--destacado img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    border-right: 0;
+    border-bottom: 1px solid var(--borde);
+  }
+
+  html[data-web-page="aplicaciones"] .servicio--destacado .texto {
+    padding: var(--ds-space-5);
+  }
+
+  html[data-web-page="aplicaciones"] .servicio--destacado .cabecera .pill,
+  html[data-web-page="aplicaciones"] .servicio--destacado .texto > p:not(.cabecera):not(.enlaces) {
+    display: revert;
+  }
+
+  html[data-web-page="aplicaciones"] .servicio--destacado h3 {
+    font-size: var(--ds-type-h2);
+  }
+
+  html[data-web-page="aplicaciones"] .servicio:last-child:nth-child(odd):not(.servicio--destacado) {
+    grid-column: auto;
+  }
+
+  html[data-web-page="aplicaciones"] #proximamente {
+    margin-block: var(--ds-space-7);
+    padding: var(--ds-space-5);
+  }
+}

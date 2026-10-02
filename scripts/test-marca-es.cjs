@@ -105,6 +105,23 @@ function signature({html,baseline=false,file,subtitle,revision}){
   }
   if(revision.descriptions[file]){const m=d.createElement('meta');m.name='description';m.content=revision.descriptions[file];d.head.append(m);}
  }
+ // Encargo explícito de Fernando, 2-oct-2026: retirar la entrada y rediseñar familias,
+ // recorrido y catálogo. Solo estas zonas permiten cambiar envoltorios; sus textos,
+ // títulos, destinos, medios y orden siguen comprobándose contra la referencia.
+ // Fuente: ONTOS/raw/marca/2026-10-02-web-home-familias-encargo-aplicaciones-fernando.md.
+ if(baseline&&file==='index.html')d.querySelector('section#encargos')?.remove();
+ for(const e of d.querySelectorAll('[data-catalog-controls]'))e.remove();
+ const visualZones=file==='index.html'?'#familias, #encargo':file==='aplicaciones.html'?'.catalogo, .proximo':null;
+ if(visualZones){
+  for(const zone of d.querySelectorAll(visualZones)){
+   // Forma canónica para esta comparación: mantiene todos los nodos con contenido,
+   // su semántica y sus ids; descuenta exclusivamente contenedores de composición.
+   for(const e of [...zone.querySelectorAll('div,details,summary,svg,span[aria-hidden],li.flecha')].reverse()){
+    if(e.matches('svg,span[aria-hidden],li.flecha'))e.remove();
+    else e.replaceWith(...e.childNodes);
+   }
+  }
+ }
  // Los landmarks y el salto de teclado no alteran el contenido del encargo.
  for(const e of d.querySelectorAll('.skip-link'))e.remove();
  for(const e of d.querySelectorAll('main.web-main, nav[aria-label="Volver al inicio"]'))e.replaceWith(...e.childNodes);
