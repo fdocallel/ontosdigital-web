@@ -209,60 +209,57 @@
 </section>
 
 <section id="familias">
-  <h2>Five families</h2>
-  <div class="familias" data-familias>
-    <details class="familia" name="familias" open>
-      <summary><span class="num">01</span> <h3>Automation</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>For teams that repeat the same operations or check documents by hand. Automated flows, checks and tools that connect your data sources, with AI where it earns its place.</p>
+  <div class="familias__cabecera">
+    <h2 id="familias-titulo">Five families</h2>
+    <div class="familias__controles" data-familias-controls hidden>
+      <span class="familias__estado" aria-live="polite" aria-atomic="true" aria-label="Visible service families">01–03 / 05</span>
+      <button type="button" data-familias-prev aria-label="See previous service families" aria-controls="familias-carril" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
+      <button type="button" data-familias-next aria-label="See next service families" aria-controls="familias-carril"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="familias" id="familias-carril" data-familias tabindex="0" role="region" aria-labelledby="familias-titulo">
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">01</span> <h3>Automation</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="20" y="54" width="65" height="52" rx="8"/><rect x="118" y="54" width="65" height="52" rx="8"/><rect x="216" y="54" width="65" height="52" rx="8"/><path d="M85 80h33m65 0h33M45 75h15m-15 12h28M144 70v20m-10-10h20M239 80l8 8 15-18"/></svg>
+      <div class="familia__texto"><p>For teams that repeat the same operations or check documents by hand. Automated flows, checks and tools that connect your data sources, with AI where it earns its place.</p>
       <ul class="enlaces">
         <li><a href="/en/contacto.html" data-contacto>Tell me about your case ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="20" y="54" width="65" height="52" rx="8"/><rect x="118" y="54" width="65" height="52" rx="8"/><rect x="216" y="54" width="65" height="52" rx="8"/><path d="M85 80h33m65 0h33M45 75h15m-15 12h28M144 70v20m-10-10h20M239 80l8 8 15-18"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">02</span> <h3>BIM</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Information requirements, coordination and control of deliverables for engineering firms and public procurement. It starts with a free BIM readiness check.</p>
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">02</span> <h3>BIM</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M150 20l80 44v74l-80 44-80-44V64zM70 64l80 44 80-44m-80 44v74M108 43l81 44v74M190 42l-80 44v74"/><path d="M37 37v24m-12-12h24M253 132v24m-12-12h24"/></svg>
+      <div class="familia__texto"><p>Information requirements, coordination and control of deliverables for engineering firms and public procurement. It starts with a free BIM readiness check.</p>
       <ul class="enlaces">
         <li><a href="/en/bim.html">BIM requirements in public tenders ▸</a></li>
         <li><a href="/en/escrito-plan-bim-ingenieria.html">What Spain's BIM Plan demands of a mid-sized firm ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M150 20l80 44v74l-80 44-80-44V64zM70 64l80 44 80-44m-80 44v74M108 43l81 44v74M190 42l-80 44v74"/><path d="M37 37v24m-12-12h24M253 132v24m-12-12h24"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">03</span> <h3>Custom applications</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>To turn a set of documents, a collection or a process into a tool that gets used: a PDF editor, a wardrobe app, a house in 3D from a drone flight.</p>
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">03</span> <h3>Custom applications</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="60" y="26" width="181" height="142" rx="10"/><path d="M60 54h181m-157-14h2m10 0h2m10 0h2"/><rect x="82" y="76" width="49" height="66" rx="4"/><path d="M149 82h66m-66 20h52m-52 20h66m-66 20h38"/></svg>
+      <div class="familia__texto"><p>To turn a set of documents, a collection or a process into a tool that gets used: a PDF editor, a wardrobe app, a house in 3D from a drone flight.</p>
       <ul class="enlaces">
         <li><a href="/en/aplicaciones.html">Explore the applications ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="60" y="26" width="181" height="142" rx="10"/><path d="M60 54h181m-157-14h2m10 0h2m10 0h2"/><rect x="82" y="76" width="49" height="66" rx="4"/><path d="M149 82h66m-66 20h52m-52 20h66m-66 20h38"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">04</span> <h3>Websites</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Sites to show your work, with whatever it takes for the owner to update them without depending on anyone. The gallery of the painter José María Casado is one of them.</p>
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">04</span> <h3>Websites</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="36" y="30" width="228" height="136" rx="10"/><path d="M36 60h228m-208-14h3m9 0h3m9 0h3"/><rect x="58" y="82" width="82" height="62" rx="4"/><path d="M163 88h76m-76 20h76m-76 20h47"/></svg>
+      <div class="familia__texto"><p>Sites to show your work, with whatever it takes for the owner to update them without depending on anyone. The gallery of the painter José María Casado is one of them.</p>
       <ul class="enlaces">
         <li><a href="https://josemariacasado.com" rel="noopener" target="_blank">Visit josemariacasado.com ▸</a></li>
         <li><a href="/en/aplicaciones.html#webs">How it was made ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="36" y="30" width="228" height="136" rx="10"/><path d="M36 60h228m-208-14h3m9 0h3m9 0h3"/><rect x="58" y="82" width="82" height="62" rx="4"/><path d="M163 88h76m-76 20h76m-76 20h47"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">05</span> <h3>Interactive 2D and 3D experiences</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>To explore a brand, a character or a place from the browser. A game, a figure that waves, a world to step into.</p>
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">05</span> <h3>Interactive 2D and 3D experiences</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(-25 150 102)"/><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(25 150 102)"/><circle cx="150" cy="102" r="32"/><circle cx="60" cy="77" r="8"/><circle cx="235" cy="130" r="8"/></svg>
+      <div class="familia__texto"><p>To explore a brand, a character or a place from the browser. A game, a figure that waves, a world to step into.</p>
       <ul class="enlaces">
         <li><a href="/en/aplicaciones.html#juegos-2d">Try the experiences ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(-25 150 102)"/><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(25 150 102)"/><circle cx="150" cy="102" r="32"/><circle cx="60" cy="77" r="8"/><circle cx="235" cy="130" r="8"/></svg>
-      </div>
-    </details>
+    </article>
   </div>
 </section>
 <section id="encargo" class="encargo">

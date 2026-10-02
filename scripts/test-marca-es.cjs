@@ -110,13 +110,15 @@ function signature({html,baseline=false,file,subtitle,revision}){
  // títulos, destinos, medios y orden siguen comprobándose contra la referencia.
  // Fuente: ONTOS/raw/marca/2026-10-02-web-home-familias-encargo-aplicaciones-fernando.md.
  if(baseline&&file==='index.html')d.querySelector('section#encargos')?.remove();
- for(const e of d.querySelectorAll('[data-catalog-controls]'))e.remove();
+ for(const e of d.querySelectorAll('[data-catalog-controls], [data-familias-controls]'))e.remove();
  const visualZones=file==='index.html'?'#familias, #encargo':file==='aplicaciones.html'?'.catalogo, .proximo':null;
  if(visualZones){
   for(const zone of d.querySelectorAll(visualZones)){
+   // Carril horizontal pedido por Fernando el 2-oct: semántica del viewport y h2 con id.
+   if(file==='index.html'&&zone.id==='familias')zone.querySelector('h2')?.removeAttribute('id');
    // Forma canónica para esta comparación: mantiene todos los nodos con contenido,
    // su semántica y sus ids; descuenta exclusivamente contenedores de composición.
-   for(const e of [...zone.querySelectorAll('div,details,summary,svg,span[aria-hidden],li.flecha')].reverse()){
+   for(const e of [...zone.querySelectorAll('div,details,summary,article.familia,svg,span[aria-hidden],li.flecha')].reverse()){
     if(e.matches('svg,span[aria-hidden],li.flecha'))e.remove();
     else e.replaceWith(...e.childNodes);
    }

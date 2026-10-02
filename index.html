@@ -208,65 +208,62 @@
 </section>
 
 <section id="familias">
-  <h2>Cinco familias</h2>
-  <div class="familias" data-familias>
-    <details class="familia" name="familias" open>
-      <summary><span class="num">01</span> <h3>Automatización</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Para equipos que repiten operaciones o revisan documentación a mano. Flujos automáticos,
+  <div class="familias__cabecera">
+    <h2 id="familias-titulo">Cinco familias</h2>
+    <div class="familias__controles" data-familias-controls hidden>
+      <span class="familias__estado" aria-live="polite" aria-atomic="true" aria-label="Familias visibles">01–03 / 05</span>
+      <button type="button" data-familias-prev aria-label="Ver las familias anteriores" aria-controls="familias-carril" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
+      <button type="button" data-familias-next aria-label="Ver las familias siguientes" aria-controls="familias-carril"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+    </div>
+  </div>
+  <div class="familias" id="familias-carril" data-familias tabindex="0" role="region" aria-labelledby="familias-titulo">
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">01</span> <h3>Automatización</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="20" y="54" width="65" height="52" rx="8"/><rect x="118" y="54" width="65" height="52" rx="8"/><rect x="216" y="54" width="65" height="52" rx="8"/><path d="M85 80h33m65 0h33M45 75h15m-15 12h28M144 70v20m-10-10h20M239 80l8 8 15-18"/></svg>
+      <div class="familia__texto"><p>Para equipos que repiten operaciones o revisan documentación a mano. Flujos automáticos,
       comprobaciones y herramientas que conectan tus fuentes de datos, con IA donde aporta.</p>
       <ul class="enlaces">
         <li><a href="contacto.html" data-contacto>Cuéntame tu caso ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="20" y="54" width="65" height="52" rx="8"/><rect x="118" y="54" width="65" height="52" rx="8"/><rect x="216" y="54" width="65" height="52" rx="8"/><path d="M85 80h33m65 0h33M45 75h15m-15 12h28M144 70v20m-10-10h20M239 80l8 8 15-18"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">02</span> <h3>BIM</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Requisitos de información, coordinación y control de entregables para ingenierías y contratación
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">02</span> <h3>BIM</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M150 20l80 44v74l-80 44-80-44V64zM70 64l80 44 80-44m-80 44v74M108 43l81 44v74M190 42l-80 44v74"/><path d="M37 37v24m-12-12h24M253 132v24m-12-12h24"/></svg>
+      <div class="familia__texto"><p>Requisitos de información, coordinación y control de entregables para ingenierías y contratación
       pública. Empieza con un diagnóstico de nivel BIM sin coste.</p>
       <ul class="enlaces">
         <li><a href="bim.html">Requisitos BIM en licitación pública ▸</a></li>
         <li><a href="escrito-plan-bim-ingenieria.html">Qué exige el Plan BIM a una ingeniería mediana ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M150 20l80 44v74l-80 44-80-44V64zM70 64l80 44 80-44m-80 44v74M108 43l81 44v74M190 42l-80 44v74"/><path d="M37 37v24m-12-12h24M253 132v24m-12-12h24"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">03</span> <h3>Aplicaciones a medida</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Para convertir unos documentos, una colección o un proceso en una herramienta que se usa: un
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">03</span> <h3>Aplicaciones a medida</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="60" y="26" width="181" height="142" rx="10"/><path d="M60 54h181m-157-14h2m10 0h2m10 0h2"/><rect x="82" y="76" width="49" height="66" rx="4"/><path d="M149 82h66m-66 20h52m-52 20h66m-66 20h38"/></svg>
+      <div class="familia__texto"><p>Para convertir unos documentos, una colección o un proceso en una herramienta que se usa: un
       editor de PDF, una app de armario, una casa en 3D desde un vuelo de dron.</p>
       <ul class="enlaces">
         <li><a href="aplicaciones.html">Ver las aplicaciones ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="60" y="26" width="181" height="142" rx="10"/><path d="M60 54h181m-157-14h2m10 0h2m10 0h2"/><rect x="82" y="76" width="49" height="66" rx="4"/><path d="M149 82h66m-66 20h52m-52 20h66m-66 20h38"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">04</span> <h3>Webs</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Páginas para enseñar un trabajo o una obra, con lo que haga falta para que su dueño las actualice
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">04</span> <h3>Webs</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="36" y="30" width="228" height="136" rx="10"/><path d="M36 60h228m-208-14h3m9 0h3m9 0h3"/><rect x="58" y="82" width="82" height="62" rx="4"/><path d="M163 88h76m-76 20h76m-76 20h47"/></svg>
+      <div class="familia__texto"><p>Páginas para enseñar un trabajo o una obra, con lo que haga falta para que su dueño las actualice
       sin depender de nadie. La galería de José María Casado, pintor, es una.</p>
       <ul class="enlaces">
         <li><a href="https://josemariacasado.com" rel="noopener" target="_blank">Visitar josemariacasado.com ▸</a></li>
         <li><a href="aplicaciones.html#webs">Cómo se hizo ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="36" y="30" width="228" height="136" rx="10"/><path d="M36 60h228m-208-14h3m9 0h3m9 0h3"/><rect x="58" y="82" width="82" height="62" rx="4"/><path d="M163 88h76m-76 20h76m-76 20h47"/></svg>
-      </div>
-    </details>
-    <details class="familia" name="familias">
-      <summary><span class="num">05</span> <h3>Experiencias interactivas 2D y 3D</h3><span class="familia__toggle" aria-hidden="true"></span></summary>
-      <div class="familia__detalle">
-        <div class="familia__texto"><p>Para explorar una marca, un personaje o un lugar desde el navegador. Un juego, una figura que
+    </article>
+    <article class="familia">
+      <div class="familia__titulo"><span class="num">05</span> <h3>Experiencias interactivas 2D y 3D</h3></div>
+      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(-25 150 102)"/><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(25 150 102)"/><circle cx="150" cy="102" r="32"/><circle cx="60" cy="77" r="8"/><circle cx="235" cy="130" r="8"/></svg>
+      <div class="familia__texto"><p>Para explorar una marca, un personaje o un lugar desde el navegador. Un juego, una figura que
       saluda, un mundo al que entrar.</p>
       <ul class="enlaces">
         <li><a href="aplicaciones.html#juegos-2d">Probar las experiencias ▸</a></li>
       </ul></div>
-        <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(-25 150 102)"/><ellipse cx="150" cy="102" rx="103" ry="37" transform="rotate(25 150 102)"/><circle cx="150" cy="102" r="32"/><circle cx="60" cy="77" r="8"/><circle cx="235" cy="130" r="8"/></svg>
-      </div>
-    </details>
+    </article>
   </div>
 </section>
 <section id="encargo" class="encargo">
