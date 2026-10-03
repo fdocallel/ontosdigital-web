@@ -447,3 +447,36 @@ html[data-ontos-web][data-web-page="entrar"] .sello {
 /* El nombre se escribe siempre «ontos», en minúscula, también dentro de rótulos en versalitas
    (Fernando, 3-oct-2026). Las etiquetas de las demos 3D las escribe el motor: se dejan sin versalitas. */
 .nombre-marca, .ot-label, .of-kicker { text-transform: none; }
+
+/* Menú móvil (3-oct-2026, brand/barra.js §4): una fila; las secciones se despliegan al pulsar.
+   Solo con JS (html.barra-menu-js); sin JS sigue la barra de dos filas. */
+html[data-ontos-web] .barra-menu { display: none; }
+@media (max-width: 34rem) {
+  html[data-ontos-web].barra-menu-js:not(:has(:where(#stage))) { --nav-h: 3.75rem; }
+  html[data-ontos-web].barra-menu-js .barra nav { flex-wrap: wrap; align-items: center; min-height: var(--nav-h); }
+  html[data-ontos-web].barra-menu-js .barra nav::after { display: none; }
+  html[data-ontos-web].barra-menu-js .barra a.item:not(.idioma):not(.icono-contacto) { display: none; }
+  html[data-ontos-web].barra-menu-js .barra-menu {
+    display: inline-flex; align-items: center; justify-content: center; order: 1;
+    width: 44px; height: 44px; margin: 0 -0.5rem 0 0; padding: 0;
+    background: none; border: 0; border-radius: var(--ds-radius-s); color: var(--texto); cursor: pointer;
+  }
+  html[data-ontos-web].barra-menu-js .barra-menu svg {
+    width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round;
+  }
+  html[data-ontos-web].barra-menu-js .barra-menu:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+  html[data-ontos-web].barra-menu-js .barra.menu-abierto .barra-menu { color: var(--acento); }
+  html[data-ontos-web].barra-menu-js .barra.menu-abierto a.item:not(.idioma):not(.icono-contacto) {
+    display: flex; align-items: center; order: 3; flex-basis: 100%;
+    min-height: 48px; padding: 0 0 0 var(--web-logo-fallback-offset); font-size: 1.05rem;
+    border-top: 1px solid var(--borde); border-bottom: 0;
+  }
+  html[data-ontos-web].barra-menu-js .barra.menu-abierto a.item[aria-current="page"] { color: var(--acento); }
+  html[data-ontos-web].barra-menu-js .barra.menu-abierto nav { padding-bottom: var(--ds-space-2); }
+}
+/* 320 px: la fila (marca 150 + contacto + idioma + menú) no cabe; la marca baja a 120 px,
+   el tamaño del estado compacto. */
+@media (max-width: 22rem) {
+  html[data-ontos-web].barra-menu-js { --web-logo-width: 120px; --web-logo-height: 40px; }
+  html[data-ontos-web].barra-menu-js .barra nav { gap: 0 var(--ds-space-2); }
+}

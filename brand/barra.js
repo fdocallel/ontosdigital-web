@@ -14,7 +14,9 @@
        /en/contacto.html. Si la carga falla, se sigue el enlace. Abrir el diálogo cuenta el
        evento GoatCounter «contacto-popup» (respeta skipgc, como el resto de contadores).
 
-   3 · Dock móvil con contacto y compartir (28-sep-2026), descrito en su bloque. */
+   3 · Dock móvil con contacto y compartir (28-sep-2026), descrito en su bloque.
+
+   4 · Menú móvil (3-oct-2026), descrito en su bloque. */
 (() => {
   const d = document, raiz = d.documentElement;
   const barra = d.querySelector('header.barra');
@@ -90,6 +92,34 @@
         .forEach(el => { if (!dock.contains(el) && !barra.contains(el)) vigia.observe(el); });
       new MutationObserver(pinta).observe(raiz, { attributes: true, attributeFilter: ['class'] });
     }
+  }
+
+  /* ---------- 4 · menú móvil (3-oct-2026) ----------
+     Fernando: la cabecera móvil ocupaba mucho y las secciones son «más para clicar que para
+     mostrar». En ≤ 34rem queda una fila (marca, contacto, idioma y este botón); Aplicaciones y
+     Sobre mí se despliegan debajo al pulsarlo. Sin JS, la barra de dos filas de siempre.
+     Se cierra con Escape, al tocar fuera y al elegir un enlace. El CSS vive en brand/marca-es.css. */
+  const nav = barra.querySelector('nav');
+  const secciones = nav ? [...nav.querySelectorAll('a.item:not(.idioma):not(.icono-contacto)')] : [];
+  if (secciones.length) {
+    const boton = d.createElement('button');
+    boton.type = 'button';
+    boton.className = 'barra-menu';
+    boton.setAttribute('aria-expanded', 'false');
+    boton.setAttribute('aria-label', en ? 'Menu' : 'Menú');
+    boton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>';
+    nav.append(boton);
+    raiz.classList.add('barra-menu-js');
+    const pon = abierto => {
+      barra.classList.toggle('menu-abierto', abierto);
+      boton.setAttribute('aria-expanded', String(abierto));
+    };
+    boton.addEventListener('click', () => pon(!barra.classList.contains('menu-abierto')));
+    secciones.forEach(a => a.addEventListener('click', () => pon(false)));
+    d.addEventListener('keydown', ev => {
+      if (ev.key === 'Escape' && barra.classList.contains('menu-abierto')) { pon(false); boton.focus(); }
+    });
+    d.addEventListener('click', ev => { if (!barra.contains(ev.target)) pon(false); });
   }
 
   /* ---------- 2 · contacto en diálogo ---------- */
