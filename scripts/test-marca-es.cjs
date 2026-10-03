@@ -153,12 +153,13 @@ function checkSobreMi(html){
  const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
  assert.equal(texto((main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)||[])[1]||''),'Fernando Calle','Sobre mí: nombre');
  assert(texto(main).includes('Hoy tengo dos frentes que se alimentan entre sí. Construyo ONTOS, el sistema que pone en orden mi propia vida, y llevo ese mismo método a personas y empresas, de su contexto para la IA a una web o un mundo en 3D.'),'Sobre mí: segundo párrafo elegido por Fernando (opción A)');
- assert.deepEqual([...main.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)].map(m=>texto(m[1])).slice(0,5),['Sydney Metro West','HS2','Northern Water','Red Sea Governorates Urban Development Plan','NEOM'],'Sobre mí: los cinco proyectos');
- for(const t of ['BIM Manager del paquete de los 41 cross passages','BIM Manager de la desaladora del Northern Water Supply Project: 140 ML/día, ampliable a 200.','GIS y plan de ejecución BIM de los túneles de The Line.','Premio de innovación (I+D) de TYPSA, 2024, por automatizar el modelado paramétrico de los cross passages de túnel.'])
+ assert.deepEqual([...main.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)].map(m=>texto(m[1])).slice(0,4),['Sydney Metro West','Northern Water','Red Sea Governorates Urban Development Plan','NEOM'],'Sobre mí: los cuatro proyectos (sin HS2, 3-oct)');
+ for(const t of ['BIM Manager del paquete de los 41 cross passages. Automaticé su modelado y la carga de metadatos','Gestioné la entrega de 67 modelos con un flujo que automaticé por completo, apoyado en IA','GIS y plan de ejecución BIM de los túneles de The Line.','Premio de innovación (I+D) de TYPSA, 2024, y publicación en la 19th Australasian Tunnelling Conference (ATC 2025)'])
   assert(texto(main).includes(t),'Sobre mí: «'+t.slice(0,40)+'…»');
  for(const h of ['https://search.informit.org/doi/abs/10.3316/informit.T2026010800016790478291249','escrito-plan-bim-ingenieria.html','https://www.linkedin.com/in/fercalle-ontos'])assert(main.includes('href="'+h+'"'),'Sobre mí: enlace '+h);
  assert(/<section class="cierre" id="contacto">[\s\S]*?Cuéntame qué os come horas\.[\s\S]*?<a class="cta" href="contacto.html" data-contacto>Cuéntame tu caso<\/a>/.test(main),'Sobre mí: cierre como la portada');
  assert(!/ONTOS en vivo/.test(main),'Sobre mí: sin «ver ONTOS en vivo»');
+ assert(/<a class="credencial__enlace" href="https:\/\/search\.informit\.org\//.test(main),'Sobre mí: premio y publicación llevan a la ficha');
 }
 checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8'));
 assert.throws(()=>checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8').replace('GIS y plan de ejecución BIM','Automatización')),/Sobre mí/,'Caso rojo: un hecho alterado en Sobre mí debe bloquear');
