@@ -111,7 +111,7 @@
   .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   .card p { font-size: 0.95rem; color: var(--sec); }
 
-  /* trabajos: tres tarjetas de aplicaciones.html (misma imagen, mismo texto) */
+  /* trabajos: una tarjeta por familia (canon ONTOS data/ontos-empresa.json#lineas), de aplicaciones.html */
   .trabajos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2rem; }
   .trabajo {
     display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: var(--texto);
@@ -253,6 +253,41 @@
     </article>
   </div>
 </section>
+<section id="trabajos">
+  <h2>Hecho y funcionando</h2>
+  <div class="trabajos">
+    <a class="trabajo" href="aplicaciones.html#armario">
+      <img src="brand/servicios/armario.png" alt="Ropa colgada en baldas ordenadas por color: blancos, grises, negros" width="1240" height="698" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Tu contexto para la IA</span>
+        <h3>Tu ropa, fichada y colgada en baldas</h3>
+      </div>
+    </a>
+    <a class="trabajo" href="aplicaciones.html#modelado-3d">
+      <img src="brand/servicios/modelado-3d.png" alt="La misma casa en dos versiones: escaneado con textura y geometría simple" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Ingeniería digital</span>
+        <h3>De un vuelo a un modelo</h3>
+      </div>
+    </a>
+    <a class="trabajo" href="aplicaciones.html#herramientas">
+      <img src="brand/servicios/editor-pdf.png" alt="Editor PDF con un documento de ejemplo de tres páginas" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Herramientas a medida</span>
+        <h3>Un editor de PDF que no saca tus documentos del ordenador</h3>
+      </div>
+    </a>
+    <a class="trabajo" href="aplicaciones.html#webs">
+      <img src="brand/servicios/web-jmcasado.png" alt="Portada de la web del pintor José María Casado" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Webs y experiencias</span>
+        <h3>Una web que el cliente puede mantener</h3>
+      </div>
+    </a>
+  </div>
+  <p class="mas"><a href="aplicaciones.html">Ver las aplicaciones ▸</a></p>
+</section>
+
 <section id="encargo" class="encargo">
   <div class="encargo__intro">
   <h2>Así empieza un encargo</h2>
@@ -284,34 +319,6 @@
       <p>Funcionando en tus equipos, con instrucciones y comprobaciones. Si quieres, nos ocupamos también de mantenerlo.</p>
     </li>
   </ol>
-</section>
-
-<section id="trabajos">
-  <h2>De un documento a una casa en 3D</h2>
-  <div class="trabajos">
-    <a class="trabajo" href="aplicaciones.html#herramientas">
-      <img src="brand/servicios/editor-pdf.png" alt="Editor PDF con un documento de ejemplo de tres páginas" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Herramientas web</span>
-        <h3>Fusión de CamScanner e iLovePDF</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="aplicaciones.html#modelado-3d">
-      <img src="brand/servicios/modelado-3d.png" alt="La misma casa en dos versiones: escaneado con textura y geometría simple" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Modelado 3D desde dron</span>
-        <h3>De un vuelo a un modelo</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="aplicaciones.html#webs">
-      <img src="brand/servicios/web-jmcasado.png" alt="Portada de la web del pintor José María Casado" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Webs a medida</span>
-        <h3>Una web que el cliente puede mantener</h3>
-      </div>
-    </a>
-  </div>
-  <p class="mas"><a href="aplicaciones.html">Ver las aplicaciones ▸</a></p>
 </section>
 
 <section class="cierre" id="contacto">

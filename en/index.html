@@ -112,7 +112,7 @@
   .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   .card p { font-size: 0.95rem; color: var(--sec); }
 
-  /* trabajos: tres tarjetas de aplicaciones.html (misma imagen, mismo texto) */
+  /* trabajos: una tarjeta por familia (canon ONTOS data/ontos-empresa.json#lineas), de aplicaciones.html */
   .trabajos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2rem; }
   .trabajo {
     display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: var(--texto);
@@ -254,6 +254,41 @@
     </article>
   </div>
 </section>
+<section id="trabajos">
+  <h2>Built and working</h2>
+  <div class="trabajos">
+    <a class="trabajo" href="/en/aplicaciones.html#armario">
+      <img src="/brand/servicios/armario.png" alt="Clothes hung on shelves sorted by colour: whites, greys, blacks" width="1240" height="698" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Your context for AI</span>
+        <h3>Your clothes, catalogued and hung on shelves</h3>
+      </div>
+    </a>
+    <a class="trabajo" href="/en/aplicaciones.html#modelado-3d">
+      <img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Digital engineering</span>
+        <h3>From a flight to a model</h3>
+      </div>
+    </a>
+    <a class="trabajo" href="/en/aplicaciones.html#herramientas">
+      <img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Custom tools</span>
+        <h3>A PDF editor that never takes your documents off your computer</h3>
+      </div>
+    </a>
+    <a class="trabajo" href="/en/aplicaciones.html#webs">
+      <img src="/brand/servicios/web-jmcasado.png" alt="Homepage of painter José María Casado's website" width="1280" height="720" decoding="async" loading="lazy">
+      <div class="texto">
+        <span class="etiqueta">Websites and experiences</span>
+        <h3>A website the client can maintain</h3>
+      </div>
+    </a>
+  </div>
+  <p class="mas"><a href="/en/aplicaciones.html">Explore the applications ▸</a></p>
+</section>
+
 <section id="encargo" class="encargo">
   <div class="encargo__intro">
   <h2>How a commission starts</h2>
@@ -285,34 +320,6 @@
       <p>Running on your own devices, with instructions and checks. If you like, we can also look after its maintenance.</p>
     </li>
   </ol>
-</section>
-
-<section id="trabajos">
-  <h2>From a document to a 3D house</h2>
-  <div class="trabajos">
-    <a class="trabajo" href="/en/aplicaciones.html#herramientas">
-      <img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Web tools</span>
-        <h3>A blend of CamScanner and iLovePDF</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="/en/aplicaciones.html#modelado-3d">
-      <img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">3D modelling from a drone</span>
-        <h3>From a flight to a model</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="/en/aplicaciones.html#webs">
-      <img src="/brand/servicios/web-jmcasado.png" alt="Homepage of painter José María Casado's website" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Custom websites</span>
-        <h3>A website the client can maintain</h3>
-      </div>
-    </a>
-  </div>
-  <p class="mas"><a href="/en/aplicaciones.html">Explore the applications ▸</a></p>
 </section>
 
 <section class="cierre" id="contacto">

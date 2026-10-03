@@ -77,7 +77,19 @@ function checkEncargo(html){
  const pasos=[...zona.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)].map(m=>[texto(m[1]),texto(m[2])]);
  assert.deepEqual(pasos,proceso.proceso.map(p=>[p.nombre,p.texto]),'Encargo: pasos del canon');
 }
+// «Hecho y funcionando» = una tarjeta por familia del canon, antes del encargo (3-oct-2026).
+// Fuente: ONTOS/raw/marca/2026-10-03-web-hecho-y-funcionando-fernando.md.
+function checkTrabajos(html){
+ const i=html.indexOf('<section id="trabajos">'),zona=html.slice(i,html.indexOf('</section>',i));
+ assert(i>0&&i<html.indexOf('<section id="encargo"'),'Trabajos: antes de «Así empieza un encargo»');
+ const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+ assert.equal(texto((zona.match(/<h2>([\s\S]*?)<\/h2>/)||[])[1]||''),proceso.trabajos_titulo,'Trabajos: título del canon');
+ const tarjetas=[...zona.matchAll(/<a class="trabajo" href="([^"]*)">\s*<img src="([^"]*)" alt="([^"]*)"[\s\S]*?<span class="etiqueta">([\s\S]*?)<\/span>\s*<h3>([\s\S]*?)<\/h3>/g)].map(m=>[m[1],m[2],m[3],texto(m[4]),texto(m[5])]);
+ assert.deepEqual(tarjetas,lineas.map(l=>[l.portada_trabajo.href,l.portada_trabajo.imagen,l.portada_trabajo.alt,l.nombre,l.portada_trabajo.titulo]),'Trabajos: tarjetas del canon');
+}
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
+checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
+assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
 checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<h3>'+proceso.proceso[1].nombre+'</h3>','<h3>Otro paso</h3>')),/pasos/,'Caso rojo: un paso fuera del canon debe bloquear');
 checkFamilias(homeHtml);
@@ -159,6 +171,7 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  if(file==='index.html'){
   d.querySelector('section#familias')?.remove();
   d.querySelector('section#encargo')?.remove(); // 3-oct: cuatro pasos desde el canon (checkEncargo)
+  d.querySelector('section#trabajos')?.remove(); // 3-oct: «Hecho y funcionando» desde el canon (checkTrabajos)
   if(baseline&&description){for(const m of d.querySelectorAll('meta[name=description]'))m.remove();const m=d.createElement('meta');m.name='description';m.content=description;d.head.append(m);}
  }
  // Los landmarks y el salto de teclado no alteran el contenido del encargo.
