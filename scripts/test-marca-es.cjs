@@ -87,6 +87,20 @@ function checkTrabajos(html){
  const tarjetas=[...zona.matchAll(/<a class="trabajo" href="([^"]*)">\s*<img src="([^"]*)" alt="([^"]*)"[\s\S]*?<span class="etiqueta">([\s\S]*?)<\/span>\s*<h3>([\s\S]*?)<\/h3>/g)].map(m=>[m[1],m[2],m[3],texto(m[4]),texto(m[5])]);
  assert.deepEqual(tarjetas,lineas.map(l=>[l.portada_trabajo.href,l.portada_trabajo.imagen,l.portada_trabajo.alt,l.nombre,l.portada_trabajo.titulo]),'Trabajos: tarjetas del canon');
 }
+// Aplicaciones = familias del canon: filtros en su orden y cada pieza con su familia (3-oct-2026).
+function checkCatalogo(html){
+ const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+ const filtros=[...html.matchAll(/<button type="button" data-filtro="([^"]+)"[^>]*>([\s\S]*?)<\/button>/g)].map(m=>[m[1],texto(m[2])]).filter(([id])=>id!=='todas');
+ assert.deepEqual(filtros,lineas.map(l=>[l.id,l.nombre]),'Catálogo: filtros = familias del canon');
+ for(const l of lineas)for(const id of l.catalogo_web){
+  const i=html.indexOf('id="'+id+'"'),art=html.slice(html.lastIndexOf('<article',i),html.indexOf('</article>',i));
+  assert(art.includes('data-categoria="'+l.id+'"'),'Catálogo: '+id+' en su familia');
+  assert(art.includes('<span class="pill pill-familia">'+l.nombre+'</span>'),'Catálogo: '+id+' con la pastilla de su familia');
+ }
+ assert.equal((html.match(/data-categoria="/g)||[]).length,lineas.reduce((n,l)=>n+l.catalogo_web.length,0),'Catálogo: cada pieza declarada en el canon');
+}
+checkCatalogo(fs.readFileSync(path.join(WEB,'aplicaciones.html'),'utf8'));
+assert.throws(()=>checkCatalogo(fs.readFileSync(path.join(WEB,'aplicaciones.html'),'utf8').replace('data-categoria="contexto-ia"','data-categoria="herramientas"')),/familia/,'Caso rojo: una pieza en otra familia debe bloquear');
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
 checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
@@ -164,6 +178,8 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
    }
   }
  }
+ // Aplicaciones, 3-oct-2026: la pastilla de tipo de cada pieza pasa a ser su familia (checkCatalogo).
+ if(file==='aplicaciones.html')for(const e of d.querySelectorAll(baseline?'.pill-medida, .pill-experiencias, .pill-webs, .pill-personal':'.pill-familia'))e.remove();
  // Encargo explícito de Fernando, 3-oct-2026: cuatro familias desde el canon de la oferta
  // (ONTOS/data/ontos-empresa.json#lineas v2) y descripción desde mensaje.json web.description.
  // #familias sale de esta comparación y se comprueba contra el canon en checkFamilias.

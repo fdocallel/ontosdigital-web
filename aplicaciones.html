@@ -55,6 +55,7 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .pill-experiencias { --pill-bg: #e6def7; --pill-fg: #43307a; }
 .pill-webs { --pill-bg: #dcefe0; --pill-fg: #1f5a33; }
 .pill-personal { --pill-bg: #e9f0f8; --pill-fg: #3a5680; }
+.pill-familia { --pill-bg: rgba(49,91,78,.12); --pill-fg: #315B4E; }
 @media (prefers-color-scheme: dark) {
   .pill-consultoria { --pill-bg: rgba(212,113,59,.22); --pill-fg: #e8956a; }
   .pill-producto { --pill-bg: rgba(31,59,99,.55); --pill-fg: #a9c4e8; }
@@ -62,6 +63,7 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
   .pill-experiencias { --pill-bg: rgba(67,48,122,.55); --pill-fg: #c9bbef; }
   .pill-webs { --pill-bg: rgba(31,90,51,.55); --pill-fg: #9fd8b0; }
   .pill-personal { --pill-bg: rgba(31,59,99,.35); --pill-fg: #a9c4e8; }
+  .pill-familia { --pill-bg: rgba(159,216,176,.18); --pill-fg: #b9dcc6; }
 }
 .servicio p { color: var(--sec); font-size: .92rem; line-height: 1.5; }
 .servicio .caso { border-top: 1px solid var(--borde); padding-top: .7rem; margin-top: .8rem; font-size: .88rem; }
@@ -143,63 +145,63 @@ footer a { color: inherit; }
 <p class="bajada">Abre el editor, juega con ONTOS, recorre su pequeño mundo, mira una casa reconstruida desde un dron o la web de un pintor. Puedes probarlo todo en tu navegador.</p>
 <div class="filtros" data-catalog-controls role="group" aria-label="Filtrar aplicaciones" hidden>
 <button type="button" data-filtro="todas" aria-pressed="true">Todas</button>
-<button type="button" data-filtro="herramientas" aria-pressed="false">Herramientas</button>
-<button type="button" data-filtro="experiencias" aria-pressed="false">Experiencias</button>
-<button type="button" data-filtro="webs" aria-pressed="false">Webs</button>
-<button type="button" data-filtro="personal" aria-pressed="false">Personal</button>
+<button type="button" data-filtro="contexto-ia" aria-pressed="false">Tu contexto para la IA</button>
+<button type="button" data-filtro="ingenieria-digital" aria-pressed="false">Ingeniería digital</button>
+<button type="button" data-filtro="herramientas" aria-pressed="false">Herramientas a medida</button>
+<button type="button" data-filtro="webs-experiencias" aria-pressed="false">Webs y experiencias</button>
 </div>
 <div class="catalogo">
 <article class="servicio servicio--destacado" id="herramientas" data-categoria="herramientas">
 <img src="brand/servicios/editor-pdf.png" alt="Editor PDF con un documento de ejemplo de tres páginas" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">01 · Herramientas web</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-medida">Aplicaciones a medida</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">01 · Herramientas web</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-familia">Herramientas a medida</span></p>
 <h3>Fusión de CamScanner e iLovePDF</h3>
 <p>Aplicaciones a medida para documentos, información y tareas repetitivas.</p>
 <p class="caso"><strong>Editor PDF.</strong> Une, gira y reordena páginas; convierte fotos en documentos. Todo en tu navegador.</p>
 <p class="enlaces"><a href="/editor-pdf/" data-goatcounter-click="servicio-probar-editor-pdf" data-goatcounter-no-session="1">Probar el editor PDF ▸</a></p></div>
 </article>
-<article class="servicio" id="juegos-2d" data-categoria="experiencias">
+<article class="servicio" id="juegos-2d" data-categoria="webs-experiencias">
 <img src="brand/servicios/juego-2d.png" alt="ONTOS como personaje en su juego 2D" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">02 · Juegos y experiencias 2D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-experiencias">Experiencias 2D y 3D</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">02 · Juegos y experiencias 2D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-familia">Webs y experiencias</span></p>
 <h3>Una marca con la que jugar</h3>
 <p>Personajes y escenas interactivas para presentar una marca o aprender jugando.</p>
 <p class="caso"><strong>El juego 2D de ONTOS.</strong> El personaje de la marca, protagonista de una escena con la que interactuar.</p>
 <p class="enlaces"><a href="juego-2d.html" data-goatcounter-click="servicio-probar-juego-2d" data-goatcounter-no-session="1">Probar el juego 2D ▸</a></p></div>
 </article>
-<article class="servicio" id="animacion-3d" data-categoria="experiencias">
+<article class="servicio" id="animacion-3d" data-categoria="webs-experiencias">
 <img src="brand/servicios/saludo-3d.png" alt="La figurita 3D de ONTOS saludando" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">03 · Animación 3D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-experiencias">Experiencias 2D y 3D</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">03 · Animación 3D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-familia">Webs y experiencias</span></p>
 <h3>Un personaje que cobra vida</h3>
 <p>Volumen, poses y movimiento para un personaje o un producto.</p>
 <p class="caso"><strong>ONTOS saludando.</strong> La figurita 3D del personaje: gírala y acércala.</p>
 <p class="enlaces"><a href="animacion-3d.html" data-goatcounter-click="servicio-probar-animacion-3d" data-goatcounter-no-session="1">Probar la animación 3D ▸</a></p></div>
 </article>
-<article class="servicio" id="visitas-3d" data-categoria="experiencias">
+<article class="servicio" id="visitas-3d" data-categoria="webs-experiencias">
 <img src="brand/servicios/mundo-3d.png" alt="ONTOS recorriendo su pequeño planeta en 3D" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">04 · Visitas y mundos 3D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-experiencias">Experiencias 2D y 3D</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">04 · Visitas y mundos 3D</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-familia">Webs y experiencias</span></p>
 <h3>Un lugar al que entrar</h3>
 <p>Escenas navegables para recorrer un espacio o una presentación desde dentro.</p>
 <p class="caso"><strong>El pequeño mundo de ONTOS.</strong> Un planeta con paseo, destellos y una semilla que descubrir.</p>
 <p class="enlaces"><a href="visita-3d.html" data-goatcounter-click="servicio-probar-mundo-normal" data-goatcounter-no-session="1">Probar el mundo de ONTOS ▸</a><br><a href="visita-3d.html?mundo=segovia" data-goatcounter-click="servicio-probar-segovia" data-goatcounter-no-session="1">Probar la visita a Segovia ▸</a></p></div>
 </article>
-<article class="servicio" id="modelado-3d" data-categoria="herramientas experiencias">
+<article class="servicio" id="modelado-3d" data-categoria="ingenieria-digital">
 <img src="brand/servicios/modelado-3d.png" alt="La misma casa en dos versiones: escaneado con textura y geometría simple" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">05 · Modelado 3D desde dron</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-medida">Aplicaciones a medida</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">05 · Modelado 3D desde dron</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-familia">Ingeniería digital</span></p>
 <h3>De un vuelo a un modelo</h3>
 <p>Fotogrametría con dron: el escaneado con su textura y una geometría simple con la que trabajar.</p>
 <p class="caso"><strong>Una casa de contenedores.</strong> 26 segundos de vuelo y el exterior reconstruido en local.</p>
 <p class="enlaces"><a href="modelado-3d.html" data-goatcounter-click="servicio-probar-modelado-3d" data-goatcounter-no-session="1">Ver el proceso y el resultado ▸</a></p></div>
 </article>
-<article class="servicio" id="webs" data-categoria="webs">
+<article class="servicio" id="webs" data-categoria="webs-experiencias">
 <img src="brand/servicios/web-jmcasado.png" alt="Portada de la web del pintor José María Casado" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">06 · Webs a medida</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-webs">Webs</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">06 · Webs a medida</span><span class="pill pill-consultoria">Consultoría</span><span class="pill pill-familia">Webs y experiencias</span></p>
 <h3>Una web que el cliente puede mantener</h3>
 <p>Webs que su dueño actualiza sin depender de nadie.</p>
 <p class="caso"><strong>José María Casado, pintor.</strong> Galería con una base de datos de obras que él mismo edita.</p>
 <p class="enlaces"><a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visitar josemariacasado.com ▸</a></p></div>
 </article>
-<article class="servicio" id="armario" data-categoria="personal">
+<article class="servicio" id="armario" data-categoria="contexto-ia">
 <img src="brand/servicios/armario.png" alt="Ropa colgada en baldas ordenadas por color: blancos, grises, negros" width="1240" height="698" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">07 · Armario</span><span class="pill pill-producto">Producto</span><span class="pill pill-personal">ONTOS personal</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">07 · Armario</span><span class="pill pill-producto">Producto</span><span class="pill pill-familia">Tu contexto para la IA</span></p>
 <h3>Tu ropa, fichada y colgada en baldas</h3>
 <p>Una foto por prenda y una ficha: el armario se ordena por color o tipo y propone conjuntos. En tu teléfono.</p>
 <p class="caso"><strong>En uso: mi armario, 82 prendas.</strong> Coloca diez prendas y mira el armario real en vídeo.</p>
