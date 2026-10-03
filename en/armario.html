@@ -89,6 +89,11 @@ footer a { color: inherit; }
 .prenda:hover img { transform: translateX(-50%) translateY(-7px) rotateY(0deg) scale(1.05); }
 .prenda figcaption { position: absolute; bottom: 4px; width: 100%; text-align: center; font-size: .72rem; line-height: 1.35; color: var(--sec); }
 .nota-demo { margin-top: 1rem; color: var(--sec); font-size: .9rem; max-width: 42rem; }
+.controles { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.4rem; margin-bottom: .8rem; }
+.criterio span { margin-right: .35em; }
+.controles .modos { margin: 0; }
+.controles .modos + .modos { padding-left: 1.4rem; border-left: 1px solid var(--borde, #e3ddd2); }
+@media (max-width: 40rem) { .controles .modos + .modos { padding-left: 0; border-left: 0; } }
 /* Página mínima (3-oct-2026, Fernando: «solo probar el armario»): el probador es la página. */
 #demo { padding-top: clamp(2rem, 5vw, 4rem); }
 #demo h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: .6rem; }
@@ -124,11 +129,16 @@ footer a { color: inherit; }
 <h1>Try it: arrange these 10 garments</h1>
 <p class="bajada">Ten garments from my real wardrobe, recreated on hangers. Arrange them by colour, by type or on two shelves, top and bottom. Hover over or tap a garment to pull it off the rail.</p>
 <div class="armario-demo" id="armario-demo">
+<div class="controles">
 <div class="modos" role="group" aria-label="How to arrange the garments">
-<button type="button" data-modo="color" aria-pressed="false">By colour</button>
-<button type="button" data-modo="tipo" aria-pressed="false">By type</button>
-<button type="button" data-modo="cat" aria-pressed="false">Top and bottom</button>
-<button type="button" data-modo="mezcla" aria-pressed="false">Shuffle</button>
+<button type="button" data-colocar="baldas" aria-pressed="false">On shelves</button>
+<button type="button" data-colocar="linea" aria-pressed="true">In one row</button>
+</div>
+<div class="modos" role="group" aria-label="How to sort them">
+<button type="button" data-orden="color" aria-pressed="false">By colour</button>
+<button type="button" data-orden="tipo" aria-pressed="false">By type</button>
+<button type="button" data-orden="mezcla" aria-pressed="false">Shuffle</button>
+</div>
 </div>
 <p class="criterio" id="criterio"><span data-para="">As they came: no order.</span><span data-para="color" hidden>By colour: neutrals from light to dark, then by hue.</span><span data-para="tipo" hidden>By type: same kinds together.</span><span data-para="cat" hidden>Top and bottom: what goes near the face comes first.</span><span data-para="mezcla" hidden>Shuffled. Arrange them again.</span><span data-cat="arriba" hidden>Top</span><span data-cat="abajo" hidden>Bottom</span></p>
 <div class="baldas" id="baldas">
@@ -165,40 +175,38 @@ footer a { color: inherit; }
     return sat<.16?[0,-l,0]:[1,tono,-l];
   }
   function compara(a,b){for(var i=0;i<a.length;i++){if(a[i]!==b[i])return a[i]-b[i];}return 0;}
-  var modos={
-    color:{clave:function(p){return texto(p,'.c');},orden:function(a,b){return compara(claveColor(a.prendas[0]),claveColor(b.prendas[0]));},rotulo:function(p){return texto(p,'.c');},muestra:true},
-    tipo:{clave:function(p){return texto(p,'.t');},orden:function(a,b){return b.prendas.length-a.prendas.length||a.rotulo.localeCompare(b.rotulo);},rotulo:function(p){return texto(p,'.t');}},
-    cat:{clave:function(p){return p.getAttribute('data-cat');},orden:function(a,b){return (a.clave==='arriba'?0:1)-(b.clave==='arriba'?0:1);},rotulo:function(p){var e=criterio.querySelector('[data-cat="'+p.getAttribute('data-cat')+'"]');return e?e.textContent:p.getAttribute('data-cat');}}
-  };
-  // con diez prendas caben en una fila: color y tipo REORDENAN la barra; solo arriba/abajo la parte en baldas
-  function agrupa(lista,modo){
-    if(!modo)return[{clave:'',rotulo:'',prendas:lista}];
-    if(modo==='color')return[{clave:'',rotulo:'',prendas:lista.slice().sort(function(a,b){return compara(claveColor(a),claveColor(b));})}];
-    if(modo==='tipo')return[{clave:'',rotulo:'',prendas:lista.slice().sort(function(a,b){return texto(a,'.t').localeCompare(texto(b,'.t'))||compara(claveColor(a),claveColor(b));})}];
-    var m=modos[modo],grupos=[],idx={};
-    lista.forEach(function(p){var k=m.clave(p);if(!(k in idx)){idx[k]=grupos.length;grupos.push({clave:k,rotulo:m.rotulo(p),hex:m.muestra?p.getAttribute('data-hex'):null,prendas:[]});}grupos[idx[k]].prendas.push(p);});
-    if(modo==='color')grupos.forEach(function(g){g.prendas.sort(function(a,b){return compara(claveColor(a),claveColor(b));});});
-    return grupos.sort(m.orden);
+  // Dos decisiones independientes (3-oct-2026, Fernando): COLOCAR en baldas (arriba/abajo) o en una línea,
+  // y ORDENAR por color, por tipo o mezclar; el orden se aplica dentro de cada balda o a la línea entera.
+  function ordena(lista,orden){
+    if(orden==='color')return lista.slice().sort(function(a,b){return compara(claveColor(a),claveColor(b));});
+    if(orden==='tipo')return lista.slice().sort(function(a,b){return texto(a,'.t').localeCompare(texto(b,'.t'))||compara(claveColor(a),claveColor(b));});
+    return lista.slice();
+  }
+  function agrupa(lista,colocar,orden){
+    var o=ordena(lista,orden);
+    if(colocar!=='baldas')return[{rotulo:'',prendas:o}];
+    return ['arriba','abajo'].map(function(c){var e=criterio.querySelector('[data-cat="'+c+'"]');return{rotulo:e?e.textContent:c,prendas:o.filter(function(p){return p.getAttribute('data-cat')===c;})};});
   }
   function mezcla(lista){var a=lista.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-  var orden=prendas.slice(), modoActual='';
-  function pinta(modo){
+  var base=prendas.slice(), colocar='linea', orden='';
+  function pinta(){
     var antes={};prendas.forEach(function(p){antes[p.getAttribute('data-id')]=p.getBoundingClientRect();});
-    var grupos=agrupa(orden,modo);
     baldas.innerHTML='';
-    grupos.forEach(function(g){
+    agrupa(base,colocar,orden).forEach(function(g){
       var balda=document.createElement('div');balda.className='balda';
-      if(g.rotulo){var h=document.createElement('h3');h.className='rotulo';if(g.hex){var i=document.createElement('i');i.style.background=g.hex;h.appendChild(i);}h.appendChild(document.createTextNode(g.rotulo+' '));var n=document.createElement('b');n.textContent=g.prendas.length;h.appendChild(n);balda.appendChild(h);}
+      if(g.rotulo){var h=document.createElement('h3');h.className='rotulo';h.appendChild(document.createTextNode(g.rotulo+' '));var n=document.createElement('b');n.textContent=g.prendas.length;h.appendChild(n);balda.appendChild(h);}
       var carril=document.createElement('div');carril.className='carril';g.prendas.forEach(function(p){carril.appendChild(p);});balda.appendChild(carril);baldas.appendChild(balda);
     });
     if(!reducido.matches){prendas.forEach(function(p){var a=antes[p.getAttribute('data-id')],d=p.getBoundingClientRect();var dx=a.left-d.left,dy=a.top-d.top;if(!dx&&!dy)return;
       p.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:520,easing:'cubic-bezier(.2,.8,.25,1)'});});}
-    demo.querySelectorAll('[data-modo]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-modo')===modo));});
+    demo.querySelectorAll('[data-colocar]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-colocar')===colocar));});
+    demo.querySelectorAll('[data-orden]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-orden')===orden));});
+    var para=orden||'';
+    criterio.querySelectorAll('[data-para]').forEach(function(e){var k=e.getAttribute('data-para');e.hidden=!(k===para||(k==='cat'&&colocar==='baldas'));});
   }
-  demo.querySelectorAll('[data-modo]').forEach(function(b){b.addEventListener('click',function(){
-    var modo=b.getAttribute('data-modo');
-    if(modo==='mezcla'){orden=mezcla(prendas);modoActual='';}else{modoActual=modo;}
-    pinta(modoActual);criterio.querySelectorAll('[data-para]').forEach(function(e){e.hidden=e.getAttribute('data-para')!==modo;});
+  demo.querySelectorAll('[data-colocar]').forEach(function(b){b.addEventListener('click',function(){colocar=b.getAttribute('data-colocar');pinta();});});
+  demo.querySelectorAll('[data-orden]').forEach(function(b){b.addEventListener('click',function(){
+    orden=b.getAttribute('data-orden');if(orden==='mezcla')base=mezcla(prendas);pinta();
   });});
 })();
 </script>

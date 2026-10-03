@@ -143,6 +143,7 @@ function checkArmario(html){
  const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
  assert.deepEqual([...main.matchAll(/<section[^>]*id="([^"]*)"/g)].map(m=>m[1]),['demo'],'Armario: solo el probador');
  assert(/<section id="demo">\s*<h1>Pruébalo: coloca estas 10 prendas<\/h1>/.test(main),'Armario: el probador es el título de la página');
+ assert.deepEqual([...main.matchAll(/data-(colocar|orden)="([a-z]+)"/g)].map(m=>m[1]+':'+m[2]),['colocar:baldas','colocar:linea','orden:color','orden:tipo','orden:mezcla'],'Armario: colocar (baldas o línea) y ordenar (color, tipo o mezclar)');
 }
 checkArmario(fs.readFileSync(path.join(WEB,'armario.html'),'utf8'));
 assert.throws(()=>checkArmario(fs.readFileSync(path.join(WEB,'armario.html'),'utf8').replace('</main>','<section id="pelicula"></section></main>')),/solo el probador/,'Caso rojo: el Armario con más secciones debe bloquear');
@@ -231,6 +232,8 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  if(file==='armario.html'){
   const main=d.querySelector('main');const demo=d.querySelector('section#demo');
   if(main&&demo){demo.querySelector('h1,h2')?.remove();demo.querySelector('#nota-demo')?.remove();main.replaceChildren(demo);}
+  // Controles separados (3-oct): colocar (baldas/línea) y ordenar (color/tipo/mezclar); se comprueban en checkArmario.
+  for(const e of d.querySelectorAll('#demo .modos, #demo .controles'))e.remove();
  }
  // Aplicaciones por baldas con tarjetas mínimas, 3-oct-2026 (ONTOS/raw/marca/2026-10-03-web-aplicaciones-ajustes-fernando.md):
  // Fernando retira las explicaciones de cada pieza; catálogo, cabecera y clips salen de la comparación con la base
