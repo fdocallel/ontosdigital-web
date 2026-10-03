@@ -1,6 +1,6 @@
 {
   "_doc": "Traducción al inglés de caso-90s.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "ONTOS · el sistema, en 80 segundos": "ONTOS · the system, in 80 seconds",
+  "ontos · el sistema, en 80 segundos": "ontos · the system, in 80 seconds",
   "Finanzas.": "Finances.",
   "Trámites.": "Admin.",
   "Patrimonio.": "Property.",
@@ -47,7 +47,7 @@
   "100<small>%</small>": "100<small>%</small>",
   "local y privado": "local and private",
   "No es un prototipo. <em>Es mi día a día desde julio 2026.</em>": "Not a prototype. <em>It is my daily life since July 2026.</em>",
-  "ONTOS": "ONTOS",
+  "ontos": "ontos",
   "Raíces sólidas. <em>Futuro inteligente.</em>": "Solid roots. <em>Intelligent future.</em>",
   "Ahora lo construyo para negocios.": "Now I build it for businesses.",
   "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>": "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>",

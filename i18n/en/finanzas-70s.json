@@ -1,6 +1,6 @@
 {
   "_doc": "Traducción al inglés de finanzas-70s.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "ONTOS · las finanzas, en 70 segundos": "ONTOS · finances, in 70 seconds",
+  "ontos · las finanzas, en 70 segundos": "ontos · finances, in 70 seconds",
   "Gastos · tiempo real": "Spending · real time",
   "<i></i>API bancaria · hoy": "<i></i>bank API · today",
   "Supermercado": "Supermarket",
@@ -53,7 +53,7 @@
   "Plan de pensiones": "Pension plan",
   "Aportación mensual <b>automática</b>, el día 1.": "Monthly contribution <b>automatic</b>, on the 1st.",
   "La inversión, <em>con reglas y sin impulsos</em>.": "Investing, <em>by rules and without impulses</em>.",
-  "ONTOS": "ONTOS",
+  "ontos": "ontos",
   "Esto hace un gemelo digital <em>con tu dinero</em>.": "This is what a digital twin does <em>with your money</em>.",
   "Ahora lo construyo para negocios.": "Now I build it for businesses.",
   "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>": "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>",

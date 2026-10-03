@@ -89,7 +89,7 @@ function artifacts(root){
     html=html.replace(/(<meta\b[^>]*(?:property="og:image"|name="twitter:image")[^>]*content=")https:\/\/ontosdigital\.es\/brand\/og\.png("[^>]*>)/g,'$1https://ontosdigital.es/brand/canon/og.png$2');
     html=html.replace(/<a\b([^>]*class="marca"[^>]*)>[\s\S]*?<\/a>/g,(_,attrs)=>{
       const dark=/<[^>]+\bid="stage"/.test(html);
-      return `<a${attrs}><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-${dark?'dark':'light'}" src="${rel}/canon/wordmark-${dark?'color-dark':'color'}.svg" alt=""></span><span class="marca__word marca__label">ONTOS</span></a>`;
+      return `<a${attrs}><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-${dark?'dark':'light'}" src="${rel}/canon/wordmark-${dark?'color-dark':'color'}.svg" alt=""></span><span class="marca__word marca__label">ontos</span></a>`;
     });
     // Restantes sellos/escenas: conservar atributos, identidad de DOM y animaciones.
     html=html.replace(/<svg\b([^>]*)>([\s\S]*?)<\/svg>/g,(all,attrs,body)=>{

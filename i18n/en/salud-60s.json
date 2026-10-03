@@ -1,6 +1,6 @@
 {
   "_doc": "Traducción al inglés de salud-60s.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "ONTOS · la salud, en 60 segundos": "ONTOS · health, in 60 seconds",
+  "ontos · la salud, en 60 segundos": "ontos · health, in 60 seconds",
   "Entreno · sesión de hoy": "Training · today's session",
   "<i></i>progresión automática": "<i></i>automatic progression",
   "Sentadilla": "Squat",
@@ -38,7 +38,7 @@
   "recuperación": "recovery",
   "pulso en reposo": "resting heart rate",
   "El descanso también cuenta. <em>Y se mide.</em>": "Rest counts too. <em>And it gets measured.</em>",
-  "ONTOS": "ONTOS",
+  "ontos": "ontos",
   "Esto hace un gemelo digital <em>con tu salud</em>.": "This is what a digital twin does <em>with your health</em>.",
   "Ahora lo construyo para negocios.": "Now I build it for businesses.",
   "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>": "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>",

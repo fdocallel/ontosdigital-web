@@ -1,6 +1,6 @@
 {
   "_doc": "Traducción al inglés de organizacion-60s.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "ONTOS · la organización, en 60 segundos": "ONTOS · organisation, in 60 seconds",
+  "ontos · la organización, en 60 segundos": "ontos · organisation, in 60 seconds",
   "Proyectos": "Projects",
   "<i></i>3 abiertos · al día": "<i></i>3 open · up to date",
   "Reforma del local": "Shop refurbishment",
@@ -47,7 +47,7 @@
   "[[licencia · vie]]": "[[licence · Fri]]",
   "[[tareas]]": "[[tasks]]",
   "Se lo pregunto, <em>y me lo da ordenado</em>.": "I ask it, <em>and it gives it to me in order</em>.",
-  "ONTOS": "ONTOS",
+  "ontos": "ontos",
   "Esto hace un gemelo digital <em>con tus proyectos</em>.": "This is what a digital twin does <em>with your projects</em>.",
   "Ahora lo construyo para negocios.": "Now I build it for businesses.",
   "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>": "<a href=\"mailto:hola@ontosdigital.es\">hola@ontosdigital.es</a> · <a href=\"https://ontosdigital.es/\" target=\"_self\">ontosdigital.es</a>",

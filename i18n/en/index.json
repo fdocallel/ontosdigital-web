@@ -1,8 +1,8 @@
 {
   "_doc": "Traducción al inglés de index.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "ONTOS · ingeniería de la información, por encargo": "ONTOS · information engineering, on demand",
-  "Consultoría por encargo: tu contexto para la IA, ingeniería digital con BIM y GIS, herramientas a medida, webs y experiencias. Fernando Calle · ONTOS.": "On-demand consulting: your context for AI, digital engineering with BIM and GIS, custom tools, websites and experiences. Fernando Calle · ONTOS.",
-  "ONTOS": "ONTOS",
+  "ontos · ingeniería de la información, por encargo": "ontos · information engineering, on demand",
+  "Consultoría por encargo: tu contexto para la IA, ingeniería digital con BIM y GIS, herramientas a medida, webs y experiencias. Fernando Calle · ontos.": "On-demand consulting: your context for AI, digital engineering with BIM and GIS, custom tools, websites and experiences. Fernando Calle · ontos.",
+  "ontos": "ontos",
   "ES": "ES",
   "Fernando Calle": "Fernando Calle",
   "Ingeniero de Caminos, Canales y Puertos": "Civil Engineer",
@@ -16,8 +16,8 @@
   "Datos, procesos y conocimiento en orden.": "Data, processes and knowledge, in order.",
   "Cuéntame tu caso": "Tell me about your case",
   "Ver lo hecho": "See the work",
-  "Qué es ONTOS": "What ONTOS is",
-  "<em>Ontos</em>, del griego ὄντος: <span class=\"serif\">«lo que es»</span>. Casi nadie tiene un problema de información: tiene un problema de <strong>orden</strong>. Los datos viven en carpetas, los trámites en la cabeza y el conocimiento en la experiencia de cada uno. ONTOS lo pone en orden y lo conecta con la inteligencia artificial, para que trabaje desde tu realidad: en tu día a día, en tu proyecto o en tu empresa. Lo comprueba una máquina, lo firma una persona.": "<em>Ontos</em>, from the Greek ὄντος: <span class=\"serif\">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head and knowledge lives in each person's experience. ONTOS puts it in order and connects it to artificial intelligence, so that it works from your reality: in your daily life, in your project or in your company. A machine checks it. A person signs it.",
+  "Qué es ontos": "What ontos is",
+  "<em>ontos</em>, del griego ὄντος: <span class=\"serif\">«lo que es»</span>. Casi nadie tiene un problema de información: tiene un problema de <strong>orden</strong>. Los datos viven en carpetas, los trámites en la cabeza y el conocimiento en la experiencia de cada uno. ontos lo pone en orden y lo conecta con la inteligencia artificial, para que trabaje desde tu realidad: en tu día a día, en tu proyecto o en tu empresa. Lo comprueba una máquina, lo firma una persona.": "<em>ontos</em>, from the Greek ὄντος: <span class=\"serif\">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head and knowledge lives in each person's experience. ontos puts it in order and connects it to artificial intelligence, so that it works from your reality: in your daily life, in your project or in your company. A machine checks it. A person signs it.",
   "Cuatro familias": "Four families",
   "Familias visibles": "Visible service families",
   "Ver las familias anteriores": "See previous service families",
@@ -58,5 +58,5 @@
   "Hablamos": "Let’s talk",
   "Cuéntame qué os come horas.": "Tell me what eats your hours.",
   "hola@ontosdigital.es": "hola@ontosdigital.es",
-  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
+  "© 2026 ontos · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ontos · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }

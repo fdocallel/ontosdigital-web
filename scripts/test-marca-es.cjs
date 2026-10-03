@@ -152,7 +152,7 @@ function checkSobreMi(html){
  const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
  const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
  assert.equal(texto((main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)||[])[1]||''),'Fernando Calle','Sobre mí: nombre');
- assert(texto(main).includes('Hoy tengo dos frentes que se alimentan entre sí. Construyo ONTOS, el sistema que pone en orden mi propia vida, y llevo ese mismo método a personas y empresas, de su contexto para la IA a una web o un mundo en 3D.'),'Sobre mí: segundo párrafo elegido por Fernando (opción A)');
+ assert(texto(main).includes('Hoy tengo dos frentes que se alimentan entre sí. Construyo ontos, el sistema que pone en orden mi propia vida, y llevo ese mismo método a personas y empresas, de su contexto para la IA a una web o un mundo en 3D.'),'Sobre mí: segundo párrafo elegido por Fernando (opción A)');
  assert.deepEqual([...main.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)].map(m=>texto(m[1])).slice(0,5),['Sydney Metro West','Malabar','Northern Water','Red Sea Governorates Urban Development Plan','NEOM'],'Sobre mí: los cinco proyectos (sin HS2, con Malabar, 3-oct)');
  for(const t of ['BIM Manager del paquete de los 41 cross passages. Automaticé su modelado y la carga de metadatos','Gestioné la entrega de 67 modelos con un flujo que automaticé por completo, apoyado en IA','GIS y plan de ejecución BIM de los túneles de The Line.','Premio de innovación (I+D) de TYPSA, 2024, y publicación en la 19th Australasian Tunnelling Conference (ATC 2025)'])
   assert(texto(main).includes(t),'Sobre mí: «'+t.slice(0,40)+'…»');
@@ -163,6 +163,13 @@ function checkSobreMi(html){
 }
 checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8'));
 assert.throws(()=>checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8').replace('GIS y plan de ejecución BIM','Automatización')),/Sobre mí/,'Caso rojo: un hecho alterado en Sobre mí debe bloquear');
+// Nombre en minúscula (3-oct-2026): ningún «ONTOS» visible en ES/EN (fuera de código, estilos y comentarios).
+function ontosVisibles(html){
+ const limpio=html.replace(/<!--[\s\S]*?-->|<style\b[\s\S]*?<\/style>/g,'').replace(/<script(?![^>]*ld\+json)\b[^>]*>[\s\S]*?<\/script>/g,'');
+ return (limpio.match(/\bONTOS\b(?!_)/g)||[]).length;
+}
+for(const f of [...pages,...pages.filter(f=>f!=='editor-pdf/index.html').map(f=>'en/'+f)])assert.equal(ontosVisibles(fs.readFileSync(path.join(WEB,f),'utf8')),0,f+': el nombre se escribe «ontos»');
+assert.equal(ontosVisibles('<p>Hola ONTOS</p>'),1,'Caso rojo: «ONTOS» visible debe contarse');
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
 checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
@@ -250,6 +257,14 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
   for(const m of d.querySelectorAll('meta[name=description]'))m.remove();
   const main=d.querySelector('main');if(main)main.remove();
   else for(const e of [...d.body.children])if(!e.matches('header.barra, footer, script, template, dialog, .skip-link'))e.remove();
+ }
+ // Nombre en minúscula, 3-oct-2026 (Fernando: «cambiar ONTOS por ontos, en general»; mensaje.json
+ // identidad_verbal.nombre): en la base, el nombre de marca visible pasa a «ontos» en textos y atributos.
+ if(baseline){
+  const w=d.createTreeWalker(d.documentElement,NodeFilter.SHOW_TEXT);let n;
+  while((n=w.nextNode()))if(!n.parentElement?.closest('script:not([type="application/ld+json"]),style'))n.nodeValue=n.nodeValue.replace(/\bONTOS\b(?!_)/g,'ontos');
+  for(const e of d.querySelectorAll('[content],[alt],[aria-label],[title],[value]'))for(const at of ['content','alt','aria-label','title','value'])if(e.hasAttribute(at))e.setAttribute(at,e.getAttribute(at).replace(/\bONTOS\b(?!_)/g,'ontos'));
+  d.title=d.title.replace(/\bONTOS\b(?!_)/g,'ontos');
  }
  // Armario mínimo, 3-oct-2026 (Fernando: «que sea solo probar el armario. Nada más»): de la página solo queda
  // el probador (#demo), cuyo título pasa a ser el h1. Se compara solo el probador, sin su título ni la nota final.

@@ -1,11 +1,11 @@
 {
   "_doc": "Traducción al inglés de armario.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "Armario · Tu ropa, fichada y colgada en baldas · ONTOS": "Wardrobe · Your clothes, catalogued and on shelves · ONTOS",
+  "Armario · Tu ropa, fichada y colgada en baldas · ontos": "Wardrobe · Your clothes, catalogued and on shelves · ontos",
   "Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y propone conjuntos que puedes ver puestos. Prueba la demo con 10 prendas y mira el vídeo.": "One photo per garment and a record. The wardrobe sorts by colour or type, says what you wear and suggests outfits. Try the 10-garment demo and watch the video.",
   "Armario: tu ropa, fichada y colgada en baldas": "Wardrobe: your clothes, catalogued and hung on shelves",
   "Diez prendas para colocar por color o por tipo, y el armario real en vídeo. Todo en tu teléfono.": "Ten garments to arrange by colour or by type, and the real wardrobe on video. All on your phone.",
   "Saltar al contenido": "Skip to content",
-  "ONTOS": "ONTOS",
+  "ontos": "ontos",
   "Aplicaciones": "Applications",
   "Sobre mí": "About me",
   "Contacto": "Contact",
@@ -45,5 +45,5 @@
   "<span class=\"t\">Vaquero</span> · <span class=\"c\">Azul</span>": "<span class=\"t\">Jeans</span> · <span class=\"c\">Blue</span>",
   "Sudadera burdeos en percha": "Burgundy sweatshirt on a hanger",
   "<span class=\"t\">Sudadera</span> · <span class=\"c\">Burdeos</span>": "<span class=\"t\">Sweatshirt</span> · <span class=\"c\">Burgundy</span>",
-  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
+  "© 2026 ontos · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ontos · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }

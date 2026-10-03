@@ -1,10 +1,10 @@
 {
   "_doc": "Traducción al inglés de caso-sistema.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "El sistema completo · caso ONTOS": "The whole system · an ONTOS case",
+  "El sistema completo · caso ontos": "The whole system · an ontos case",
   "Cómo construí mi gemelo digital: un modelo de toda mi vida mantenido a diario con IA. Datos, documentos, respuestas con citas y auditoría diaria.": "How I built my digital twin: a model of my entire life kept up to date daily with AI. Data, documents, answers with citations and a daily audit.",
   "Un modelo de toda mi vida mantenido a diario con IA: datos que entran solos, documentos consultables en lenguaje natural y auditoría diaria.": "A model of my entire life kept up to date daily with AI: data that arrives on its own, documents you can query in plain language, and a daily audit.",
   "Saltar al contenido": "Skip to content",
-  "ONTOS": "ONTOS",
+  "ontos": "ontos",
   "Aplicaciones": "Applications",
   "Sobre mí": "About me",
   "Contacto": "Contact",
@@ -34,5 +34,5 @@
   "Cuéntame qué te come horas.": "Tell me what eats your hours.",
   "hola@ontosdigital.es": "hola@ontosdigital.es",
   "O escríbeme desde la <a href=\"contacto.html\">página de contacto</a>.": "Or write to me from the <a href=\"contacto.html\">contact page</a>.",
-  "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
+  "© 2026 ontos · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Aviso legal</a> · <a href=\"privacidad.html\">Privacidad</a> · Web sin cookies · recuento de visitas anónimo.": "© 2026 ontos · Fernando Calle · La Lastrilla (Segovia) · <a href=\"aviso-legal.html\">Legal notice</a> · <a href=\"privacidad.html\">Privacy</a> · Cookie-free website · anonymous visit count."
 }
