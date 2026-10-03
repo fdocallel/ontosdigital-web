@@ -18,7 +18,9 @@ const protectedFile=f=>(!bilingual&&(f.startsWith('en/')||f.startsWith('i18n/en/
 // publicado, no la rama previa. Fernando autoriza el 28-sep-2026 tocar barra.js y tokens.css para
 // el dock móvil y la auditoría móvil; cambios posteriores se comparan con lo publicado.
 const PUBLICADA='477ca9424fddeaae71de45dcc508175e22bacca5';
-const permitidos=new Set(['brand/barra.js','brand/tokens.css']);
+// 3-oct-2026: Fernando pide «ontos» en minúscula también en los textos de los juegos y mundos 3D;
+// solo cambian cadenas visibles del motor publicado y su huella (provenance.json).
+const permitidos=new Set(['brand/barra.js','brand/tokens.css','experiencias/mundo-3d.js','experiencias/i18n.js','experiencias/provenance.json']);
 const cambiadosDesdePublicada=new Set(git('diff',PUBLICADA,'--name-only').trim().split('\n'));
 assert.deepEqual(changed.filter(protectedFile).filter(f=>!(permitidos.has(f)&&cambiadosDesdePublicada.has(f)&&!git('diff',BASE,PUBLICADA,'--name-only').split('\n').includes(f))),[],'EN y sus recursos conservan su versión');
 const sitemap=fs.readFileSync(path.join(WEB,'sitemap.xml'),'utf8'),oldSitemap=git('show',BASE+':sitemap.xml');
