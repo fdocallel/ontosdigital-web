@@ -1,7 +1,7 @@
 {
   "_doc": "Traducción al inglés de armario.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "Armario · Tu ropa, fichada y colgada en baldas · ontos": "Wardrobe · Your clothes, catalogued and on shelves · ontos",
-  "Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y propone conjuntos que puedes ver puestos. Prueba la demo con 10 prendas y mira el vídeo.": "One photo per garment and a record. The wardrobe sorts by colour or type, says what you wear and suggests outfits. Try the 10-garment demo and watch the video.",
+  "Armario · Tu ropa, fichada y colgada en baldas · ontos": "Wardrobe · Your clothes, catalogued and hung on shelves · ontos",
+  "Una foto por prenda y una ficha. El armario se ordena por color o por tipo, dice qué usas y propone conjuntos que puedes ver puestos. Prueba la demo con 10 prendas y mira el vídeo.": "One photo per garment and a record. The wardrobe sorts by colour or type, says what you wear and suggests outfits you can see being worn. Try the 10-garment demo and watch the video.",
   "Armario: tu ropa, fichada y colgada en baldas": "Wardrobe: your clothes, catalogued and hung on shelves",
   "Diez prendas para colocar por color o por tipo, y el armario real en vídeo. Todo en tu teléfono.": "Ten garments to arrange by colour or by type, and the real wardrobe on video. All on your phone.",
   "Saltar al contenido": "Skip to content",

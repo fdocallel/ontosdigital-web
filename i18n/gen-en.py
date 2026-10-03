@@ -418,8 +418,12 @@ def genera(pagina, indexable, extraer):
         abre_en_linea = tipo == "marcado" and es_en_linea(parte) and not parte.startswith("</")
         if tipo == "marcado" and not abre_en_linea:
             bajo = parte.lower()
-            if bajo.startswith("<!--") or bajo.startswith("<style") or bajo.startswith("<textarea"):
+            if bajo.startswith("<!--") or bajo.startswith("<style"):
                 salida.append(parte)
+            elif bajo.startswith("<textarea"):
+                # el contenido se copia tal cual; la etiqueta de apertura (placeholder, aria-label) se traduce
+                fin = parte.index(">") + 1
+                salida.append(traduce_etiqueta(parte[:fin], tr, pagina, indexable) + parte[fin:])
             elif bajo.startswith("<script"):
                 if "application/ld+json" in bajo:
                     salida.append(traduce_json_ld(parte, tr, pagina))

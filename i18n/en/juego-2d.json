@@ -1,7 +1,7 @@
 {
   "_doc": "Traducción al inglés de juego-2d.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "ontos vivo · Patio de juegos": "ontos alive · Playground",
-  "Controla a ontos en un patio de juegos 2D: rueda, salta, recoge destellos y lleva la semilla a su sitio. Juega con teclado o controles táctiles.": "Control ontos in a 2D playground: roll, jump, collect sparks and carry the seed where it belongs. Play with a keyboard or touch controls.",
+  "Controla a ontos en un patio de juegos 2D: rueda, salta, recoge destellos y lleva la semilla a su sitio. Juega con teclado o controles táctiles.": "Control ontos in a 2D playground: roll, jump, collect sparkles and carry the seed where it belongs. Play with a keyboard or touch controls.",
   "Navegación": "Navigation",
   "← Aplicaciones": "← Applications",
   "Patio de juegos · materia y movimiento": "Playground · matter and motion",
@@ -19,7 +19,7 @@
   "Ver de cerca": "Look closer",
   "Un pequeño respiro.": "A little breather.",
   "Pulsa Pausa o P para continuar.": "Press Pause or P to continue.",
-  "Prueba a moverte. Me hago rueda yo solo.": "Try moving. I turn into a wheel myself.",
+  "Prueba a moverte. Me hago rueda yo solo.": "Try moving. I turn into a wheel all by myself.",
   "Controles del personaje": "Character controls",
   "Mover a la izquierda": "Move left",
   "Mover a la derecha": "Move right",
