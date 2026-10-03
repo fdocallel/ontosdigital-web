@@ -144,3 +144,7 @@ Fernando autoriza la versión inglesa, la publicación y el cierre. Se generan 2
 Flujo vigente: importar el canon, regenerar EN y sitemap, ejecutar `node scripts/test-marca-es.cjs --bilingue`, revisar escritorio/móvil y desplegar `main`. El contrato conserva las 30 fuentes ES, sus correcciones auditadas, la cobertura EN y los recursos compartidos. `servicios.html` añade canonical a Aplicaciones; los redirects no entran en el sitemap. Las fechas de páginas o traducciones modificadas se actualizan antes del commit.
 
 La prueba real de recepción del formulario continúa pendiente de autorización específica; las pruebas funcionales interceptan las solicitudes externas.
+
+## Canon de ONTOS en las comprobaciones (3-oct-2026)
+
+El hook no lee el canon (marca, mensaje, oferta, elementos) del árbol de trabajo de ONTOS, sino de su **último commit**. `scripts/ontos-canon.sh` mantiene una copia desacoplada en `~/Dev/.ontos-canon-web`, la sitúa en el HEAD de ONTOS en cada commit (menos de 1 s) y exporta `ONTOS_BRAND_ROOT`. Lo que otra sesión tenga a medio editar en ONTOS ya no rompe el hook ni se cuela en `brand/canon/`. Consecuencia: **commitear primero en ONTOS** el canon que la web va a consumir. Para forzar otra raíz, exportar `ONTOS_BRAND_ROOT` antes del commit. Si no puede situar la copia, el hook falla cerrado.
