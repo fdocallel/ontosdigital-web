@@ -44,7 +44,6 @@
     background: var(--panel); border-bottom: 1px solid var(--border);
     padding: 8px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   }
-  .sep { width: 1px; height: 24px; background: var(--border); margin: 0 4px; }
   button {
     font: inherit; font-size: 13px; padding: 7px 12px; border-radius: 8px;
     border: 1px solid var(--border); background: var(--panel); color: var(--text);
@@ -156,10 +155,8 @@
     #signSide input[type=text], #signSide select { font-size: 16px; }
     button { min-height: 44px; }
   }
-  @media (prefers-color-scheme: dark) {
-    button.primary { color: #181410; }
-    button.primary:hover:not(:disabled) { background: var(--realce); border-color: var(--realce); }
-  }
+  /* Sin bloque oscuro propio: marca-es.css fija la superficie clara del manual en ambos
+     esquemas, y el texto oscuro sobre el verde de acción dejaba el botón ilegible. */
   .pie-marca { margin-top: 2px; }
   .pie-marca a { color: var(--accent); text-decoration: none; }
   .pie-marca a:hover { text-decoration: underline; }
@@ -170,6 +167,147 @@
 <script defer src="../brand/canon/movimiento-data.js"></script>
 <script defer src="../brand/canon/movimiento.js"></script>
 <!-- /MARCA:estilos -->
+<style>
+  /* Pulido de la interfaz (3-oct-2026): va después de marca-es.css para ganarle en cascada sin
+     !important. Solo tokens del canon: verde de acción, arena de línea, hueso de panel; la teja
+     queda en el símbolo. Jerarquía: una acción principal (Abrir sin documento, Guardar con él),
+     secundarias agrupadas, versión de escritorio deshabilitada pero legible. */
+  html[data-ontos-web][data-web-page="editor-pdf"] {
+    --ep-linea: color-mix(in srgb, var(--ds-brand-arena) 70%, var(--ds-support-hueso));
+    --ep-mesa: color-mix(in srgb, var(--ds-brand-arena) 26%, var(--ds-support-hueso));
+    --ep-tinte: color-mix(in srgb, var(--ds-brand-verde) 8%, var(--ds-support-hueso));
+    --ep-suave: color-mix(in srgb, var(--ds-brand-verde) 62%, var(--ds-support-hueso));
+  }
+  /* Cabecera: título de herramienta a escala de aplicación, junto a la marca. */
+  #top .barra .marca { margin-right: 0; }
+  #top .titulo-app {
+    font-size: var(--ds-type-h2); line-height: 1.2; font-weight: 500; letter-spacing: -.01em;
+    margin: 0 auto 0 0; padding-left: var(--ds-space-4);
+    border-left: 1px solid var(--ep-linea); white-space: nowrap;
+  }
+  #top .titulo-app span { font-weight: 600; }
+  #top #btnLang { margin-left: 0; min-height: 32px; padding: 0 var(--ds-space-3); border-color: var(--ep-linea); color: var(--texto); }
+
+  /* Barra de herramientas */
+  #top #toolbar {
+    gap: var(--ds-space-2) var(--ds-space-3); padding-top: var(--ds-space-3); padding-bottom: var(--ds-space-3);
+    background: var(--ds-support-hueso); border-bottom: 1px solid var(--ep-linea);
+  }
+  /* Grupos sin envoltorio (el test de conservación compara la estructura): los separadores
+     marcan el corte y girar/quitar y seleccionar se pegan como controles segmentados. */
+  #toolbar .sep { width: 1px; height: 24px; margin: 0 var(--ds-space-1); background: var(--ep-linea); }
+  #toolbar :is(#btnAdd, #btnRotR, #btnDel, #btnNone, #btnSaveOcr, #btnSign) { margin-left: calc(var(--ds-space-1) - var(--ds-space-3)); }
+  #toolbar :is(#btnRotR, #btnDel, #btnNone) { margin-left: calc(-1px - var(--ds-space-3)); }
+  /* Hasta 1500 px, guardar abre segunda fila con la opción de escáner y el estado: así la
+     fila no se parte a mitad de grupo. */
+  @media (max-width: 1500px) { #toolbar div.sep:nth-of-type(3) { flex-basis: 100%; height: 0; margin: 0; } }
+  #toolbar button {
+    min-height: 36px; padding: 0 var(--ds-space-3); font-size: 14px; font-weight: 500; line-height: 1;
+    border: 1px solid var(--ep-linea); border-radius: var(--ds-radius-s);
+    background: var(--ds-support-hueso); color: var(--ds-brand-verde);
+    transition: background-color var(--web-motion-fast), border-color var(--web-motion-fast), color var(--web-motion-fast);
+  }
+  #toolbar :is(#btnRotL, #btnRotR, #btnDel, #btnAll, #btnNone) { background: var(--ds-surface-page); border-radius: 0; }
+  #toolbar :is(#btnRotL, #btnAll) { border-radius: var(--ds-radius-s) 0 0 var(--ds-radius-s); }
+  #toolbar :is(#btnDel, #btnNone) { border-radius: 0 var(--ds-radius-s) var(--ds-radius-s) 0; }
+  #toolbar :is(#btnRotL, #btnRotR, #btnDel, #btnAll, #btnNone):focus-visible { position: relative; z-index: 1; }
+  #toolbar button:hover:not(:disabled) { background: var(--ep-tinte); border-color: var(--ep-suave); }
+  #toolbar button:disabled { opacity: 1; color: color-mix(in srgb, var(--ds-brand-verde) 42%, var(--ds-support-hueso)); cursor: not-allowed; }
+  #toolbar #btnDel:hover:not(:disabled) { color: var(--ds-brand-rojo); background: color-mix(in srgb, var(--ds-brand-rojo) 8%, var(--ds-support-hueso)); }
+  /* Acción principal: verde lleno. Sin documento manda Abrir; con documento, Guardar. */
+  #toolbar :is(#btnOpen, #btnSave:not(:disabled)) {
+    background: var(--ds-action); border-color: var(--ds-action); color: var(--ds-on-action); font-weight: 600; box-shadow: none;
+  }
+  #toolbar :is(#btnOpen, #btnSave:not(:disabled)):hover { background: color-mix(in srgb, var(--ds-action) 86%, var(--ds-web-technical-black)); border-color: transparent; color: var(--ds-on-action); box-shadow: none; }
+  #toolbar:has(#btnSave:not(:disabled)) #btnOpen { background: var(--ds-support-hueso); border-color: var(--ep-linea); color: var(--ds-brand-verde); font-weight: 500; }
+  #toolbar:has(#btnSave:not(:disabled)) #btnOpen:hover { background: var(--ep-tinte); border-color: var(--ep-suave); color: var(--ds-brand-verde); }
+  #toolbar #btnSave:disabled { background: transparent; }
+  /* OCR y firma son de la versión de escritorio: discretos, con su explicación en el title. */
+  #toolbar button.escritorio:disabled { background: transparent; border-style: dashed; cursor: help; }
+  #toolbar .opcion-escaner {
+    display: inline-flex; align-items: center; gap: var(--ds-space-2); min-height: 36px;
+    font-size: 14px; color: var(--ds-brand-verde); cursor: pointer;
+  }
+  #toolbar .opcion-escaner input { width: 16px; height: 16px; accent-color: var(--ds-brand-verde); }
+  #top #status { font-size: 13px; color: var(--ds-brand-verde); font-variant-numeric: tabular-nums; }
+  #top #status:not(:empty) { padding: 4px var(--ds-space-3); border-radius: 999px; background: var(--ep-tinte); }
+
+  /* Área de trabajo */
+  main#contenido { padding: var(--ds-space-5) 0 var(--ds-space-6); }
+  main#contenido:focus { outline: none; }
+  #dropzone {
+    min-height: clamp(320px, 58vh, 600px); gap: var(--ds-space-3); padding: var(--ds-space-7) var(--ds-space-5);
+    border: 1.5px dashed var(--ep-suave); border-radius: var(--ds-radius); background: var(--ds-support-hueso);
+    color: var(--ds-brand-verde); transition: background-color var(--web-motion-fast), border-color var(--web-motion-fast);
+  }
+  #dropzone:hover, #dropzone.over { border-color: var(--ds-brand-verde); background: var(--ep-tinte); }
+  #dropzone.over { border-style: solid; outline: none; }
+  #dropzone > span[aria-hidden="true"] { margin-bottom: var(--ds-space-2); }
+  #dropzone strong { font-size: var(--ds-type-h2); font-weight: 600; letter-spacing: -.01em; color: var(--ds-brand-verde); }
+  #dropzone strong + span { max-width: 68ch; font-size: var(--ds-type-body); line-height: 1.65; color: color-mix(in srgb, var(--ds-brand-verde) 82%, var(--ds-support-hueso)); }
+  body.dragging #grid { outline: 2px dashed var(--ds-brand-verde); outline-offset: 6px; border-radius: var(--ds-radius); }
+
+  /* Miniaturas: la página sobre una mesa arena, número en pastilla, selección en verde. */
+  #grid { grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: var(--ds-space-5) var(--ds-space-4); }
+  #grid .card {
+    padding: var(--ds-space-2); border: 1px solid var(--ep-linea); border-radius: var(--ds-radius);
+    background: var(--ds-support-hueso); box-shadow: none;
+    transition: border-color var(--web-motion-fast), box-shadow var(--web-motion-fast), background-color var(--web-motion-fast);
+  }
+  #grid .card:hover { border-color: var(--ep-suave); }
+  #grid .thumb-box { height: 212px; padding: var(--ds-space-4); border-radius: var(--ds-radius-s); background: var(--ep-mesa); }
+  #grid .thumb-box canvas { box-shadow: 0 0 0 1px color-mix(in srgb, var(--ds-brand-verde) 10%, transparent), 0 2px 6px color-mix(in srgb, var(--ds-brand-verde) 16%, transparent); }
+  #grid .card.selected { border-color: var(--ds-brand-verde); box-shadow: 0 0 0 1px var(--ds-brand-verde); background: var(--ep-tinte); }
+  #grid .card.selected .thumb-box { background: color-mix(in srgb, var(--ds-brand-verde) 16%, var(--ds-support-hueso)); }
+  #grid .card.drag-over-left { box-shadow: -5px 0 0 0 var(--ds-brand-verde); }
+  #grid .card.drag-over-right { box-shadow: 5px 0 0 0 var(--ds-brand-verde); }
+  #grid .card .label { margin-top: var(--ds-space-2); font-size: 13px; font-weight: 500; color: var(--ds-brand-verde); font-variant-numeric: tabular-nums; }
+  #grid .card .badge {
+    top: 14px; left: 14px; min-width: 24px; padding: 2px 8px; text-align: center;
+    font-size: 12px; font-weight: 600; line-height: 18px; border-radius: 999px;
+    background: var(--ds-support-hueso); color: var(--ds-brand-verde); border: 1px solid var(--ep-linea);
+  }
+  #grid .card.selected .badge { background: var(--ds-brand-verde); border-color: var(--ds-brand-verde); color: var(--ds-on-action); }
+  #grid .card .mini { top: 12px; right: 12px; gap: 2px; padding: 2px; border: 1px solid var(--ep-linea); border-radius: var(--ds-radius-s); background: var(--ds-support-hueso); }
+  #grid .mini button { min-width: 28px; min-height: 28px; padding: 0 6px; justify-content: center; border: 0; border-radius: 6px; background: transparent; color: var(--ds-brand-verde); }
+  #grid .mini button:hover:not(:disabled) { background: var(--ep-tinte); }
+  #grid .mini button:disabled { color: color-mix(in srgb, var(--ds-brand-verde) 30%, var(--ds-support-hueso)); }
+  #grid .thumb-box[role="button"]:focus-visible { outline: 3px solid var(--ds-action); outline-offset: 3px; }
+  #grid .mini button:focus-visible { outline: 2px solid var(--ds-action); outline-offset: 1px; }
+  /* Sin ratón, la página seleccionada enseña sus mandos (girar, mover, quitar). */
+  @media (hover: none) { #grid .card.selected .mini { display: flex; } }
+
+  footer { padding-top: var(--ds-space-4); padding-bottom: var(--ds-space-5); border-top: 1px solid var(--ep-linea); color: color-mix(in srgb, var(--ds-brand-verde) 82%, var(--ds-support-hueso)); }
+  .pie-marca a { color: var(--ds-brand-verde); text-decoration: underline; text-decoration-color: var(--ep-suave); text-underline-offset: 3px; }
+
+  @media (max-width: 700px) {
+    #top { position: static; }
+    #top .titulo-app { font-size: var(--ds-type-h3); }
+    #top #toolbar { gap: var(--ds-space-2); padding: var(--ds-space-3) var(--ds-space-4); }
+    /* En móvil cada separador corta la fila: un grupo por fila, botones a todo el ancho. */
+    #toolbar .sep { flex-basis: 100%; height: 0; margin: 0; background: none; }
+    #toolbar button { flex: 1 1 auto; justify-content: center; font-size: 13.5px; padding: 0 var(--ds-space-2); }
+    #toolbar :is(#btnAdd, #btnSaveOcr, #btnSign) { margin-left: 0; }
+    #toolbar :is(#btnRotR, #btnDel, #btnNone) { margin-left: calc(-1px - var(--ds-space-2)); }
+    #toolbar button, #toolbar .opcion-escaner { min-height: 44px; }
+    #top #status { margin-left: 0; }
+    main#contenido { padding: var(--ds-space-4) 0; }
+    #dropzone { min-height: 300px; padding: var(--ds-space-6) var(--ds-space-4); }
+    #grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-3); }
+    #grid .thumb-box { height: 168px; padding: var(--ds-space-3); }
+    #grid .card .badge { top: 12px; left: 12px; }
+    #grid .card .mini { left: 12px; right: 12px; top: auto; bottom: 36px; max-width: none; flex-wrap: nowrap; }
+    #grid .mini button { min-height: 36px; min-width: 0; padding: 0; flex: 1 1 0; }
+    footer { padding-top: var(--ds-space-4); padding-bottom: var(--ds-space-4); }
+  }
+  @media (max-width: 34rem) {
+    #top .barra nav { flex-wrap: wrap; }
+    #top .titulo-app { order: 3; flex-basis: 100%; padding: 0 0 var(--ds-space-2); border: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #toolbar button, #dropzone, #grid .card { transition: none; }
+  }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#contenido" data-i18n="skipContent">Saltar al contenido</a>
@@ -193,9 +331,9 @@
   <button id="btnNone" disabled data-i18n="selNone">Quitar selección</button>
   <div class="sep"></div>
   <button id="btnSave" class="primary" disabled data-i18n="save">💾 Guardar PDF</button>
-  <button id="btnSaveOcr" class="primary" disabled data-i18n="saveOcr">🔍 Guardar con OCR</button>
-  <button id="btnSign" class="primary" disabled data-i18n="sign">✍️ Firmar</button>
-  <label style="display:inline-flex;align-items:center;gap:5px;font-size:13px;cursor:pointer" data-i18n-title="scanT">
+  <button id="btnSaveOcr" class="escritorio" disabled data-i18n="saveOcr">🔍 Guardar con OCR</button>
+  <button id="btnSign" class="escritorio" disabled data-i18n="sign">✍️ Firmar</button>
+  <label class="opcion-escaner" data-i18n-title="scanT">
     <input type="checkbox" id="chkScan" checked> <span data-i18n="scan">🖨 Efecto escáner en fotos</span>
   </label>
   <span id="status" role="status" aria-live="polite"></span>
