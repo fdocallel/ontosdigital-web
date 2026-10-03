@@ -104,17 +104,25 @@ function checkCatalogo(html){
   assert.deepEqual(ids,lineas[i].catalogo_web,'Catálogo: piezas de la balda '+lineas[i].id+' en el orden del canon');
   for(const id of ids){
    const art=m[4].slice(m[4].indexOf('id="'+id+'"'),m[4].indexOf('</article>',m[4].indexOf('id="'+id+'"')));
-   const c=piezas[id];
+   const c=piezas[id],x=c.accion;
    assert.equal(texto((art.match(/<span class="etiqueta">([\s\S]*?)<\/span>/)||[])[1]||''),c.tipo,'Catálogo: tipo de '+id);
    assert.equal(texto((art.match(/<h3[^>]*>([\s\S]*?)<\/h3>/)||[])[1]||''),c.titulo,'Catálogo: título de '+id);
    assert.equal(art.includes('pill-producto'),!!c.producto,'Catálogo: «Producto» solo donde lo es ('+id+')');
+   assert.equal(texto((art.match(/<p class="dato">([\s\S]*?)<\/p>/)||[])[1]||''),c.dato||'','Catálogo: dato de '+id);
+   const acc=art.match(/<a class="servicio__accion" href="([^"]*)"([^>]*)>[\s\S]*?<span class="servicio__rotulo">([\s\S]*?)<\/span>/);
+   assert(acc,'Catálogo: '+id+' con su acción');
+   assert.deepEqual([acc[1],texto(acc[3]),/data-modo="([^"]*)"/.exec(acc[2])?.[1],/data-goatcounter-click="([^"]*)"/.exec(acc[2])?.[1],/target="_blank"/.test(acc[2])],
+    [x.src||x.href,x.rotulo,x.modo,x.evento,x.modo==='externo'],'Catálogo: acción de '+id+' (destino, rótulo, modo, analítica)');
+   if(x.extra)assert(art.includes('href="'+x.extra.href+'" data-goatcounter-click="'+x.extra.evento+'"')&&art.includes('>'+x.extra.rotulo+'</a>'),'Catálogo: acción extra de '+id);
   }
  });
  const cat=html.slice(html.indexOf('<section id="trabajos"'),html.indexOf('<section id="proximamente"'));
  assert(!/pill-consultoria|pill-familia|data-categoria/.test(cat),'Catálogo: sin pastillas de consultoría ni filtros');
- const per=html.slice(html.indexOf('id="ontos-personal"'),html.indexOf('</article>',html.indexOf('id="ontos-personal"')));
- assert.deepEqual([...per.matchAll(/<a class="clip"[^>]*href="([^"]+)"|<a class="clip" href="([^"]+)"/g)].map(m=>m[1]||m[2]),['organizacion-60s.html','salud-60s.html','finanzas-70s.html','caso-90s.html'],'Próximamente: los cuatro clips, en miniatura');
- assert(per.includes('href="caso-sistema.html"'),'Próximamente: «Leer el caso» se conserva');
+ const prox=html.slice(html.indexOf('<section id="proximamente"'),html.indexOf('</section>',html.indexOf('<section id="proximamente"')));
+ const clips=prox.slice(prox.indexOf('class="proximo-clips"'));
+ assert(prox.indexOf('class="proximo-clips"')>prox.lastIndexOf('</article>'),'Próximamente: los clips van fuera de las tarjetas');
+ assert.deepEqual([...clips.matchAll(/<a class="clip" href="([^"]+)" data-modo="clip"/g)].map(m=>m[1]),['organizacion-60s.html','salud-60s.html','finanzas-70s.html','caso-90s.html'],'Próximamente: los cuatro clips, en miniatura');
+ assert(prox.includes('href="caso-sistema.html"'),'Próximamente: «Leer el caso» se conserva');
 }
 const appsHtml=fs.readFileSync(path.join(WEB,'aplicaciones.html'),'utf8');
 checkCatalogo(appsHtml);
@@ -210,15 +218,11 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  // Aplicaciones por baldas, 3-oct-2026: el catálogo se reduce en ambos lados a sus piezas por id, en orden
  // fijo y sin cabecera ni título (checkCatalogo los compara con el canon); se conservan y comparan sus textos,
  // enlaces e imágenes. Titular, entradilla y clips de «Próximamente» también se comprueban en checkCatalogo.
+ // Aplicaciones por baldas con tarjetas mínimas, 3-oct-2026 (ONTOS/raw/marca/2026-10-03-web-aplicaciones-ajustes-fernando.md):
+ // Fernando retira las explicaciones de cada pieza; catálogo, cabecera y clips salen de la comparación con la base
+ // y checkCatalogo los comprueba contra el canon (piezas, acciones, analítica y clips).
  if(file==='aplicaciones.html'){
-  const cat=d.querySelector('section#trabajos');
-  if(cat){
-   const arts=['herramientas','juegos-2d','animacion-3d','visitas-3d','modelado-3d','webs','armario'].map(id=>d.getElementById(id)).filter(Boolean);
-   for(const a of arts){a.querySelector('.cabecera')?.remove();a.querySelector('h3')?.remove();for(const e of [...a.querySelectorAll('div,span:not([class])')].reverse())e.replaceWith(...e.childNodes);}
-   cat.replaceChildren(...arts);
-  }
-  for(const e of d.querySelectorAll('.hero h1, .hero .intro, #proximamente ul.videos, #proximamente ul.clips, dialog.dlg-clip'))e.remove();
-  for(const e of d.querySelectorAll('#proximamente a[href="caso-sistema.html"]')){const p=e.closest('p');(p&&p.textContent.trim()===e.textContent.trim()?p:e).remove();}
+  for(const e of d.querySelectorAll('section#trabajos, .hero h1, .hero .intro, #proximamente ul.videos, .proximo-clips, dialog.dlg, dialog.dlg-clip'))e.remove();
  }
  // Encargo explícito de Fernando, 3-oct-2026: cuatro familias desde el canon de la oferta
  // (ONTOS/data/ontos-empresa.json#lineas v2) y descripción desde mensaje.json web.description.
