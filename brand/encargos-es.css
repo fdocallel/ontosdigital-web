@@ -10,14 +10,20 @@ html[data-web-page="index"] .familias__controles button:disabled { opacity: .35;
 html[data-web-page="index"] .familias__controles svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 html[data-web-page="index"] .familias { display: grid; grid-auto-flow: column; --familias-asoma: 3rem; grid-auto-columns: calc((100% - 3 * var(--ds-space-5) - var(--familias-asoma)) / 3); gap: var(--ds-space-5); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--borde) transparent; padding-block: var(--ds-space-1) var(--ds-space-4); }
 html[data-web-page="index"] .familia { min-width: 0; display: flex; flex-direction: column; padding: var(--ds-space-5); margin: 0; background: var(--panel); border: 1px solid var(--borde); border-radius: var(--ds-radius); scroll-snap-align: start; transition: transform var(--web-motion-fast) ease; }
-/* Movimiento de las familias (propuesta 3-oct): figura trazada al entrar, gesto al pasar, carril con progreso. */
+/* Movimiento de las familias (propuesta 3-oct): figura trazada al entrar, gesto al pasar; controles al pie con un círculo por familia. */
 @media (hover: hover) { html[data-web-page="index"] .familia:hover { transform: translateY(-3px); } }
 html[data-web-page="index"] .familia:focus-within { transform: translateY(-3px); }
-html[data-web-page="index"] .familias--progreso { scrollbar-width: none; }
-html[data-web-page="index"] .familias--progreso::-webkit-scrollbar { display: none; }
-html[data-web-page="index"] .familias__progreso { position: relative; height: 2px; margin-top: var(--ds-space-2); background: var(--borde); border-radius: 1px; overflow: hidden; }
-html[data-web-page="index"] .familias__progreso[hidden] { display: none; }
-html[data-web-page="index"] .familias__progreso span { position: absolute; inset-block: 0; left: 0; background: var(--acento); border-radius: inherit; }
+html[data-web-page="index"] .familias--pie { scrollbar-width: none; }
+html[data-web-page="index"] .familias--pie::-webkit-scrollbar { display: none; }
+html[data-web-page="index"] .familias__controles--pie:not([hidden]) { justify-content: center; gap: var(--ds-space-4); margin-top: var(--ds-space-3); }
+html[data-web-page="index"] .familias__controles--pie .familias__estado { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
+html[data-web-page="index"] .familias__controles--pie button { width: 40px; height: 40px; border: 0; background: transparent; color: var(--acento); transition: background-color var(--web-motion-fast) ease, color var(--web-motion-fast) ease; }
+html[data-web-page="index"] .familias__controles--pie button:hover:not(:disabled) { background: var(--panel); color: var(--acento); }
+html[data-web-page="index"] .familias__controles--pie button:disabled { opacity: .3; }
+html[data-web-page="index"] .familias__controles--pie svg { width: 20px; height: 20px; stroke-width: 1.25; }
+html[data-web-page="index"] .familias__puntos { display: flex; gap: var(--ds-space-2); align-items: center; }
+html[data-web-page="index"] .familias__puntos span { width: 7px; height: 7px; border: 1px solid var(--acento); border-radius: 50%; opacity: .55; transition: background-color var(--web-motion-fast) ease, opacity var(--web-motion-fast) ease; }
+html[data-web-page="index"] .familias__puntos span.es-visible { background: var(--acento); opacity: 1; }
 html[data-web-page="index"] .familia__titulo { min-height: 112px; }
 html[data-web-page="index"] .familia .num { display: block; font-size: var(--ds-type-note); color: var(--acento); font-variant-numeric: tabular-nums; margin-bottom: var(--ds-space-3); }
 html[data-web-page="index"] .familia h3 { font-size: clamp(var(--ds-type-h2), 2vw, var(--ds-type-h1)); line-height: var(--ds-type-h2-leading); margin: 0; }

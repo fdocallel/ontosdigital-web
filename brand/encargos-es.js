@@ -15,12 +15,16 @@
   const EASE = 'cubic-bezier(.4, 0, .2, 1)';
   let frame = 0;
 
-  const progress = document.createElement('div');
-  progress.className = 'familias__progreso';
-  progress.setAttribute('aria-hidden', 'true');
-  const bar = progress.appendChild(document.createElement('span'));
-  track.after(progress);
-  track.classList.add('familias--progreso');
+  // Controles bajo el carril, centrados: flecha, un círculo por familia (lleno si se ve), flecha.
+  // Sin JavaScript siguen ocultos en la cabecera; el estado textual queda para lectores de pantalla.
+  track.after(controls);
+  controls.classList.add('familias__controles--pie');
+  track.classList.add('familias--pie');
+  const dots = document.createElement('span');
+  dots.className = 'familias__puntos';
+  dots.setAttribute('aria-hidden', 'true');
+  const dot = cards.map(() => dots.appendChild(document.createElement('span')));
+  controls.insertBefore(dots, next);
 
   // Posiciones por maquetación, no por rectángulos: el escalonado y el gesto no las alteran.
   const start = card => card.offsetLeft - cards[0].offsetLeft;
@@ -35,10 +39,7 @@
     state.textContent = `${String(from + 1).padStart(2, '0')}–${String(to + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
     prev.disabled = track.scrollLeft <= 2;
     next.disabled = track.scrollLeft >= maximum() - 2;
-    const ratio = track.clientWidth / track.scrollWidth;
-    progress.hidden = ratio >= 1;
-    bar.style.width = `${ratio * 100}%`;
-    bar.style.left = `${track.scrollLeft / track.scrollWidth * 100}%`;
+    dot.forEach((d, index) => d.classList.toggle('es-visible', index >= from && index <= to));
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(update); }
   function go(left, direction = 0) {
@@ -139,9 +140,9 @@
     if (busy.has(card) || (!entrance && !shown.has(card))) return;
     busy.add(card);
     const orbital = svg.querySelector('ellipse');
-    if (entrance) { await draw(svg, 600); shown.add(card); if (orbital) await orbit(svg, 1600); }
-    else if (orbital) await orbit(svg, 1200);
-    else await draw(svg, 450);
+    if (entrance) { await draw(svg, 1400); shown.add(card); if (orbital) await orbit(svg, 2200); }
+    else if (orbital) await orbit(svg, 1800);
+    else await draw(svg, 1000);
     busy.delete(card);
   }
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
