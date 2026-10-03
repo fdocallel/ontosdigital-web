@@ -41,30 +41,17 @@ h1 { font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600; line-height: 1.2; ma
 section { padding: var(--sp-sec) 0; border-top: 1px solid var(--borde); }
 h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .bajada { max-width: 42rem; color: var(--sec); }
-.catalogo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin-top: 1.6rem; }
 .servicio { border: 1px solid var(--borde); border-radius: 14px; background: var(--panel); overflow: hidden; display: flex; flex-direction: column; }
 .servicio img { display: block; width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; border-bottom: 1px solid var(--borde); }
 .servicio .texto { padding: 1rem 1.1rem 1.1rem; display: flex; flex-direction: column; flex: 1; }
 .servicio h3 { font-size: 1.2rem; margin: .5rem 0 .5rem; }
 .servicio .cabecera { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
 .servicio .cabecera .etiqueta { font-size: .72rem; }
-/* Dos etiquetas por tarjeta: la vertical (consultoría o producto) y el tipo de aplicación. Contraste texto/fondo ≥ 4,5:1 en claro y oscuro. */
+/* Pastilla «Producto» (contraste texto/fondo ≥ 4,5:1 en claro y oscuro). */
 .pill { display: inline-block; border-radius: 999px; padding: .1rem .5rem; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 600; line-height: 1.5; background: var(--pill-bg); color: var(--pill-fg); }
-.pill-consultoria { --pill-bg: rgba(212,113,59,.16); --pill-fg: #8a3f1f; }
 .pill-producto { --pill-bg: #dbe7f5; --pill-fg: #1f3b63; }
-.pill-medida { --pill-bg: #f6e7c1; --pill-fg: #6b4a00; }
-.pill-experiencias { --pill-bg: #e6def7; --pill-fg: #43307a; }
-.pill-webs { --pill-bg: #dcefe0; --pill-fg: #1f5a33; }
-.pill-personal { --pill-bg: #e9f0f8; --pill-fg: #3a5680; }
-.pill-familia { --pill-bg: rgba(49,91,78,.12); --pill-fg: #315B4E; }
 @media (prefers-color-scheme: dark) {
-  .pill-consultoria { --pill-bg: rgba(212,113,59,.22); --pill-fg: #e8956a; }
   .pill-producto { --pill-bg: rgba(31,59,99,.55); --pill-fg: #a9c4e8; }
-  .pill-medida { --pill-bg: rgba(107,74,0,.55); --pill-fg: #e8c96a; }
-  .pill-experiencias { --pill-bg: rgba(67,48,122,.55); --pill-fg: #c9bbef; }
-  .pill-webs { --pill-bg: rgba(31,90,51,.55); --pill-fg: #9fd8b0; }
-  .pill-personal { --pill-bg: rgba(31,59,99,.35); --pill-fg: #a9c4e8; }
-  .pill-familia { --pill-bg: rgba(159,216,176,.18); --pill-fg: #b9dcc6; }
 }
 .servicio p { color: var(--sec); font-size: .92rem; line-height: 1.5; }
 .servicio .caso { border-top: 1px solid var(--borde); padding-top: .7rem; margin-top: .8rem; font-size: .88rem; }
@@ -79,10 +66,7 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .edicion .desc { font-size: 1.02rem; color: var(--texto); }
 .edicion .verticales { color: var(--sec); font-size: .92rem; margin-top: .5rem; }
 .edicion .estado { color: var(--sec); font-size: .88rem; margin-top: .9rem; font-style: italic; }
-.edicion .videos { list-style: none; margin-top: auto; padding-top: .8rem; border-top: 1px solid var(--borde); display: flex; flex-wrap: wrap; column-gap: 1.2rem; }
 .edicion .estado { margin-bottom: 1.2rem; }
-.edicion .videos a { display: inline-block; min-height: 40px; padding: .5rem 0; font-weight: 600; font-size: .92rem; text-decoration: none; }
-.edicion .videos a:hover { text-decoration: underline; }
 .proximo-pie { margin-top: 1.4rem; color: var(--sec); }
 .proximo-pie a { font-weight: 600; text-decoration: none; display: inline-block; padding: .5rem 0; }
 .proximo-pie a:hover { text-decoration: underline; }
@@ -90,28 +74,7 @@ h2 { font-size: clamp(1.65rem, 4vw, 2.25rem); margin-bottom: 1rem; }
 .contacto p { max-width: 41rem; color: var(--sec); }
 footer { border-top: 1px solid var(--borde); padding: 2rem 0; color: var(--sec); font-size: .85rem; }
 footer a { color: inherit; }
-/* La tarjeta que queda sola al final de una fila de tres se tumba: imagen a la izquierda, texto a la derecha. */
-@media (min-width: 58.01rem) {
-  .servicio:last-child:nth-child(3n+1) { grid-column: 1 / -1; flex-direction: row; }
-  .servicio:last-child:nth-child(3n+1) img { width: 42%; aspect-ratio: auto; height: auto; align-self: stretch; border-bottom: 0; border-right: 1px solid var(--borde); }
-  .servicio:last-child:nth-child(3n+1) .texto { padding: 1.2rem 1.4rem; justify-content: center; }
-}
-@media (max-width: 58rem) { .catalogo { grid-template-columns: 1fr 1fr; } }
-/* Móvil (28-sep-2026, Fernando: «ver más, en vez de uno solo»): dos por fila y tarjeta corta.
-   Imagen, número, título y enlace; la descripción y las etiquetas siguen en escritorio. */
-@media (max-width: 40rem) {
-  .hero { padding: 3rem 0; }
-  .catalogo { grid-template-columns: 1fr 1fr; gap: .7rem; }
-  .servicio .texto { padding: .7rem .75rem .5rem; }
-  .servicio .cabecera .pill, .servicio .texto > p:not(.cabecera):not(.enlaces) { display: none; }
-  .servicio .cabecera .etiqueta { font-size: .66rem; letter-spacing: .08em; }
-  .servicio h3 { font-size: .98rem; line-height: 1.25; margin: .35rem 0 .2rem; }
-  .servicio a { font-size: .84rem; min-height: 44px; display: inline-flex; align-items: center; }
-  .servicio .enlaces br { display: none; }
-  .servicio .enlaces a + a { margin-top: -.4rem; }
-  .servicio .enlaces { display: flex; flex-direction: column; }
-  .servicio:last-child:nth-child(odd) { grid-column: 1 / -1; }
-}
+@media (max-width: 40rem) { .hero { padding: 3rem 0; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 <!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
@@ -137,77 +100,96 @@ footer a { color: inherit; }
 <main id="contenido" tabindex="-1" class="wrap">
 <div class="hero">
 <p class="etiqueta">Applications</p>
-<h1>Tools that solve problems. Experiences to explore.</h1>
-<p class="intro">Some ideas need a tool. Others need a character, a game or a world to step into. I design and build these pieces to work in the browser.</p>
+<h1>Try it in your browser.</h1>
+<p class="intro">One example from each family, from your context in order to a world in 3D. It all works right here, with nothing to install.</p>
 <div class="acciones"><a class="cta" href="/en/contacto.html" data-contacto>Tell me your idea</a></div>
 </div>
-<section id="trabajos">
-<h2>From a document to a house in 3D</h2>
-<p class="bajada">Open the editor, play with ONTOS, walk its little world, look at a house rebuilt from a drone flight or a painter's website. You can try everything in your browser.</p>
-<div class="filtros" data-catalog-controls role="group" aria-label="Filter applications" hidden>
-<button type="button" data-filtro="todas" aria-pressed="true">All</button>
-<button type="button" data-filtro="contexto-ia" aria-pressed="false">Your context for AI</button>
-<button type="button" data-filtro="ingenieria-digital" aria-pressed="false">Digital engineering</button>
-<button type="button" data-filtro="herramientas" aria-pressed="false">Custom tools</button>
-<button type="button" data-filtro="webs-experiencias" aria-pressed="false">Websites and experiences</button>
-</div>
+<section id="trabajos" aria-label="Applications catalogue">
+<nav class="baldas-indice" aria-label="Application families">
+<ol>
+<li><a href="#balda-contexto-ia"><span class="baldas-indice__n">01</span> Your context for AI</a></li>
+<li><a href="#balda-ingenieria-digital"><span class="baldas-indice__n">02</span> Digital engineering</a></li>
+<li><a href="#balda-herramientas"><span class="baldas-indice__n">03</span> Custom tools</a></li>
+<li><a href="#balda-webs-experiencias"><span class="baldas-indice__n">04</span> Websites and experiences</a></li>
+</ol>
+</nav>
 <div class="catalogo">
-<article class="servicio servicio--destacado" id="herramientas" data-categoria="herramientas">
-<img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">01 · Web tools</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-familia">Custom tools</span></p>
-<h3>CamScanner meets iLovePDF</h3>
-<p>Custom applications for documents, information and repetitive tasks.</p>
-<p class="caso"><strong>PDF editor.</strong> Merge, rotate and reorder pages; turn photos into documents. All in your browser.</p>
-<p class="enlaces"><a href="/editor-pdf/?lang=en" data-goatcounter-click="servicio-probar-editor-pdf" data-goatcounter-no-session="1">Try the PDF editor ▸</a></p></div>
-</article>
-<article class="servicio" id="juegos-2d" data-categoria="webs-experiencias">
-<img src="/brand/servicios/juego-2d.png" alt="ONTOS as a character in its 2D game" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">02 · 2D games and experiences</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-familia">Websites and experiences</span></p>
-<h3>A brand you can play with</h3>
-<p>Characters and interactive scenes to present a brand or learn by playing.</p>
-<p class="caso"><strong>The ONTOS 2D game.</strong> The brand character, starring in a scene you can interact with.</p>
-<p class="enlaces"><a href="/en/juego-2d.html" data-goatcounter-click="servicio-probar-juego-2d" data-goatcounter-no-session="1">Try the 2D game ▸</a></p></div>
-</article>
-<article class="servicio" id="animacion-3d" data-categoria="webs-experiencias">
-<img src="/brand/servicios/saludo-3d.png" alt="The ONTOS 3D figurine waving" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">03 · 3D animation</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-familia">Websites and experiences</span></p>
-<h3>A character that comes to life</h3>
-<p>Volume, poses and motion for a character or a product.</p>
-<p class="caso"><strong>ONTOS waving.</strong> The character's 3D figurine: spin it and zoom in.</p>
-<p class="enlaces"><a href="/en/animacion-3d.html" data-goatcounter-click="servicio-probar-animacion-3d" data-goatcounter-no-session="1">Try the 3D animation ▸</a></p></div>
-</article>
-<article class="servicio" id="visitas-3d" data-categoria="webs-experiencias">
-<img src="/brand/servicios/mundo-3d.png" alt="ONTOS exploring its small 3D planet" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">04 · 3D tours and worlds</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-familia">Websites and experiences</span></p>
-<h3>A place to step into</h3>
-<p>Navigable scenes to walk through a space or a presentation from the inside.</p>
-<p class="caso"><strong>ONTOS's little world.</strong> A planet with a stroll, sparkles and a seed to discover.</p>
-<p class="enlaces"><a href="/en/visita-3d.html" data-goatcounter-click="servicio-probar-mundo-normal" data-goatcounter-no-session="1">Try the ONTOS world ▸</a><br><a href="/en/visita-3d.html?mundo=segovia" data-goatcounter-click="servicio-probar-segovia" data-goatcounter-no-session="1">Try the Segovia tour ▸</a></p></div>
-</article>
-<article class="servicio" id="modelado-3d" data-categoria="ingenieria-digital">
-<img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">05 · 3D modelling from a drone</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-familia">Digital engineering</span></p>
-<h3>From a flight to a model</h3>
-<p>Drone photogrammetry: the textured scan plus a simple geometry to work with.</p>
-<p class="caso"><strong>A container house.</strong> A 26-second flight and the exterior rebuilt locally.</p>
-<p class="enlaces"><a href="/en/modelado-3d.html" data-goatcounter-click="servicio-probar-modelado-3d" data-goatcounter-no-session="1">See the process and the result ▸</a></p></div>
-</article>
-<article class="servicio" id="webs" data-categoria="webs-experiencias">
-<img src="/brand/servicios/web-jmcasado.png" alt="Home page of painter José María Casado's website" width="1280" height="720" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">06 · Custom websites</span><span class="pill pill-consultoria">Consulting</span><span class="pill pill-familia">Websites and experiences</span></p>
-<h3>A website the client can maintain</h3>
-<p>Websites their owner can update without depending on anyone.</p>
-<p class="caso"><strong>José María Casado, painter.</strong> A gallery with a database of works he edits himself.</p>
-<p class="enlaces"><a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visit josemariacasado.com ▸</a></p></div>
-</article>
-<article class="servicio" id="armario" data-categoria="contexto-ia">
+<section class="balda balda--una" id="balda-contexto-ia" data-familia="contexto-ia" aria-labelledby="balda-contexto-ia-titulo">
+<div class="balda__cabecera"><span class="balda__n" aria-hidden="true">01</span><h2 id="balda-contexto-ia-titulo">Your context for AI</h2></div>
+<div class="balda__piezas">
+<article class="servicio" id="armario">
 <img src="/brand/servicios/armario.png" alt="Clothes hung on shelves sorted by colour: whites, greys, blacks" width="1240" height="698" loading="lazy">
-<div class="texto"><p class="cabecera"><span class="etiqueta">07 · Wardrobe</span><span class="pill pill-producto">Product</span><span class="pill pill-familia">Your context for AI</span></p>
+<div class="texto"><p class="cabecera"><span class="etiqueta">Wardrobe app</span><span class="pill pill-producto">Product</span></p>
 <h3>Your clothes, catalogued and hung on shelves</h3>
 <p>One photo per garment and a record: the wardrobe sorts by colour or type and suggests outfits. On your phone.</p>
 <p class="caso"><strong>In use: my wardrobe, 82 garments.</strong> Place ten garments and watch the real wardrobe on video.</p>
 <p class="enlaces"><a href="/en/armario.html" data-goatcounter-click="servicio-probar-armario" data-goatcounter-no-session="1">Try it with 10 garments ▸</a></p></div>
 </article>
+</div>
+</section>
+<section class="balda balda--una" id="balda-ingenieria-digital" data-familia="ingenieria-digital" aria-labelledby="balda-ingenieria-digital-titulo">
+<div class="balda__cabecera"><span class="balda__n" aria-hidden="true">02</span><h2 id="balda-ingenieria-digital-titulo">Digital engineering</h2></div>
+<div class="balda__piezas">
+<article class="servicio" id="modelado-3d">
+<img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720" loading="lazy">
+<div class="texto"><p class="cabecera"><span class="etiqueta">3D modelling from a drone</span></p>
+<h3>From a flight to a model</h3>
+<p>Drone photogrammetry: the textured scan plus a simple geometry to work with.</p>
+<p class="caso"><strong>A container house.</strong> A 26-second flight and the exterior rebuilt locally.</p>
+<p class="enlaces"><a href="/en/modelado-3d.html" data-goatcounter-click="servicio-probar-modelado-3d" data-goatcounter-no-session="1">See the process and the result ▸</a></p></div>
+</article>
+</div>
+</section>
+<section class="balda balda--una" id="balda-herramientas" data-familia="herramientas" aria-labelledby="balda-herramientas-titulo">
+<div class="balda__cabecera"><span class="balda__n" aria-hidden="true">03</span><h2 id="balda-herramientas-titulo">Custom tools</h2></div>
+<div class="balda__piezas">
+<article class="servicio" id="herramientas">
+<img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720" loading="lazy">
+<div class="texto"><p class="cabecera"><span class="etiqueta">Web tool</span></p>
+<h3>A PDF editor that keeps your documents on your computer</h3>
+<p>Custom applications for documents, information and repetitive tasks.</p>
+<p class="caso"><strong>PDF editor.</strong> Merge, rotate and reorder pages; turn photos into documents. All in your browser.</p>
+<p class="enlaces"><a href="/editor-pdf/?lang=en" data-goatcounter-click="servicio-probar-editor-pdf" data-goatcounter-no-session="1">Try the PDF editor ▸</a></p></div>
+</article>
+</div>
+</section>
+<section class="balda balda--fila" id="balda-webs-experiencias" data-familia="webs-experiencias" aria-labelledby="balda-webs-experiencias-titulo">
+<div class="balda__cabecera"><span class="balda__n" aria-hidden="true">04</span><h2 id="balda-webs-experiencias-titulo">Websites and experiences</h2></div>
+<div class="balda__piezas">
+<article class="servicio" id="webs">
+<img src="/brand/servicios/web-jmcasado.png" alt="Home page of painter José María Casado's website" width="1280" height="720" loading="lazy">
+<div class="texto"><p class="cabecera"><span class="etiqueta">Custom website</span></p>
+<h3>A website the client can maintain</h3>
+<p>Websites their owner can update without depending on anyone.</p>
+<p class="caso"><strong>José María Casado, painter.</strong> A gallery with a database of works he edits himself.</p>
+<p class="enlaces"><a href="https://josemariacasado.com" rel="noopener" target="_blank" data-goatcounter-click="servicio-probar-web-jmcasado" data-goatcounter-no-session="1">Visit josemariacasado.com ▸</a></p></div>
+</article>
+<article class="servicio" id="juegos-2d">
+<img src="/brand/servicios/juego-2d.png" alt="ONTOS as a character in its 2D game" width="1280" height="720" loading="lazy">
+<div class="texto"><p class="cabecera"><span class="etiqueta">2D game</span></p>
+<h3>A brand you can play with</h3>
+<p>Characters and interactive scenes to present a brand or learn by playing.</p>
+<p class="caso"><strong>The ONTOS 2D game.</strong> The brand character, starring in a scene you can interact with.</p>
+<p class="enlaces"><a href="/en/juego-2d.html" data-goatcounter-click="servicio-probar-juego-2d" data-goatcounter-no-session="1">Try the 2D game ▸</a></p></div>
+</article>
+<article class="servicio" id="animacion-3d">
+<img src="/brand/servicios/saludo-3d.png" alt="The ONTOS 3D figurine waving" width="1280" height="720" loading="lazy">
+<div class="texto"><p class="cabecera"><span class="etiqueta">3D animation</span></p>
+<h3>A character that comes to life</h3>
+<p>Volume, poses and motion for a character or a product.</p>
+<p class="caso"><strong>ONTOS waving.</strong> The character's 3D figurine: spin it and zoom in.</p>
+<p class="enlaces"><a href="/en/animacion-3d.html" data-goatcounter-click="servicio-probar-animacion-3d" data-goatcounter-no-session="1">Try the 3D animation ▸</a></p></div>
+</article>
+<article class="servicio" id="visitas-3d">
+<img src="/brand/servicios/mundo-3d.png" alt="ONTOS exploring its small 3D planet" width="1280" height="720" loading="lazy">
+<div class="texto"><p class="cabecera"><span class="etiqueta">3D worlds</span></p>
+<h3>A place to step into</h3>
+<p>Navigable scenes to walk through a space or a presentation from the inside.</p>
+<p class="caso"><strong>ONTOS's little world.</strong> A planet with a stroll, sparkles and a seed to discover.</p>
+<p class="enlaces"><a href="/en/visita-3d.html" data-goatcounter-click="servicio-probar-mundo-normal" data-goatcounter-no-session="1">Try the ONTOS world ▸</a><br><a href="/en/visita-3d.html?mundo=segovia" data-goatcounter-click="servicio-probar-segovia" data-goatcounter-no-session="1">Try the Segovia tour ▸</a></p></div>
+</article>
+</div>
+</section>
 </div>
 </section>
 <section id="proximamente">
@@ -220,13 +202,13 @@ footer a { color: inherit; }
 <p class="desc">Your whole life in a single model, and the boring part done for you.</p>
 <p class="verticales">Organisation · Health · Money · Career</p>
 <p class="estado">In private pilot, by invitation.</p>
-<ul class="videos">
-<li><a href="/en/organizacion-60s.html">▶ Organisation</a></li>
-<li><a href="/en/salud-60s.html">▶ Health</a></li>
-<li><a href="/en/finanzas-70s.html">▶ Finances</a></li>
-<li><a href="/en/caso-90s.html">▶ The whole system</a></li>
-<li><a href="/en/caso-sistema.html">Read the case ▸</a></li>
+<ul class="clips">
+<li><a class="clip" href="/en/organizacion-60s.html" data-clip><span class="clip__titulo">Organisation</span><span class="clip__marco"><img src="/brand/servicios/clip-organizacion.webp" alt="" width="640" height="360" loading="lazy"><span class="clip__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><span class="clip__dur">60 s</span></span></a></li>
+<li><a class="clip" href="/en/salud-60s.html" data-clip><span class="clip__titulo">Health</span><span class="clip__marco"><img src="/brand/servicios/clip-salud.webp" alt="" width="640" height="360" loading="lazy"><span class="clip__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><span class="clip__dur">60 s</span></span></a></li>
+<li><a class="clip" href="/en/finanzas-70s.html" data-clip><span class="clip__titulo">Finances</span><span class="clip__marco"><img src="/brand/servicios/clip-finanzas.webp" alt="" width="640" height="360" loading="lazy"><span class="clip__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><span class="clip__dur">70 s</span></span></a></li>
+<li><a class="clip" href="/en/caso-90s.html" data-clip><span class="clip__titulo">The whole system</span><span class="clip__marco"><img src="/brand/servicios/clip-sistema.webp" alt="" width="640" height="360" loading="lazy"><span class="clip__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span><span class="clip__dur">80 s</span></span></a></li>
 </ul>
+<p class="leer-caso"><a href="/en/caso-sistema.html">Read the case ▸</a></p>
 </article>
 <article class="edicion" id="ontos-empresarial">
 <p class="cabecera"><span class="pill pill-producto">Product</span></p>
@@ -243,6 +225,10 @@ footer a { color: inherit; }
 <div class="acciones"><a class="cta" href="mailto:hola@ontosdigital.es">Email me at hola@ontosdigital.es</a><a href="/en/contacto.html" data-contacto>Use the contact form</a></div>
 </section>
 </main>
+<dialog class="dlg-clip" aria-label="ONTOS personal clip">
+<div class="dlg-clip__barra"><p class="dlg-clip__titulo">ONTOS personal clip</p><button type="button" class="dlg-clip__cerrar" aria-label="Close the clip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+<div class="dlg-clip__pantalla"><iframe title="ONTOS personal clip" allow="fullscreen"></iframe></div>
+</dialog>
 <footer><div class="wrap"><p>© 2026 ONTOS · Fernando Calle · La Lastrilla (Segovia) · <a href="/en/aviso-legal.html">Legal notice</a> · <a href="/en/privacidad.html">Privacy</a> · Cookie-free website · anonymous visit count.</p></div></footer>
 <script src="/brand/analytics-preferences.js?v=2"></script>
 <script data-goatcounter="https://ontosdigital.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

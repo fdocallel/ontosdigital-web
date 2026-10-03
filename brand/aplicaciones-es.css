@@ -1,126 +1,311 @@
-/* Escaparate de Aplicaciones. Los colores, tipos y superficies vienen del canon. */
+/* Escaparate de Aplicaciones por baldas (3-oct-2026). Una balda por familia del canon
+   (ONTOS data/ontos-empresa.json → lineas.items[].catalogo_web), como el Armario: las piezas
+   descansan sobre una línea fina con sus dos ménsulas. Colores, tipos y superficies del canon. */
+html[data-web-page="aplicaciones"] {
+  --balda-linea: color-mix(in srgb, var(--ds-brand-arena) 75%, var(--borde));
+  --balda-mensula: var(--ds-brand-verde);
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-web-page="aplicaciones"] {
+    --balda-linea: color-mix(in srgb, var(--ds-brand-arena) 38%, var(--borde));
+    --balda-mensula: color-mix(in srgb, var(--ds-brand-arena) 60%, var(--borde));
+  }
+}
+
 html[data-web-page="aplicaciones"] .hero {
-  padding-block: var(--ds-space-8);
+  padding-block: var(--ds-space-8) var(--ds-space-7);
 }
 
 html[data-web-page="aplicaciones"] .hero .intro {
-  max-width: 52rem;
+  max-width: 44rem;
 }
 
 html[data-web-page="aplicaciones"] #trabajos {
-  padding-top: var(--ds-space-7);
+  padding-block: var(--ds-space-6) 0;
 }
 
-html[data-web-page="aplicaciones"] #trabajos > .bajada {
-  max-width: 54rem;
-}
-
-html[data-web-page="aplicaciones"] .filtros:not([hidden]) {
+/* Índice de saltos: cuatro anclas, sin JS. */
+html[data-web-page="aplicaciones"] .baldas-indice ol {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
+  gap: var(--ds-space-1) var(--ds-space-6);
+  padding-bottom: var(--ds-space-3);
+  border-bottom: 1px solid var(--borde);
+}
+
+html[data-web-page="aplicaciones"] .baldas-indice a {
+  display: inline-flex;
+  align-items: baseline;
   gap: var(--ds-space-2);
-  margin-top: var(--ds-space-6);
-}
-
-html[data-web-page="aplicaciones"] .filtros button {
   min-height: 44px;
-  padding: var(--ds-space-2) var(--ds-space-4);
-  border: 1px solid var(--ds-control-border);
-  border-radius: var(--ds-radius-s);
-  background: var(--panel);
+  padding-block: var(--ds-space-3);
   color: var(--texto);
-  font: 600 var(--ds-type-body)/1.2 var(--ds-font-corporativa);
-  cursor: pointer;
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .25em;
+  transition: text-decoration-color var(--web-motion-fast) ease, color var(--web-motion-fast) ease;
 }
 
-html[data-web-page="aplicaciones"] .filtros button[aria-pressed="true"] {
-  background: var(--ds-action);
-  color: var(--ds-on-action);
+html[data-web-page="aplicaciones"] .baldas-indice a:hover {
+  color: var(--acento);
+  text-decoration-color: currentColor;
 }
 
-html[data-web-page="aplicaciones"] .filtros button:hover:not([aria-pressed="true"]) {
-  background: var(--bg);
+html[data-web-page="aplicaciones"] .baldas-indice__n,
+html[data-web-page="aplicaciones"] .balda__n {
+  color: var(--acento);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
 }
 
+html[data-web-page="aplicaciones"] .baldas-indice__n {
+  font-size: var(--ds-type-note);
+}
+
+/* Las baldas */
 html[data-web-page="aplicaciones"] .catalogo {
-  gap: var(--ds-space-5);
-  margin-top: var(--ds-space-6);
+  display: block;
+  margin-top: 0;
 }
 
-html[data-web-page="aplicaciones"] .catalogo > [hidden] {
-  display: none !important;
+html[data-web-page="aplicaciones"] .balda {
+  padding: 0;
+  border-top: 0;
+  margin-top: var(--ds-space-8);
+  scroll-margin-top: calc(var(--nav-h) + var(--ds-space-4));
 }
 
+html[data-web-page="aplicaciones"] .balda:first-child {
+  margin-top: var(--ds-space-7);
+}
+
+html[data-web-page="aplicaciones"] .balda__cabecera {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-space-3);
+  margin-bottom: var(--ds-space-5);
+}
+
+html[data-web-page="aplicaciones"] .balda__n {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-weight: 600;
+}
+
+html[data-web-page="aplicaciones"] .balda__cabecera h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 3.2vw, 1.95rem);
+}
+
+/* La línea de la balda, con sus dos ménsulas, bajo cada fila. */
+html[data-web-page="aplicaciones"] .balda::after {
+  content: '';
+  display: block;
+  height: 9px;
+  margin-top: var(--ds-space-4);
+  border-top: 2px solid var(--balda-linea);
+  background:
+    linear-gradient(var(--balda-mensula), var(--balda-mensula)) 6% 0 / 2px 100% no-repeat,
+    linear-gradient(var(--balda-mensula), var(--balda-mensula)) 94% 0 / 2px 100% no-repeat;
+}
+
+/* Pieza: tarjeta con passe-partout, como «Hecho y funcionando» de la portada. */
 html[data-web-page="aplicaciones"] .servicio {
+  position: relative;
+  padding: var(--ds-space-2);
   border-radius: var(--ds-radius);
+  transition: transform var(--web-motion-fast) ease, border-color var(--web-motion-fast) ease;
 }
 
 html[data-web-page="aplicaciones"] .servicio img {
-  aspect-ratio: 16 / 10;
-  object-position: center;
-  object-fit: contain;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center top;
+  border: 1px solid var(--borde);
+  border-radius: calc(var(--ds-radius) - var(--ds-space-1));
   background: var(--bg);
 }
 
 html[data-web-page="aplicaciones"] .servicio .texto {
-  padding: var(--ds-space-5);
+  padding: var(--ds-space-4) var(--ds-space-3) var(--ds-space-2);
+}
+
+html[data-web-page="aplicaciones"] .servicio .cabecera .etiqueta {
+  color: var(--sec);
+  font-size: var(--ds-type-note);
+  letter-spacing: .12em;
 }
 
 html[data-web-page="aplicaciones"] .servicio h3 {
-  font-size: clamp(var(--ds-type-h3), 1.7vw, var(--ds-type-h2));
-  margin-block: var(--ds-space-3);
+  font-size: 1.15rem;
+  line-height: 1.28;
+  margin-block: var(--ds-space-2) var(--ds-space-2);
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  transition: text-decoration-color var(--web-motion-fast) ease;
 }
 
 html[data-web-page="aplicaciones"] .servicio .caso {
-  margin-top: var(--ds-space-4);
+  margin-top: var(--ds-space-3);
   padding-top: var(--ds-space-3);
 }
 
 html[data-web-page="aplicaciones"] .servicio .enlaces {
-  padding-top: var(--ds-space-3);
+  padding-top: var(--ds-space-2);
 }
 
-html[data-web-page="aplicaciones"] .servicio--destacado {
-  grid-column: 1 / -1;
+@media (hover: hover) {
+  html[data-web-page="aplicaciones"] .servicio:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--acento) 45%, var(--borde));
+  }
+}
+
+html[data-web-page="aplicaciones"] :is(.servicio:hover, .servicio:focus-within) h3 {
+  text-decoration-color: currentColor;
+}
+
+html[data-web-page="aplicaciones"] .servicio:focus-within {
+  border-color: color-mix(in srgb, var(--acento) 45%, var(--borde));
+}
+
+/* Balda de una pieza: en grande, imagen a un lado y texto al otro (alterna en la segunda). */
+html[data-web-page="aplicaciones"] .balda--una .servicio {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  align-items: center;
+  gap: var(--ds-space-2);
 }
 
-html[data-web-page="aplicaciones"] .servicio--destacado img {
-  height: 100%;
-  min-height: 22rem;
-  aspect-ratio: auto;
-  border-right: 1px solid var(--borde);
-  border-bottom: 0;
+html[data-web-page="aplicaciones"] .balda--una:nth-child(even) .servicio {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
 }
 
-html[data-web-page="aplicaciones"] .servicio--destacado .texto {
-  padding: clamp(var(--ds-space-5), 3vw, var(--ds-space-8));
+html[data-web-page="aplicaciones"] .balda--una:nth-child(even) .servicio img {
+  order: 2;
+}
+
+html[data-web-page="aplicaciones"] .balda--una .servicio .texto {
+  padding: var(--ds-space-5) clamp(var(--ds-space-4), 3vw, var(--ds-space-7));
   justify-content: center;
 }
 
-html[data-web-page="aplicaciones"] .servicio--destacado h3 {
-  font-size: clamp(var(--ds-type-h2), 2.6vw, var(--ds-type-h1));
+html[data-web-page="aplicaciones"] .balda--una .servicio h3 {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  margin-block: var(--ds-space-3);
 }
 
-html[data-web-page="aplicaciones"] .servicio--destacado .caso {
-  border-top: 0;
-  padding-top: 0;
+html[data-web-page="aplicaciones"] .balda--una .servicio p:not(.cabecera, .caso, .enlaces) {
+  font-size: 1rem;
 }
 
-html[data-web-page="aplicaciones"] .servicio:last-child:nth-child(3n+1):not(.servicio--destacado) {
-  grid-column: auto;
-  flex-direction: column;
+/* Balda de varias: fila de cuatro; dos en tableta y portátil estrecho; carril deslizable en móvil. */
+html[data-web-page="aplicaciones"] .balda--fila .balda__piezas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--ds-space-4);
 }
 
-html[data-web-page="aplicaciones"] .servicio:last-child:nth-child(3n+1):not(.servicio--destacado) img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
-  border-right: 0;
-  border-bottom: 1px solid var(--borde);
+/* Mismo corte que «Hecho y funcionando» de la portada (72rem). */
+@media (max-width: 72rem) {
+  html[data-web-page="aplicaciones"] .balda--fila .balda__piezas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--ds-space-5) var(--ds-space-4);
+  }
 }
 
+@media (max-width: 52rem) {
+  html[data-web-page="aplicaciones"] .balda--fila .balda__piezas {
+    display: flex;
+    gap: var(--ds-space-3);
+    /* A sangre: el carril llega a los bordes y arranca en la guía de la página. */
+    margin-left: calc(-1 * var(--web-content-left));
+    margin-right: calc(-1 * var(--web-content-right));
+    padding: var(--ds-space-1) var(--web-content-right) var(--ds-space-2) var(--web-content-left);
+    scroll-padding-inline: var(--web-content-left) var(--web-content-right);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  html[data-web-page="aplicaciones"] .balda--fila .balda__piezas::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* La siguiente asoma: así se ve que la balda sigue. */
+  html[data-web-page="aplicaciones"] .balda--fila .servicio {
+    flex: 0 0 min(80%, 21rem);
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 40rem) {
+  html[data-web-page="aplicaciones"] .hero {
+    padding-block: var(--ds-space-7) var(--ds-space-6);
+  }
+
+  html[data-web-page="aplicaciones"] .baldas-indice ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--ds-space-4);
+  }
+
+  html[data-web-page="aplicaciones"] .baldas-indice a {
+    font-size: .88rem;
+    line-height: 1.3;
+  }
+
+  html[data-web-page="aplicaciones"] .balda {
+    margin-top: var(--ds-space-7);
+  }
+
+  html[data-web-page="aplicaciones"] .balda--una .servicio,
+  html[data-web-page="aplicaciones"] .balda--una:nth-child(even) .servicio {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  html[data-web-page="aplicaciones"] .balda--una:nth-child(even) .servicio img {
+    order: 0;
+  }
+
+  html[data-web-page="aplicaciones"] .balda--una .servicio .texto {
+    padding: var(--ds-space-4) var(--ds-space-3) var(--ds-space-2);
+  }
+
+  html[data-web-page="aplicaciones"] .balda--una .servicio h3 {
+    font-size: 1.3rem;
+  }
+
+  html[data-web-page="aplicaciones"] .balda--una .servicio p:not(.cabecera, .caso, .enlaces) {
+    font-size: .95rem;
+  }
+}
+
+/* Entrada: las piezas de cada balda suben una tras otra, una sola vez (aplicaciones-es.js). */
+html[data-web-page="aplicaciones"] .balda--espera .servicio {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: none;
+}
+
+html[data-web-page="aplicaciones"] .balda--entra .servicio {
+  transition: opacity 520ms cubic-bezier(.2, 0, .2, 1) var(--retraso, 0ms), transform 520ms cubic-bezier(.2, 0, .2, 1) var(--retraso, 0ms), border-color var(--web-motion-fast) ease;
+}
+
+html[data-web-page="aplicaciones"] .balda--entra .servicio:nth-child(2) { --retraso: 90ms; }
+html[data-web-page="aplicaciones"] .balda--entra .servicio:nth-child(3) { --retraso: 180ms; }
+html[data-web-page="aplicaciones"] .balda--entra .servicio:nth-child(4) { --retraso: 270ms; }
+
+/* Próximamente */
 html[data-web-page="aplicaciones"] #proximamente {
   margin-block: var(--ds-space-8);
   padding: var(--ds-space-7);
@@ -132,83 +317,265 @@ html[data-web-page="aplicaciones"] #proximamente {
 html[data-web-page="aplicaciones"] #proximamente .proximo {
   gap: var(--ds-space-5);
   margin-top: var(--ds-space-6);
+  align-items: start;
 }
 
 html[data-web-page="aplicaciones"] #proximamente .edicion {
   background: var(--bg);
+  border-radius: var(--ds-radius);
 }
 
-@media (max-width: 58rem) {
-  html[data-web-page="aplicaciones"] .catalogo {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+/* Los cuatro clips: miniatura con duración; el clic abre el clip en un diálogo (aplicaciones-es.js). */
+html[data-web-page="aplicaciones"] .clips {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--ds-space-4) var(--ds-space-3);
+  padding-top: var(--ds-space-4);
+  border-top: 1px solid var(--borde);
+}
 
-  html[data-web-page="aplicaciones"] .servicio--destacado {
-    grid-column: 1 / -1;
-  }
+html[data-web-page="aplicaciones"] .clip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-2);
+  color: var(--texto);
+  font-weight: 600;
+  font-size: .92rem;
+  line-height: 1.3;
+  text-decoration: none;
+  border-radius: var(--ds-radius-s);
+}
+
+html[data-web-page="aplicaciones"] .clip__marco {
+  order: -1;
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--borde);
+  border-radius: var(--ds-radius-s);
+  background: #0f0e0c;
+}
+
+html[data-web-page="aplicaciones"] .clip__marco img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+html[data-web-page="aplicaciones"] .clip__play {
+  position: absolute;
+  inset: 0;
+  width: 42px;
+  height: 42px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--teja);
+  transition: transform var(--web-motion-fast) ease;
+}
+
+html[data-web-page="aplicaciones"] .clip__play svg {
+  width: 46%;
+  margin-left: 8%;
+  fill: #14100c;
+}
+
+html[data-web-page="aplicaciones"] .clip__dur {
+  position: absolute;
+  right: var(--ds-space-2);
+  bottom: var(--ds-space-2);
+  padding: 0 var(--ds-space-2);
+  border-radius: 4px;
+  background: rgba(15, 14, 12, .8);
+  color: #ece7e0;
+  font-size: .72rem;
+  line-height: 1.6;
+  font-variant-numeric: tabular-nums;
+}
+
+html[data-web-page="aplicaciones"] .clip__titulo {
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .22em;
+  transition: text-decoration-color var(--web-motion-fast) ease;
+}
+
+html[data-web-page="aplicaciones"] :is(.clip:hover, .clip:focus-visible) .clip__titulo {
+  text-decoration-color: currentColor;
+}
+
+html[data-web-page="aplicaciones"] :is(.clip:hover, .clip:focus-visible) .clip__play {
+  transform: scale(1.08);
+}
+
+html[data-web-page="aplicaciones"] .clip:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 4px;
+}
+
+html[data-web-page="aplicaciones"] .leer-caso {
+  margin-top: var(--ds-space-3);
+}
+
+html[data-web-page="aplicaciones"] .leer-caso a {
+  display: inline-block;
+  min-height: 40px;
+  padding: var(--ds-space-2) 0;
+  font-weight: 600;
+  font-size: .92rem;
+  text-decoration: none;
+}
+
+html[data-web-page="aplicaciones"] .leer-caso a:hover {
+  text-decoration: underline;
+}
+
+/* Diálogo del clip: la película siempre es oscura, como su página. */
+html:has(dialog.dlg-clip[open]) {
+  overflow: hidden;
+}
+
+.dlg-clip {
+  width: min(64rem, calc(100vw - 2rem), calc((100dvh - 6rem) * 16 / 9));
+  max-width: none;
+  max-height: none;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #2a261f;
+  border-radius: var(--ds-radius);
+  background: #0f0e0c;
+  color: #ece7e0;
+}
+
+.dlg-clip[open] {
+  animation: dlg-clip-entra 220ms ease;
+}
+
+@keyframes dlg-clip-entra {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+.dlg-clip::backdrop {
+  background: rgba(20, 16, 12, .72);
+}
+
+.dlg-clip__barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-space-3);
+  padding: var(--ds-space-2) var(--ds-space-2) var(--ds-space-2) var(--ds-space-4);
+  border-bottom: 1px solid #2a261f;
+}
+
+.dlg-clip__titulo {
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+.dlg-clip__cerrar {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: #ece7e0;
+  cursor: pointer;
+  transition: background-color var(--web-motion-fast) ease, color var(--web-motion-fast) ease;
+}
+
+.dlg-clip__cerrar:hover {
+  color: var(--teja);
+  background: rgba(212, 113, 59, .14);
+}
+
+html .dlg-clip .dlg-clip__cerrar:focus-visible {
+  outline: 2px solid var(--teja);
+  outline-offset: 2px;
+}
+
+.dlg-clip__cerrar svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.dlg-clip__pantalla {
+  aspect-ratio: 16 / 9;
+}
+
+.dlg-clip__pantalla iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 @media (max-width: 40rem) {
-  html[data-web-page="aplicaciones"] .hero {
-    padding-block: var(--ds-space-7);
-  }
-
-  html[data-web-page="aplicaciones"] .filtros:not([hidden]) {
-    gap: var(--ds-space-2);
-    margin-top: var(--ds-space-5);
-  }
-
-  html[data-web-page="aplicaciones"] .filtros button {
-    padding-inline: var(--ds-space-3);
-    font-size: var(--ds-type-note);
-  }
-
-  html[data-web-page="aplicaciones"] .catalogo {
-    gap: var(--ds-space-3);
-    margin-top: var(--ds-space-5);
-  }
-
-  html[data-web-page="aplicaciones"] .servicio:not(.servicio--destacado) img {
-    aspect-ratio: 16 / 10;
-  }
-
-  html[data-web-page="aplicaciones"] .servicio:not(.servicio--destacado) .texto {
-    padding: var(--ds-space-3);
-  }
-
-  html[data-web-page="aplicaciones"] .servicio--destacado {
-    display: flex;
-    flex-direction: column;
-  }
-
-  html[data-web-page="aplicaciones"] .servicio--destacado img {
-    width: 100%;
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 9;
-    border-right: 0;
-    border-bottom: 1px solid var(--borde);
-  }
-
-  html[data-web-page="aplicaciones"] .servicio--destacado .texto {
-    padding: var(--ds-space-5);
-  }
-
-  html[data-web-page="aplicaciones"] .servicio--destacado .cabecera .pill,
-  html[data-web-page="aplicaciones"] .servicio--destacado .texto > p:not(.cabecera):not(.enlaces) {
-    display: revert;
-  }
-
-  html[data-web-page="aplicaciones"] .servicio--destacado h3 {
-    font-size: var(--ds-type-h2);
-  }
-
-  html[data-web-page="aplicaciones"] .servicio:last-child:nth-child(odd):not(.servicio--destacado) {
-    grid-column: auto;
-  }
-
   html[data-web-page="aplicaciones"] #proximamente {
     margin-block: var(--ds-space-7);
-    padding: var(--ds-space-5);
+    padding: var(--ds-space-5) var(--ds-space-4);
+  }
+
+  html[data-web-page="aplicaciones"] #proximamente .edicion {
+    padding: var(--ds-space-5) var(--ds-space-3) var(--ds-space-4);
+  }
+
+  html[data-web-page="aplicaciones"] .clips {
+    gap: var(--ds-space-3) var(--ds-space-2);
+  }
+
+  .dlg-clip {
+    width: calc(100vw - 1rem);
+  }
+
+  html[data-web-page="aplicaciones"] .clip__play {
+    width: 32px;
+    height: 32px;
+  }
+
+  html[data-web-page="aplicaciones"] .clip__dur {
+    right: var(--ds-space-1);
+    bottom: var(--ds-space-1);
+    padding: 0 var(--ds-space-1);
+  }
+}
+
+/* Teléfono en vertical: el clip tiene su versión vertical (se activa sola si el marco es más alto que ancho). */
+@media (max-width: 40rem) and (orientation: portrait) {
+  .dlg-clip__pantalla {
+    aspect-ratio: auto;
+    height: min(calc(100dvh - 6rem), calc((100vw - 1rem) * 16 / 9));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-web-page="aplicaciones"] .servicio,
+  html[data-web-page="aplicaciones"] .clip__play,
+  html[data-web-page="aplicaciones"] .baldas-indice a {
+    transition: none;
+  }
+
+  html[data-web-page="aplicaciones"] .servicio:hover,
+  html[data-web-page="aplicaciones"] :is(.clip:hover, .clip:focus-visible) .clip__play {
+    transform: none;
+  }
+
+  .dlg-clip[open] {
+    animation: none;
   }
 }

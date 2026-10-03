@@ -1,43 +1,74 @@
+/* Aplicaciones (3-oct-2026): baldas con entrada escalonada y clips en un diálogo.
+   Sin JavaScript todo funciona: el índice son anclas y cada miniatura es un enlace a su página. */
 (() => {
   'use strict';
 
-  const controls = document.querySelector('[data-catalog-controls]');
-  const cards = [...document.querySelectorAll('#trabajos .catalogo > .servicio[data-categoria]')];
-  if (!controls || !cards.length) return;
-
-  const buttons = [...controls.querySelectorAll('button[data-filtro]')];
-  const filters = new Set(buttons.map(button => button.dataset.filtro));
-
-  function selectFilter(filter) {
-    if (!filters.has(filter)) return;
-    for (const card of cards) {
-      card.hidden = filter !== 'todas' && !card.dataset.categoria.split(/\s+/).includes(filter);
-    }
-    for (const button of buttons) {
-      button.setAttribute('aria-pressed', String(button.dataset.filtro === filter));
+  /* Entrada: las piezas de cada balda suben una tras otra la primera vez que se ven.
+     Una sola vez; con movimiento reducido o sin IntersectionObserver, quietas. */
+  const baldas = [...document.querySelectorAll('#trabajos .balda')];
+  if (baldas.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const balda = entry.target;
+        observer.unobserve(balda);
+        balda.classList.add('balda--entra');
+        void balda.offsetWidth;
+        balda.classList.remove('balda--espera');
+        // Terminada la entrada, el gesto al pasar responde sin el retraso escalonado.
+        setTimeout(() => balda.classList.remove('balda--entra'), 900);
+      }
+    }, { threshold: .2 });
+    for (const balda of baldas) {
+      // Ya en pantalla al cargar (ancla o recarga): sin entrada.
+      if (balda.getBoundingClientRect().top < innerHeight * .9) continue;
+      balda.classList.add('balda--espera');
+      observer.observe(balda);
     }
   }
 
-  function revealDeepLink() {
-    if (!location.hash) return;
-    let id;
-    try { id = decodeURIComponent(location.hash.slice(1)); }
-    catch { return; }
-    const target = document.getElementById(id);
-    const card = target?.closest('#trabajos .catalogo > .servicio');
-    if (!card?.hidden) return;
-    selectFilter('todas');
-    requestAnimationFrame(() => target.scrollIntoView({ block: 'start' }));
+  /* Clips: el clic abre la página del clip en un <dialog> con un <iframe>.
+     Se usa el href del propio enlace (en /en/ ya apunta a la versión inglesa). */
+  const dialog = document.querySelector('dialog.dlg-clip');
+  const links = [...document.querySelectorAll('a[data-clip]')];
+  if (!dialog || !links.length || typeof dialog.showModal !== 'function') return;
+
+  const frame = dialog.querySelector('iframe');
+  const title = dialog.querySelector('.dlg-clip__titulo');
+  const close = dialog.querySelector('.dlg-clip__cerrar');
+  let opener = null;
+
+  function open(link) {
+    const name = link.querySelector('.clip__titulo')?.textContent.trim() || link.textContent.trim();
+    const url = new URL(link.href, location.href);
+    url.searchParams.set('autoplay', '1');
+    opener = link;
+    title.textContent = name;
+    dialog.setAttribute('aria-label', name);
+    frame.title = name;
+    frame.src = url.href;
+    dialog.showModal();
+    close.focus();
   }
 
-  controls.addEventListener('click', event => {
-    const button = event.target.closest('button[data-filtro]');
-    if (!button || !controls.contains(button)) return;
-    if (location.hash) history.replaceState(null, '', location.pathname + location.search);
-    selectFilter(button.dataset.filtro);
+  for (const link of links) {
+    link.addEventListener('click', event => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      open(link);
+    });
+  }
+
+  close.addEventListener('click', () => dialog.close());
+  // Clic fuera: el fondo (::backdrop) cuenta como clic en el propio <dialog>.
+  dialog.addEventListener('click', event => {
+    if (event.target === dialog) dialog.close();
   });
-
-  controls.hidden = false;
-  window.addEventListener('hashchange', revealDeepLink);
-  revealDeepLink();
+  dialog.addEventListener('close', () => {
+    // Vaciar el iframe para parar la animación.
+    frame.src = 'about:blank';
+    frame.removeAttribute('src');
+    if (opener) opener.focus();
+    opener = null;
+  });
 })();
