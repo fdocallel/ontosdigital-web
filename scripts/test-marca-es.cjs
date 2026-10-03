@@ -54,7 +54,22 @@ function checkPdfSecurity(html){
 const editorHtml=fs.readFileSync(path.join(WEB,'editor-pdf/index.html'),'utf8');
 checkPdfSecurity(editorHtml);
 assert.throws(()=>checkPdfSecurity(editorHtml.replace(/isEvalSupported\s*:\s*false/g,'isEvalSupported: true')),/isEvalSupported/,'Caso rojo: la configuración vulnerable debe bloquear el guard');
-function signature({html,baseline=false,file,subtitle,revision}){
+// Familias de la portada = canon de la oferta (título, texto y orden), 3-oct-2026.
+const lineas=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/ontos-empresa.json'),'utf8')).lineas.items;
+const webDescription=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.description')?.es;
+assert(webDescription,'Descripción de portada declarada en su fuente');
+function checkFamilias(html){
+ const zona=html.slice(html.indexOf('<section id="familias">'),html.indexOf('</section>',html.indexOf('<section id="familias">')));
+ const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+ const titulos=[...zona.matchAll(/<h3>([\s\S]*?)<\/h3>/g)].map(m=>texto(m[1]));
+ const parrafos=[...zona.matchAll(/<div class="familia__texto"><p>([\s\S]*?)<\/p>/g)].map(m=>texto(m[1]));
+ assert.deepEqual(titulos,lineas.map(l=>l.nombre),'Familias: títulos y orden del canon');
+ assert.deepEqual(parrafos,lineas.map(l=>l.texto_web),'Familias: textos del canon');
+}
+const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
+checkFamilias(homeHtml);
+assert.throws(()=>checkFamilias(homeHtml.replace('<h3>'+lineas[0].nombre+'</h3>','<h3>Otra familia</h3>')),/títulos/,'Caso rojo: una familia fuera del canon debe bloquear');
+function signature({html,baseline=false,file,subtitle,revision,description}){
  const d=new DOMParser().parseFromString(html,'text/html');
  const clean=s=>s.replace(/\s+/g,' ').trim();
  if(!baseline&&d.querySelector('header.barra')){
@@ -124,6 +139,14 @@ function signature({html,baseline=false,file,subtitle,revision}){
    }
   }
  }
+ // Encargo explícito de Fernando, 3-oct-2026: cuatro familias desde el canon de la oferta
+ // (ONTOS/data/ontos-empresa.json#lineas v2) y descripción desde mensaje.json web.description.
+ // #familias sale de esta comparación y se comprueba contra el canon en checkFamilias.
+ // Fuente: ONTOS/raw/marca/2026-10-03-oferta-cuatro-familias-fernando.md.
+ if(file==='index.html'){
+  d.querySelector('section#familias')?.remove();
+  if(baseline&&description){for(const m of d.querySelectorAll('meta[name=description]'))m.remove();const m=d.createElement('meta');m.name='description';m.content=description;d.head.append(m);}
+ }
  // Los landmarks y el salto de teclado no alteran el contenido del encargo.
  for(const e of d.querySelectorAll('.skip-link'))e.remove();
  for(const e of d.querySelectorAll('main.web-main, nav[aria-label="Volver al inicio"]'))e.replaceWith(...e.childNodes);
@@ -143,7 +166,7 @@ function signature({html,baseline=false,file,subtitle,revision}){
  const browser=await webkit.launch();
  try{
   const page=await browser.newPage();
-  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file,subtitle,revision});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado con correcciones explícitas de la auditoría');}
+  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file,subtitle,revision,description:webDescription});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado con correcciones explícitas de la auditoría');}
   console.log(`PASS marca ES: ${pages.length} páginas conservan contenido con menú y apertura autorizados; ${bilingual?'espejo EN completo':'EN intacto'}; recursos compartidos protegidos y canon reproducible.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.message);process.exitCode=1;});

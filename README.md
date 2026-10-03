@@ -6,7 +6,7 @@ Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a
 
 Decisión: `ONTOS/docs/estudios/2026-09-24-web-consultoria-primero.md`. Estilo: referente anthropic.com (spec del crítico, 24-sep).
 
-- `/` — la **consultoría** es la portada: gancho, entrada, Qué es ONTOS, cinco familias, así empieza un encargo, tres trabajos, quién, contacto.
+- `/` — la **consultoría** es la portada: gancho, entrada, Qué es ONTOS, familias de la oferta (canon: ONTOS data/ontos-empresa.json#lineas), así empieza un encargo, tres trabajos, quién, contacto.
 - `aplicaciones.html` — galería + bloque «Próximamente» (ONTOS personal · ONTOS empresarial) con enlaces a `producto.html` y a los vídeos.
 - `fernando-calle.html` — «Sobre mí»: bio + `#escritos` (antes `blog.html`).
 - `consultoria.html` → `/` y `blog.html` → `fernando-calle.html#escritos`: redirecciones (meta refresh + JS, canonical al destino, noindex), fuera del sitemap.

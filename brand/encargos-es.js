@@ -1,4 +1,4 @@
-/* Cinco familias en un carril nativo: flechas, teclado y gesto táctil.
+/* Las familias en un carril nativo: flechas, teclado y gesto táctil.
    Sin JavaScript permanece desplazable; sin temporizadores de reproducción.
    Movimiento (propuesta 3-oct): cada figura se traza al entrar en pantalla y
    repite su gesto con cursor o foco; las flechas escalonan la llegada.
