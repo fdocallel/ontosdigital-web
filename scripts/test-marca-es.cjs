@@ -147,6 +147,21 @@ function checkArmario(html){
 }
 checkArmario(fs.readFileSync(path.join(WEB,'armario.html'),'utf8'));
 assert.throws(()=>checkArmario(fs.readFileSync(path.join(WEB,'armario.html'),'utf8').replace('</main>','<section id="pelicula"></section></main>')),/solo el probador/,'Caso rojo: el Armario con más secciones debe bloquear');
+// «Sobre mí» (3-oct-2026): proyectos con cargo, premio y publicación comprobables, escritos y cierre como la portada.
+function checkSobreMi(html){
+ const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+ const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
+ assert.equal(texto((main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)||[])[1]||''),'Fernando Calle','Sobre mí: nombre');
+ assert(texto(main).includes('Hoy tengo dos frentes que se alimentan entre sí. Construyo ONTOS, el sistema que pone en orden mi propia vida, y llevo ese mismo método a personas y empresas, de su contexto para la IA a una web o un mundo en 3D.'),'Sobre mí: segundo párrafo elegido por Fernando (opción A)');
+ assert.deepEqual([...main.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)].map(m=>texto(m[1])).slice(0,5),['Sydney Metro West','HS2','Northern Water','Red Sea Governorates Urban Development Plan','NEOM'],'Sobre mí: los cinco proyectos');
+ for(const t of ['BIM Manager del paquete de los 41 cross passages','BIM Manager de la desaladora del Northern Water Supply Project: 140 ML/día, ampliable a 200.','GIS y plan de ejecución BIM de los túneles de The Line.','Premio de innovación (I+D) de TYPSA, 2024, por automatizar el modelado paramétrico de los cross passages de túnel.'])
+  assert(texto(main).includes(t),'Sobre mí: «'+t.slice(0,40)+'…»');
+ for(const h of ['https://search.informit.org/doi/abs/10.3316/informit.T2026010800016790478291249','escrito-plan-bim-ingenieria.html','https://www.linkedin.com/in/fercalle-ontos'])assert(main.includes('href="'+h+'"'),'Sobre mí: enlace '+h);
+ assert(/<section class="cierre" id="contacto">[\s\S]*?Cuéntame qué os come horas\.[\s\S]*?<a class="cta" href="contacto.html" data-contacto>Cuéntame tu caso<\/a>/.test(main),'Sobre mí: cierre como la portada');
+ assert(!/ONTOS en vivo/.test(main),'Sobre mí: sin «ver ONTOS en vivo»');
+}
+checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8'));
+assert.throws(()=>checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8').replace('GIS y plan de ejecución BIM','Automatización')),/Sobre mí/,'Caso rojo: un hecho alterado en Sobre mí debe bloquear');
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
 checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
@@ -227,6 +242,14 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  // Aplicaciones por baldas, 3-oct-2026: el catálogo se reduce en ambos lados a sus piezas por id, en orden
  // fijo y sin cabecera ni título (checkCatalogo los compara con el canon); se conservan y comparan sus textos,
  // enlaces e imágenes. Titular, entradilla y clips de «Próximamente» también se comprueban en checkCatalogo.
+ // «Sobre mí» rehecho, 3-oct-2026 (ONTOS/raw/marca/2026-10-03-web-sobre-mi-fernando.md): textos y estructura nuevos
+ // por decisión de Fernando; el contenido principal y la descripción salen de esta comparación y checkSobreMi
+ // comprueba hechos, enlaces y cierre.
+ if(file==='fernando-calle.html'){
+  for(const m of d.querySelectorAll('meta[name=description]'))m.remove();
+  const main=d.querySelector('main');if(main)main.remove();
+  else for(const e of [...d.body.children])if(!e.matches('header.barra, footer, script, template, dialog, .skip-link'))e.remove();
+ }
  // Armario mínimo, 3-oct-2026 (Fernando: «que sea solo probar el armario. Nada más»): de la página solo queda
  // el probador (#demo), cuyo título pasa a ser el h1. Se compara solo el probador, sin su título ni la nota final.
  if(file==='armario.html'){
