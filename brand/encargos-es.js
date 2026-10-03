@@ -87,7 +87,7 @@
       const animation = el.animate([{strokeDashoffset: length}, {strokeDashoffset: 0}], {duration, delay: wait + index * step, easing: EASE, fill: 'backwards'});
       el.style.strokeDashoffset = '';
       return animation.finished.catch(() => {});
-    })).then(() => list.forEach(({el}) => { el.style.strokeDasharray = ''; }));
+    })).then(() => list.forEach(({el}) => { if (!el.getAnimations().length) el.style.strokeDasharray = ''; }));
   }
   function hide(svg) {
     shapes(svg).forEach(({el, length}) => { el.style.strokeDasharray = length; el.style.strokeDashoffset = length; });
@@ -148,6 +148,26 @@
       nodos.forEach((svg, index) => draw(svg, 1100, index * PASO));
     }, {threshold: .2});
     vigia.observe(pasos);
+    // Al pasar por un paso, el recorrido vuelve a empezar desde él: su pictograma y los que tiene por delante.
+    const items = nodos.map(svg => svg.closest('.paso'));
+    let ultimo = {desde: -1, hasta: 0};
+    function recorrer(desde) {
+      if (pasos.classList.contains('pasos--espera')) return;
+      if (ultimo.desde === desde && performance.now() < ultimo.hasta) return;
+      ultimo = {desde, hasta: performance.now() + (items.length - desde) * PASO + 1100};
+      items.slice(desde).forEach((item, k) => {
+        const svg = nodos[desde + k];
+        shapes(svg).forEach(({el}) => el.getAnimations().forEach(a => a.cancel()));
+        item.style.setProperty('--retraso', `${k * PASO + 520}ms`);
+        item.classList.add('paso--espera');
+      });
+      void pasos.offsetWidth;
+      items.slice(desde).forEach((item, k) => {
+        item.classList.remove('paso--espera');
+        draw(nodos[desde + k], 1100, k * PASO);
+      });
+    }
+    items.forEach((item, index) => item.addEventListener('pointerenter', () => recorrer(index)));
   }
 
   const figures = new Map(cards.map(card => [card, card.querySelector('.familia__figura')]).filter(([, svg]) => svg));

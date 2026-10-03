@@ -60,7 +60,7 @@ html[data-web-page="index"] .paso__figura .paso__nodo { fill: var(--panel); stro
 html[data-web-page="index"] .paso__figura .paso__nodo.acento { stroke: var(--teja); stroke-width: 2; }
 /* Línea de unión: del borde de un nodo al del siguiente, a la altura de su centro. */
 html[data-web-page="index"] .paso:not(:last-child)::after { content: ''; position: absolute; top: calc(var(--nodo) / 2); left: calc(var(--nodo) + var(--ds-space-3)); right: calc(var(--ds-space-3) - var(--ds-space-6)); height: 1.5px; background: var(--ds-brand-verde); opacity: .45; transform-origin: left center; transition: transform 520ms cubic-bezier(.4, 0, .2, 1) var(--retraso, 0ms); }
-html[data-web-page="index"] .pasos--espera .paso::after { transform: scaleX(0); transition: none; }
+html[data-web-page="index"] .pasos--espera .paso::after, html[data-web-page="index"] .paso.paso--espera::after { transform: scaleX(0); transition: none; }
 html[data-web-page="index"] .paso .num { display: block; margin: 0 0 var(--ds-space-2); color: var(--acento); font-size: var(--ds-type-note); font-weight: 600; font-variant-numeric: tabular-nums; }
 html[data-web-page="index"] .paso h3 { font-size: var(--ds-type-h3); margin: 0 0 var(--ds-space-3); }
 html[data-web-page="index"] .paso p { max-width: 34ch; margin: 0; }
@@ -73,7 +73,7 @@ html[data-web-page="index"] .paso p { max-width: 34ch; margin: 0; }
   html[data-web-page="index"] .paso .num { padding-top: var(--ds-space-1); }
   html[data-web-page="index"] .paso p { max-width: 52ch; }
   html[data-web-page="index"] .paso:not(:last-child)::after { top: calc(var(--nodo) + var(--ds-space-2)); bottom: var(--ds-space-2); left: calc(var(--nodo) / 2); right: auto; width: 1.5px; height: auto; transform-origin: center top; }
-  html[data-web-page="index"] .pasos--espera .paso::after { transform: scaleY(0); transition: none; }
+  html[data-web-page="index"] .pasos--espera .paso::after, html[data-web-page="index"] .paso.paso--espera::after { transform: scaleY(0); transition: none; }
 }
 @media (max-width: 34rem) {
   html[data-web-page="index"] .encargo { --nodo: 56px; }
