@@ -62,7 +62,7 @@ html[data-ontos-web][data-web-page="fernando-calle"] body :is(.trayectoria > p, 
 html[data-ontos-web][data-web-page="fernando-calle"] body .proyectos {
   list-style: none; margin: 0; padding: 0;
   display: grid; gap: var(--ds-space-4);
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* cuatro proyectos: 2×2 (3-oct, sin HS2) */;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* cuatro proyectos: 2×2 (3-oct, sin HS2) */
 }
 @media (max-width: 64rem) {
   html[data-ontos-web][data-web-page="fernando-calle"] body .proyectos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
