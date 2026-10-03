@@ -101,6 +101,15 @@ function checkCatalogo(html){
 }
 checkCatalogo(fs.readFileSync(path.join(WEB,'aplicaciones.html'),'utf8'));
 assert.throws(()=>checkCatalogo(fs.readFileSync(path.join(WEB,'aplicaciones.html'),'utf8').replace('data-categoria="contexto-ia"','data-categoria="herramientas"')),/familia/,'Caso rojo: una pieza en otra familia debe bloquear');
+// «Qué es ONTOS» = mensaje.json web.que_es (3-oct-2026; ONTOS/raw/marca/2026-10-03-web-que-es-ontos-a-fernando.md).
+const queEs=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.que_es');
+function checkQueEs(html){
+ const i=html.indexOf('<section class="intro" id="que-es">'),zona=html.slice(i,html.indexOf('</section>',i));
+ const p=(zona.match(/<p>([\s\S]*?)<\/p>/)||[])[1]||'';
+ assert.equal(p.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim(),queEs.es,'Qué es ONTOS: texto de mensaje.json web.que_es');
+}
+checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
+assert.throws(()=>checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('Lo comprueba una máquina','Lo revisa una máquina')),/que_es/,'Caso rojo: un «Qué es» fuera del mensaje debe bloquear');
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
 checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
@@ -188,6 +197,7 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
   d.querySelector('section#familias')?.remove();
   d.querySelector('section#encargo')?.remove(); // 3-oct: cuatro pasos desde el canon (checkEncargo)
   d.querySelector('section#trabajos')?.remove(); // 3-oct: «Hecho y funcionando» desde el canon (checkTrabajos)
+  d.querySelector('section#que-es p')?.remove(); // 3-oct: «Qué es ONTOS» desde mensaje.json web.que_es (checkQueEs)
   if(baseline&&description){for(const m of d.querySelectorAll('meta[name=description]'))m.remove();const m=d.createElement('meta');m.name='description';m.content=description;d.head.append(m);}
  }
  // Los landmarks y el salto de teclado no alteran el contenido del encargo.
