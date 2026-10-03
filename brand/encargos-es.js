@@ -78,13 +78,13 @@
   // Figuras: el orden de los trazos en el SVG es el orden del gesto (en Automatización, el ✓ cierra el trazo).
   if (reduced.matches || typeof IntersectionObserver === 'undefined' || !Element.prototype.animate) return;
   const shapes = svg => [...svg.querySelectorAll('rect, path, ellipse, circle')].map(el => ({el, length: Math.ceil(el.getTotalLength()) + 1}));
-  function draw(svg, total) {
+  function draw(svg, total, wait = 0) {
     const list = shapes(svg);
     const duration = total / 2;
     const step = list.length > 1 ? (total - duration) / (list.length - 1) : 0;
     return Promise.all(list.map(({el, length}, index) => {
       el.style.strokeDasharray = length;
-      const animation = el.animate([{strokeDashoffset: length}, {strokeDashoffset: 0}], {duration, delay: index * step, easing: EASE, fill: 'backwards'});
+      const animation = el.animate([{strokeDashoffset: length}, {strokeDashoffset: 0}], {duration, delay: wait + index * step, easing: EASE, fill: 'backwards'});
       el.style.strokeDashoffset = '';
       return animation.finished.catch(() => {});
     })).then(() => list.forEach(({el}) => { el.style.strokeDasharray = ''; }));
@@ -131,6 +131,23 @@
       }
       requestAnimationFrame(tick);
     });
+  }
+
+  // Encargo: al entrar, cada nodo traza su pictograma y la línea avanza hacia el siguiente.
+  // Una sola vez; sin JavaScript o con movimiento reducido, recorrido completo y estático.
+  const pasos = document.querySelector('[data-pasos]');
+  const nodos = pasos ? [...pasos.querySelectorAll('.paso__figura')] : [];
+  if (nodos.length) {
+    const PASO = 420;
+    nodos.forEach((svg, index) => { hide(svg); svg.closest('.paso').style.setProperty('--retraso', `${index * PASO + 520}ms`); });
+    pasos.classList.add('pasos--espera');
+    const vigia = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      vigia.disconnect();
+      pasos.classList.remove('pasos--espera');
+      nodos.forEach((svg, index) => draw(svg, 1100, index * PASO));
+    }, {threshold: .2});
+    vigia.observe(pasos);
   }
 
   const figures = new Map(cards.map(card => [card, card.querySelector('.familia__figura')]).filter(([, svg]) => svg));
