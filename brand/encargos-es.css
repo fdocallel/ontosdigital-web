@@ -8,7 +8,7 @@ html[data-web-page="index"] .familias__controles button { display: grid; place-i
 html[data-web-page="index"] .familias__controles button:hover:not(:disabled) { background: var(--ds-action); color: var(--ds-on-action); }
 html[data-web-page="index"] .familias__controles button:disabled { opacity: .35; cursor: default; }
 html[data-web-page="index"] .familias__controles svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-html[data-web-page="index"] .familias { display: grid; grid-auto-flow: column; --familias-asoma: 3rem; grid-auto-columns: calc((100% - 3 * var(--ds-space-5) - var(--familias-asoma)) / 3); gap: var(--ds-space-5); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--borde) transparent; padding-block: var(--ds-space-1) var(--ds-space-4); }
+html[data-web-page="index"] .familias { display: grid; grid-auto-flow: column; --familias-asoma: 3rem; grid-auto-columns: calc((100% - 3 * var(--ds-space-5)) / 4); gap: var(--ds-space-5); overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--borde) transparent; padding-block: var(--ds-space-1) var(--ds-space-4); }
 html[data-web-page="index"] .familia { min-width: 0; display: flex; flex-direction: column; padding: var(--ds-space-5); margin: 0; background: var(--panel); border: 1px solid var(--borde); border-radius: var(--ds-radius); scroll-snap-align: start; transition: transform var(--web-motion-fast) ease; }
 /* Movimiento de las familias (propuesta 3-oct): figura trazada al entrar, gesto al pasar; controles al pie con un círculo por familia. */
 @media (hover: hover) { html[data-web-page="index"] .familia:hover { transform: translateY(-3px); } }
@@ -35,7 +35,8 @@ html[data-web-page="index"] .familia .enlaces a { min-height: 44px; display: inl
 html[data-web-page="index"] .familia .enlaces a:hover { text-decoration: underline; }
 html[data-web-page="index"] .familia__figura { display: block; flex: none; width: 100%; height: 144px; margin-bottom: var(--ds-space-5); fill: none; stroke: var(--ds-brand-verde); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 html[data-web-page="index"] :where(.familias, .familias__controles button):focus-visible { outline: 3px solid var(--acento); outline-offset: 3px; }
-@media (max-width: 58rem) {
+/* Las cuatro caben juntas en escritorio; por debajo, carril con flechas y círculos. */
+@media (max-width: 72rem) {
   html[data-web-page="index"] .familias { grid-auto-columns: calc((100% - 2 * var(--ds-space-5) - var(--familias-asoma)) / 2); }
 }
 @media (max-width: 40rem) {

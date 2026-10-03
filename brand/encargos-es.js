@@ -40,6 +40,8 @@
     prev.disabled = track.scrollLeft <= 2;
     next.disabled = track.scrollLeft >= maximum() - 2;
     dot.forEach((d, index) => d.classList.toggle('es-visible', index >= from && index <= to));
+    // Si todas caben (escritorio), sobran flechas y círculos.
+    controls.hidden = maximum() <= 2;
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(update); }
   function go(left, direction = 0) {
@@ -71,7 +73,6 @@
   window.addEventListener('resize', schedule, {passive: true});
   if (typeof ResizeObserver !== 'undefined') new ResizeObserver(schedule).observe(track);
   document.fonts?.ready.then(schedule);
-  controls.hidden = false;
   update();
 
   // Figuras: el orden de los trazos en el SVG es el orden del gesto (en Automatización, el ✓ cierra el trazo).
