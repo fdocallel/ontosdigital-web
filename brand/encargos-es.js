@@ -195,3 +195,23 @@
     card.addEventListener('focusin', () => play(card, false));
   });
 })();
+
+/* «Hecho y funcionando»: las cuatro tarjetas entran escalonadas la primera vez que se ven.
+   Una sola vez y sin bucles; sin JavaScript o con movimiento reducido quedan visibles y quietas. */
+(() => {
+  const grid = document.querySelector('#trabajos .trabajos');
+  if (!grid || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const top = grid.getBoundingClientRect().top;
+  if (top < innerHeight * .9) return; // ya en pantalla al cargar (ancla o recarga): sin entrada
+  grid.classList.add('trabajos--espera');
+  const observer = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    observer.disconnect();
+    grid.classList.add('trabajos--entra');
+    void grid.offsetWidth;
+    grid.classList.remove('trabajos--espera');
+    // Terminada la entrada, el gesto al pasar responde sin el retraso escalonado.
+    setTimeout(() => grid.classList.remove('trabajos--entra'), 900);
+  }, {threshold: .25});
+  observer.observe(grid);
+})();
