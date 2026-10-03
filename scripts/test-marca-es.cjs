@@ -66,7 +66,20 @@ function checkFamilias(html){
  assert.deepEqual(titulos,lineas.map(l=>l.nombre),'Familias: títulos y orden del canon');
  assert.deepEqual(parrafos,lineas.map(l=>l.texto_web),'Familias: textos del canon');
 }
+// «Así empieza un encargo» = canon del proceso (título, bajada y pasos), 3-oct-2026.
+// Fuente: ONTOS/raw/marca/2026-10-03-encargo-cuatro-pasos-fernando.md.
+const proceso=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/ontos-empresa.json'),'utf8')).lineas.comun;
+function checkEncargo(html){
+ const i=html.indexOf('<section id="encargo"'),zona=html.slice(i,html.indexOf('</section>',i));
+ const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+ assert.equal(texto((zona.match(/<h2>([\s\S]*?)<\/h2>/)||[])[1]||''),proceso.proceso_titulo,'Encargo: título del canon');
+ assert.equal(texto((zona.match(/<p class="bajada">([\s\S]*?)<\/p>/)||[])[1]||''),proceso.proceso_bajada,'Encargo: bajada del canon');
+ const pasos=[...zona.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)].map(m=>[texto(m[1]),texto(m[2])]);
+ assert.deepEqual(pasos,proceso.proceso.map(p=>[p.nombre,p.texto]),'Encargo: pasos del canon');
+}
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
+checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
+assert.throws(()=>checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<h3>'+proceso.proceso[1].nombre+'</h3>','<h3>Otro paso</h3>')),/pasos/,'Caso rojo: un paso fuera del canon debe bloquear');
 checkFamilias(homeHtml);
 assert.throws(()=>checkFamilias(homeHtml.replace('<h3>'+lineas[0].nombre+'</h3>','<h3>Otra familia</h3>')),/títulos/,'Caso rojo: una familia fuera del canon debe bloquear');
 function signature({html,baseline=false,file,subtitle,revision,description}){
@@ -145,6 +158,7 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  // Fuente: ONTOS/raw/marca/2026-10-03-oferta-cuatro-familias-fernando.md.
  if(file==='index.html'){
   d.querySelector('section#familias')?.remove();
+  d.querySelector('section#encargo')?.remove(); // 3-oct: cuatro pasos desde el canon (checkEncargo)
   if(baseline&&description){for(const m of d.querySelectorAll('meta[name=description]'))m.remove();const m=d.createElement('meta');m.name='description';m.content=description;d.head.append(m);}
  }
  // Los landmarks y el salto de teclado no alteran el contenido del encargo.
