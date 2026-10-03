@@ -84,8 +84,8 @@ function checkTrabajos(html){
  assert(i>0&&i<html.indexOf('<section id="encargo"'),'Trabajos: antes de «Así empieza un encargo»');
  const texto=s=>s.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
  assert.equal(texto((zona.match(/<h2>([\s\S]*?)<\/h2>/)||[])[1]||''),proceso.trabajos_titulo,'Trabajos: título del canon');
- const tarjetas=[...zona.matchAll(/<a class="trabajo" href="([^"]*)">\s*<img src="([^"]*)" alt="([^"]*)"[\s\S]*?<span class="etiqueta">([\s\S]*?)<\/span>\s*<h3>([\s\S]*?)<\/h3>/g)].map(m=>[m[1],m[2],m[3],texto(m[4]),texto(m[5])]);
- assert.deepEqual(tarjetas,lineas.map(l=>[l.portada_trabajo.href,l.portada_trabajo.imagen,l.portada_trabajo.alt,l.nombre,l.portada_trabajo.titulo]),'Trabajos: tarjetas del canon');
+ const tarjetas=[...zona.matchAll(/<a class="trabajo" href="([^"]*)"( rel="noopener" target="_blank")?>\s*<img src="([^"]*)" alt="([^"]*)"[\s\S]*?<span class="etiqueta">([\s\S]*?)<\/span>\s*<h3>([\s\S]*?)<\/h3>/g)].map(m=>[m[1],!!m[2],m[3],m[4],texto(m[5]),texto(m[6])]);
+ assert.deepEqual(tarjetas,lineas.map(l=>[l.portada_trabajo.href,!!l.portada_trabajo.externo,l.portada_trabajo.imagen,l.portada_trabajo.alt,l.nombre,l.portada_trabajo.titulo]),'Trabajos: tarjetas del canon (destino directo; externa en pestaña nueva)');
 }
 // Aplicaciones = familias del canon: filtros en su orden y cada pieza con su familia (3-oct-2026).
 function checkCatalogo(html){
