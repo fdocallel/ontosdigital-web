@@ -156,7 +156,7 @@ function checkSobreMi(html){
  assert.deepEqual([...main.matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>/g)].map(m=>texto(m[1])).slice(0,5),['Sydney Metro West','Malabar','Northern Water','Red Sea Governorates Urban Development Plan','NEOM'],'Sobre mí: los cinco proyectos (sin HS2, con Malabar, 3-oct)');
  for(const t of ['BIM Manager del paquete de los 41 cross passages. Automaticé su modelado y la carga de metadatos','Gestioné la entrega de 67 modelos con un flujo que automaticé por completo, apoyado en IA','GIS y plan de ejecución BIM de los túneles de The Line.','Premio de innovación (I+D) de TYPSA, 2024, y publicación en la 19th Australasian Tunnelling Conference (ATC 2025)'])
   assert(texto(main).includes(t),'Sobre mí: «'+t.slice(0,40)+'…»');
- for(const h of ['https://search.informit.org/doi/abs/10.3316/informit.T2026010800016790478291249','escrito-plan-bim-ingenieria.html','bim.html#diagnostico','https://www.linkedin.com/in/fercalle-ontos'])assert(main.includes('href="'+h+'"'),'Sobre mí: enlace '+h);
+ for(const h of ['https://search.informit.org/doi/abs/10.3316/informit.T2026010800016790478291249','escrito-plan-bim-ingenieria.html','bim.html','https://www.linkedin.com/in/fercalle-ontos'])assert(main.includes('href="'+h+'"'),'Sobre mí: enlace '+h);
  assert(/<section class="cierre" id="contacto">[\s\S]*?Cuéntame qué os come horas\.[\s\S]*?<a class="cta" href="contacto.html" data-contacto>Cuéntame tu caso<\/a>/.test(main),'Sobre mí: cierre como la portada');
  assert(!/ONTOS en vivo/.test(main),'Sobre mí: sin «ver ONTOS en vivo»');
  assert(/<a class="credencial__enlace" href="https:\/\/search\.informit\.org\//.test(main),'Sobre mí: premio y publicación llevan a la ficha');
