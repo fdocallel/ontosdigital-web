@@ -150,8 +150,12 @@ async function bootOntosMotion() {
     const scale = target.r / 42;
     const layout = {left: os[0], right: os[1], target};
     // La cabecera recorta solo el margen vacío del escenario; conserva geometría y recorrido.
+    const placement = window.ontosMotionConfig?.wordmark_placement;
+    // Las demos del manual reciben el eje del canon; el arte y su destino no se desplazan.
+    const frameX = placement?.x ?? 0, frameWidth = placement?.width ?? width;
     svg.setAttribute('viewBox', window.ontosMotionConfig?.compact_frame
-      ? `0 ${target.y - 46} ${width} 92` : `0 0 ${width} 170`);
+      ? `${frameX} ${target.y - 46} ${frameWidth} 92` : `${frameX} 0 ${frameWidth} 170`);
+    if(placement)svg.setAttribute('data-wordmark-axis',placement.axis);
     const pieces = Array.from({length: 8}, () => {
       const path = el('path', {fill: 'currentColor'});
       svg.append(path);

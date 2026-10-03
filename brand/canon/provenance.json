@@ -5,13 +5,13 @@
   "sources": {
     "docs/ontos/propuesta-web-2026-09-12/assets/logo.svg": "7c15febb133cf351ac6e9405e2d28241a09bb5e47bf7ecb1a3c7ffa79f41f264",
     "data/mensaje.json": "242bba79ff21e42b151f1c0ac10c385889f3629abf888c7bb619a4248690ceb1",
-    "data/manual-marca.json": "73e42079823eccfc69b966ebe4f8467d070913173ff1d6cdad60172db983da5c",
-    "data/marca-construccion.json": "1d1905ac43ac9c6144329999111839c532ccd19057d7f2515e0771381b132d44",
+    "data/manual-marca.json": "fb9a050e69030d10962c851049eed8d8b2f601af6580ce84c31fffb6c7a1de0b",
+    "data/marca-construccion.json": "56d85c2cb6fc400a61a730e044b50571230e3b82b016ab7a8716cadca8ec1903",
     "data/marca-wordmark-geometria.json": "ab5810b579c9085733a2daa4d9bae5a6369d5ad164f928f2e82db280ba7abecc",
     "data/marca-aplicaciones.json": "c4c72797927e60169f20297101ccfb223a36244f65cd28323551caec802b28b9",
     "data/design-system.json": "e6922cc1fb2e2d61234090611ca92f775fb51eade3301311eaf59847631c8a33",
     "data/design-system-tokens.json": "d3acb7698236da079ed4cf9663d05b66476163517901ff78221576d649398845",
-    "scripts/lib/marca-movimiento.js": "5ea431368508ac3f122ffb2f901182907803f6e41219dfd4748f9cf3db849962",
+    "scripts/lib/marca-movimiento.js": "6e294a13fbaad6e444f2ce3fcd4fbc68ab30f0605184e052f5cd43a7d95b3df5",
     "data/marca-movimiento-geometria.json": "fe939b62a72202449f76530e22009e9db1b1b0a8576b0dd89e40d53314208608",
     "app/img/brand/logo-esqueleto.svg": "9b33d97cff6f3fd37c0c2afed82a1aa1f34a088757f877df399d3f4d648954d5",
     "docs/diseno/ontos/marca/wordmark/fuentes/jost.ttf": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
@@ -21,7 +21,7 @@
     "docs/ontos/assets/tipografia/newsreader-OFL.txt": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
   },
   "outputs": {
-    "brand/canon/movimiento.js": "5ea431368508ac3f122ffb2f901182907803f6e41219dfd4748f9cf3db849962",
+    "brand/canon/movimiento.js": "6e294a13fbaad6e444f2ce3fcd4fbc68ab30f0605184e052f5cd43a7d95b3df5",
     "brand/canon/movimiento-data.js": "3e969791fa60563d7c669269336a994ff16c4a7df38e2bbfa1408c8538c1b11b",
     "brand/canon/fonts/jost.ttf": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
     "brand/canon/fonts/newsreader.ttf": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
