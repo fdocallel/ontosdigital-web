@@ -138,6 +138,14 @@ function checkQueEs(html){
 }
 checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('Lo comprueba una máquina','Lo revisa una máquina')),/que_es/,'Caso rojo: un «Qué es» fuera del mensaje debe bloquear');
+// Armario mínimo (3-oct-2026): la página es el probador y nada más.
+function checkArmario(html){
+ const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
+ assert.deepEqual([...main.matchAll(/<section[^>]*id="([^"]*)"/g)].map(m=>m[1]),['demo'],'Armario: solo el probador');
+ assert(/<section id="demo">\s*<h1>Pruébalo: coloca estas 10 prendas<\/h1>/.test(main),'Armario: el probador es el título de la página');
+}
+checkArmario(fs.readFileSync(path.join(WEB,'armario.html'),'utf8'));
+assert.throws(()=>checkArmario(fs.readFileSync(path.join(WEB,'armario.html'),'utf8').replace('</main>','<section id="pelicula"></section></main>')),/solo el probador/,'Caso rojo: el Armario con más secciones debe bloquear');
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
 checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
@@ -218,6 +226,12 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  // Aplicaciones por baldas, 3-oct-2026: el catálogo se reduce en ambos lados a sus piezas por id, en orden
  // fijo y sin cabecera ni título (checkCatalogo los compara con el canon); se conservan y comparan sus textos,
  // enlaces e imágenes. Titular, entradilla y clips de «Próximamente» también se comprueban en checkCatalogo.
+ // Armario mínimo, 3-oct-2026 (Fernando: «que sea solo probar el armario. Nada más»): de la página solo queda
+ // el probador (#demo), cuyo título pasa a ser el h1. Se compara solo el probador, sin su título ni la nota final.
+ if(file==='armario.html'){
+  const main=d.querySelector('main');const demo=d.querySelector('section#demo');
+  if(main&&demo){demo.querySelector('h1,h2')?.remove();demo.querySelector('#nota-demo')?.remove();main.replaceChildren(demo);}
+ }
  // Aplicaciones por baldas con tarjetas mínimas, 3-oct-2026 (ONTOS/raw/marca/2026-10-03-web-aplicaciones-ajustes-fernando.md):
  // Fernando retira las explicaciones de cada pieza; catálogo, cabecera y clips salen de la comparación con la base
  // y checkCatalogo los comprueba contra el canon (piezas, acciones, analítica y clips).

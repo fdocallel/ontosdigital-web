@@ -92,6 +92,9 @@ footer a { color: inherit; }
 .prenda:hover img { transform: translateX(-50%) translateY(-7px) rotateY(0deg) scale(1.05); }
 .prenda figcaption { position: absolute; bottom: 4px; width: 100%; text-align: center; font-size: .72rem; line-height: 1.35; color: var(--sec); }
 .nota-demo { margin-top: 1rem; color: var(--sec); font-size: .9rem; max-width: 42rem; }
+/* Página mínima (3-oct-2026, Fernando: «solo probar el armario»): el probador es la página. */
+#demo { padding-top: clamp(2rem, 5vw, 4rem); }
+#demo h1 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: .6rem; }
 @media (max-width: 720px) {
   .prenda { flex-basis: 84px; width: 84px; height: 200px; }
   .prenda img { width: 140px; }
@@ -120,14 +123,8 @@ footer a { color: inherit; }
   </nav>
 </header>
 <main id="contenido" tabindex="-1" class="wrap">
-<div class="hero">
-<p class="etiqueta">Armario</p>
-<h1>Tu ropa, fichada y colgada en baldas.</h1>
-<p class="intro">Una foto de cada prenda y una ficha: tipo, marca, talla, color. Con eso, el armario entero se ordena por tonalidad o por tipo, dice qué usas y qué no, y propone conjuntos que puedes ver puestos. Todo en tu teléfono, sin que las fotos salgan de él.</p>
-<div class="acciones"><a class="cta" href="#demo">Probar con 10 prendas</a><a href="#pelicula">Ver el vídeo</a><a href="/">Volver al inicio</a></div>
-</div>
 <section id="demo">
-<h2>Pruébalo: coloca estas 10 prendas</h2>
+<h1>Pruébalo: coloca estas 10 prendas</h1>
 <p class="bajada">Son diez prendas de mi armario real, recreadas sobre percha. Colócalas por color, por tipo o en dos baldas, arriba y abajo. Pasa el cursor o toca una prenda para sacarla de la barra.</p>
 <div class="armario-demo" id="armario-demo">
 <div class="modos" role="group" aria-label="Cómo colocar las prendas">
@@ -151,42 +148,7 @@ footer a { color: inherit; }
 <figure class="prenda" data-id="pr-107" data-cat="arriba" data-hex="#6e1f2e"><img src="brand/servicios/armario/pr-107.webp" alt="Sudadera burdeos en percha" width="640" height="640" loading="lazy" decoding="async"><figcaption><span class="t">Sudadera</span> · <span class="c">Burdeos</span></figcaption></figure>
 </div></div>
 </div>
-<p class="nota-demo" id="nota-demo">En la aplicación, además, cada prenda tiene su ficha y su veredicto de color y de corte; y las baldas se combinan con filtros, marca y búsqueda.</p>
 </div>
-</section>
-<section id="pelicula">
-<h2>El armario real, en 35 segundos</h2>
-<p class="bajada">Es mi ropa: 82 prendas fichadas. El vídeo enseña las tarjetas, la barra de perchas, las baldas por tipo y por color, y tres conjuntos puestos en mí con IA.</p>
-<figure class="pelicula">
-<video controls playsinline preload="metadata" poster="/brand/servicios/armario-poster.jpg" width="1080" height="1080" data-goatcounter-click="armario-play" data-goatcounter-no-session="1">
-<source src="/brand/servicios/armario.mp4" type="video/mp4">
-Tu navegador no reproduce este vídeo. <a href="brand/servicios/armario.mp4">Descárgalo</a>.
-</video>
-<figcaption>Tarjetas → perchas → baldas por tipo → baldas por color → puestas en mí.</figcaption>
-</figure>
-</section>
-<section>
-<h2>Cómo funciona</h2>
-<p class="bajada">Tres pasos, y el trabajo pesado lo hace el teléfono.</p>
-<ol class="pasos">
-<li><h3>Una foto por prenda</h3><p>Se recorta sola, se propone el tipo y el color, y queda una ficha con marca, talla y composición si se leen en la etiqueta.</p></li>
-<li><h3>El armario se ordena</h3><p>Perchas, tarjetas o tabla. Baldas por color, tipo, marca o por lo que mejor te sienta. Filtros y búsqueda por encima.</p></li>
-<li><h3>Conjuntos y veredictos</h3><p>Con tu tono de piel y tu silueta, cada prenda recibe un veredicto de color y de corte, y salen conjuntos que puedes ver puestos.</p></li>
-</ol>
-</section>
-<section>
-<h2>Lo que es y lo que no</h2>
-<div class="limites">
-<div><h3>Un prototipo en uso</h3><p>Es la aplicación que uso cada día con mi ropa. La primera versión pública será para iPhone.</p></div>
-<div><h3>Nada sale del teléfono</h3><p>Las fotos y las fichas viven en tu dispositivo. Exportar e importar es cosa tuya, sin cuenta ni servidor.</p></div>
-<div><h3>Las pruebas en mí son IA</h3><p>Los conjuntos puestos son simulaciones para comparar. La talla y la caída exacta se comprueban al vestirse.</p></div>
-<div><h3>El estilista sigue siendo humano</h3><p>Los veredictos de color y corte parten de un análisis hecho por un profesional. La aplicación lo aplica a cada prenda; no lo sustituye.</p></div>
-</div>
-</section>
-<section class="contacto" id="contacto">
-<h2>¿Quieres estar en la primera versión?</h2>
-<p>Escríbeme y te aviso cuando salga para iPhone. Si tienes una idea parecida para otra colección, cuéntamela: la misma base sirve para cualquier cosa que se fotografíe y se ordene.</p>
-<div class="acciones"><a class="cta" href="mailto:hola@ontosdigital.es?subject=Armario" data-goatcounter-click="armario-contacto" data-goatcounter-no-session="1">Escríbeme a hola@ontosdigital.es</a><a href="contacto.html">Usar el formulario de contacto</a></div>
 </section>
 </main>
 <script>
