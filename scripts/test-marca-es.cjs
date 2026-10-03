@@ -236,6 +236,9 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  // Fuente: ONTOS/raw/marca/2026-10-02-web-home-familias-encargo-aplicaciones-fernando.md.
  if(baseline&&file==='index.html')d.querySelector('section#encargos')?.remove();
  for(const e of d.querySelectorAll('[data-catalog-controls], [data-familias-controls]'))e.remove();
+ // 3-oct-2026 (Fernando): el nombre va en minúscula también en rótulos en versalitas; su envoltorio
+ // es tipografía, no estructura. El texto se sigue comparando.
+ for(const e of d.querySelectorAll('span.nombre-marca'))e.replaceWith(...e.childNodes);
  const visualZones=file==='index.html'?'#familias, #encargo':file==='aplicaciones.html'?'.catalogo, .proximo':null;
  if(visualZones){
   for(const zone of d.querySelectorAll(visualZones)){

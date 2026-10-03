@@ -443,3 +443,7 @@ html[data-ontos-web][data-web-page="entrar"] .sello {
   width: var(--web-logo-icon-min);
   height: var(--web-logo-icon-min);
 }
+
+/* El nombre se escribe siempre «ontos», en minúscula, también dentro de rótulos en versalitas
+   (Fernando, 3-oct-2026). Las etiquetas de las demos 3D las escribe el motor: se dejan sin versalitas. */
+.nombre-marca, .ot-label, .of-kicker { text-transform: none; }
