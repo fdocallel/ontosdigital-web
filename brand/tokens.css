@@ -195,6 +195,7 @@ html:has(dialog.dlg-contacto[open]) { overflow: hidden; }
   padding: 0.35rem 0.9rem; border-radius: 999px; font: inherit; font-size: 0.8rem;
   border: 1px solid var(--borde); background: none; color: var(--sec); cursor: pointer;
 }
+@media (pointer: coarse) { .dlg-contacto .copiar { min-height: 44px; } }
 @media (max-width: 34rem) {
   .dlg-contacto .dlg-cuerpo { padding: 1.5rem 1.2rem 1.3rem; }
   .dlg-contacto h2 { font-size: 1.6rem; }
