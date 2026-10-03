@@ -107,6 +107,8 @@ function checkQueEs(html){
  const i=html.indexOf('<section class="intro" id="que-es">'),zona=html.slice(i,html.indexOf('</section>',i));
  const p=(zona.match(/<p>([\s\S]*?)<\/p>/)||[])[1]||'';
  assert.equal(p.replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim(),queEs.es,'Qué es ONTOS: texto de mensaje.json web.que_es');
+ const cta=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.cta_trabajos');
+ assert(html.includes('<a class="cta cta--secundaria" href="#trabajos">'+cta.es+'</a>'),'Panel: segundo botón de mensaje.json web.cta_trabajos hacia #trabajos');
 }
 checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
 assert.throws(()=>checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('Lo comprueba una máquina','Lo revisa una máquina')),/que_es/,'Caso rojo: un «Qué es» fuera del mensaje debe bloquear');
@@ -198,6 +200,7 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
   d.querySelector('section#encargo')?.remove(); // 3-oct: cuatro pasos desde el canon (checkEncargo)
   d.querySelector('section#trabajos')?.remove(); // 3-oct: «Hecho y funcionando» desde el canon (checkTrabajos)
   d.querySelector('section#que-es p')?.remove(); // 3-oct: «Qué es ONTOS» desde mensaje.json web.que_es (checkQueEs)
+  d.querySelector('.home-feature .cta--secundaria')?.remove(); // 3-oct: «Ver lo hecho» desde mensaje.json web.cta_trabajos (checkQueEs)
   if(baseline&&description){for(const m of d.querySelectorAll('meta[name=description]'))m.remove();const m=d.createElement('meta');m.name='description';m.content=description;d.head.append(m);}
  }
  // Los landmarks y el salto de teclado no alteran el contenido del encargo.
