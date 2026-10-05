@@ -4,21 +4,21 @@
   "scope": "es-en",
   "sources": {
     "docs/diseno/ontos/marca/manual/recursos/logo-n5.svg": "7c15febb133cf351ac6e9405e2d28241a09bb5e47bf7ecb1a3c7ffa79f41f264",
-    "data/mensaje.json": "4c1553bbcd35fa49d5c4d123c723dc45f62263cbf1d41af96a4b27c7a12d7da2",
-    "data/manual-marca.json": "93b48acd468dd2b2eaf4db638506f4f47142d44643910f5ac9c8eac212358da2",
+    "data/mensaje.json": "aee35c2939b19b0c3da80e3bd312a8674aeca15fc54d5e70cb7756fdb5bf9fc3",
+    "data/manual-marca.json": "589b9bfdb76448ca21aeff0d28abf9621383cd283a46bac808fa592e213deede",
     "data/marca-construccion.json": "aeaa24ae968cedb3a964c1c59355e692b63a37f3425c64c380ef6dc2775c78c6",
     "data/marca-wordmark-geometria.json": "198e7a43b7394915ab20b328656baf0c773b97ee4826d00317b0e160a3468f33",
     "data/marca-aplicaciones.json": "6212d8ad60a7a843be28c018fe0e23b13b57d4e33c14eb50de89ec79284c0e27",
-    "data/design-system.json": "41f78b63f14a898c3f27c06a57c81d7f089f74ec4e3b5bfd8f8b6aeb0e51f1dc",
-    "data/design-system-tokens.json": "9e57cf412889262999443362a6855d5b14df68cd78598b3dad847f07f684ab28",
+    "data/design-system.json": "15aa440d9b695f93b622236928a47f437f982160e219ba18d1ae102f0286a4d3",
+    "data/design-system-tokens.json": "406d6b1b8652b3eb30d94e3f77a38b29fbf78a9f76a05551849846437fa2c14a",
     "scripts/lib/marca-movimiento.js": "6e294a13fbaad6e444f2ce3fcd4fbc68ab30f0605184e052f5cd43a7d95b3df5",
     "data/marca-movimiento-geometria.json": "fe939b62a72202449f76530e22009e9db1b1b0a8576b0dd89e40d53314208608",
     "app/img/brand/logo-esqueleto.svg": "9b33d97cff6f3fd37c0c2afed82a1aa1f34a088757f877df399d3f4d648954d5",
     "lib/diseno/ontos/marca/wordmark/fuentes/jost.ttf": "6343b70971000b04c5d401c96ae08ce371086135e999d5e1e1413039c0213076",
-    "lib/ontos/assets/tipografia/newsreader.ttf": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
-    "lib/ontos/assets/tipografia/newsreader-italic.ttf": "796668611f80b64d5adf182fde3b6f29ed83b4e7cbec7b96937e84ac01364792",
+    "lib/diseno/ontos/marca/manual/assets/tipografia/newsreader.ttf": "8a08d13f8a6c0d51be379a60af84f945f65369a67e509ee3c3bdcc421254d7c1",
+    "lib/diseno/ontos/marca/manual/assets/tipografia/newsreader-italic.ttf": "796668611f80b64d5adf182fde3b6f29ed83b4e7cbec7b96937e84ac01364792",
     "docs/diseno/ontos/marca/wordmark/fuentes/jost-OFL.txt": "1af3438a4d5f0ed2bdbc5751a5a67ebf6d537334161184b7fbb68503ef0ea0c5",
-    "docs/ontos/assets/tipografia/newsreader-OFL.txt": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
+    "docs/diseno/ontos/marca/manual/assets/tipografia/newsreader-OFL.txt": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
   },
   "outputs": {
     "brand/canon/movimiento.js": "6e294a13fbaad6e444f2ce3fcd4fbc68ab30f0605184e052f5cd43a7d95b3df5",

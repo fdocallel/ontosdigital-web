@@ -37,7 +37,7 @@ function artifacts(root){
     'window.ontosBrandAssets='+JSON.stringify({'logo.svg':svg,'logo-esqueleto.svg':read('app/img/brand/logo-esqueleto.svg').toString()})+';\n'+
     'window.ontosGlyphGeometry='+JSON.stringify({O:glyph.O,glyphs:glyph.glyphs,wordmark:glyph.wordmark})+';\n'+
     'window.ontosMotionConfig='+JSON.stringify({duracion_ms:motion.duracion_ms,scroll:motion.scroll,destino:motion.destino,nav_selector:'.barra .marca',host_selector:'[data-arcilla-host]',compact_frame:true})+';\n';
-  const fonts=[model.familias.corporativa.archivo,model.familias.editorial.archivo,model.familias.editorial.cursiva,'docs/diseno/ontos/marca/wordmark/fuentes/jost-OFL.txt','docs/ontos/assets/tipografia/newsreader-OFL.txt'];
+  const fonts=[model.familias.corporativa.archivo,model.familias.editorial.archivo,model.familias.editorial.cursiva,'docs/diseno/ontos/marca/wordmark/fuentes/jost-OFL.txt','docs/diseno/ontos/marca/manual/assets/tipografia/newsreader-OFL.txt'];
   for(const source of fonts){sources.push(source);out['brand/canon/fonts/'+path.basename(source)]=read(source);}
   for(const layout of ['horizontal','vertical','wordmark','icon'])for(const tone of ['color','color-dark','positive','negative'])
     out[`brand/canon/${layout}-${tone}.svg`]='<!-- GENERADO por scripts/import-marca.cjs desde el manual ONTOS. -->\n'+marks.logo(layout,tone);
