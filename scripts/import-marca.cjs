@@ -17,7 +17,7 @@ function artifacts(root){
   const {loadDesignSystem}=require(path.join(root,'scripts/lib/design-system-model'));
   const model=loadDesignSystem({ROOT:root});
   const read=p=>fs.readFileSync(path.join(root,p));
-  const svgPath='docs/ontos/propuesta-web-2026-09-12/assets/logo.svg';
+  const svgPath='docs/diseno/ontos/marca/manual/recursos/logo-n5.svg';
   const svg=read(svgPath).toString();
   const marks=require(path.join(root,'scripts/lib/manual-marca-geometria'))({ROOT:root,svg:()=>svg});
   const cfg=JSON.parse(read('data/marca-aplicaciones.json'));
