@@ -14,9 +14,9 @@
 <link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/contacto.html">
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/contacto.html">
 <!-- /i18n:alt -->
-<meta name="description" content="Tell me what eats your hours, or ask to see ontos from the inside. Form, email hola@ontosdigital.es and invitation-only access.">
+<meta name="description" content="ontos personal is invitation-only. This is where you request access; for anything else, a form and the email hola@ontosdigital.es.">
 <meta property="og:title" content="Contact · ontos">
-<meta property="og:description" content="Tell me what eats your hours, or ask to see ontos from the inside. Form, email hola@ontosdigital.es and invitation-only access.">
+<meta property="og:description" content="ontos personal is invitation-only. This is where you request access; for anything else, a form and the email hola@ontosdigital.es.">
 <meta property="og:image" content="https://ontosdigital.es/brand/canon/og-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -69,8 +69,8 @@
   }
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
 
-  /* Puente al acceso al producto. Sobrio a propósito: es una invitación, no un
-     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  /* Puente a la consultoría (fernandocalle.es, 8-oct-2026). Sobrio a propósito: es una
+     salida, no un reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
   /* dos líneas cortas con un enlace nowrap: justificado quedaba con la primera línea suelta; se deja a la izquierda */
   .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
   .cta-medio a {
@@ -78,6 +78,12 @@
     white-space: nowrap; display: inline-block; padding: 0.6rem 0;
   }
   .cta-medio a:hover { text-decoration: underline; }
+  /* Acción principal: la solicitud vive en solicitud.html (por correo, sin terceros); aquí se enlaza. */
+  .acceso { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-bottom: 2.6rem; }
+  .acceso span { color: var(--sec); font-size: 0.95rem; }
+  .otra { font-family: var(--sans); font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem; }
+  /* La consultoría va aparte, con Fernando Calle: se separa del producto con un filete. */
+  .cta-medio.consultoria { border-top: 1px solid var(--borde); padding-top: 1.2rem; }
 
   /* ---- contacto ---- */
   section { padding: 2rem 0 4.2rem; }
@@ -145,30 +151,24 @@
 
 <div class="hero">
   <p class="kicker">Contact</p>
-  <h1>Let's talk.</h1>
-  <p class="lema">Tell me what eats your hours, or say you want to see ontos from the inside. I usually reply within 24 to 48 hours.</p>
+  <h1>Request access.</h1>
+  <p class="lema">ontos personal is invitation-only: you ask, I read it myself and I reply, whether the answer is yes or no.</p>
 </div>
 
 <div class="wrap">
 
 <section class="contacto" id="formulario">
+  <p class="acceso"><a class="cta" href="/en/solicitud.html">Request access ▸</a>
+  <span>How it works and what I need to know about you, on one page.</span></p>
+  <h2 class="otra">Something else? Write to me here.</h2>
   <form action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b" method="POST">
     <div><label for="f-nombre">Name</label>
     <input type="text" id="f-nombre" name="nombre" required autocomplete="name"></div>
-    <div><label for="f-org">Company or organisation (if any)</label>
-    <input type="text" id="f-org" name="organizacion" autocomplete="organization"></div>
     <div><label for="f-email">Email</label>
     <input type="email" id="f-email" name="email" required autocomplete="email"></div>
-    <div><label for="f-interes">What you're looking for</label>
-    <select id="f-interes" name="interes" required>
-      <option value="" disabled selected>Choose</option>
-      <option value="consultoria">A commission (consulting)</option>
-      <option value="producto">Using ontos (product)</option>
-      <option value="otra">Something else</option>
-    </select></div>
-    <div><label for="f-msg">What eats your hours</label>
+    <div><label for="f-msg">Message</label>
     <textarea id="f-msg" name="mensaje" required></textarea></div>
-    <input type="hidden" name="_subject" value="Web contact · Contact">
+    <input type="hidden" name="_subject" value="Web contact · ontos">
     <input type="hidden" name="_next" value="https://ontosdigital.es/en/gracias.html">
     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
     <input type="hidden" name="_captcha" value="false">
@@ -176,7 +176,7 @@
     <p class="form-nota">The form goes through FormSubmit only so it reaches my inbox; details in the <a href="/en/privacidad.html" style="color:inherit">privacy policy</a>.</p>
   </form>
   <p class="alt-mail">Or directly: <a href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a><button class="copiar" type="button" data-copiar="hola@ontosdigital.es">copy</button></p>
-  <p class="cta-medio">Do you want to use ontos yourself, rather than hire me for a job? It is invitation-only: <a href="/en/solicitud.html">request access ▸</a></p>
+  <p class="cta-medio consultoria">Looking for a consulting engagement? <a href="https://fernandocalle.es/en/contacto.html">I handle that as Fernando Calle ▸</a></p>
 </section>
 
 <footer>

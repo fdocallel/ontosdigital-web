@@ -7,7 +7,7 @@
        barra, <html> lleva .is-condensado y el CSS (brand/tokens.css) pliega la palabra.
        El umbral se adapta solo a la altura de cada cabecera; no hay scrollY mágico.
 
-   2 · Contacto en un <dialog>. El icono de la barra y los botones «Cuéntame tu caso» son
+   2 · Contacto en un <dialog>. El icono de la barra y los botones de contacto son
        enlaces normales a contacto.html (sin JS funcionan igual). Con JS, el primer clic trae
        contacto.html y copia SU formulario al diálogo: el formulario vive una sola vez
        (DATO ÚNICO) y el espejo inglés trae el suyo, ya traducido, porque el enlace apunta a
@@ -50,7 +50,7 @@
 
   /* ---------- 3 · dock móvil (28-sep-2026) ----------
      En móvil la llamada a la acción se queda arriba o al final. El dock es una fila fija
-     abajo con «Cuéntame tu caso» (abre el mismo diálogo: se crea antes de recoger los
+     abajo con «Solicitar acceso» (abre el mismo diálogo: se crea antes de recoger los
      disparadores) y «Compartir» (Web Share; sin soporte, no aparece). Solo en páginas
      indexables con barra, nunca en contacto. Aparece con el logo plegado y se retira
      mientras hay a la vista otra llamada a contacto, un formulario o el pie: nunca dos
@@ -64,7 +64,7 @@
     cta.className = 'cta dock-cta';
     cta.href = iconoContacto.href;
     cta.dataset.contacto = '';
-    cta.textContent = en ? 'Tell me about your case' : 'Cuéntame tu caso';
+    cta.textContent = en ? 'Request access' : 'Solicitar acceso'; // 8-oct-2026: el contacto de ontos es la solicitud de acceso
     dock.append(cta);
     if (navigator.share) {
       const comp = d.createElement('button');
@@ -149,11 +149,10 @@
 
   const construir = (html) => {
     const fuente = new DOMParser().parseFromString(html, 'text/html');
-    const form = fuente.querySelector('#formulario form');
-    if (!form) throw new Error('contacto.html sin #formulario form');
+    const seccion = fuente.querySelector('#formulario');
+    if (!seccion || !seccion.querySelector('form')) throw new Error('contacto.html sin #formulario form');
     const titulo = fuente.querySelector('.hero h1');
     const lema = fuente.querySelector('.hero .lema');
-    const alt = fuente.querySelector('.alt-mail');
 
     const caja = d.createElement('dialog');
     caja.id = 'dlg-contacto';
@@ -174,8 +173,9 @@
     h.textContent = titulo ? titulo.textContent.trim() : (en ? 'Contact' : 'Contacto');
     cuerpo.append(cerrar, h);
     if (lema) { const p = d.createElement('p'); p.className = 'dlg-lema'; p.textContent = lema.textContent.replace(/\s+/g, ' ').trim(); cuerpo.append(p); }
-    cuerpo.append(d.importNode(form, true));
-    if (alt) cuerpo.append(d.importNode(alt, true));
+    // La sección entera, en su orden (8-oct-2026: acceso, formulario, correo y la salida a la
+    // consultoría de fernandocalle.es); así el diálogo no se queda atrás si contacto.html cambia.
+    for (const el of seccion.children) cuerpo.append(d.importNode(el, true));
     caja.append(cuerpo);
 
     // copiar la dirección (mismo comportamiento que contacto.html)
@@ -208,7 +208,7 @@
     preparar(a.href).then(caja => {
       if (caja.open) return;
       caja.showModal();
-      const primero = caja.querySelector('#f-nombre') ||
+      const primero = caja.querySelector('.acceso a') || caja.querySelector('#f-nombre') ||
         caja.querySelector('input:not([type=hidden]):not([name=_honey]), select, textarea');
       if (primero) primero.focus();
       contar();

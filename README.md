@@ -13,6 +13,11 @@ redirecciones a la misma ruta de fernandocalle.es (meta refresh + JS que lee el 
 sitemap; su /en/ va a `/en/` de allí. Sus comprobaciones de contenido viven en `fernandocalle-web`.
 `brand/` no se toca: la leen los scripts de ONTOS. **No publicar** hasta que fernandocalle.es esté servido.
 Plan: ONTOS `docs/estudios/2026-10-08-separar-web-personal-y-ontos.md`.
+**Contacto = solicitar acceso** (8-oct-2026): `contacto.html` lleva como acción principal a `solicitud.html` (la
+solicitud va por correo, sin terceros); el formulario queda para «otra cosa», sin selector; la consultoría sale aparte
+a `fernandocalle.es/contacto.html`, igual que la salida secundaria del cierre de los casos. El diálogo de `barra.js`
+copia la sección `#formulario` entera y el dock móvil dice «Solicitar acceso». Lo comprueba `checkContacto`
+(`scripts/test-marca-es.cjs`, con caso rojo).
 
 ## Estructura v5 (24-sep-2026, rama web-v5-consultoria)
 
@@ -25,7 +30,7 @@ Decisión: `ONTOS/docs/estudios/2026-09-24-web-consultoria-primero.md`. Estilo: 
 - `producto.html`, casos, demos, `contacto.html`, `solicitud.html`, `entrar.html`: se quedan; producto fuera de la barra.
 - Barra española en todas las páginas con `<header class="barra">`: ONTOS (= inicio) · Aplicaciones · Sobre mí · icono de contacto · EN. Consultoría se retira del menú el 27-sep; continúa siendo la portada. En móvil (≤34rem) dos filas: marca, icono e idioma arriba; Aplicaciones y Sobre mí debajo. La versión inglesa comparte la misma cabecera y cambia el conmutador a ES.
 - `brand/barra.js`: (1) el wordmark se pliega al símbolo al pasar la cabecera de la página (centinela + IntersectionObserver, `html.is-condensado`); (2) el icono de contacto y los enlaces con `data-contacto` abren un `<dialog>` con el formulario de `contacto.html`, que se trae por fetch (el formulario vive una vez; en /en/ trae el inglés). Sin JS son enlaces a `contacto.html`. Abrir el diálogo cuenta el evento GoatCounter `contacto-popup`.
-- `brand/barra.js` (3), 28-sep-2026: **dock móvil** (≤34rem) con «Cuéntame tu caso» (abre el mismo diálogo) y Compartir (Web Share, evento GoatCounter `compartir`; sin soporte no aparece). Solo en páginas indexables con barra y fuera de contacto; aparece con el logo plegado y se retira si hay a la vista otro CTA de contacto, un formulario o el pie. Auditoría y verificación: `ONTOS/data/_cache/web-movil-2026-09-28/`.
+- `brand/barra.js` (3), 28-sep-2026: **dock móvil** (≤34rem) con «Solicitar acceso» (desde el 8-oct-2026; abre el mismo diálogo) y Compartir (Web Share, evento GoatCounter `compartir`; sin soporte no aparece). Solo en páginas indexables con barra y fuera de contacto; aparece con el logo plegado y se retira si hay a la vista otro CTA de contacto, un formulario o el pie. Auditoría y verificación: `ONTOS/data/_cache/web-movil-2026-09-28/`.
 - `.nojekyll` en la raíz: GitHub Pages sirve `producto/README.md` tal cual, sin renderizarlo.
 
 El espejo inglés se actualiza a la v5 el 28-sep-2026 por orden de Fernando. La estructura y la marca se comparten; los textos se traducen desde sus diccionarios. Los commits utilizan el hook bilingüe y el contrato de conservación.

@@ -210,6 +210,21 @@ const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
 // mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<h3>'+proceso.proceso[1].nombre+'</h3>','<h3>Otro paso</h3>')),/pasos/,'Caso rojo: un paso fuera del canon debe bloquear');
 // mudada a fernandocalle.es (8-oct-2026): checkFamilias(homeHtml);
 // mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkFamilias(homeHtml.replace('<h3>'+lineas[0].nombre+'</h3>','<h3>Otra familia</h3>')),/títulos/,'Caso rojo: una familia fuera del canon debe bloquear');
+// Contacto de ontos (8-oct-2026): la acción principal es solicitud.html (por correo, sin terceros); el formulario
+// queda para «otra cosa», sin selector ni opción de encargo; la consultoría, enlazada aparte a fernandocalle.es.
+function checkContacto(html,en){
+ const pre=en?'/en/':'';const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
+ const sec=main.slice(main.indexOf('id="formulario"'));
+ assert(sec.indexOf('<p class="acceso"><a class="cta" href="'+pre+'solicitud.html">')>=0&&sec.indexOf('class="acceso"')<sec.indexOf('<form'),'Contacto: la solicitud de acceso es la acción principal, antes del formulario');
+ assert(!/<select\b/.test(main)&&!/value="consultoria"|encargo \(|come horas|eats your hours/i.test(main),'Contacto: sin selector ni opción de encargo o lema de consultoría');
+ assert(main.includes('href="'+PERSONAL+(en?'/en':'')+'/contacto.html"'),'Contacto: salida a la consultoría en fernandocalle.es');
+ assert(/name="_subject" value="(Contacto web · ontos|Web contact · ontos)"/.test(main),'Contacto: asunto del formulario de ontos');
+ assert(main.includes('action="https://formsubmit.co/4cbfbc404eb625f93b3df7cdc7b2e18b"'),'Contacto: el formulario sigue llegando al correo');
+ for(const m of html.matchAll(/<meta (?:name="description"|property="og:description") content="([^"]*)"/g))assert(!/come horas|eats your hours|encargo|consult/i.test(m[1]),'Contacto: descripción sin consultoría');
+}
+checkContacto(fs.readFileSync(path.join(WEB,'contacto.html'),'utf8'),false);
+if(bilingual)checkContacto(fs.readFileSync(path.join(WEB,'en/contacto.html'),'utf8'),true);
+assert.throws(()=>checkContacto(fs.readFileSync(path.join(WEB,'contacto.html'),'utf8').replace('<form','<select name="interes"><option value="consultoria">Un encargo (consultoría)</option></select><form'),false),/selector/,'Caso rojo: volver a ofrecer un encargo en el contacto de ontos debe bloquear');
 function signature({html,baseline=false,file,subtitle,revision,description,sep}){
  const d=new DOMParser().parseFromString(html,'text/html');
  const clean=s=>s.replace(/\s+/g,' ').trim();
@@ -317,6 +332,14 @@ function signature({html,baseline=false,file,subtitle,revision,description,sep})
    apps.replaceWith(nuevo(pre+'armario.html','Armario','item',file==='armario.html'),'\n    ',nuevo('/#areas','Casos','item',file.startsWith('caso-')));
    sobre.replaceWith(nuevo(sep.PERSONAL+'/','Fernando Calle','item item--personal',false));
   }
+ }
+ // Contacto de ontos = solicitar acceso (Fernando, 8-oct-2026): la consultoría sale a fernandocalle.es. En la base,
+ // la salida secundaria del cierre de los casos (pitch de consultoría) apunta al contacto de la web personal;
+ // contacto.html se rehace (sin selector de encargo) y su contenido y descripción los comprueba checkContacto.
+ if(baseline&&/^caso-/.test(file))for(const a of d.querySelectorAll('.cierre a[href="contacto.html"]'))a.setAttribute('href',sep.PERSONAL+'/contacto.html');
+ if(file==='contacto.html'){
+  for(const m of d.querySelectorAll('meta[name=description], meta[property="og:description"]'))m.remove();
+  for(const e of [...d.body.children])if(!e.matches('header.barra'))e.remove(); // la base no tenía main y el pie iba dentro del envoltorio
  }
  // Armario mínimo, 3-oct-2026 (Fernando: «que sea solo probar el armario. Nada más»): de la página solo queda
  // el probador (#demo), cuyo título pasa a ser el h1. Se compara solo el probador, sin su título ni la nota final.

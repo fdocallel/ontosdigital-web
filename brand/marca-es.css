@@ -480,3 +480,12 @@ html[data-ontos-web] .barra-menu { display: none; }
   html[data-ontos-web].barra-menu-js { --web-logo-width: 120px; --web-logo-height: 40px; }
   html[data-ontos-web].barra-menu-js .barra nav { gap: 0 var(--ds-space-2); }
 }
+
+/* Diálogo de contacto (8-oct-2026): trae la sección entera de contacto.html. La acción principal
+   es la solicitud de acceso; la consultoría sale aparte, a fernandocalle.es. */
+html[data-ontos-web] .dlg-contacto .acceso { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin: 0 0 1.8rem; }
+html[data-ontos-web] .dlg-contacto .acceso span { color: var(--sec); font-size: 0.92rem; }
+html[data-ontos-web] .dlg-contacto h2.otra { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.9rem; }
+html[data-ontos-web] .dlg-contacto .cta-medio { margin: 1.4rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--borde); font-size: 0.92rem; color: var(--sec); }
+html[data-ontos-web] .dlg-contacto .cta-medio a { color: var(--acento); font-weight: 600; text-decoration: none; display: inline-block; padding: 0.5rem 0; }
+html[data-ontos-web] .dlg-contacto .cta-medio a:hover { text-decoration: underline; }
