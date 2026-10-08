@@ -47,6 +47,9 @@ html[data-ontos-web]{
   --ds-type-note: 12.8px;
   --ds-type-note-leading: 1.5;
   --ds-motion-arcilla: 1200ms;
+  --ds-motion-portada-texto: 1300ms;
+  --ds-motion-portada-salida: 250ms;
+  --ds-motion-portada-reposo: 12000ms;
   --ds-type-display: 68px;
   --ds-type-display-leading: 1.08;
   --ds-brand-icon-visible-min: 96px;

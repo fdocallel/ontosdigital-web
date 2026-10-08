@@ -19,24 +19,26 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 I18N = os.path.join(RAIZ, "i18n", "en")
 SALIDA = os.path.join(RAIZ, "en")
 DOMINIO = "https://ontosdigital.es"
+# Web personal (separación del 8-oct-2026): las páginas mudadas redirigen allí; su inglés vive en /en/ de allí.
+PERSONAL = "https://fernandocalle.es"  # DOMINIO_PERSONAL
 
 # Páginas del espejo. `indexable` decide si lleva hreflang y entra en el sitemap.
 PAGINAS = [
     ("index.html", True),
-    ("producto.html", False),  # oculto desde el 28-sep-2026 (Fernando): sin enlaces ni sitemap
+    ("producto.html", False),  # redirección a / (separación, 8-oct-2026): el producto es la portada
     ("consultoria.html", False),  # redirección a / (web v5, 24-sep-2026), sin índice
     ("contacto.html", True),
-    ("bim.html", True),
-    ("aplicaciones.html", True),
-    ("modelado-3d.html", True),
+    ("bim.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
+    ("aplicaciones.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
+    ("modelado-3d.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
     ("armario.html", True),
     ("servicios.html", False),   # redirección: la URL antigua de Aplicaciones (21-sep-2026), sin índice
-    ("juego-2d.html", True),
-    ("animacion-3d.html", True),
-    ("visita-3d.html", True),
-    ("escrito-plan-bim-ingenieria.html", True),
+    ("juego-2d.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
+    ("animacion-3d.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
+    ("visita-3d.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
+    ("escrito-plan-bim-ingenieria.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
     ("blog.html", False),         # redirección a fernando-calle.html#escritos (web v5, 24-sep-2026), sin índice
-    ("fernando-calle.html", True),
+    ("fernando-calle.html", False),  # redirección a fernandocalle.es (separación, 8-oct-2026)
     ("caso-sistema.html", True),
     ("caso-finanzas.html", True),
     ("caso-organizacion.html", True),
@@ -109,6 +111,13 @@ def ruta_en(destino):
         return destino
     if destino.startswith(DOMINIO):
         return ruta_en(destino[len(DOMINIO):] or "/")
+    if destino.startswith(PERSONAL + "/") and not destino.startswith(PERSONAL + "/en/"):
+        resto = destino[len(PERSONAL) + 1:]
+        if resto.startswith("editor-pdf/"):
+            return destino   # app bilingüe, sin espejo: el idioma va por ?lang
+        if resto == "" or resto.split("#")[0].split("?")[0].endswith(".html"):
+            return PERSONAL + "/en/" + resto
+        return destino
     if destino.startswith(("#", "mailto:", "tel:", "http://", "https://", "//", "data:")):
         return destino
     # El editor PDF es una única aplicación bilingüe, fuera del espejo /en/.
@@ -228,7 +237,8 @@ def traduce_etiqueta(tag, tr, pagina, indexable):
         # una redirección declara como canónico su DESTINO (consultoria.html → /): el espejo
         # apunta al destino inglés, no a sí mismo (web v5, 24-sep-2026)
         propio = atrs.get("href", "") in ("", url_es(pagina))
-        pon("href", url_en(pagina) if propio else DOMINIO + ruta_en(atrs["href"]))
+        destino_en = ruta_en(atrs["href"])
+        pon("href", url_en(pagina) if propio else destino_en if destino_en.startswith("http") else DOMINIO + destino_en)
 
     if nombre == "meta":
         clave_meta = (atrs.get("name") or atrs.get("property") or "").lower()

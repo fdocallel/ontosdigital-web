@@ -76,7 +76,9 @@ function artifacts(root){
     if(!/<html\b[^>]*lang="es"/.test(html))throw Error('Página fuera de español: '+file);
     const rel=file==='404.html'?'/brand':path.posix.relative(path.posix.dirname(file),'brand')||'brand';
     const route=file==='editor-pdf/index.html'?'editor-pdf':path.basename(file,'.html');
-    if(route==='index'){
+    // Separación (8-oct-2026): la portada de consultoría (con subtítulo) se mudó a fernandocalle.es; aquí
+    // la portada es el producto. Si vuelve una portada con apertura, el subtítulo sigue siendo obligatorio.
+    if(route==='index'&&/class="home-intro"/.test(html)){
       if(!/<p class="home-intro__subtitle">/.test(html))throw Error('Portada sin espacio para el subtítulo');
       html=html.replace(/(<p class="home-intro__subtitle">)[\s\S]*?(<\/p>)/,(_,a,b)=>a+esc(subtitle)+b);
     }

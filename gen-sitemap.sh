@@ -4,7 +4,8 @@
 # Uso: ./gen-sitemap.sh [--es] · --es conserva literalmente las entradas inglesas.
 set -e
 cd "$(dirname "$0")"
-PAGINAS="index.html producto.html contacto.html aplicaciones.html armario.html modelado-3d.html juego-2d.html animacion-3d.html visita-3d.html bim.html escrito-plan-bim-ingenieria.html fernando-calle.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html editor-pdf/index.html"
+# Separación (8-oct-2026): lo personal se mudó a fernandocalle.es; aquí queda redirigido y fuera del sitemap.
+PAGINAS="index.html contacto.html armario.html caso-sistema.html caso-finanzas.html caso-organizacion.html caso-salud.html"
 if [ "${1:-}" = "--es" ]; then
   python3 - "$PAGINAS" <<'PY'
 from pathlib import Path

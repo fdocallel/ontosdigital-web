@@ -1,5 +1,5 @@
 {
   "_doc": "Traducción al inglés de servicios.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "Aplicaciones · ontos": "Applications · ontos",
-  "Esta página se llama ahora <a href=\"aplicaciones.html\">Aplicaciones</a>.": "This page is now called <a href=\"aplicaciones.html\">Applications</a>."
+  "Esta página está ahora en <a href=\"https://fernandocalle.es/servicios.html\">la web de Fernando Calle</a>.": "This page is now on <a href=\"https://fernandocalle.es/servicios.html\">Fernando Calle's website</a>."
 }

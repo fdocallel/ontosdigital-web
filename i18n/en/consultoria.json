@@ -1,5 +1,5 @@
 {
   "_doc": "Traducción al inglés de consultoria.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
   "Consultoría · ontos": "Consulting · ontos",
-  "La consultoría está ahora en el <a href=\"./\">inicio</a>.": "Consulting is now on the <a href=\"./\">homepage</a>."
+  "Esta página está ahora en <a href=\"https://fernandocalle.es/consultoria.html\">la web de Fernando Calle</a>.": "This page is now on <a href=\"https://fernandocalle.es/consultoria.html\">Fernando Calle's website</a>."
 }

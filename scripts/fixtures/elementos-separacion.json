@@ -1,0 +1,9 @@
+{
+  "_doc": "Separación del 8-oct-2026: lo personal se mudó a fernandocalle.es (repo fernandocalle-web, que comprueba allí sus elementos). Aquí, las páginas mudadas salen de cada elemento; los de la portada de consultoría salen enteros (la portada es ahora el producto); y cambian los textos de la barra y los botones.",
+  "mudadas": ["aplicaciones.html", "servicios.html", "fernando-calle.html", "blog.html", "consultoria.html", "bim.html", "escrito-plan-bim-ingenieria.html", "juego-2d.html", "visita-3d.html", "modelado-3d.html", "animacion-3d.html"],
+  "fuera": ["portada.intro", "portada.intro.frase", "portada.intro.subtitulo", "portada.panel", "portada.panel.kicker", "portada.panel.titular", "portada.panel.boton", "portada.que-es", "portada.familias", "portada.pasos", "portada.trabajos", "portada.cierre"],
+  "cambian": {
+    "comun.menu": { "texto": "Armario · Casos · Fernando Calle" },
+    "comun.boton": { "texto": "Solicitar acceso" }
+  }
+}

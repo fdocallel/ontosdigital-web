@@ -10,6 +10,36 @@ assert(subtitle,'Subtítulo de portada declarado en su fuente');
 const bilingual=process.argv.includes('--bilingue');
 const BASE='a7bc996e35f64e7ef74e5d811c74755af6895312';
 const revision=require('./fixtures/revision-prepublicacion.json');
+// Separación (Fernando, 8-oct-2026; ONTOS docs/estudios/2026-10-08-separar-web-personal-y-ontos.md): lo personal se
+// mudó a fernandocalle.es (repo fernandocalle-web, que conserva allí estas comprobaciones). Aquí sus URLs quedan como
+// redirección a la misma ruta; producto.html pasa a ser la portada y redirige a /.
+const PERSONAL='https://fernandocalle.es'; // DOMINIO_PERSONAL
+const ONTOS_URL='https://ontosdigital.es';
+const MUDADAS=['aplicaciones','servicios','fernando-calle','blog','consultoria','bim','escrito-plan-bim-ingenieria','juego-2d','visita-3d','modelado-3d','animacion-3d'].map(p=>p+'.html').concat(['editor-pdf/index.html']);
+const destinoMudada=f=>PERSONAL+'/'+(f==='editor-pdf/index.html'?'editor-pdf/':f);
+// Una página mudada es solo su redirección: noindex, refresh y canonical al mismo destino, y JS que conserva query y ancla.
+function checkRedireccion(html,destino,file){
+ const head=html.slice(0,html.indexOf('</head>'));
+ assert(head.includes('<meta name="robots" content="noindex">'),file+': redirección sin índice');
+ assert(head.includes('<meta http-equiv="refresh" content="0; url='+destino+'">'),file+': refresh a '+destino);
+ assert(head.includes('<link rel="canonical" href="'+destino+'">'),file+': canonical al destino');
+ assert(/location\.replace\(.*location\.search \+ location\.hash\)/.test(head),file+': el JS conserva query y ancla');
+ assert(!/<header\b/.test(html)&&(html.match(/<a\b/g)||[]).length===1,file+': sin contenido propio, solo el enlace al destino');
+}
+for(const f of MUDADAS)checkRedireccion(fs.readFileSync(path.join(WEB,f),'utf8'),destinoMudada(f),f);
+checkRedireccion(fs.readFileSync(path.join(WEB,'producto.html'),'utf8').replace('url=./','url='+ONTOS_URL+'/'),ONTOS_URL+'/','producto.html');
+assert.throws(()=>checkRedireccion(fs.readFileSync(path.join(WEB,'bim.html'),'utf8').replace('<meta name="robots" content="noindex">',''),destinoMudada('bim.html'),'bim.html'),/sin índice/,'Caso rojo: una redirección indexable debe bloquear');
+const enOntos=f=>!MUDADAS.includes(f)&&f!=='producto.html';
+// Destinos de la base en el lado de ontos: páginas mudadas a fernandocalle.es; producto.html a la portada.
+function separa(href){
+ if(!href)return href;
+ const rel=href.startsWith(ONTOS_URL)?href.slice(ONTOS_URL.length):href;
+ if(/^[a-z]+:/.test(rel))return href;
+ const hoja=rel.replace(/^\//,'').split(/[?#]/)[0];
+ if(MUDADAS.includes(hoja)||hoja==='editor-pdf/')return PERSONAL+'/'+rel.replace(/^\//,'');
+ if(hoja==='producto.html')return rel!==href?ONTOS_URL+'/':'/';
+ return href;
+}
 const git=(...args)=>execFileSync('git',args,{cwd:WEB,encoding:'utf8',maxBuffer:20*1024*1024});
 const pages=fs.readdirSync(WEB).filter(f=>f.endsWith('.html')).concat(['editor-pdf/index.html']);
 const changed=git('diff',BASE,'--name-only').trim().split('\n');
@@ -31,7 +61,7 @@ if(!bilingual)assert.deepEqual(urls(sitemap),urls(oldSitemap),'Sitemap: las mism
 else {
  const spanish=urls(sitemap).filter(url=>!url.includes('/en/'));
  // Producto oculto (Fernando, 28-sep-2026): noindex, sin enlaces y fuera del sitemap.
- const ocultas=['https://ontosdigital.es/producto.html'];
+ const ocultas=['https://ontosdigital.es/producto.html',...MUDADAS.map(f=>ONTOS_URL+'/'+(f==='editor-pdf/index.html'?'editor-pdf/':f))];
  assert.deepEqual(spanish,urls(oldSitemap).filter(url=>!url.includes('/en/')&&!ocultas.includes(url)),'Sitemap: conservar todas las rutas ES');
  assert.deepEqual(urls(sitemap).filter(url=>url.includes('/en/')),spanish.filter(url=>!url.endsWith('/editor-pdf/')).map(url=>url.replace('https://ontosdigital.es/','https://ontosdigital.es/en/')).sort(),'Sitemap: espejo EN de todas las páginas indexables salvo editor bilingüe');
  for(const file of pages.filter(file=>file!=='editor-pdf/index.html')){
@@ -41,8 +71,9 @@ else {
   assert(english.includes('/canon/tokens.css')&&english.includes('/marca-es.css'),file+': recursos compartidos de marca');
  }
  const englishHome=fs.readFileSync(path.join(WEB,'en/index.html'),'utf8');
- const englishSubtitle=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.subtitulo')?.en;
- assert(englishSubtitle&&englishHome.includes(englishSubtitle),'Subtítulo inglés canónico');
+ const englishSubtitle=false&&JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.subtitulo')?.en;
+ // Subtítulo inglés: era de la portada de consultoría, que se mudó a fernandocalle.es (8-oct-2026).
+ assert(!englishHome.includes('home-intro'),'Portada inglesa: el producto, sin la apertura de consultoría');
 }
 for(const file of pages){const html=fs.readFileSync(path.join(WEB,file),'utf8');assert(html.includes('data-ontos-web'),file+' activa marca');assert(html.includes('/canon/tokens.css'),file+' carga tokens');assert(html.includes('/marca-es.css'),file+' carga CSS común');assert(!/<circle[^>]+r="16\.5"/.test(html),file+' no conserva símbolo anterior');}
 require('./import-marca.cjs').run(ONTOS,{check:true});
@@ -53,9 +84,9 @@ function checkPdfSecurity(html){
  assert.equal(calls.length,(html.match(/pdfjsLib\.getDocument\s*\(/g)||[]).length,'Revisar nueva forma de abrir PDF');
  for(const call of calls)assert(/\bisEvalSupported\s*:\s*false\b/.test(call[1]),'PDF.js: isEvalSupported debe ser false');
 }
-const editorHtml=fs.readFileSync(path.join(WEB,'editor-pdf/index.html'),'utf8');
-checkPdfSecurity(editorHtml);
-assert.throws(()=>checkPdfSecurity(editorHtml.replace(/isEvalSupported\s*:\s*false/g,'isEvalSupported: true')),/isEvalSupported/,'Caso rojo: la configuración vulnerable debe bloquear el guard');
+// mudada a fernandocalle.es (8-oct-2026): const editorHtml=fs.readFileSync(path.join(WEB,'editor-pdf/index.html'),'utf8');
+// mudada a fernandocalle.es (8-oct-2026): checkPdfSecurity(editorHtml);
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkPdfSecurity(editorHtml.replace(/isEvalSupported\s*:\s*false/g,'isEvalSupported: true')),/isEvalSupported/,'Caso rojo: la configuración vulnerable debe bloquear el guard');
 // Familias de la portada = canon de la oferta (título, texto y orden), 3-oct-2026.
 const lineas=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/ontos-empresa.json'),'utf8')).lineas.items;
 const webDescription=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.description')?.es;
@@ -126,9 +157,9 @@ function checkCatalogo(html){
  assert.deepEqual([...clips.matchAll(/<a class="clip" href="([^"]+)" data-modo="clip"/g)].map(m=>m[1]),['organizacion-60s.html','salud-60s.html','finanzas-70s.html','caso-90s.html'],'Próximamente: los cuatro clips, en miniatura');
  assert(prox.includes('href="caso-sistema.html"'),'Próximamente: «Leer el caso» se conserva');
 }
-const appsHtml=fs.readFileSync(path.join(WEB,'aplicaciones.html'),'utf8');
-checkCatalogo(appsHtml);
-assert.throws(()=>checkCatalogo(appsHtml.replace('id="balda-contexto-ia" data-familia="contexto-ia"','id="balda-contexto-ia" data-familia="herramientas"')),/baldas/,'Caso rojo: una balda fuera del canon debe bloquear');
+// const appsHtml: aplicaciones.html es una redirección desde el 8-oct-2026.
+// mudada a fernandocalle.es (8-oct-2026): checkCatalogo(appsHtml);
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkCatalogo(appsHtml.replace('id="balda-contexto-ia" data-familia="contexto-ia"','id="balda-contexto-ia" data-familia="herramientas"')),/baldas/,'Caso rojo: una balda fuera del canon debe bloquear');
 // «Qué es ONTOS» = mensaje.json web.que_es (3-oct-2026; ONTOS/raw/marca/2026-10-03-web-que-es-ontos-a-fernando.md).
 const queEs=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.que_es');
 function checkQueEs(html){
@@ -138,8 +169,8 @@ function checkQueEs(html){
  const cta=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/mensaje.json'),'utf8')).superficies.find(s=>s.id==='web.cta_trabajos');
  assert(html.includes('<a class="cta cta--secundaria" href="#trabajos">'+cta.es+'</a>'),'Panel: segundo botón de mensaje.json web.cta_trabajos hacia #trabajos');
 }
-checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
-assert.throws(()=>checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('Lo comprueba una máquina','Lo revisa una máquina')),/que_es/,'Caso rojo: un «Qué es» fuera del mensaje debe bloquear');
+// mudada a fernandocalle.es (8-oct-2026): checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkQueEs(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('Lo comprueba una máquina','Lo revisa una máquina')),/que_es/,'Caso rojo: un «Qué es» fuera del mensaje debe bloquear');
 // Armario mínimo (3-oct-2026): la página es el probador y nada más.
 function checkArmario(html){
  const main=html.slice(html.indexOf('<main'),html.indexOf('</main>'));
@@ -163,8 +194,8 @@ function checkSobreMi(html){
  assert(!/ONTOS en vivo/.test(main),'Sobre mí: sin «ver ONTOS en vivo»');
  assert(/<a class="credencial__enlace" href="https:\/\/search\.informit\.org\//.test(main),'Sobre mí: premio y publicación llevan a la ficha');
 }
-checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8'));
-assert.throws(()=>checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8').replace('GIS y plan de ejecución BIM','Automatización')),/Sobre mí/,'Caso rojo: un hecho alterado en Sobre mí debe bloquear');
+// mudada a fernandocalle.es (8-oct-2026): checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8'));
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkSobreMi(fs.readFileSync(path.join(WEB,'fernando-calle.html'),'utf8').replace('GIS y plan de ejecución BIM','Automatización')),/Sobre mí/,'Caso rojo: un hecho alterado en Sobre mí debe bloquear');
 // Nombre en minúscula (3-oct-2026): ningún «ONTOS» visible en ES/EN (fuera de código, estilos y comentarios).
 function ontosVisibles(html){
  const limpio=html.replace(/<!--[\s\S]*?-->|<style\b[\s\S]*?<\/style>/g,'').replace(/<script(?![^>]*ld\+json)\b[^>]*>[\s\S]*?<\/script>/g,'');
@@ -173,13 +204,13 @@ function ontosVisibles(html){
 for(const f of [...pages,...pages.filter(f=>f!=='editor-pdf/index.html').map(f=>'en/'+f)])assert.equal(ontosVisibles(fs.readFileSync(path.join(WEB,f),'utf8')),0,f+': el nombre se escribe «ontos»');
 assert.equal(ontosVisibles('<p>Hola ONTOS</p>'),1,'Caso rojo: «ONTOS» visible debe contarse');
 const homeHtml=fs.readFileSync(path.join(WEB,'index.html'),'utf8');
-checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
-assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
-checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
-assert.throws(()=>checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<h3>'+proceso.proceso[1].nombre+'</h3>','<h3>Otro paso</h3>')),/pasos/,'Caso rojo: un paso fuera del canon debe bloquear');
-checkFamilias(homeHtml);
-assert.throws(()=>checkFamilias(homeHtml.replace('<h3>'+lineas[0].nombre+'</h3>','<h3>Otra familia</h3>')),/títulos/,'Caso rojo: una familia fuera del canon debe bloquear');
-function signature({html,baseline=false,file,subtitle,revision,description}){
+// mudada a fernandocalle.es (8-oct-2026): checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkTrabajos(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<span class="etiqueta">'+lineas[1].nombre+'</span>','<span class="etiqueta">Otra</span>')),/tarjetas/,'Caso rojo: una tarjeta fuera del canon debe bloquear');
+// mudada a fernandocalle.es (8-oct-2026): checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8'));
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkEncargo(fs.readFileSync(path.join(WEB,'index.html'),'utf8').replace('<h3>'+proceso.proceso[1].nombre+'</h3>','<h3>Otro paso</h3>')),/pasos/,'Caso rojo: un paso fuera del canon debe bloquear');
+// mudada a fernandocalle.es (8-oct-2026): checkFamilias(homeHtml);
+// mudada a fernandocalle.es (8-oct-2026): assert.throws(()=>checkFamilias(homeHtml.replace('<h3>'+lineas[0].nombre+'</h3>','<h3>Otra familia</h3>')),/títulos/,'Caso rojo: una familia fuera del canon debe bloquear');
+function signature({html,baseline=false,file,subtitle,revision,description,sep}){
  const d=new DOMParser().parseFromString(html,'text/html');
  const clean=s=>s.replace(/\s+/g,' ').trim();
  if(!baseline&&d.querySelector('header.barra')){
@@ -271,6 +302,22 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
   for(const e of d.querySelectorAll('[content],[alt],[aria-label],[title],[value]'))for(const at of ['content','alt','aria-label','title','value'])if(e.hasAttribute(at))e.setAttribute(at,e.getAttribute(at).replace(/\bONTOS\b(?!_)/g,'ontos'));
   d.title=d.title.replace(/\bONTOS\b(?!_)/g,'ontos');
  }
+ // Separación, 8-oct-2026 (Fernando): en la base, la barra pasa a ontos · Armario · Casos · Fernando Calle y los
+ // destinos mudados a fernandocalle.es; la portada es el contenido de producto.html con su canonical en /.
+ if(baseline){
+  const separa=new Function('MUDADAS','ONTOS_URL','PERSONAL','return '+sep.separa)(sep.MUDADAS,sep.ONTOS_URL,sep.PERSONAL);
+  for(const a of d.querySelectorAll('a[href], link[rel=canonical]'))a.setAttribute('href',separa(a.getAttribute('href')));
+  if(sep.portada)for(const l of d.querySelectorAll('link[rel=canonical]'))l.setAttribute('href',sep.ONTOS_URL+'/');
+  if(sep.portada)for(const l of d.querySelectorAll('a[data-i18n-alt]'))l.setAttribute('href','/en/');
+  const nav=d.querySelector('header.barra nav'),items=nav?[...nav.querySelectorAll('a.item')]:[];
+  const apps=items.find(e=>clean(e.textContent)==='Aplicaciones'),sobre=items.find(e=>clean(e.textContent)==='Sobre mí');
+  if(apps&&sobre){
+   const pre=file==='404.html'?'/':'';
+   const nuevo=(href,texto,clase,actual)=>{const a=d.createElement('a');a.className=clase;a.href=href;a.textContent=texto;if(actual)a.setAttribute('aria-current','page');return a;};
+   apps.replaceWith(nuevo(pre+'armario.html','Armario','item',file==='armario.html'),'\n    ',nuevo('/#areas','Casos','item',file.startsWith('caso-')));
+   sobre.replaceWith(nuevo(sep.PERSONAL+'/','Fernando Calle','item item--personal',false));
+  }
+ }
  // Armario mínimo, 3-oct-2026 (Fernando: «que sea solo probar el armario. Nada más»): de la página solo queda
  // el probador (#demo), cuyo título pasa a ser el h1. Se compara solo el probador, sin su título ni la nota final.
  if(file==='armario.html'){
@@ -316,7 +363,9 @@ function signature({html,baseline=false,file,subtitle,revision,description}){
  const browser=await webkit.launch();
  try{
   const page=await browser.newPage();
-  for(const file of pages){const before=await page.evaluate(signature,{html:git('show',BASE+':'+file),baseline:true,file,subtitle,revision,description:webDescription});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file});assert.deepEqual(after,before,file+': contenido conservado con correcciones explícitas de la auditoría');}
+  // Separación: las mudadas y producto.html son redirecciones (checkRedireccion); la portada conserva el contenido de producto.html.
+  const sep={MUDADAS,ONTOS_URL,PERSONAL,separa:separa.toString()};
+  for(const file of pages.filter(enOntos)){const origen=file==='index.html'?'producto.html':file;const before=await page.evaluate(signature,{html:git('show',BASE+':'+origen),baseline:true,file:origen,subtitle,revision,description:webDescription,sep:{...sep,portada:file==='index.html'}});const after=await page.evaluate(signature,{html:fs.readFileSync(path.join(WEB,file),'utf8'),file:origen});assert.deepEqual(after,before,file+': contenido conservado con correcciones explícitas de la auditoría');}
   console.log(`PASS marca ES: ${pages.length} páginas conservan contenido con menú y apertura autorizados; ${bilingual?'espejo EN completo':'EN intacto'}; recursos compartidos protegidos y canon reproducible.`);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e.message);process.exitCode=1;});

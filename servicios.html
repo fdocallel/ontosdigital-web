@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="es" data-ontos-web data-web-page="servicios">
 <head>
-<link rel="canonical" href="https://ontosdigital.es/aplicaciones.html">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- Redirección (21-sep-2026): la página Aplicaciones se llamó servicios.html hasta hoy. Esta URL
-     sigue viva porque está en posts publicados de LinkedIn; manda al destino conservando ?query y #ancla.
-     GitHub Pages no hace redirecciones de servidor, así que va por meta refresh + JS. -->
+<!-- Redirección (separación del 8-oct-2026): esta página se mudó a la web personal de Fernando Calle.
+     La URL sigue viva (enlaces publicados, buscadores) y manda a la misma ruta del dominio nuevo,
+     conservando ?query y #ancla. GitHub Pages no hace redirecciones de servidor: meta refresh + JS.
+     El JS lee el destino del canonical, que i18n/gen-en.py reescribe al espejo inglés. -->
 <meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=aplicaciones.html">
+<meta http-equiv="refresh" content="0; url=https://fernandocalle.es/servicios.html">
+<link rel="canonical" href="https://fernandocalle.es/servicios.html">
 <title>Aplicaciones · ontos</title>
 <link rel="icon" type="image/svg+xml" href="brand/canon/favicon.svg">
-<script>location.replace('aplicaciones.html' + location.search + location.hash);</script>
+<script>location.replace(document.querySelector('link[rel=canonical]').href + location.search + location.hash);</script>
 <!-- MARCA:estilos · generado desde el canon; diseño ES/EN -->
 <link rel="stylesheet" href="brand/canon/tokens.css">
 <link rel="stylesheet" href="brand/marca-es.css">
 <!-- /MARCA:estilos -->
 </head>
 <body>
-<p>Esta página se llama ahora <a href="aplicaciones.html">Aplicaciones</a>.</p>
+<p>Esta página está ahora en <a href="https://fernandocalle.es/servicios.html">la web de Fernando Calle</a>.</p>
 </body>
 </html>

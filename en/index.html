@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" data-ontos-web data-web-page="index">
+<!-- Portada en transición (8-oct-2026): el contenido de producto.html; la consultoría se mudó a fernandocalle.es. -->
 <head>
 <!-- GENERADO por i18n/gen-en.py desde ../index.html · no editar a mano -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ontos · information engineering, on demand</title>
+<title>ontos, the product · digital twin of your life and business</title>
 <meta name="theme-color" content="#F3EDE5">
 <meta name="theme-color" content="#F3EDE5" media="(prefers-color-scheme: dark)">
 <link rel="icon" type="image/svg+xml" href="/brand/canon/favicon.svg">
@@ -14,11 +15,9 @@
 <link rel="alternate" hreflang="en" href="https://ontosdigital.es/en/">
 <link rel="alternate" hreflang="x-default" href="https://ontosdigital.es/">
 <!-- /i18n:alt -->
-<meta name="msvalidate.01" content="515812BC9718626E8FC3D1D0174B09DB">
-<!-- web.title, web.description: data/mensaje.json en el repo ONTOS (v5, 24-sep-2026) -->
-<meta name="description" content="On-demand consulting: your context for AI, digital engineering with BIM and GIS, custom tools, websites and experiences. Fernando Calle · ontos.">
-<meta property="og:title" content="ontos · information engineering, on demand">
-<meta property="og:description" content="On-demand consulting: your context for AI, digital engineering with BIM and GIS, custom tools, websites and experiences. Fernando Calle · ontos.">
+<meta name="description" content="A digital model of everything that's yours (finances, documents, admin, health) that an AI keeps up to date and answers when you ask. All on your machine.">
+<meta property="og:title" content="ontos, the product · digital twin of your life and business">
+<meta property="og:description" content="An ordered model of everything that's yours, and an AI that keeps it up to date. All local: your data never leaves your computer.">
 <meta property="og:image" content="https://ontosdigital.es/brand/canon/og-en.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -30,15 +29,14 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": "SoftwareApplication",
   "name": "ontos",
-  "description": "On-demand consulting: your context for AI, digital engineering with BIM and GIS, custom tools, websites and experiences. Fernando Calle · ontos.",
   "url": "https://ontosdigital.es/en/",
-  "email": "hola@ontosdigital.es",
-  "address": { "@type": "PostalAddress", "addressLocality": "La Lastrilla", "addressRegion": "Segovia", "addressCountry": "ES" },
-  "areaServed": "ES",
-  "sameAs": ["https://www.linkedin.com/in/fercalle-ontos"],
-  "founder": { "@type": "Person", "@id": "https://ontosdigital.es/en/fernando-calle.html#persona", "name": "Fernando Calle", "jobTitle": "Civil Engineer", "image": "https://ontosdigital.es/brand/fernando.jpg", "url": "https://ontosdigital.es/en/fernando-calle.html", "sameAs": "https://www.linkedin.com/in/fercalle-ontos" }
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "macOS, Windows, Linux",
+  "description": "A personal and business digital twin: an ordered model of your own data, documents and processes, operated with artificial intelligence and run locally.",
+  "inLanguage": "en",
+  "author": { "@type": "Person", "name": "Fernando Calle" }
 }
 </script>
 <style>
@@ -53,107 +51,143 @@
   .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1.5rem; }
   h1, h3, .serif { font-family: var(--serif); }
 
-  /* ---- hero: kicker + titular grande + lema + un botón (v5: la portada es la consultoría) ---- */
+  /* ---- hero ---- */
   .hero {
-    min-height: min(72vh, 42rem);
+    min-height: 0;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     text-align: center; position: relative; overflow: hidden;
-    padding: 5rem 1.5rem 4.5rem;
+    padding: 4rem 1.5rem 3.5rem;
   }
   .hero::before {
     content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse 60% 45% at 50% 32%, rgba(212,113,59,0.10), transparent 70%);
+    background: radial-gradient(ellipse 60% 45% at 50% 28%, rgba(212,113,59,0.10), transparent 70%);
     pointer-events: none;
   }
-  .kicker {
-    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
-    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.6rem; font-weight: 600;
-  }
   .hero h1 {
-    font-size: clamp(2.3rem, 6.4vw, 4.4rem); font-weight: 600;
-    line-height: 1.08; max-width: 52rem; letter-spacing: -0.02em; text-wrap: balance;
+    font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 600;
+    line-height: 1.2; max-width: 46rem; letter-spacing: -0.01em; text-wrap: balance;
   }
   .hero .lema {
-    margin-top: 1.6rem; max-width: 40rem;
-    font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--sec); text-wrap: balance;
+    margin-top: 1.2rem; max-width: 40rem;
+    font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--sec); text-wrap: balance;
   }
-  .hero .ctas { margin-top: 2.6rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .hero .ctas { margin-top: 2.4rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .cta {
     display: inline-block;
-    padding: 0.85rem 1.9rem; border-radius: 999px;
+    padding: 0.8rem 1.8rem; border-radius: 999px;
     background: var(--teja); color: #14100c; font-weight: 600; text-decoration: none;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(212,113,59,0.35); }
+  .cta.secundario { background: none; color: var(--acento); border: 1px solid var(--acento); }
+  .cta.secundario:hover { box-shadow: 0 8px 30px rgba(212,113,59,0.15); }
+  .hero .plazo { margin-top: 1.4rem; font-size: 0.85rem; color: var(--sec); }
+  .kicker {
+    font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--acento); margin-bottom: 1.4rem; font-weight: 600;
+  }
 
-  /* ---- secciones: ritmo amplio (--sp-sec en brand/tokens.css) ---- */
+  /* ---- secciones ---- */
   section { padding: var(--sp-sec) 0; }
-  section + section { border-top: 1px solid var(--borde); }
   h2 {
     font-family: var(--sans); font-size: 0.85rem; text-transform: uppercase;
     letter-spacing: 0.25em; color: var(--acento); margin-bottom: 2rem; font-weight: 600;
   }
-  /* prosa justificada (Fernando, 21-sep-2026); las tarjetas se quedan a la izquierda */
-  .entrada p, .intro p, .bajada { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
-  .entrada { padding-top: 0; }
-  .entrada p {
-    max-width: 46rem; margin: 0 auto;
-    font-size: clamp(1.15rem, 2.3vw, 1.4rem); line-height: 1.55;
-  }
-  .intro h2 { text-align: center; }
-  .intro p { max-width: 44rem; margin: 0 auto; font-size: 1.12rem; }
+  /* prosa justificada (Fernando, 21-sep-2026: los párrafos «estaban como partidos»);
+     las tarjetas estrechas (.card p) y lo centrado se quedan a la izquierda */
+  .intro p, .metodo, .estado p { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+  .intro p { max-width: 42rem; font-size: 1.12rem; }
+  .intro p + p { margin-top: 1rem; }
   .intro strong { color: var(--realce); font-weight: 600; }
+
+  .stats { display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .stat .n { font-family: var(--serif); font-size: 2rem; font-weight: 650; }
+  .stat .l { font-size: 0.85rem; color: var(--sec); text-transform: uppercase; letter-spacing: 0.08em; }
 
   .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 1.2rem; }
   .card {
     background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
     padding: 1.8rem 1.6rem;
+    transition: transform 0.15s ease, border-color 0.15s ease;
   }
   .card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
   .card p { font-size: 0.95rem; color: var(--sec); }
+  .card .icono { font-size: 1.5rem; margin-bottom: 0.8rem; display: block; color: var(--acento); }
+  a.card:hover { transform: translateY(-4px); border-color: var(--teja); }
 
-  /* trabajos: una tarjeta por familia (canon ONTOS data/ontos-empresa.json#lineas), de aplicaciones.html */
-  .trabajos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 2rem; }
-  .trabajo {
-    display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: var(--texto);
-    background: var(--panel); border: 1px solid var(--borde); border-radius: 14px;
-    transition: transform 0.15s ease, border-color 0.15s ease;
+  /* las tres piezas del producto */
+  .piezas { margin-top: 1.8rem; }
+  .pieza .icono { font-size: 1.8rem; }
+  .pieza h3 { font-size: 1.1rem; }
+
+  /* ediciones */
+  .ediciones { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 48rem) { .ediciones { grid-template-columns: 1fr; } }
+  .edicion .icono { font-size: 2rem; }
+  .edicion h3 { font-size: 1.25rem; }
+  .edicion .edicion-desc { font-size: 0.98rem; color: var(--sec); }
+  .edicion .lineas { list-style: none; margin-top: 1.2rem; }
+  .edicion .lineas li { font-size: 0.92rem; color: var(--sec); padding: 0.7rem 0; border-top: 1px solid var(--borde); }
+  .edicion .lineas b { color: var(--texto); font-weight: 600; display: block; margin-bottom: 0.15rem; }
+
+  /* estado honesto */
+  .estado {
+    background: var(--panel); border: 1px solid var(--borde); border-left: 4px solid var(--teja);
+    border-radius: 14px; padding: 1.8rem 1.8rem; max-width: 46rem;
   }
-  .trabajo:hover { transform: translateY(-4px); border-color: var(--teja); }
-  .trabajo img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--borde); }
-  .trabajo .texto { padding: 0.9rem 1.1rem 1.1rem; }
-  .trabajo .etiqueta { font-size: 0.72rem; color: var(--acento); letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
-  .trabajo h3 { font-size: 1.15rem; margin: 0.4rem 0 0.4rem; line-height: 1.25; }
-  .trabajo p { font-size: 0.92rem; color: var(--sec); line-height: 1.5; }
-  .mas { margin-top: 1.6rem; }
-  .mas a { color: var(--acento); font-weight: 600; text-decoration: none; display: inline-block; padding: 0.5rem 0; }
-  .mas a:hover { text-decoration: underline; }
-  /* Menos de tres columnas (28-sep-2026, Fernando: «más corto»): una fila que se desliza,
-     con la siguiente tarjeta asomando, en vez de tres tarjetas apiladas. */
-  @media (max-width: 52rem) {
-    .trabajos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 0.9rem;
-      margin-inline: -1.5rem; padding: 0 1.5rem 0.6rem; scroll-padding-inline: 1.5rem; }
-    .trabajo { flex: 0 0 min(78%, 20rem); scroll-snap-align: start; }
-    .trabajo .texto { padding: 0.85rem 1rem 1rem; }
-    .trabajo h3 { font-size: 1.05rem; }
+  .estado p + p { margin-top: 0.9rem; }
+  .estado p { color: var(--sec); }
+  .estado strong { color: var(--texto); font-weight: 600; }
+
+
+  .metodo { margin-top: 1.6rem; color: var(--sec); font-size: 0.95rem; max-width: 42rem; }
+  .verificable { margin-top: 1.6rem; font-size: 0.95rem; color: var(--sec); }
+  .verificable a { color: var(--acento); font-weight: 600; text-decoration: none; border-bottom: 1px solid var(--acento); }
+  /* Retrato de Quién: brand/fernando.jpg, 600x800 (3:4), ~50 KB */
+  .quien-con-foto { display: grid; grid-template-columns: 13rem 1fr; gap: 2.4rem; align-items: start; }
+  @media (max-width: 48rem) { .quien-con-foto { grid-template-columns: 1fr; gap: 1.6rem; } }
+  .retrato { margin: 0; }
+  .retrato img {
+    /* height:auto es obligatorio: el atributo height="800" del HTML es una pista de
+       presentación que gana a aspect-ratio y estiraba el retrato a 800 px de alto. */
+    width: 13rem; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 30%;
+    /* borde algo más marcado que --borde: la pared beige de la foto y el fondo hueso
+       se diferencian solo un 5 % y la silueta se disolvía en la página */
+    border-radius: 14px; border: 1px solid rgba(0,0,0,0.14); display: block;
   }
-  @media (prefers-reduced-motion: reduce) { .trabajo, .cta { transition: none; } }
+  @media (prefers-color-scheme: dark) { .retrato img { border-color: rgba(255,255,255,0.12); } }
+  @media (max-width: 48rem) { .retrato img { width: 10rem; } }
+  .retrato figcaption { margin-top: 0.6rem; font-size: 0.8rem; color: var(--sec); }
 
-  /* quién: retrato + dos frases de fernando-calle.html */
-
-  /* cierre */
-  .cierre { text-align: center; }
-  .cierre h2 { margin-bottom: 1.2rem; }
-  .cierre .titular { font-family: var(--serif); font-size: clamp(1.8rem, 4.4vw, 2.8rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.01em; }
-  .cierre .ctas { margin-top: 2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center; align-items: center; }
-  .cierre .ctas .mail { color: var(--acento); font-weight: 600; text-decoration: none; padding: 0.6rem 0; }
-  .cierre .ctas .mail:hover { text-decoration: underline; }
-
-  @media (max-width: 34rem) {
-    .hero { min-height: 0; padding: 3.5rem 1.2rem 3.2rem; }
-    .kicker { letter-spacing: 0.16em; font-size: 0.8rem; }
-    .entrada p { font-size: 1.1rem; }
+  /* casos: cuatro tarjetas; el título lleva al caso y el pie da el caso o el vídeo directo
+     (dos enlaces dentro de la tarjeta, por eso la tarjeta es un div y no un <a>) */
+  .demos { margin-top: 1.8rem; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  @media (max-width: 56rem) { .demos { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 30rem) { .demos { grid-template-columns: 1fr; } }
+  .card.demo { display: flex; flex-direction: column; color: var(--texto); padding: 1.5rem 1.2rem; }
+  .card.demo:hover { transform: translateY(-4px); border-color: var(--teja); }
+  .card.demo h3 { font-size: 1.05rem; }
+  .card.demo h3 a { color: inherit; text-decoration: none; }
+  .card.demo h3 a:hover { text-decoration: underline; }
+  .card.demo p { font-size: 0.9rem; }
+  .card.demo .icono { font-size: 2.2rem; margin-bottom: 1rem; line-height: 1; }
+  .card.demo p { flex: 1; }
+  /* flex con wrap: en inglés «Read the case ▸ · ▶ Watch the video» no cabe en una línea a cuatro
+     columnas y el separador quedaba colgando al final de la primera */
+  .card.demo .ver { margin-top: 1.3rem; font-size: 0.85rem; font-weight: 600; color: var(--sec);
+    display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.4rem; }
+  .card.demo .ver a { display: inline-block; padding: 0.3rem 0; color: var(--acento); text-decoration: none; white-space: nowrap; }
+  .card.demo .ver a:hover { text-decoration: underline; }
+  .demos-nota { margin-top: 1rem; color: var(--sec); font-size: 0.85rem; }
+  /* Puente al contacto a media página. Sobrio a propósito: es una invitación, no un
+     reclamo. El enlace se toca con el dedo (44 px) sin parecer un botón más. */
+  .cta-medio { margin-top: 2rem; color: var(--sec); font-size: 0.95rem; }
+  .cta-medio a {
+    color: var(--acento); text-decoration: none; font-weight: 600;
+    white-space: nowrap; display: inline-block; padding: 0.6rem 0;
   }
+  .cta-medio a:hover { text-decoration: underline; }
+
 
   footer {
     border-top: 1px solid var(--borde);
@@ -167,10 +201,6 @@
 <script defer src="/brand/canon/movimiento-data.js"></script>
 <script defer src="/brand/canon/movimiento.js"></script>
 <!-- /MARCA:estilos -->
-<link rel="stylesheet" href="/brand/home-es.css">
-<link rel="stylesheet" href="/brand/encargos-es.css">
-<script defer src="/brand/encargos-es.js"></script>
-<script defer src="/brand/home-es.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#contenido">Skip to content</a>
@@ -178,144 +208,126 @@
 <header class="barra">
   <nav>
     <a class="marca" href="/en/"><span class="marca__arcilla" data-arcilla-host aria-hidden="true"><img class="marca-light" src="/brand/canon/wordmark-color.svg" alt=""></span><span class="marca__word marca__label">ontos</span></a>
-    <a class="item" href="/en/aplicaciones.html">Applications</a>
-    <a class="item" href="/en/fernando-calle.html">About me</a>
+    <a class="item" href="/en/armario.html">Wardrobe</a>
+    <a class="item" href="/en/#areas">Case studies</a>
+    <a class="item item--personal" href="https://fernandocalle.es/en/">Fernando Calle</a>
     <a class="item icono-contacto" href="/en/contacto.html" data-contacto aria-label="Contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="M3.8 7l8.2 6.2L20.2 7"/></svg></a>
     <a class="item idioma" data-i18n-alt href="/" hreflang="es" lang="es" aria-label="Ver esta página en español">ES</a>
   </nav>
 </header>
 <main class="web-main" id="contenido" tabindex="-1">
 
-<div class="home-intro">
-  <p class="home-intro__statement">From experience and the application of artificial intelligence, what used to be science fiction is now a reality.</p>
-  <p class="home-intro__subtitle">I put the information of people and companies in order, connect it to AI and give shape to new ideas.</p>
-</div>
-
-<div class="hero home-feature" data-home-feature>
-  <div class="home-feature__inner">
-    <p class="kicker">Information engineering, on demand</p>
-    <h1>Data, processes and knowledge, in order.</h1>
-    <div class="ctas">
-      <a class="cta" href="/en/contacto.html" data-contacto>Tell me about your case</a>
-      <a class="cta cta--secundaria" href="#trabajos">See the work</a>
-    </div>
+<div class="hero">
+  <p class="kicker">Product</p>
+  <h1>A digital model of everything that's yours, and an AI that keeps it up to date.</h1>
+  <p class="lema">Finances, documents, admin, projects, diary, health: all in one place, on your machine, and available just by asking. I built it for myself and I use it every day.</p>
+  <div class="ctas">
+    <a class="cta" href="/en/solicitud.html">Request access</a>
   </div>
+  <p class="plazo">In a private pilot. Everything runs locally: your data never leaves your computer.</p>
 </div>
 
 <div class="wrap">
 
-<section class="intro" id="que-es">
-  <h2>What <span class="nombre-marca">ontos</span> is</h2>
-  <p><em>ontos</em>, from the Greek ὄντος: <span class="serif">“that which is”</span>. Almost nobody has an information problem: what they have is an <strong>order</strong> problem. Data lives in folders, admin lives in your head and knowledge lives in each person's experience. ontos puts it in order and connects it to artificial intelligence, so that it works from your reality: in your daily life, in your project or in your company. A machine checks it. A person signs it.</p>
-</section>
-
-<section id="familias">
-  <div class="familias__cabecera">
-    <h2 id="familias-titulo">Four families</h2>
-    <div class="familias__controles" data-familias-controls hidden>
-      <span class="familias__estado" aria-live="polite" aria-atomic="true" aria-label="Visible service families">01–03 / 04</span>
-      <button type="button" data-familias-prev aria-label="See previous service families" aria-controls="familias-carril" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg></button>
-      <button type="button" data-familias-next aria-label="See next service families" aria-controls="familias-carril"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+<section class="intro" id="producto">
+  <h2>How it works</h2>
+  <p>ontos is a <strong>digital twin</strong>: an ordered model of what you have, what you do and what you know, with artificial intelligence working on top of it every day.</p>
+  <div class="cards piezas">
+    <div class="card pieza">
+      <span class="icono">◉</span>
+      <h3>The data, in one place</h3>
+      <p>Every fact lives once. Views, reports and summaries are generated from it, so nothing contradicts itself or goes stale in a forgotten copy.</p>
+    </div>
+    <div class="card pieza">
+      <span class="icono">✦</span>
+      <h3>The AI that operates it</h3>
+      <p>You tell it in one sentence what has happened and it updates everything that is affected. You ask in plain language and it answers with your own data, citing where each thing comes from.</p>
+    </div>
+    <div class="card pieza">
+      <span class="icono">✓</span>
+      <h3>The audit that keeps watch</h3>
+      <p>A system nobody watches degrades. An automatic check runs every day to make sure nothing is lost, that the views match their source and that no loose end is left hanging.</p>
     </div>
   </div>
-  <div class="familias" id="familias-carril" data-familias tabindex="0" role="region" aria-labelledby="familias-titulo">
-    <article class="familia">
-      <div class="familia__titulo"><span class="num">01</span> <h3>Your context for AI</h3></div>
-      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M30 26h28l10 10v32H30z M58 26v10h10"></path><path d="M37 46h20m-20 8h24m-24 8h14"></path><rect x="30" y="86" width="38" height="28" rx="3"></rect><path d="M30 89l19 13 19-13"></path><path d="M30 136h13l4 5h21v29H30z"></path><path d="M72 48c18 0 20 24 38 24 M72 100h38 M72 154c18 0 20-26 38-26"></path><rect x="114" y="58" width="62" height="84" rx="6"></rect><path d="M114 86h62m-62 28h62"></path><path d="M124 72h6m6 0h22m-34 28h6m6 0h28m-40 28h6m6 0h16"></path><path d="M180 100h18"></path><circle cx="230" cy="100" r="30"></circle><path class="acento" d="M230 84q2 14 16 16q-14 2-16 16q-2-14-16-16q14-2 16-16z"></path></svg>
-      <div class="familia__texto"><p>For people and businesses whose information is scattered across folders, inboxes and heads. We put what you know and have in order, and connect it to an AI that works from there, with sources you can check.</p></div>
-    </article>
-    <article class="familia">
-      <div class="familia__titulo"><span class="num">02</span> <h3>Digital engineering</h3></div>
-      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M22 110h22c20 0 30 30 46 46c20 20 100 20 120 0c16-16 26-46 46-46h22"></path><path d="M22 126h20c20 0 30 28 46 44c22 14 102 14 124 0c16-16 26-44 46-44h20"></path><rect x="40" y="104" width="220" height="6" rx="1"></rect><path d="M84 150Q150 86 216 150m-124 2Q150 100 208 152"></path><path d="M106 110v22.2m22-22.2v11.6m22-11.6v8m22-8v11.6m22-11.6v22.2"></path><path d="M145 49l-33 47m43-47l33 47"></path><path class="acento" d="M142 34h16a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-16a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3z M139 40h-12v-8m34 8h12v-8m-55 0h20m32 0h20"></path></svg>
-      <div class="familia__texto"><p>BIM, GIS and drone capture for engineering firms and public procurement: information requirements, coordination and deliverable control. It starts with a free BIM readiness check.</p></div>
-    </article>
-    <article class="familia">
-      <div class="familia__titulo"><span class="num">03</span> <h3>Custom tools</h3></div>
-      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><path d="M30 66v-8h46v62h-8"></path><rect x="22" y="66" width="46" height="62" rx="3"></rect><path d="M30 80h30m-30 10h24m-24 10h30m-30 10h18"></path><path d="M72 100h16"></path><path d="M124.7 97.2L128.9 97.8L128.9 102.2L124.7 102.8L123 107L125.5 110.4L122.4 113.5L119 111L114.8 112.7L114.2 116.9L109.8 116.9L109.2 112.7L105 111L101.6 113.5L98.5 110.4L101 107L99.3 102.8L95.1 102.2L95.1 97.8L99.3 97.2L101 93L98.5 89.6L101.6 86.5L105 89L109.2 87.3L109.8 83.1L114.2 83.1L114.8 87.3L119 89L122.4 86.5L125.5 89.6L123 93Z"></path><circle cx="112" cy="100" r="5"></circle><path d="M134 100h12m-4-4l4 4-4 4"></path><rect x="154" y="30" width="124" height="140" rx="9"></rect><path d="M154 52h124m-110-11h1m8 0h1m8 0h1"></path><rect x="168" y="66" width="14" height="14" rx="3"></rect><rect x="168" y="94" width="14" height="14" rx="3"></rect><rect x="168" y="122" width="14" height="14" rx="3"></rect><path d="M171 73l3 3 6-6m-9 31l3 3 6-6M192 73h62m-62 28h48"></path><path d="M192 129h56"></path><path class="acento" d="M164 128l7 7 14-16"></path></svg>
-      <div class="familia__texto"><p>For teams that repeat operations or check documents by hand. Automations, checks and applications that turn a process or a collection into something people use: a PDF editor, a wardrobe app.</p></div>
-    </article>
-    <article class="familia">
-      <div class="familia__titulo"><span class="num">04</span> <h3>Websites and experiences</h3></div>
-      <svg class="familia__figura" viewBox="0 0 300 200" aria-hidden="true" focusable="false"><rect x="22" y="24" width="256" height="152" rx="10"></rect><path d="M22 50h256m-242-13h1m8 0h1m8 0h1"></path><rect x="84" y="31" width="132" height="12" rx="6"></rect><rect x="40" y="66" width="76" height="58" rx="2"></rect><rect x="48" y="74" width="60" height="42"></rect><path d="M48 116l17-21 10 12 8-8 25 17"></path><path d="M94 84a5 5 0 1 0 0.01 0z"></path><path d="M40 140h44m-44 12h28"></path><path d="M98 158l14-14 5 5-14 14h-5z"></path><circle cx="200" cy="113" r="20"></circle><path d="M180 113a20 7 0 0 0 40 0"></path><ellipse cx="200" cy="113" rx="58" ry="16" transform="rotate(-16 200 113)"></ellipse><ellipse cx="200" cy="113" rx="58" ry="16" transform="rotate(22 200 113)"></ellipse><circle cx="146.1" cy="122.8" r="5"></circle><circle class="acento" cx="245" cy="120.1" r="5"></circle></svg>
-      <div class="familia__texto"><p>Websites to show a project or a body of work, which their owners can update without relying on anyone. And experiences to explore a brand or a place: 2D and 3D animation, games and navigable worlds.</p></div>
-    </article>
-  </div>
-</section>
-<section id="trabajos">
-  <h2>Built and working</h2>
-  <div class="trabajos">
-    <a class="trabajo" href="/en/armario.html">
-      <img src="/brand/servicios/armario.png" alt="Clothes hung on shelves sorted by colour: whites, greys, blacks" width="1240" height="698" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Your context for AI</span>
-        <h3>Your clothes, catalogued and hung on shelves</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="/en/modelado-3d.html">
-      <img src="/brand/servicios/modelado-3d.png" alt="The same house in two versions: textured scan and simple geometry" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Digital engineering</span>
-        <h3>From a flight to a model</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="/editor-pdf/?lang=en">
-      <img src="/brand/servicios/editor-pdf.png" alt="PDF editor with a three-page sample document" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Custom tools</span>
-        <h3>A PDF editor that never takes your documents off your computer</h3>
-      </div>
-    </a>
-    <a class="trabajo" href="https://josemariacasado.com" rel="noopener" target="_blank">
-      <img src="/brand/servicios/web-jmcasado.png" alt="Homepage of painter José María Casado's website" width="1280" height="720" decoding="async" loading="lazy">
-      <div class="texto">
-        <span class="etiqueta">Websites and experiences</span>
-        <h3>A website the client can maintain</h3>
-      </div>
-    </a>
-  </div>
-  <p class="mas"><a href="/en/aplicaciones.html">Explore the applications ▸</a></p>
+  <p class="metodo">Everything runs on your machine. No compulsory cloud, no account to create, none of your data feeding anybody's product.</p>
 </section>
 
-<section id="encargo" class="encargo">
-  <div class="encargo__intro">
-  <h2>How a commission starts</h2>
-  <p class="bajada">First we understand what you have and what you need. Then we agree on what to build and what it costs, before we start.</p>
+<section>
+  <h2>Two editions</h2>
+  <div class="ediciones">
+    <div class="card edicion">
+      <span class="icono">◈</span>
+      <h3>ontos personal</h3>
+      <p class="edicion-desc">Your whole life in a single model, and the boring part done for you.</p>
+      <ul class="lineas">
+        <li><b>Organisation</b>Today, notes, diary and calendar, projects, documents and contacts.</li>
+        <li><b>Health</b>Training with progression, body composition, nutrition and rest.</li>
+        <li><b>Money</b>Net worth, income and spending, investing with written rules.</li>
+        <li><b>Career</b>Training, languages, track record and your own business when you have one.</li>
+      </ul>
+    </div>
+    <div class="card edicion">
+      <span class="icono">▣</span>
+      <h3>ontos for business</h3>
+      <p class="edicion-desc">The model of your business: data, processes and knowledge in one place.</p>
+      <ul class="lineas">
+        <li><b>Sales</b>Pipeline of opportunities, clients with their history and their next step.</li>
+        <li><b>Operations</b>Work in progress, deadlines ahead, services and deliverables.</li>
+        <li><b>Administration</b>Invoicing, expenses, and obligations monitored, with alerts.</li>
+        <li><b>Knowledge</b>The firm's documents, searchable by asking and answered with a citation.</li>
+      </ul>
+    </div>
   </div>
-  <ol class="pasos" data-pasos>
-    <li class="paso">
-      <svg class="paso__figura" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><circle class="paso__nodo" cx="48" cy="48" r="46"></circle><path d="M30 24h24l10 10v34H30z M54 24v10h10"></path><path d="M36 40h16m-16 8h12"></path><circle cx="58" cy="58" r="10"></circle><path d="M65 65l8 8"></path></svg>
-      <span class="num">01</span>
-      <h3>Assessment</h3>
-      <p>We review your case and send you back, free of charge, one page with what we would do, what we need from you and what is not worth doing.</p>
-    </li>
-    <li class="paso">
-      <svg class="paso__figura" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><circle class="paso__nodo acento" cx="48" cy="48" r="46"></circle><rect x="28" y="22" width="36" height="48" rx="2"></rect><path d="M34 32h24m-24 8h24m-24 8h16"></path><path d="M34 60c3-6 5-6 6 0s4 3 7-3"></path><path d="M60 58a8 8 0 1 0 0.01 0z M56 72l-2 8 6-3 6 3-2-8"></path></svg>
-      <span class="num">02</span>
-      <h3>Fixed-price proposal</h3>
-      <p>Scope, price, timeline and how we will check that it works, in writing and before we start. You pay for the result, not for hours.</p>
-    </li>
-    <li class="paso">
-      <svg class="paso__figura" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><circle class="paso__nodo" cx="48" cy="48" r="46"></circle><rect x="22" y="28" width="46" height="36" rx="3"></rect><path d="M22 36h46m-41-4h1m4 0h1"></path><path d="M28 56l8-8 6 5 9-10 9 7"></path><path d="M58 74l14-14 5 5-14 14h-5z"></path></svg>
-      <span class="num">03</span>
-      <h3>First version</h3>
-      <p>A concrete piece with your real data, to review together and adjust.</p>
-    </li>
-    <li class="paso">
-      <svg class="paso__figura" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><circle class="paso__nodo" cx="48" cy="48" r="46"></circle><rect x="24" y="26" width="48" height="34" rx="3"></rect><path d="M44 60v8m8-8v8m-14 0h20"></path><path d="M38 43l6 6 13-13"></path></svg>
-      <span class="num">04</span>
-      <h3>Delivery and use</h3>
-      <p>Running on your own devices, with instructions and checks. If you like, we can also look after its maintenance.</p>
-    </li>
-  </ol>
 </section>
 
-<section class="cierre" id="contacto">
-  <h2>Let’s talk</h2>
-  <p class="titular">Tell me what eats your hours.</p>
-  <div class="ctas">
-    <a class="cta" href="/en/contacto.html" data-contacto>Tell me about your case</a>
-    <a class="mail" href="mailto:hola@ontosdigital.es">hola@ontosdigital.es</a>
+<section id="areas">
+  <h2>Areas</h2>
+  <div class="intro">
+  <p>I built the first digital twin for myself, and it is the proof that this works: a model of my entire life kept up to date every day with AI. Each case study shows how it is built inside, with its demo in motion.</p>
   </div>
+  <div class="cards demos">
+    <div class="card demo">
+      <span class="icono">◉</span>
+      <h3><a href="/en/caso-sistema.html">The whole system</a></h3>
+      <p>The full model with the AI operating it: data, documents, answers with citations.</p>
+      <span class="ver"><a href="/en/caso-sistema.html">Read the case study ▸</a> · <a href="/en/caso-90s.html">▶ Watch the video</a></span>
+    </div>
+    <div class="card demo">
+      <span class="icono">€</span>
+      <h3><a href="/en/caso-finanzas.html">Finances</a></h3>
+      <p>Spending by API, an 18-month projection, grant monitoring, investing by rules.</p>
+      <span class="ver"><a href="/en/caso-finanzas.html">Read the case study ▸</a> · <a href="/en/finanzas-70s.html">▶ Watch the video</a></span>
+    </div>
+    <div class="card demo">
+      <span class="icono">☰</span>
+      <h3><a href="/en/caso-organizacion.html">Organisation</a></h3>
+      <p>Projects with their next step, tasks, calendar and contacts up to date.</p>
+      <span class="ver"><a href="/en/caso-organizacion.html">Read the case study ▸</a> · <a href="/en/organizacion-60s.html">▶ Watch the video</a></span>
+    </div>
+    <div class="card demo">
+      <span class="icono">♥</span>
+      <h3><a href="/en/caso-salud.html">Health</a></h3>
+      <p>Training with automatic progression, body composition, nutrition and rest from the wearable.</p>
+      <span class="ver"><a href="/en/caso-salud.html">Read the case study ▸</a> · <a href="/en/salud-60s.html">▶ Watch the video</a></span>
+    </div>
+  </div>
+  <p class="demos-nota">Every case study comes with its animated demo. No sound, sample data.</p>
+  <div class="stats">
+    <div class="stat"><div class="n">400+</div><div class="l">log entries</div></div>
+    <div class="stat"><div class="n">300+</div><div class="l">searchable documents</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">local and private</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>Where it stands today</h2>
+  <div class="estado">
+    <p><strong>ontos is not a promise: it is what I have used every day</strong> since June 2026. What you see in the cases is running on my own instance, with my real data.</p>
+    <p>It is <strong>in a private pilot</strong>, and I open it up one person at a time: I sit down with each of them on day one, we build their model and we switch on only the modules that are useful to them. We learn and fix things before taking the next step.</p>
+    <p><strong>There is no public price yet.</strong> I would rather learn with the first few people before putting a figure on it, and tell you so straight instead of selling you a list of features.</p>
+    <p>If this sounds like what you have been wanting for a while, write to me and I will show it to you live.</p>
+  </div>
+  <p class="cta-medio">Invitation only: <a href="/en/solicitud.html">request access ▸</a> · Already invited? <a href="/en/entrar.html">Log in ▸</a></p>
 </section>
 
 <footer>

@@ -4,13 +4,13 @@
   "scope": "es-en",
   "sources": {
     "docs/diseno/ontos/marca/manual/recursos/logo-n5.svg": "7c15febb133cf351ac6e9405e2d28241a09bb5e47bf7ecb1a3c7ffa79f41f264",
-    "data/mensaje.json": "aee35c2939b19b0c3da80e3bd312a8674aeca15fc54d5e70cb7756fdb5bf9fc3",
+    "data/mensaje.json": "b34e4abf9a9ecf42c1ba6ec7b3052beeb90cd8b396d7b2d0935a4a447501397d",
     "data/manual-marca.json": "589b9bfdb76448ca21aeff0d28abf9621383cd283a46bac808fa592e213deede",
     "data/marca-construccion.json": "aeaa24ae968cedb3a964c1c59355e692b63a37f3425c64c380ef6dc2775c78c6",
     "data/marca-wordmark-geometria.json": "198e7a43b7394915ab20b328656baf0c773b97ee4826d00317b0e160a3468f33",
     "data/marca-aplicaciones.json": "6212d8ad60a7a843be28c018fe0e23b13b57d4e33c14eb50de89ec79284c0e27",
-    "data/design-system.json": "15aa440d9b695f93b622236928a47f437f982160e219ba18d1ae102f0286a4d3",
-    "data/design-system-tokens.json": "406d6b1b8652b3eb30d94e3f77a38b29fbf78a9f76a05551849846437fa2c14a",
+    "data/design-system.json": "ae775c8a8e216927e16837857cdb40e23e7adeb89a24d8d4b76e62defad31c7f",
+    "data/design-system-tokens.json": "3c2675c0283351ec0a4b213d1c8d2218c6b8368b5c01502b093934f445b07202",
     "scripts/lib/marca-movimiento.js": "6e294a13fbaad6e444f2ce3fcd4fbc68ab30f0605184e052f5cd43a7d95b3df5",
     "data/marca-movimiento-geometria.json": "fe939b62a72202449f76530e22009e9db1b1b0a8576b0dd89e40d53314208608",
     "app/img/brand/logo-esqueleto.svg": "9b33d97cff6f3fd37c0c2afed82a1aa1f34a088757f877df399d3f4d648954d5",
@@ -45,8 +45,8 @@
     "brand/canon/icon-positive.svg": "2e4df9b8f45663f100c9b3acdd28a32ebd833bb458f1f07371f6bd10940b3161",
     "brand/canon/icon-negative.svg": "6c555e967ab9abea6a26345181aff03660d18adcafc92c566cc07c7d7a24d441",
     "brand/canon/favicon.svg": "c940ade6bd660695d8b8b7948cd5688523e7116fd3185064129736ea5ff07b7e",
-    "brand/canon/tokens.css": "a0772b690e5dd2ce6490fc1ed88a40b8ee73d06b2ec6ee0fa31e21337e130a12",
-    "brand/canon/tokens.json": "0abc1a782c1b410f529e7a2f391fc9c8c44852ccd3c3b9a4917ebe2049e476c3",
+    "brand/canon/tokens.css": "e4f2eccbc32d72c489c8e0f10fb0ddf2a864ef6d3b65d78bb495b509013939e5",
+    "brand/canon/tokens.json": "856003385acf096e773bd1e5e307cc1bae0daace4950587fa1d2355ef491e8bf",
     "brand/canon/og.png": "67343e6f595530b70ce2e889037f5338bec023149380ba65d96fa856d27bc83a",
     "brand/canon/og-en.png": "519d35f53b1c81e638eeeb33d559d87c0e0d6205a50176847c738e85607ff99c"
   }

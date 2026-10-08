@@ -199,10 +199,10 @@ html[data-ontos-web][data-web-page="editor-pdf"] #toolbar {
   padding-left: var(--web-content-left);
   padding-right: var(--web-content-right);
 }
-html[data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien .fila) {
+html[data-ontos-web][data-web-page="index"]:has(.home-intro) :where(.entrada p, .intro p, .bajada, .quien .fila) {
   margin-inline: 0;
 }
-html[data-ontos-web][data-web-page="index"] .intro h2 {
+html[data-ontos-web][data-web-page="index"]:has(.home-intro) .intro h2 {
   text-align: left;
 }
 html[data-ontos-web][data-web-page="contacto"] .contacto {
@@ -422,7 +422,7 @@ html[data-ontos-web]:has(#stage) #volver:focus-visible {
   html[data-ontos-web]:not(:has(:where(#stage))) footer {
     font-size: max(var(--ds-type-note), .85rem);
   }
-  html[data-ontos-web][data-web-page="index"] :where(.entrada p, .intro p, .bajada, .quien p) {
+  html[data-ontos-web][data-web-page="index"]:has(.home-intro) :where(.entrada p, .intro p, .bajada, .quien p) {
     text-align: start;
     hyphens: none;
   }

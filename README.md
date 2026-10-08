@@ -2,6 +2,18 @@
 
 Landing pública de ONTOS. HTML vanilla, sin build. Deploy: GitHub Pages (push a main).
 
+## Separación web personal / ontos (8-oct-2026, rama `separacion-web-personal`, sin publicar)
+
+La consultoría se muda a la web personal **fernandocalle.es** (repo `fernandocalle-web`, clon con historial).
+Aquí queda solo ontos: portada = el contenido de `producto.html` (que redirige a `/`), casos, clips, `armario.html`,
+`entrar.html`, `solicitud.html`, contacto y legales. Barra: ontos · Armario · Casos · Fernando Calle · contacto · EN.
+Las páginas mudadas (`aplicaciones`, `servicios`, `fernando-calle`, `blog`, `consultoria`, `bim`,
+`escrito-plan-bim-ingenieria`, `juego-2d`, `visita-3d`, `modelado-3d`, `animacion-3d`, `editor-pdf/`) son
+redirecciones a la misma ruta de fernandocalle.es (meta refresh + JS que lee el canonical + noindex), fuera del
+sitemap; su /en/ va a `/en/` de allí. Sus comprobaciones de contenido viven en `fernandocalle-web`.
+`brand/` no se toca: la leen los scripts de ONTOS. **No publicar** hasta que fernandocalle.es esté servido.
+Plan: ONTOS `docs/estudios/2026-10-08-separar-web-personal-y-ontos.md`.
+
 ## Estructura v5 (24-sep-2026, rama web-v5-consultoria)
 
 Decisión: `ONTOS/docs/estudios/2026-09-24-web-consultoria-primero.md`. Estilo: referente anthropic.com (spec del crítico, 24-sep).

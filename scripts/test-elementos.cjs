@@ -9,6 +9,14 @@ const ONTOS=process.env.ONTOS_BRAND_ROOT||path.resolve(WEB,'../ONTOS');
 const catalogo=JSON.parse(fs.readFileSync(path.join(ONTOS,'data/web-elementos.json'),'utf8'));
 const {webkit}=require(process.env.PLAYWRIGHT_MODULE||path.join(ONTOS,'scripts/verify/node_modules/playwright'));
 const {textoDe,TODAS}=require(path.join(ONTOS,'scripts/capturas-web-elementos.js'));
+// Separación (8-oct-2026): fixture con las páginas mudadas a fernandocalle.es, los elementos que salen y los textos nuevos.
+const sep=require('./fixtures/elementos-separacion.json');
+for(const id of [...sep.fuera,...Object.keys(sep.cambian)])if(!catalogo.elementos.some(e=>e.id===id))throw Error('elementos-separacion: el id '+id+' ya no existe en el catálogo de ONTOS');
+catalogo.elementos=catalogo.elementos.filter(el=>!sep.fuera.includes(el.id)).flatMap(el=>{
+  if(el.js)return [Object.assign(el,sep.cambian[el.id]||{})];
+  const quedan=(el.pagina==='todas'?TODAS:el.pagina.split(' · ')).filter(f=>!sep.mudadas.includes(f));
+  return quedan.length?[Object.assign(el,{pagina:quedan.join(' · ')},sep.cambian[el.id]||{})]:[];
+});
 
 function paginas(el){
   const base=el.pagina==='todas'?TODAS:el.pagina.split(' · ');
