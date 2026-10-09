@@ -1,5 +1,5 @@
 {
-  "_doc": "Fragmentos de correcciones editoriales de la auditoría del 27-sep-2026. Referencia de conservación, no fuente productiva. BOE/FormSubmit y encargo: docs/diseno/ontos/web/marca/README.md en ONTOS.",
+  "_doc": "Fragmentos de correcciones editoriales de la auditoría del 27-sep-2026. Referencia de conservación, no fuente productiva. BOE/FormSubmit y encargo: docs/diseno/ontos/web/marca/README.md en ONTOS. Definición y separación de consultoría aprobadas por Fernando el 9-oct-2026: fuente data/fuentes/marca/2026-10-09-web-definicion-asistente-publicacion-fernando.md.",
   "pages": {
     "bim.html": [
       {
@@ -54,6 +54,140 @@
       {
         "selector": "h2:nth-of-type(3) + p",
         "html": "<p>ONTOS no vende tus datos, no elabora perfiles y no envía publicidad. El correo se usa\nexclusivamente para responderte y atender lo que solicites. El formulario utiliza el proveedor\ndescrito arriba; su <a href=\"https://formsubmit.co/privacy.pdf\" rel=\"noopener\">política de privacidad</a>\nindica que su propio servicio puede utilizar cookies. La tipografía de este sitio está\nautoalojada: no se conecta a servidores de terceros para cargar fuentes.</p>"
+      }
+    ],
+    "producto.html": [
+      {
+        "selector": "title",
+        "html": "<title>ontos · asistente personal con un modelo vivo</title>"
+      },
+      {
+        "selector": "meta[name=\"description\"]",
+        "html": "<meta name=\"description\" content=\"Un asistente personal con IA y un modelo vivo de tu realidad. Organiza tu contexto, te ayuda a decidir y actuar, y mantiene la información al día.\">"
+      },
+      {
+        "selector": ".hero h1",
+        "html": "<h1>Un asistente personal apoyado en un modelo vivo de tu realidad.</h1>"
+      },
+      {
+        "selector": "#producto h2",
+        "html": "<h2>Qué es ontos</h2>"
+      },
+      {
+        "selector": "#areas .stats .stat:last-child",
+        "html": "<div class=\"stat\"><div class=\"n\">Piloto</div><div class=\"l\">por invitación</div></div>"
+      },
+      {
+        "selector": ".lema",
+        "html": "<p class=\"lema\">Tu contexto conectado: finanzas, documentos, trámites, proyectos, agenda y salud. Lo construí para mí y lo uso todos los días.</p>"
+      },
+      {
+        "selector": ".plazo",
+        "html": "<p class=\"plazo\">En piloto privado. Se entra por invitación.</p>"
+      },
+      {
+        "selector": "#producto > p",
+        "index": 0,
+        "html": "<p>ontos es un <strong>asistente personal</strong> apoyado en un modelo vivo de tu realidad. Su base es el <strong>gemelo digital</strong>: una representación parcial de lo que sabes, tienes, haces y quieres hacer, que se mantiene al día. El asistente usa ese contexto con inteligencia artificial para entender tu situación, ayudarte a decidir y actuar siguiendo tu criterio.</p>"
+      },
+      {
+        "selector": ".metodo",
+        "html": "<p class=\"metodo\">Durante el piloto, tu modelo vive en un ordenador de Fernando, en un espacio separado. Los motores de IA pueden ser remotos; lo que sale de esa máquina y cuándo se explica en las <a href=\"solicitud.html\">condiciones del piloto</a>.</p>"
+      },
+      {
+        "selector": ".edicion-desc",
+        "html": "<p class=\"edicion-desc\">Un asistente que trabaja con tu contexto personal y mantiene el modelo al día.</p>",
+        "index": 0
+      },
+      {
+        "selector": ".edicion-desc",
+        "html": "<p class=\"edicion-desc\">El mismo enfoque aplicado a tu negocio: datos, procesos y conocimiento conectados para trabajar con ellos.</p>",
+        "index": 1
+      },
+      {
+        "selector": "#areas .intro p",
+        "html": "<p>El primer ontos lo construí para mí. Su modelo reúne el contexto de mi vida y mi negocio que he incorporado y mantengo al día con IA. Cada caso muestra cómo trabajo con una parte de ese contexto, con su demo en movimiento.</p>"
+      },
+      {
+        "selector": ".estado p:last-child",
+        "html": "<p>Si esto te suena a lo que llevas tiempo queriendo, escríbeme y te lo enseño en vivo.</p>\n    <p>Soy Fernando Calle, fundador de ontos. Los servicios profesionales que realizo por encargo van aparte, en <a href=\"https://fernandocalle.es/\">mi consultoría de fernandocalle.es</a>.</p>"
+      }
+    ],
+    "caso-sistema.html": [
+      {
+        "selector": "meta[name=\"description\"]",
+        "html": "<meta name=\"description\" content=\"Cómo construí mi asistente personal con un modelo vivo de mi contexto. Datos, documentos, respuestas con citas y mantenimiento diario con IA.\">"
+      },
+      {
+        "selector": ".cifras .cifra:last-child",
+        "html": "<div class=\"cifra\"><div class=\"n\">Modelo</div><div class=\"l\">en mi máquina</div></div>"
+      },
+      {
+        "selector": "p",
+        "index": 0,
+        "html": "<p class=\"contexto\">Un asistente personal apoyado en un modelo vivo de mi contexto, mantenido a diario con IA. El primero lo construí para mí.</p>"
+      },
+      {
+        "selector": "p",
+        "index": 3,
+        "html": "<p>Un asistente personal con un modelo vivo de mi contexto. El gemelo digital representa la información incorporada, con cada dato en un único sitio; el asistente trabaja con ese modelo usando inteligencia artificial.</p>"
+      },
+      {
+        "selector": "p",
+        "index": 6,
+        "html": "<p>El modelo y los documentos se guardan en mi máquina; los motores de IA pueden ser remotos.</p>"
+      }
+    ],
+    "caso-finanzas.html": [
+      {
+        "selector": "title",
+        "html": "<title>Caso Finanzas · el modelo de tu dinero en ontos</title>"
+      },
+      {
+        "selector": "p",
+        "index": 0,
+        "html": "<p class=\"contexto\">Cómo ontos trabaja con el modelo de mis finanzas: los movimientos entran solos, la proyección se recalcula y las reglas están escritas. Este es el primer caso del sistema ontos.</p>"
+      },
+      {
+        "selector": "p",
+        "index": 4,
+        "html": "<p>El modelo y los documentos se guardan en mi máquina; los motores de IA pueden ser remotos.</p>"
+      },
+      {
+        "selector": "p",
+        "index": 9,
+        "html": "<p>El primer gemelo digital lo construí para mí, y lo mantengo a diario con IA desde junio\n  de 2026. Hoy el sistema acumula <strong>más de 400 entradas de bitácora</strong> y\n  <strong>más de 300 documentos consultables en lenguaje natural</strong>, <strong>con el modelo guardado en mi máquina</strong>.</p>"
+      }
+    ],
+    "caso-organizacion.html": [
+      {
+        "selector": "meta[name=\"description\"]",
+        "html": "<meta name=\"description\" content=\"Caso Organización de ontos: proyectos con su siguiente paso, tareas y calendario sin duplicados, red de contactos al día. El asistente usa ese contexto con IA.\">"
+      },
+      {
+        "selector": "p",
+        "index": 0,
+        "html": "<p class=\"bajada\">Cómo ontos trabaja con el modelo de proyectos, tareas, calendario y contactos, y responde en lenguaje natural a la pregunta de cada lunes: ¿en qué punto está cada cosa?</p>"
+      },
+      {
+        "selector": "p",
+        "index": 3,
+        "html": "<p>Un modelo del contexto de organización donde cada hecho vive una sola vez, y el asistente que trabaja con él a diario usando inteligencia artificial. Para la organización, tres piezas concretas:</p>"
+      },
+      {
+        "selector": "ul.hechos li:last-child",
+        "html": "<li>El modelo y los documentos se guardan en mi máquina; los motores de IA pueden ser remotos.</li>"
+      }
+    ],
+    "caso-salud.html": [
+      {
+        "selector": "meta[name=\"description\"]",
+        "html": "<meta name=\"description\" content=\"Entreno con progresión automática, composición corporal, nutrición y descanso del wearable, conectados en un modelo vivo. Caso real del sistema ontos.\">"
+      },
+      {
+        "selector": "p",
+        "index": 10,
+        "html": "<p>El sistema completo va mucho más allá de la salud: acumula más de 400 entradas de bitácora y más de 300 documentos consultables en lenguaje natural, con el modelo y los documentos guardados en mi máquina. Soy ingeniero de caminos, con 6 años en grandes proyectos internacionales (metro de Sídney, HS2, NEOM) y premios de I+D en automatización e IA. Este sistema es mi propia medicina aplicada a mi vida.</p>"
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
   "_doc": "Traducción al inglés de producto.html. La estructura vive en la página española; aquí solo el texto. Genera con ./i18n/gen-en.py",
-  "ontos, el producto · gemelo digital de tu vida y negocio": "ontos, the product · digital twin of your life and business",
+  "ontos · asistente personal con un modelo vivo": "ontos · personal assistant with a living model",
   "El producto está ahora en el <a href=\"./\">inicio</a>.": "The product is now on the <a href=\"./\">homepage</a>."
 }
